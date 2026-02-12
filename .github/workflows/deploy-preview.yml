@@ -1,0 +1,97 @@
+name: Deploy Preview
+
+on:
+  pull_request:
+    branches:
+      - etc
+      - main
+
+# Allow only one preview deployment per PR
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to Vercel Preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: preview
+      url: ${{ steps.vercel-deploy.outputs.preview-url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run linter
+        run: pnpm lint
+
+      - name: Run type check
+        run: pnpm lint:types
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Build application
+        run: pnpm build
+        env:
+          # Preview uses Mordor testnet
+          NEXT_PUBLIC_CHAIN_NAME: mordor
+          NEXT_PUBLIC_PROVIDER: https://rpc.mordor.etccooperative.org
+          NEXT_PUBLIC_DOMAIN: vercel.app
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        id: vercel-deploy
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-comment: true
+          working-directory: ./
+
+      - name: Comment preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🚀 Preview Deployment Ready
+
+              **Preview URL:** ${{ steps.vercel-deploy.outputs.preview-url }}
+
+              **Environment:**
+              - Chain: Mordor testnet (chain 63)
+              - RPC: https://rpc.mordor.etccooperative.org
+
+              **Test Links:**
+              - [Homepage](${{ steps.vercel-deploy.outputs.preview-url }})
+              - [OG Image](${{ steps.vercel-deploy.outputs.preview-url }}/api/og?domain=test.etc)
+
+              **Checks:**
+              - ✅ Lint passed
+              - ✅ Type check passed
+              - ✅ Tests passed
+              - ✅ Build successful
+
+              ---
+              _Deployed by [Vercel](https://vercel.com) via GitHub Actions_`
+            })

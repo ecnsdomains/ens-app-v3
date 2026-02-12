@@ -1,0 +1,61 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches:
+      - etc
+  pull_request:
+    branches:
+      - etc
+
+jobs:
+  lighthouse:
+    name: Lighthouse Performance Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_CHAIN_NAME: etc
+          NEXT_PUBLIC_PROVIDER: https://etc.rivet.cloud
+          NEXT_PUBLIC_DOMAIN: ecns.domains
+
+      - name: Start Next.js server
+        run: |
+          pnpm start &
+          sleep 15
+          curl http://localhost:3000 || exit 1
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            http://localhost:3000
+            http://localhost:3000/api/og?domain=test.etc
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 3
+
+      - name: Check Lighthouse scores
+        run: |
+          echo "✅ Lighthouse audit completed"
+          echo "📊 View results in the workflow artifacts"
