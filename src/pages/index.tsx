@@ -76,7 +76,7 @@ const Stack = styled.div(
   `,
 )
 
-const StyledENS = styled(ENSFull)(
+const StyledECNS = styled(ENSFull)(
   ({ theme }) => css`
     height: ${theme.space['8.5']};
   `,
@@ -116,7 +116,7 @@ export default function Page() {
       <UnicornBackground />
       <StyledLeadingHeading>
         <LogoAndLanguage>
-          <StyledENS />
+          <StyledECNS />
         </LogoAndLanguage>
         <Hamburger />
       </StyledLeadingHeading>

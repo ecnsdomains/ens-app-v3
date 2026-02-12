@@ -8,7 +8,7 @@ import { LeadingHeading } from '@app/components/LeadingHeading'
 
 import ENSFull from '../assets/ENSFull.svg'
 
-const StyledENS = styled.div(
+const StyledECNS = styled(ENSFull)(
   ({ theme }) => css`
     height: ${theme.space['8.5']};
   `,
@@ -42,7 +42,7 @@ export default function Page() {
       </Head>
       <StyledLeadingHeading>
         <LogoAndLanguage>
-          <StyledENS as={ENSFull} />
+          <StyledECNS />
         </LogoAndLanguage>
         <Hamburger />
       </StyledLeadingHeading>
