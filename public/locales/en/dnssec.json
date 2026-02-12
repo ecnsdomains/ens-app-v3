@@ -1,5 +1,5 @@
 {
-  "title": "Import {{name}} into ENS",
+  "title": "Import {{name}} into ECNS",
   "error": {
     "unknown": "An unknown error occurred",
     "noTxtRecord": "No record found",
@@ -22,7 +22,7 @@
     },
     "selectType": {
       "title": "Claim {{name}}",
-      "subtitle": "Importing domain names allows them to be used as ENS names.",
+      "subtitle": "Importing domain names allows them to be used as ECNS names.",
       "learnMore": "Learn more about importing names",
       "customizedTld": "The team behind .{{tld}} have customized their ENS experience, so we're unable to help you import the name at this time",
       "select": {
@@ -30,7 +30,7 @@
         "offchain": {
           "name": "Offchain",
           "tag": "Free",
-          "description": "Your name will not have an onchain token.<br/>This does not affect it's ability to receive transactions or be used as a primary name.<br/><b>You will not be able to edit your profile from within the ENS app.</b>"
+          "description": "Your name will not have an onchain token.<br/>This does not affect it's ability to receive transactions or be used as a primary name.<br/><b>You will not be able to edit your profile from within the ECNS app.</b>"
         },
         "onchain": {
           "name": "Onchain",
@@ -86,7 +86,7 @@
       "title": "Congratulations!",
       "import": {
         "subtitle": "<gradient>{{name}}</gradient> has been imported",
-        "description": "This domain has been successfully imported into ENS. You can now view this name.",
+        "description": "This domain has been successfully imported into ECNS. You can now view this name.",
         "warning": "Gasless DNS names do not currently appear in your \"Names\" list."
       },
       "claim": {

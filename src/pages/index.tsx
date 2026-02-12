@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
@@ -8,18 +9,27 @@ import FaucetBanner from '@app/components/@molecules/FaucetBanner'
 import Hamburger from '@app/components/@molecules/Hamburger/Hamburger'
 import { SearchInput } from '@app/components/@molecules/SearchInput/SearchInput'
 import { LeadingHeading } from '@app/components/LeadingHeading'
-import { AnnouncementBanner } from '@app/components/pages/AnnouncementBanner'
+// import { AnnouncementBanner } from '@app/components/pages/AnnouncementBanner' // Hidden for ECNS - ENSv2 not applicable
 import { VerificationErrorDialog } from '@app/components/pages/VerificationErrorDialog'
 import { useVerificationOAuthHandler } from '@app/hooks/verification/useVerificationOAuthHandler/useVerificationOAuthHandler'
 
 import ENSFull from '../assets/ENSFull.svg'
+
+// Dynamic import for Unicorn Studio background (SSR disabled)
+const UnicornBackground = dynamic(
+  () => import('@app/components/@atoms/UnicornBackground'),
+  { ssr: false }
+)
+
+// ECNS Green gradient
+const ECNS_GRADIENT = 'linear-gradient(330.4deg, #1A3A2E 4.54%, #3FB68B 59.2%, #4FD4A4 148.85%)'
 
 const GradientTitle = styled.h1(
   ({ theme }) => css`
     font-size: ${theme.fontSizes.headingTwo};
     text-align: center;
     font-weight: 800;
-    background-image: ${theme.colors.blueGradient};
+    background-image: ${ECNS_GRADIENT};
     background-repeat: no-repeat;
     background-size: 110%;
     /* stylelint-disable-next-line property-no-vendor-prefix */
@@ -50,6 +60,8 @@ const Container = styled.div(
     align-items: center;
     justify-content: center;
     width: 100%;
+    position: relative;
+    z-index: 1;
   `,
 )
 
@@ -64,7 +76,7 @@ const Stack = styled.div(
   `,
 )
 
-const StyledENS = styled.div(
+const StyledENS = styled(ENSFull)(
   ({ theme }) => css`
     height: ${theme.space['8.5']};
   `,
@@ -83,6 +95,8 @@ const LogoAndLanguage = styled.div(
 
 const StyledLeadingHeading = styled(LeadingHeading)(
   ({ theme }) => css`
+    position: relative;
+    z-index: 2;
     @media (min-width: ${theme.breakpoints.sm}px) {
       display: none;
     }
@@ -97,11 +111,12 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>ENS</title>
+        <title>ECNS - Ethereum Classic Name Service</title>
       </Head>
+      <UnicornBackground />
       <StyledLeadingHeading>
         <LogoAndLanguage>
-          <StyledENS as={ENSFull} />
+          <StyledENS />
         </LogoAndLanguage>
         <Hamburger />
       </StyledLeadingHeading>
@@ -116,7 +131,7 @@ export default function Page() {
           </SubtitleWrapper>
           <SearchInput />
 
-          <AnnouncementBanner />
+          {/* <AnnouncementBanner /> - Hidden for ECNS - ENSv2 not applicable */}
         </Stack>
       </Container>
       <VerificationErrorDialog {...(dialogProps ?? {})} />

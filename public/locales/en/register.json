@@ -1,5 +1,5 @@
 {
-  "title": "Register {{name}} on ENS",
+  "title": "Register {{name}} on ECNS",
   "subtitle": "Register",
   "heading": "Register {{name}}",
   "invoice": {
@@ -50,7 +50,7 @@
             },
             "placeholder": {
               "name": "John Smith",
-              "url": "https://ens.domains",
+              "url": "https://ecns.domains",
               "location": "Metaverse",
               "description": "I'm a yield farmer from rural Tennessee."
             }
@@ -76,8 +76,8 @@
               "email": "Email"
             },
             "placeholder": {
-              "com.twitter": "e.g. ensdomains",
-              "com.github": "e.g. ensdomains",
+              "com.twitter": "e.g. ecnsdomains",
+              "com.github": "e.g. ecnsdomains",
               "com.discord": "e.g. nickjohnson",
               "org.telegram": "e.g. nicksdjohnson",
               "email": "e.g. hello@example.com"

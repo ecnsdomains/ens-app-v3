@@ -84,11 +84,11 @@
     "terms": "Terms of Use",
     "privacy": "Privacy Policy",
     "back": "Back",
-    "oldApp": "Old ENS App",
+    "oldApp": "Old ECNS App",
     "language": "Language",
     "theme": "Theme",
     "currency": "Currency",
-    "ipfsApp": "IPFS ENS App",
+    "ipfsApp": "IPFS ECNS App",
     "feedback": "Feedback",
     "syncMessage": "Syncing with the network. Changes from your transaction may not be visible yet.",
     "mode": {
@@ -192,7 +192,7 @@
     },
     "networkLatency": {
       "title": "Slow data syncing",
-      "message": "The ENS app is experiencing slow downs due to network latency issues."
+      "message": "The ECNS app is experiencing slow downs due to network latency issues."
     }
   },
   "transaction": {
@@ -384,7 +384,7 @@
     "empty": "No options found"
   },
   "testnetFaucet": {
-    "explanation": "Each address on {{ testnet }} can claim {{ amount }} {{ ticker }} to test out the ENS manager app, as well as any other testnet usage.",
+    "explanation": "Each address on {{ testnet }} can claim {{ amount }} {{ ticker }} from the Mordor faucet at https://github.com/mordortestnet/mordor-public-faucet to test out the ECNS manager app.",
     "note": "It may take a few minutes to show up in your wallet."
   },
   "roles": {
@@ -433,15 +433,15 @@
     "default": "We could't verify your account. Please return to Dentity and try again."
   },
   "networkNotifications": {
-    "Ethereum": {
-      "title": "Switch to Ethereum?",
-      "description": "You've selected Ethereum (mainnet) in your wallet.",
-      "action": "Go to app.ens.domains"
+    "EthereumClassic": {
+      "title": "Switch to Ethereum Classic?",
+      "description": "You've selected Ethereum Classic (mainnet) in your wallet.",
+      "action": "Stay on app.ecns.domains"
     },
-    "Sepolia": {
-      "title": "Switch to Sepolia?",
-      "description": "You've selected Sepolia (testnet) in your wallet.",
-      "action": "Go to sepolia.app.ens.domains"
+    "Mordor": {
+      "title": "Switch to Mordor?",
+      "description": "You've selected Mordor (testnet) in your wallet.",
+      "action": "Stay on app.ecns.domains"
     }
   },
   "para": {
