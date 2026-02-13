@@ -1,3 +1,27 @@
+/* ── IBM 3270 (Brand / Display) ── */
+
+@font-face {
+  font-family: 'IBM 3270';
+  src:
+    url('./monospace/3270-Regular.woff2') format('woff2'),
+    url('./monospace/3270-Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IBM 3270 Narrow';
+  src:
+    url('./monospace/3270SemiCondensed-Regular.woff2') format('woff2'),
+    url('./monospace/3270SemiCondensed-Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* ── Satoshi (UI / Body) ── */
+
 @font-face {
   font-family: 'Satoshi-Variable';
   src:
