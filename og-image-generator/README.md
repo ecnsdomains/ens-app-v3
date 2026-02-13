@@ -144,14 +144,14 @@ To deploy on Cloudflare Pages:
 
 ### Add custom fonts
 
-To use Satoshi font instead of system fonts:
+To use IBM Plex Mono font instead of system fonts:
 
-1. Host Satoshi font files in `/public/fonts/`
+1. Font files are hosted in `/public/fonts/monospace/`
 2. Fetch font in API route:
 
 ```typescript
-const satoshiFont = await fetch(
-  new URL('../../public/fonts/sans-serif/Satoshi-Variable.woff', import.meta.url)
+const plexMonoFont = await fetch(
+  new URL('../../public/fonts/monospace/IBMPlexMono-Bold.woff', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 return new ImageResponse(
@@ -161,9 +161,9 @@ return new ImageResponse(
     height: 630,
     fonts: [
       {
-        name: 'Satoshi',
-        data: satoshiFont,
-        weight: 800,
+        name: 'IBM Plex Mono',
+        data: plexMonoFont,
+        weight: 700,
         style: 'normal',
       },
     ],
@@ -251,7 +251,7 @@ open http://localhost:3000/api/og?domain=test.etc
 
 ## Future Enhancements
 
-- [ ] Add Satoshi font loading (requires hosting font files)
+- [ ] Add IBM Plex Mono font loading for OG images
 - [ ] Create theme variants (minimal, profile, stats)
 - [ ] Add chain-specific branding (Mordor vs mainnet)
 - [ ] Generate favicons dynamically

@@ -63,22 +63,18 @@ const GlobalStyle = createGlobalStyle`
   *,
   ::before,
   ::after {
-    font-family: Satoshi,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      "Fira Sans",
-      "Droid Sans",
-      "Helvetica Neue",
-      sans-serif;
+    font-family: 'IBM Plex Mono',
+      'SF Mono',
+      'Fira Code',
+      'Fira Mono',
+      Consolas,
+      'Liberation Mono',
+      monospace;
   }
 
   body {
-    background: radial-gradient(50% 50% at 50% 50%, rgba(82, 152, 255, 0.062) 0%, rgba(255, 255, 255, 0) 100%), #F7F7F7;
+    /* ECNS Green Theme */
+    background: radial-gradient(50% 50% at 50% 50%, rgba(63, 182, 139, 0.08) 0%, rgba(255, 255, 255, 0) 100%), #F7F7F7;
     color: var(--thrn-color-textPrimary);
   }
 
@@ -92,7 +88,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   [data-theme="dark"] body {
-    background: rgb(20, 20, 22);
+    /* ECNS Dark Green Theme */
+    background: #1A3A2E;
   }
 
   a {

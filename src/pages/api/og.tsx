@@ -25,7 +25,7 @@ export default async function handler(req: NextRequest) {
   const theme = searchParams.get('theme') || 'default' // default, minimal, profile
 
   try {
-    // Load Satoshi font (would need to be hosted or use system fonts)
+    // Load IBM Plex Mono font (would need to be hosted or use system fonts)
     // For now, using system fonts as fallback
 
     return new ImageResponse(

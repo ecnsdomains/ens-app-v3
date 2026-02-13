@@ -7,13 +7,16 @@ import { loadPara } from './loadPara'
 
 type RainbowKitProviderProps = ComponentProps<typeof RainbowKitProvider>
 
+// ECNS Green accent color
+const ECNS_GREEN = '#3FB68B'
+
 const rainbowKitTheme: Theme = {
   ...lightTheme({
-    accentColor: thorinLightTheme.colors.accent,
+    accentColor: ECNS_GREEN,
     borderRadius: 'medium',
   }),
   fonts: {
-    body: 'Satoshi, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+    body: 'IBM Plex Mono, SF Mono, Fira Code, Fira Mono, Consolas, Liberation Mono, monospace',
   },
 }
 

@@ -20,60 +20,44 @@
   font-style: normal;
 }
 
-/* ── Satoshi (UI / Body) ── */
+/* ── IBM Plex Mono (UI / Body) ── */
 
 @font-face {
-  font-family: 'Satoshi-Variable';
+  font-family: 'IBM Plex Mono';
   src:
-    url('./sans-serif/Satoshi-Variable.ttf') format('truetype'),
-    url('./sans-serif/Satoshi-Variable.woff2') format('woff2'),
-    url('./sans-serif/Satoshi-Variable.woff') format('woff');
-  font-weight: 300 900;
+    url('./monospace/IBMPlexMono-Regular.woff2') format('woff2'),
+    url('./monospace/IBMPlexMono-Regular.woff') format('woff');
+  font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Satoshi';
+  font-family: 'IBM Plex Mono';
   src:
-    url('./sans-serif/Satoshi-Medium.otf') format('opentype'),
-    url('./sans-serif/Satoshi-Medium.woff2') format('woff2'),
-    url('./sans-serif/Satoshi-Medium.woff') format('woff');
+    url('./monospace/IBMPlexMono-Medium.woff2') format('woff2'),
+    url('./monospace/IBMPlexMono-Medium.woff') format('woff');
   font-weight: 500;
   font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Satoshi';
+  font-family: 'IBM Plex Mono';
   src:
-    url('./sans-serif/Satoshi-Bold.otf') format('opentype'),
-    url('./sans-serif/Satoshi-Bold.woff2') format('woff2'),
-    url('./sans-serif/Satoshi-Bold.woff') format('woff');
+    url('./monospace/IBMPlexMono-SemiBold.woff2') format('woff2'),
+    url('./monospace/IBMPlexMono-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src:
+    url('./monospace/IBMPlexMono-Bold.woff2') format('woff2'),
+    url('./monospace/IBMPlexMono-Bold.woff') format('woff');
   font-weight: 700;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src:
-    url('./sans-serif/Satoshi-Variable.ttf') format('truetype'),
-    url('./sans-serif/Satoshi-Variable.woff2') format('woff2'),
-    url('./sans-serif/Satoshi-Variable.woff') format('woff');
-  font-weight: 800;
-  font-variation-settings: 'wght' 800;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src:
-    url('./sans-serif/Satoshi-Black.otf') format('opentype'),
-    url('./sans-serif/Satoshi-Black.woff2') format('woff2'),
-    url('./sans-serif/Satoshi-Black.woff') format('woff');
-  font-weight: 900;
   font-display: swap;
   font-style: normal;
 }

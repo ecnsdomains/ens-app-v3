@@ -23,7 +23,7 @@ const getFontSize = (str: string) => {
   canvas.height = 270
   const ctx = canvas.getContext('2d')!
   ctx.font =
-    'normal normal bold 20px normal Satoshi, Noto Color Emoji, Apple Color Emoji, sans-serif'
+    'normal normal bold 20px normal IBM Plex Mono, Noto Color Emoji, Apple Color Emoji, monospace'
   const fontMetrics = ctx.measureText(str)
   const fontSize = Math.floor(20 * (200 / fontMetrics.width))
   return fontSize < 34 ? fontSize : 32
@@ -42,7 +42,7 @@ const addSpan = (str: string, inx: number) => (
 
 const Text = styled.text(
   () => css`
-    font-family: Satoshi, 'Noto Color Emoji', 'Apple Color Emoji', sans-serif;
+    font-family: 'IBM Plex Mono', 'Noto Color Emoji', 'Apple Color Emoji', monospace;
     font-style: normal;
     font-variant-numeric: tabular-nums;
     font-weight: bold;
