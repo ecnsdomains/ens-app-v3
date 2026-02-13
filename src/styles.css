@@ -1,11 +1,99 @@
 @import url('/fonts/fonts.css');
 
+/* ========================================
+   ECNS Terminal Color System v2.0
+   ======================================== */
+
+:root {
+  /* ── Diamond Prism Shades ── */
+  --ecns-primary: #3FB68B;
+  --ecns-primary-light: #4FD4A4;
+  --ecns-primary-dark: #2E9E76;
+  --ecns-primary-deep: #1A6B50;
+  --ecns-primary-shadow: #0D3D2E;
+  --ecns-primary-dim: rgba(63, 182, 139, 0.10);
+  --ecns-primary-hover: #5EE0B2;
+
+  /* ── Background Scale ── */
+  --ecns-bg-terminal: #0F1A15;
+  --ecns-bg-dark: #1C1C1E;
+  --ecns-bg-light: #F5F5F0;
+
+  /* ── Semantic Colors ── */
+  --ecns-success: #3FB68B;
+  --ecns-error: #E55B5B;
+  --ecns-warning: #F5A623;
+  --ecns-info: #4FD4A4;
+
+  /* ── Thorin Overrides (Light Mode Default) ── */
+  --thrn-color-accent: #3FB68B;
+  --thrn-color-accentSecondary: #4FD4A4;
+  --thrn-color-accentTertiary: rgba(63, 182, 139, 0.15);
+  --thrn-color-accentSecondaryHover: #5EE0B2;
+  --thrn-color-accentGradient: linear-gradient(330.4deg, #0D3D2E 4.54%, #3FB68B 59.2%, #4FD4A4 148.85%);
+
+  /* Blue → Green replacements */
+  --thrn-color-blue: #3FB68B;
+  --thrn-color-bluePrimary: #3FB68B;
+  --thrn-color-blueLight: rgba(63, 182, 139, 0.15);
+  --thrn-color-blueSurface: rgba(63, 182, 139, 0.05);
+
+  /* ── Theme-aware tokens ── */
+  --ecns-surface: #FFFFFF;
+  --ecns-surface-elevated: #FFFFFF;
+  --ecns-border: #E0E0DB;
+  --ecns-text-primary: #1C1C1E;
+  --ecns-text-secondary: #666666;
+  --ecns-text-dim: #9B9BA7;
+}
+
+/* ── Dark Theme ── */
+[data-theme="dark"] {
+  --thrn-color-accent: #4FD4A4;
+  --thrn-color-accentSecondary: #3FB68B;
+  --thrn-color-backgroundPrimary: #0F1A15;
+  --thrn-color-backgroundSecondary: #1A2A22;
+
+  --ecns-surface: #1A2A22;
+  --ecns-surface-elevated: #243530;
+  --ecns-border: rgba(63, 182, 139, 0.12);
+  --ecns-text-primary: #E8E8E8;
+  --ecns-text-secondary: #9B9BA7;
+  --ecns-text-dim: #5A6B63;
+}
+
+/* ── Component Overrides ── */
+
+/* Primary buttons */
+button[data-variant="primary"],
+.thorin-button-primary {
+  background: var(--ecns-primary) !important;
+}
+
+button[data-variant="primary"]:hover,
+.thorin-button-primary:hover {
+  background: var(--ecns-primary-light) !important;
+}
+
+/* Link colors */
+a[data-variant="accent"] {
+  color: var(--ecns-primary) !important;
+}
+
+/* Intercom z-index fix */
 .intercom-lightweight-app,
 #intercom-container {
   position: relative;
   z-index: 998 !important;
 }
 
+/* Identicon background */
 cpsl-identicon {
-  background: var(--identicon-background-blue) !important;
+  background: var(--ecns-primary) !important;
+}
+
+/* Search input focus ring */
+input:focus {
+  border-color: var(--ecns-primary) !important;
+  box-shadow: 0 0 0 3px var(--ecns-primary-dim) !important;
 }
