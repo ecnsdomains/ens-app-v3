@@ -101,10 +101,7 @@ describe('WrapButton', () => {
     screen.getByTestId('wrap-name-btn').click()
     expect(mockCreateTransactionFlow).toHaveBeenCalled()
   })
-  it('should create a transaction flow for migrateProfile and wrapName', async () => {
-    mockUseResolverStatus.mockReturnValue(
-      createMockResolverStatus({ isMigratedProfileEqual: false }),
-    )
+  it('should create a transaction flow for wrapName as manager', async () => {
     render(
       <WrapButton
         name="test123.eth"
@@ -133,10 +130,8 @@ describe('WrapButton', () => {
     const args = mockCreateTransactionFlow.mock.lastCall!
 
     expect(args[0]).toBe('wrapName-test123.eth')
-    expect(args[1].transactions[0].name).toEqual('migrateProfile')
+    expect(args[1].transactions[0].name).toEqual('wrapName')
     expect(args[1].transactions[0].data).toEqual({ name: 'test123.eth' })
-    expect(args[1].transactions[1].name).toEqual('wrapName')
-    expect(args[1].transactions[1].data).toEqual({ name: 'test123.eth' })
   })
   it('should create a transaction flow for wrapName when already using wrapper aware resolver', async () => {
     render(
@@ -228,8 +223,7 @@ describe('WrapButton', () => {
     expect(args[0]).toBe('wrapName-test123.eth')
     expect(args[1].transactions[0].name).toEqual('wrapName')
     expect(args[1].transactions[0].data).toEqual({ name: 'test123.eth' })
-    expect(args[1].transactions[1].name).toEqual('migrateProfile')
-    expect(args[1].transactions[1].data).toEqual({ name: 'test123.eth', resolverAddress: '0x456' })
+    expect(args[1].transactions).toHaveLength(1)
   })
   it('should create a transaction flow for a .eth 2LD with a profile, a different owner, and a name wrapper aware resolver', () => {
     render(
@@ -354,10 +348,9 @@ describe('WrapButton', () => {
     const args = mockCreateTransactionFlow.mock.lastCall!
 
     expect(args[0]).toBe('wrapName-sub.test123.eth')
-    expect(args[1].transactions[0].name).toEqual('migrateProfile')
+    expect(args[1].transactions[0].name).toEqual('wrapName')
     expect(args[1].transactions[0].data).toEqual({ name: 'sub.test123.eth' })
-    expect(args[1].transactions[1].name).toEqual('wrapName')
-    expect(args[1].transactions[1].data).toEqual({ name: 'sub.test123.eth' })
+    expect(args[1].transactions).toHaveLength(1)
   })
 
   it('should call resumeTransactionFlow if flow can be resumed', () => {

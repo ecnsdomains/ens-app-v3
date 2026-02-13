@@ -8,8 +8,6 @@ import createSubname from './createSubname'
 import deleteSubname from './deleteSubname'
 import extendNames from './extendNames'
 import importDnsName from './importDnsName'
-import migrateProfile from './migrateProfile'
-import migrateProfileWithReset from './migrateProfileWithReset'
 import registerName from './registerName'
 import removeVerificationRecord from './removeVerificationRecord'
 import repairDesyncedName from './repairDesyncedName'
@@ -41,8 +39,6 @@ export const transactions = {
   deleteSubname,
   extendNames,
   importDnsName,
-  migrateProfile,
-  migrateProfileWithReset,
   registerName,
   repairDesyncedName,
   resetPrimaryName,

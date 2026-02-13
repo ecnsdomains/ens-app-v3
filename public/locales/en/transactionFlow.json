@@ -122,25 +122,6 @@
           "subtitle": "You do not have permission to set records for this resolver. You will need to update to the latest resolver to edit your profile.",
           "action": "Update resolver"
         },
-        "migrateProfileSelector": {
-          "title": "Profile",
-          "subtitle": "The profile records on each resolver do not match. Which set of records would you like to use?",
-          "option": {
-            "latest": "Profile records on new resolver",
-            "current": "Current profile records",
-            "reset": "Reset your profile",
-            "resetSubtitle": "Remove all profile records"
-          }
-        },
-        "migrateProfileWarning": {
-          "title": "Migrate profile",
-          "subtitle": "You are migrating your profile records to the latest resolver. This will permanently clear any existing records on the latest resolver and replace them with your current records."
-        },
-        "migrateRegistry": {
-          "title": "Registry out of date",
-          "subtitle": "You will need to migrate the registry before making changes to this name.",
-          "action": "Migrate"
-        },
         "noResolver": {
           "title": "No resolver set",
           "subtitle": "A resolver needs to be set before editing your profile.",
@@ -190,14 +171,6 @@
         "resetProfile": {
           "title": "Reset profile",
           "description": "This will remove all profile records from the latest resolver and then update the resolver."
-        },
-        "migrateProfile": {
-          "title": "Migrate profile",
-          "description": "This will migrate your current profile records to the latest resolver."
-        },
-        "migrateCurrentProfile": {
-          "title": "Migrate profile",
-          "description": "This will migrate your current profile records to the latest resolver."
         }
       }
     },
@@ -436,12 +409,6 @@
     }
   },
   "intro": {
-    "migrateAndUpdateResolver": {
-      "title": "Action Required",
-      "heading": "The edits you want to save to your profile require that you upgrade your resolver.",
-      "link": "Learn more about resolver upgrades",
-      "warning": "Note that if you cancel this at any point your changes will not be saved."
-    },
     "syncManager": {
       "description": "Syncing the manager will make you the new manager of this name. The current manager <b>({{manager}})</b> will no longer be able to make changes.",
       "wrappedWarning": "Syncing the manager will also unwrap this name. This will burn the NFT and reset any permissions."

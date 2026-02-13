@@ -86,7 +86,6 @@ const mockUseAbilitiesData: MockHookData<typeof useAbilities> = {
 
 const mockUseProfileData: MockHookData<typeof useProfile> = {
   address: '0x1234567890',
-  isMigrated: true,
 }
 
 const mockUseOwnerData: MockHookData<typeof useOwner> = {
@@ -331,21 +330,6 @@ describe('useProfileActions', () => {
         'setPrimaryName-test.eth-0x1234567890',
       )
       expect(mockCreateTransactionFlow.mock.calls[0][1].transactions.length).toBe(1)
-    })
-
-    it('should not return an action if profile is not migrated', () => {
-      mockUseProfile.mockReturnValue({
-        data: {
-          ...mockUseProfileData,
-          isMigrated: false,
-        },
-        isLoading: false,
-      })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
-      const setPrimaryAction = result.current.profileActions?.find(
-        (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
-      )
-      expect(setPrimaryAction).toBeUndefined()
     })
 
     it('should not return an action if profile user is not controller or wrapped owner or resolved address', () => {

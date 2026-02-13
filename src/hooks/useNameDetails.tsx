@@ -57,18 +57,6 @@ export const useNameDetails = ({ name, subgraphEnabled = true }: UseNameDetailsP
     if (registrationStatus === 'unsupportedTLD') {
       return { content: t('errors.unsupportedTLD') }
     }
-    if (profile && !profile.isMigrated && typeof profile.isMigrated === 'boolean') {
-      return {
-        content: (
-          <>
-            {t('errors.migrationNotAvailable')}
-            <a href={`https://legacy.ens.domains/name/${normalisedName}`}>
-              {t('errors.migrationNotAvailableLink')}
-            </a>
-          </>
-        ),
-      }
-    }
     if (registrationStatus === 'invalid') {
       return { content: t('errors.invalidName') }
     }

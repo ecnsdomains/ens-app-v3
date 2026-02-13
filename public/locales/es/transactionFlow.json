@@ -113,25 +113,6 @@
           "subtitle": "No tienes permiso para establecer registros en este resolver. Necesitas actualizar al resolver más reciente para editar tu perfil.",
           "action": "Actualizar resolver"
         },
-        "migrateProfileSelector": {
-          "title": "Perfil",
-          "subtitle": "Los registros de perfil en cada resolver no coinciden. ¿Qué conjunto de registros deseas usar?",
-          "option": {
-            "latest": "Registros de perfil en el nuevo resolver",
-            "current": "Registros de perfil actuales",
-            "reset": "Restablecer tu perfil",
-            "resetSubtitle": "Eliminar todos los registros de perfil"
-          }
-        },
-        "migrateProfileWarning": {
-          "title": "Migrar perfil",
-          "subtitle": "Estás migrando los registros de tu perfil al resolver más reciente. Esto eliminará permanentemente cualquier registro existente en el resolver más reciente y los reemplazará con tus registros actuales."
-        },
-        "migrateRegistry": {
-          "title": "Registro desactualizado",
-          "subtitle": "Necesitas migrar el registro antes de hacer cambios en este nombre.",
-          "action": "Migrar"
-        },
         "noResolver": {
           "title": "Sin resolver establecido",
           "subtitle": "Debes establecer un resolver antes de editar tu perfil.",
@@ -181,14 +162,6 @@
         "resetProfile": {
           "title": "Restablecer perfil",
           "description": "Esto eliminará todos los registros de perfil del resolver más reciente y luego actualizará el resolver."
-        },
-        "migrateProfile": {
-          "title": "Migrar perfil",
-          "description": "Esto migrará tus registros de perfil actuales al resolver más reciente."
-        },
-        "migrateCurrentProfile": {
-          "title": "Migrar perfil",
-          "description": "Esto migrará tus registros de perfil actuales al resolver más reciente."
         }
       }
     },
@@ -427,12 +400,6 @@
     }
   },
   "intro": {
-    "migrateAndUpdateResolver": {
-      "title": "Acción requerida",
-      "heading": "Los cambios que deseas guardar en tu perfil requieren que actualices tu resolver.",
-      "link": "Más información sobre actualizaciones de resolver",
-      "warning": "Ten en cuenta que si cancelas esto en cualquier momento, tus cambios no se guardarán."
-    },
     "syncManager": {
       "description": "Sincronizar el administrador hará que te conviertas en el nuevo administrador de este nombre. El administrador actual <b>({{manager}})</b> ya no podrá realizar cambios.",
       "wrappedWarning": "Sincronizar el administrador también desenvolverá este nombre. Esto quemará el NFT y restablecerá cualquier permiso."

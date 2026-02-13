@@ -36,9 +36,6 @@ import type { TransactionDialogPassthrough } from '@app/transaction-flow/types'
 
 import { useProfileEditorReducer } from './hooks/useProfileEditorReducer'
 import { InvalidResolverView } from './views/InvalidResolverView'
-import { MigrateProfileSelectorView } from './views/MigrateProfileSelectorView.tsx'
-import { MigrateProfileWarningView } from './views/MigrateProfileWarningView'
-import { MigrateRegistryView } from './views/MigrateRegistryView'
 import { NoResolverView } from './views/NoResolverView'
 import { ResetProfileView } from './views/ResetProfileView'
 import { ResolverNotNameWrapperAwareView } from './views/ResolverNotNameWrapperAwareView'
@@ -279,33 +276,6 @@ const ProfileEditor = ({ data = {}, transactions = [], dispatch, onDismiss }: Pr
     })
   }
 
-  const handleMigrateProfile = () => {
-    dispatch({
-      name: 'startFlow',
-      key: `migrate-profile-${name}`,
-      payload: {
-        intro: {
-          title: ['input.profileEditor.intro.migrateProfile.title', { ns: 'transactionFlow' }],
-          content: makeIntroItem('GenericWithDescription', {
-            description: t('input.profileEditor.intro.migrateProfile.description', {
-              ns: 'transactionFlow',
-            }),
-          }),
-        },
-        transactions: [
-          createTransactionItem('migrateProfile', {
-            name,
-          }),
-          createTransactionItem('updateResolver', {
-            name,
-            contract: isWrapped ? 'nameWrapper' : 'registry',
-            resolverAddress,
-          }),
-        ],
-      },
-    })
-  }
-
   const handleResetProfile = () => {
     dispatch({
       name: 'startFlow',
@@ -334,42 +304,9 @@ const ProfileEditor = ({ data = {}, transactions = [], dispatch, onDismiss }: Pr
     })
   }
 
-  const handleMigrateCurrentProfileToLatest = async () => {
-    dispatch({
-      name: 'startFlow',
-      key: `migrate-profile-with-reset-${name}`,
-      payload: {
-        intro: {
-          title: [
-            'input.profileEditor.intro.migrateCurrentProfile.title',
-            { ns: 'transactionFlow' },
-          ],
-          content: makeIntroItem('GenericWithDescription', {
-            description: t('input.profileEditor.intro.migrateCurrentProfile.description', {
-              ns: 'transactionFlow',
-            }),
-          }),
-        },
-        transactions: [
-          createTransactionItem('migrateProfileWithReset', {
-            name,
-            resolverAddress: profile?.resolverAddress!,
-          }),
-          createTransactionItem('updateResolver', {
-            name,
-            contract: isWrapped ? 'nameWrapper' : 'registry',
-            resolverAddress,
-          }),
-        ],
-      },
-    })
-  }
-
   const handleMigrate = () => {
     if (resolverStatus.data?.hasMigratedProfile && resolverStatus.data?.isMigratedProfileEqual)
       editorDispatch({ type: 'pushView', payload: 'updateResolverOrResetProfile' })
-    else if (resolverStatus.data?.hasMigratedProfile)
-      editorDispatch({ type: 'pushView', payload: 'migrateProfileSelector' })
     else if (resolverStatus.data?.hasProfile)
       editorDispatch({ type: 'pushView', payload: 'transferOrResetProfile' })
     else handleUpdateResolver()
@@ -570,34 +507,8 @@ const ProfileEditor = ({ data = {}, transactions = [], dispatch, onDismiss }: Pr
             }}
           />
         ))
-        .with('migrateRegistry', () => <MigrateRegistryView name={name} onCancel={onDismiss} />)
         .with('invalidResolver', () => (
           <InvalidResolverView onConfirm={() => handleUpdateResolver()} onCancel={onDismiss} />
-        ))
-        .with('migrateProfileSelector', () => (
-          <MigrateProfileSelectorView
-            name={name}
-            currentResolverAddress={profile?.resolverAddress!}
-            latestResolverAddress={resolverAddress!}
-            hasCurrentProfile={resolverStatus.data?.hasProfile!}
-            onBack={() => {
-              editorDispatch({ type: 'popView' })
-            }}
-            onNext={(selectedProfile) => {
-              if (selectedProfile === 'latest') handleUpdateResolver()
-              else if (selectedProfile === 'current')
-                editorDispatch({ type: 'pushView', payload: 'migrateProfileWarning' })
-              else editorDispatch({ type: 'pushView', payload: 'resetProfile' })
-            }}
-          />
-        ))
-        .with('migrateProfileWarning', () => (
-          <MigrateProfileWarningView
-            onBack={() => {
-              editorDispatch({ type: 'popView' })
-            }}
-            onNext={() => handleMigrateCurrentProfileToLatest()}
-          />
         ))
         .with('noResolver', () => (
           <NoResolverView
@@ -638,10 +549,7 @@ const ProfileEditor = ({ data = {}, transactions = [], dispatch, onDismiss }: Pr
             onBack={() => {
               editorDispatch({ type: 'popView' })
             }}
-            onNext={(selectedProfile: SelectedProfile) => {
-              if (selectedProfile === 'reset') handleUpdateResolver()
-              else handleMigrateProfile()
-            }}
+            onNext={() => handleUpdateResolver()}
           />
         ))
         .with('updateResolverOrResetProfile', () => (

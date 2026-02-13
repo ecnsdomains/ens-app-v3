@@ -98,11 +98,6 @@
           "subtitle": "Je hebt hiervoor een transactie gestart. Click Hervat om die voort te zetten.",
           "action": "Hervat"
         },
-        "migrate": {
-          "title": "Migreer resolver",
-          "subtitle": "Je hebt je profiel gemigreerd maar je resolver nog niet geupdate. Click update om naar de laatste resolver te updaten.",
-          "action": "Update"
-        },
         "noResolver": {
           "title": "Geen resolver gekoppeld",
           "subtitle": "Je moet een resolver zetten om je profiel aan te kunnen passen.",
@@ -155,10 +150,5 @@
     }
   },
   "intro": {
-    "migrateAndUpdateResolver": {
-      "title": "De aanpassingen die je wil maken aan je profiel vereisen dat je je profiel upgrade.",
-      "link": "Leer meer over resolver upgrades",
-      "warning": "Weet dat als je dit op welk moment dan ook cancelled dat de aanpassingen ongedaan gemaakt worden."
-    }
   }
 }

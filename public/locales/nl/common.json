@@ -115,8 +115,6 @@
       "test": "Test Transactie",
       "addSuccess": "Voeg Success toe",
       "sendName": "Stuur Naam",
-      "migrateProfile": "Migreer Profiel",
-      "migrateProfileWithSync": "Migreer en update profiel",
       "wrapName": "Wrap Naam",
       "updateResolver": "Update Resolver",
       "updateProfile": "Update Profiel",
@@ -136,8 +134,6 @@
     },
     "info": {
       "sendName": "Zet the controller and registrant of the name",
-      "migrateProfile": "Zet bestaande records op nieuwe resolver",
-      "migrateProfileWithSync": "Zet bestaande records op nieuwe resolver",
       "wrapName": "Wrap naam en zet nieuwe resolver",
       "updateResolver": "Verander resolver naar",
       "updateProfile": "Update records op bestaande resolver",

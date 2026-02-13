@@ -177,12 +177,6 @@ describe('UnknownLabels', () => {
             },
           },
           {
-            name: 'migrateProfile',
-            data: {
-              name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
-            },
-          },
-          {
             name: 'wrapName',
             data: {
               name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
@@ -207,12 +201,6 @@ describe('UnknownLabels', () => {
             name: 'approveNameWrapper',
             data: {
               address: '0x123',
-            },
-          },
-          {
-            name: 'migrateProfile',
-            data: {
-              name: `cool.sub.nice.test.test123.eth`,
             },
           },
           {

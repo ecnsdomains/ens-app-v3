@@ -183,63 +183,6 @@ describe('useResolverStatus', () => {
     expectEnabledHook(mockUseLatestResolverProfile, true)
   })
 
-  it('should return hasMigratedRecord is true if migratedRecordsMatch matches on latest resolver profile', () => {
-    mockUseResolverType.mockReturnValueOnce({ data: { type: 'outdated' } })
-    mockUseLatestResolverProfile.mockReturnValueOnce({
-      data: createProfileData({ coinTypes: [{ id: 60, name: 'ETH', value: '0xotheraddress' }] }),
-      isLoading: false,
-    })
-    const { result } = renderHook(() =>
-      useResolverStatus({
-        name: 'test.eth',
-        migratedRecordsMatch: { type: 'address', match: { id: 60, value: '0xotheraddress' } },
-      }),
-    )
-    expect(result.current).toMatchObject(
-      createResult([
-        'hasProfile',
-        'hasResolver',
-        'hasValidResolver',
-        'isAuthorized',
-        'hasMigratedProfile',
-        'isNameWrapperAware',
-        'hasMigratedRecord',
-      ]),
-    )
-    expectEnabledHook(mockUseProfile, true)
-    expectEnabledHook(mockUseResolverType, true)
-    expectEnabledHook(mockUseResolverIsAuthorised, true)
-    expectEnabledHook(mockUseLatestResolverProfile, true)
-  })
-
-  it('should return hasMigratedRecord is false if migratedRecordsMatch does not match on latest resolver profile', () => {
-    mockUseResolverType.mockReturnValueOnce({ data: { type: 'outdated' } })
-    mockUseLatestResolverProfile.mockReturnValueOnce({
-      data: createProfileData({ coinTypes: [{ id: 60, name: 'ETH', value: '0xothermatch' }] }),
-      isLoading: false,
-    })
-    const { result } = renderHook(() =>
-      useResolverStatus({
-        name: 'test.eth',
-        migratedRecordsMatch: { type: 'address', match: { id: 60, value: '0xotheraddress' } },
-      }),
-    )
-    expect(result.current).toMatchObject(
-      createResult([
-        'hasProfile',
-        'hasResolver',
-        'hasValidResolver',
-        'isAuthorized',
-        'hasMigratedProfile',
-        'isNameWrapperAware',
-      ]),
-    )
-    expectEnabledHook(mockUseProfile, true)
-    expectEnabledHook(mockUseResolverType, true)
-    expectEnabledHook(mockUseResolverIsAuthorised, true)
-    expectEnabledHook(mockUseLatestResolverProfile, true)
-  })
-
   it('should not return hasMigratedProfile if latest resolver profile does not have records', () => {
     mockUseResolverType.mockReturnValueOnce({ data: { type: 'outdated' } })
     mockUseLatestResolverProfile.mockReturnValueOnce({

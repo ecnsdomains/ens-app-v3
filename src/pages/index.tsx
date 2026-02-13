@@ -9,11 +9,10 @@ import FaucetBanner from '@app/components/@molecules/FaucetBanner'
 import Hamburger from '@app/components/@molecules/Hamburger/Hamburger'
 import { SearchInput } from '@app/components/@molecules/SearchInput/SearchInput'
 import { LeadingHeading } from '@app/components/LeadingHeading'
-// import { AnnouncementBanner } from '@app/components/pages/AnnouncementBanner' // Hidden for ECNS - ENSv2 not applicable
 import { VerificationErrorDialog } from '@app/components/pages/VerificationErrorDialog'
 import { useVerificationOAuthHandler } from '@app/hooks/verification/useVerificationOAuthHandler/useVerificationOAuthHandler'
 
-import ENSFull from '../assets/ENSFull.svg'
+import ECNSMark from '../assets/ECNSMark.svg'
 
 // Dynamic import for Unicorn Studio background (SSR disabled)
 const UnicornBackground = dynamic(
@@ -76,7 +75,7 @@ const Stack = styled.div(
   `,
 )
 
-const StyledECNS = styled(ENSFull)(
+const StyledECNS = styled(ECNSMark)(
   ({ theme }) => css`
     height: ${theme.space['8.5']};
   `,
@@ -130,8 +129,6 @@ export default function Page() {
             </Typography>
           </SubtitleWrapper>
           <SearchInput />
-
-          {/* <AnnouncementBanner /> - Hidden for ECNS - ENSv2 not applicable */}
         </Stack>
       </Container>
       <VerificationErrorDialog {...(dialogProps ?? {})} />

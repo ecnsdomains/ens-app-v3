@@ -7,11 +7,7 @@ import { useResolverType } from '@app/hooks/resolver/useResolverType'
 import { useProfile } from '@app/hooks/useProfile'
 import { emptyAddress } from '@app/utils/constants'
 import { profileHasRecords } from '@app/utils/profile'
-import {
-  checkProfileRecordsContains,
-  checkProfileRecordsEqual,
-  RecordMatch,
-} from '@app/utils/records'
+import { checkProfileRecordsEqual } from '@app/utils/records'
 import { getResolverWrapperAwareness } from '@app/utils/utils'
 
 type UseResolverStatusParameters = {
@@ -19,14 +15,12 @@ type UseResolverStatusParameters = {
 
   enabled?: boolean
   compare?: boolean
-  migratedRecordsMatch?: RecordMatch
 }
 
 export const useResolverStatus = ({
   name,
   enabled: enabled_ = true,
   compare = true,
-  migratedRecordsMatch,
 }: UseResolverStatusParameters) => {
   const chainId = useChainId()
 
@@ -87,7 +81,6 @@ export const useResolverStatus = ({
       hasProfile: false,
       hasMigratedProfile: false,
       isMigratedProfileEqual: false,
-      hasMigratedRecord: undefined,
     }
 
     const baseResults = {
@@ -122,15 +115,11 @@ export const useResolverStatus = ({
 
     const resolverRecords = latestResolverProfile.data || {}
     const hasMigratedProfile = profileHasRecords(latestResolverProfile.data)
-    const hasMigratedRecord = migratedRecordsMatch
-      ? checkProfileRecordsContains({ profile: resolverRecords, ...migratedRecordsMatch })
-      : undefined
 
     return {
       ...authorizedResults,
       hasMigratedProfile,
       isMigratedProfileEqual: checkProfileRecordsEqual(profile || {}, resolverRecords),
-      hasMigratedRecord,
     }
   }, [
     chainId,
@@ -138,7 +127,6 @@ export const useResolverStatus = ({
     resolverIsAuthorised.data?.isValid,
     latestResolverProfile.data,
     compare,
-    migratedRecordsMatch,
     profile,
     profileResolverAddress,
     resolverType.data?.type,

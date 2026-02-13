@@ -6,7 +6,6 @@ import type { useProfile } from '@app/hooks/useProfile'
 
 export type View =
   | 'loading'
-  | 'migrateRegistry'
   | 'noResolver'
   | 'resolverNotNameWrapperAware'
   | 'editor'
@@ -17,8 +16,6 @@ export type View =
   | 'resolverOutOfDate'
   | 'transferOrResetProfile'
   | 'invalidResolver'
-  | 'migrateProfileSelector'
-  | 'migrateProfileWarning'
   | 'resetProfile'
   | 'updateResolverOrResetProfile'
   | 'header-upload'
@@ -52,12 +49,6 @@ const initializer = ({ profile, resolverStatus, isWrapped, isLoading }: InitialD
       isWrapped,
       isLoading,
     })
-      .with(
-        {
-          profile: { isMigrated: false },
-        },
-        () => ({ ...defaultState, stack: ['migrateRegistry'] as View[] }),
-      )
       .with({ resolverStatus: { hasResolver: false } }, () => ({
         ...defaultState,
         stack: ['noResolver'] as View[],

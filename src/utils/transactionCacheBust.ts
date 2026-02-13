@@ -38,12 +38,6 @@ export const computeCacheBustFlags = (action: string, data: unknown): CacheBust 
       }
     }
 
-    case 'migrateProfile':
-    case 'migrateProfileWithReset':
-      // These copy existing records to a new resolver without changing values.
-      // No cache bust needed since avatar/header content remains the same.
-      return undefined
-
     case 'resetProfileWithRecords':
       // This uses clearRecords: true, so any existing avatar/header will be deleted
       // unless explicitly included in the passed records. Always bust to be safe.

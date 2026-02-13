@@ -33,11 +33,6 @@ const WrapButton = ({ name, ownerData, profile, canBeWrapped, isManager, isRegis
 
   const hasOwnerData = !!ownerData
 
-  // BUG: We should also check if the current resolver is name wrapper aware, but this check creates a false negative for custom name wrapper aware resolvers.
-  // For safety, we will migrate if the profile on the current resolver does not match the profile on the latest name wrapper aware resolver.
-  const shouldMigrate = !resolverStatus.data?.isMigratedProfileEqual
-  const resolverAddress = profile?.resolverAddress
-
   const isSubname = name.split('.').length > 2
   const { data: approvedForAll, isLoading: isApprovalLoading } = useWrapperApprovedForAll({
     address: address!,
@@ -54,8 +49,6 @@ const WrapButton = ({ name, ownerData, profile, canBeWrapped, isManager, isRegis
     if (!hasOwnerData) return
     if (resumable) return resumeTransactionFlow(`wrapName-${name}`)
 
-    const isManagerAndShouldMigrate = isManager && shouldMigrate
-    const isRegistrantAndShouldMigrate = !isManager && isRegistrant && shouldMigrate
     const needsApproval = isManager && isSubname && !approvedForAll
 
     const transactions: GenericTransaction[] = [
@@ -66,19 +59,9 @@ const WrapButton = ({ name, ownerData, profile, canBeWrapped, isManager, isRegis
             }),
           ]
         : []),
-      ...(isManagerAndShouldMigrate
-        ? [
-            createTransactionItem('migrateProfile', {
-              name,
-            }),
-          ]
-        : []),
       createTransactionItem('wrapName', {
         name,
       }),
-      ...(isRegistrantAndShouldMigrate
-        ? [createTransactionItem('migrateProfile', { name, resolverAddress })]
-        : []),
     ]
 
     const transactionFlowItem: TransactionFlowItem = {

@@ -109,7 +109,6 @@ export const useProfile = ({
             decodedName,
           }
         : {}),
-      isMigrated: subgraphRecords?.isMigrated,
       createdAt: subgraphRecords?.createdAt,
       address: profile.coins.find((x) => x.id === 60)?.value as Address | undefined,
     }

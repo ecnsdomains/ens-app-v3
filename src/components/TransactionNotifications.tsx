@@ -84,8 +84,6 @@ export const TransactionNotifications = () => {
           'updateProfile',
           'updateProfileRecords',
           'resetProfileWithRecords',
-          'migrateProfile',
-          'migrateProfileWithReset',
         ]
         if (profileActions.includes(action)) {
           queryClient.invalidateQueries({ queryKey: [META_DATA_QUERY_KEY] })
