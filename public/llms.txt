@@ -1,0 +1,44 @@
+# ECNS - Ethereum Classic Name Service
+
+> Decentralized naming for Ethereum Classic. Claim your .etc domain.
+
+## What is ECNS?
+
+ECNS (Ethereum Classic Name Service) is a decentralized naming system built on Ethereum Classic (ETC). It allows users to register human-readable .etc domains that map to wallet addresses, smart contracts, and other blockchain resources.
+
+## Key Features
+
+- **Human-Readable Addresses**: Replace complex wallet addresses like `0x1234...abcd` with simple names like `yourname.etc`
+- **Decentralized**: Built on Ethereum Classic blockchain, fully decentralized and censorship-resistant
+- **Multi-Chain Support**: Works on both ETC mainnet (chain 61) and Mordor testnet (chain 63)
+- **ENS Compatible**: Forked from Ethereum Name Service (ENS), maintaining compatibility with ENS standards
+- **Resolver Records**: Store addresses, text records, content hashes, and more
+
+## Supported Networks
+
+- **Ethereum Classic Mainnet** (Chain ID: 61)
+- **Mordor Testnet** (Chain ID: 63)
+
+## How to Use
+
+1. Visit https://ecns.domains
+2. Connect your wallet (MetaMask, etc.)
+3. Search for your desired .etc name
+4. Register and manage your domain
+
+## Technical Details
+
+- **TLD**: .etc (top-level domain for Ethereum Classic)
+- **Registry Contract**: ECNSRegistry
+- **Registrar**: ETCRegistrarController
+- **Resolver**: PublicResolver
+
+## Links
+
+- Website: https://ecns.domains
+- GitHub: https://github.com/ecnsdomains
+- Twitter: https://x.com/ecnsdomains
+
+## Contact
+
+- Email: support@ecns.domains

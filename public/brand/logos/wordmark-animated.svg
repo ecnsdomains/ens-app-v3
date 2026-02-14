@@ -1,0 +1,24 @@
+<svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- ETC Diamond Prism mark + animated ecns wordmark (> ecns█ with blinking cursor) -->
+  <style>
+    .cursor { animation: blink 1.06s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+  <g>
+    <polygon points="40,2 70,50 40,98 10,50" fill="#0D3D2E"/>
+    <polygon points="40,2 15,42 40,42" fill="#4FD4A4"/>
+    <polygon points="40,2 65,42 40,42" fill="#1A6B50"/>
+    <polygon points="15,42 10,50 40,50 40,42" fill="#3FB68B"/>
+    <polygon points="65,42 70,50 40,50 40,42" fill="#0D3D2E"/>
+    <polygon points="10,50 15,58 40,58 40,50" fill="#3FB68B"/>
+    <polygon points="70,50 65,58 40,58 40,50" fill="#1A6B50"/>
+    <polygon points="15,58 40,98 40,58" fill="#4FD4A4"/>
+    <polygon points="65,58 40,98 40,58" fill="#2E9E76"/>
+  </g>
+  <!-- Animated terminal wordmark -->
+  <text x="84" y="58" style="font-family:'IBM 3270','IBM 3270 Narrow',monospace;font-size:24px;letter-spacing:0.02em">
+    <tspan fill="#3FB68B" fill-opacity="0.5">&gt; </tspan>
+    <tspan fill="#3FB68B">ecns</tspan>
+    <tspan fill="#3FB68B" class="cursor">&#x2588;</tspan>
+  </text>
+</svg>

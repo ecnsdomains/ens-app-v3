@@ -1,6 +1,6 @@
 {
-  "name": "ENS App",
-  "short_name": "ENS",
+  "name": "ECNS - Ethereum Classic Name Service",
+  "short_name": "ECNS",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,8 +13,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#5298FF",
-  "background_color": "#F6F6F6",
+  "theme_color": "#3FB68B",
+  "background_color": "#1A3A2E",
   "display": "standalone",
-  "description": "Decentralised naming for wallets, websites, & more"
+  "description": "Decentralized naming for Ethereum Classic. Claim your .etc domain."
 }

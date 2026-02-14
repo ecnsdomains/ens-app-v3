@@ -1,4 +1,57 @@
+# ECNS - Ethereum Classic Name Service
+# https://ecns.domains
+
 User-agent: *
 Allow: /
 
-Sitemap: https://app.ens.domains/sitemap.xml
+# Sitemap
+Sitemap: https://ecns.domains/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# AI Crawlers - Allow for accurate representation
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Common AI and search crawlers
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Disallow private/internal paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Allow important assets
+Allow: /og-image.png
+Allow: /favicon.svg
+Allow: /favicon.ico
+Allow: /manifest.json
+
+# Host directive
+Host: https://ecns.domains

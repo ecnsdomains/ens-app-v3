@@ -1,0 +1,16 @@
+<svg viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Base silhouette (darkest shade absorbs any sub-pixel gaps) -->
+  <polygon points="40,2 70,50 40,98 10,50" fill="#0D3D2E"/>
+
+  <!-- Left faces (bright — light-catching side) -->
+  <polygon points="40,2 15,42 40,42" fill="#4FD4A4"/>
+  <polygon points="15,42 10,50 40,50 40,42" fill="#3FB68B"/>
+  <polygon points="10,50 15,58 40,58 40,50" fill="#3FB68B"/>
+  <polygon points="15,58 40,98 40,58" fill="#4FD4A4"/>
+
+  <!-- Right faces (dark — shadow side) -->
+  <polygon points="40,2 65,42 40,42" fill="#1A6B50"/>
+  <polygon points="65,42 70,50 40,50 40,42" fill="#0D3D2E"/>
+  <polygon points="70,50 65,58 40,58 40,50" fill="#1A6B50"/>
+  <polygon points="65,58 40,98 40,58" fill="#2E9E76"/>
+</svg>
