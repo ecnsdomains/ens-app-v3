@@ -29,7 +29,7 @@
     "tenv": "ens-test-env -a",
     "denv": "pnpm tenv start --no-scripts --no-build --extra-time 11368000 --verbosity 1",
     "lint": "eslint src && stylelint \"./src/**/*.tsx\"",
-    "lint:types": "tsc --noEmit",
+    "lint:types": "tsc --noEmit -p tsconfig.lint.json",
     "lint:fix": "eslint src --fix",
     "export": "next export",
     "compare-locales": "node ./scripts/compare-locales.mjs",

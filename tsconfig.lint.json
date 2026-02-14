@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.test-d.ts",
+    "**/*.spec.ts",
+    "e2e/**",
+    "deploy/**",
+    "**/*.ignore.ts",
+    "**/*.ignore.tsx",
+    "functions/**/*"
+  ]
+}

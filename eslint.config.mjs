@@ -4,6 +4,8 @@ import nextPlugin from '@next/eslint-plugin-next'
 import tseslint from 'typescript-eslint'
 import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y'
+import importPlugin from 'eslint-plugin-import'
 import prettierConfig from 'eslint-config-prettier'
 
 export default tseslint.config(
@@ -27,6 +29,8 @@ export default tseslint.config(
       '@next/next': nextPlugin,
       react: reactPlugin,
       'react-hooks': reactHooksPlugin,
+      'jsx-a11y': jsxA11yPlugin,
+      import: importPlugin,
     },
     languageOptions: {
       parserOptions: {
@@ -60,6 +64,11 @@ export default tseslint.config(
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
+      '@typescript-eslint/no-empty-object-type': 'warn',
+      '@typescript-eslint/ban-ts-comment': 'warn',
+      '@typescript-eslint/prefer-as-const': 'warn',
+      '@typescript-eslint/no-unsafe-function-type': 'warn',
       '@typescript-eslint/naming-convention': [
         'error',
         {
@@ -79,6 +88,12 @@ export default tseslint.config(
           format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
           leadingUnderscore: 'allowSingleOrDouble',
           trailingUnderscore: 'allow',
+          filter: { regex: '^\\$|\\.|^@', match: false },
+        },
+        {
+          selector: 'property',
+          format: null,
+          filter: { regex: '^\\$|\\.|^@', match: true },
         },
         {
           selector: 'typeLike',
