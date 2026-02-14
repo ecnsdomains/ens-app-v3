@@ -3,6 +3,7 @@ import { labelhash } from 'viem'
 
 import { createSubgraphClient } from '@ensdomains/ensjs/subgraph'
 
+import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
 import { ConfigWithEns, CreateQueryKey, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
 import { prepareQueryOptions } from '@app/utils/prepareQueryOptions'
@@ -77,6 +78,8 @@ const useRegistrationData = <TParams extends UseRegistrationDataParameters>({
   // params
   ...params
 }: TParams & UseRegistrationDataConfig) => {
+  const hasSubgraph = useHasSubgraph()
+
   const initialOptions = useQueryOptions({
     params,
     functionName: 'getRegistrationData',
@@ -87,7 +90,7 @@ const useRegistrationData = <TParams extends UseRegistrationDataParameters>({
   const preparedOptions = prepareQueryOptions({
     queryKey: initialOptions.queryKey,
     queryFn: initialOptions.queryFn,
-    enabled: enabled && !!params.name && checkETH2LDFromName(params.name),
+    enabled: enabled && hasSubgraph && !!params.name && checkETH2LDFromName(params.name),
     gcTime,
     staleTime,
   })

@@ -6,6 +6,7 @@ import {
   GetSubgraphRecordsReturnType,
 } from '@ensdomains/ensjs/subgraph'
 
+import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
 import { usePrefetchQuery } from '@app/hooks/usePrefetchQuery'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, PartialBy, QueryConfig } from '@app/types'
@@ -46,6 +47,8 @@ export const useSubgraphRecords = <TParams extends UseSubgraphRecordsParameters>
   // params
   ...params
 }: TParams & UseSubgraphRecordsConfig) => {
+  const hasSubgraph = useHasSubgraph()
+
   const initialOptions = useQueryOptions({
     params,
     scopeKey,
@@ -57,7 +60,7 @@ export const useSubgraphRecords = <TParams extends UseSubgraphRecordsParameters>
   const preparedOptions = prepareQueryOptions({
     queryKey: initialOptions.queryKey,
     queryFn: initialOptions.queryFn,
-    enabled: enabled && !!params.name,
+    enabled: enabled && hasSubgraph && !!params.name,
     gcTime,
     staleTime,
   })

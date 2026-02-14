@@ -2,6 +2,7 @@ import { QueryFunctionContext, queryOptions } from '@tanstack/react-query'
 
 import { getSubnames, Name } from '@ensdomains/ensjs/subgraph'
 
+import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
 import { ConfigWithEns, CreateQueryKey } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
 import { useQuery } from '@app/utils/query/useQuery'
@@ -53,8 +54,9 @@ const hasSubnamesQueryFn =
   }
 
 export const useHasSubnames = (name: string) => {
+  const hasSubgraph = useHasSubgraph()
   const isSubname = !!name && name.split('.').length > 2
-  const enabled = !!name && isSubname
+  const enabled = !!name && isSubname && hasSubgraph
 
   const initialOptions = useQueryOptions({
     params: { name },

@@ -3,6 +3,7 @@ import { gql } from 'graphql-request'
 
 import { createSubgraphClient } from '@ensdomains/ensjs/subgraph'
 
+import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
@@ -62,6 +63,8 @@ export const useSubgraphMeta = <TParams extends UseSubgraphMetaParameters>(
     scopeKey,
   } = args
 
+  const hasSubgraph = useHasSubgraph()
+
   const initialOptions = useQueryOptions({
     params: {},
     scopeKey,
@@ -73,7 +76,7 @@ export const useSubgraphMeta = <TParams extends UseSubgraphMetaParameters>(
   const preparedOptions = prepareQueryOptions({
     queryKey: initialOptions.queryKey,
     queryFn: initialOptions.queryFn,
-    enabled,
+    enabled: enabled && hasSubgraph,
     gcTime,
     staleTime,
   })

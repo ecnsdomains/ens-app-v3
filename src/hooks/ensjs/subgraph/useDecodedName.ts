@@ -8,6 +8,7 @@ import {
 } from '@ensdomains/ensjs/subgraph'
 import { checkIsDecrypted } from '@ensdomains/ensjs/utils'
 
+import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, PartialBy, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
@@ -47,6 +48,8 @@ export const useDecodedName = <TParams extends UseDecodedNameParameters>({
   // params
   ...params
 }: TParams & UseDecodedNameConfig) => {
+  const hasSubgraph = useHasSubgraph()
+
   const initialOptions = useQueryOptions({
     params,
     scopeKey,
@@ -63,7 +66,7 @@ export const useDecodedName = <TParams extends UseDecodedNameParameters>({
   const preparedOptions = prepareQueryOptions({
     queryKey: initialOptions.queryKey,
     queryFn: initialOptions.queryFn,
-    enabled: enabled && !!params.name && nameIsEncrypted,
+    enabled: enabled && hasSubgraph && !!params.name && nameIsEncrypted,
     gcTime,
     staleTime,
   })

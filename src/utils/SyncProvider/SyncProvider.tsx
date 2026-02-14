@@ -114,7 +114,7 @@ export const SyncProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: currentGraphBlock } = useQuery<number>({
     queryKey: ['graphBlock', chainId, transactions],
     queryFn: () =>
-      subgraphClient.request<GraphResponse>(query).then((res) => {
+      subgraphClient!.request<GraphResponse>(query).then((res) => {
         return res!._meta.block.number
       }),
     initialData: 0,

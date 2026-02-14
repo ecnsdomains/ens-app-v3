@@ -7,6 +7,7 @@ import {
   GetSubnamesReturnType,
 } from '@ensdomains/ensjs/subgraph'
 
+import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, InfiniteQueryConfig, PartialBy } from '@app/types'
 import { useInfiniteQuery } from '@app/utils/query/useInfiniteQuery'
@@ -54,6 +55,8 @@ export const useSubnames = <TParams extends UseSubnamesParameters>({
   // params
   ...params
 }: TParams & UseSubnamesConfig) => {
+  const hasSubgraph = useHasSubgraph()
+
   const paramsWithLowercaseSearchString = {
     ...params,
     searchString: params.searchString?.toLocaleLowerCase(),
@@ -72,7 +75,7 @@ export const useSubnames = <TParams extends UseSubnamesParameters>({
     queryFn: initialOptions.queryFn,
     getNextPageParam: getNextPageParam(paramsWithLowercaseSearchString),
     initialPageParam,
-    enabled: enabled && !!paramsWithLowercaseSearchString.name,
+    enabled: enabled && hasSubgraph && !!paramsWithLowercaseSearchString.name,
     gcTime,
     staleTime,
   })

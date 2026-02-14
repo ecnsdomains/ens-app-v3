@@ -3,6 +3,7 @@ import { namehash, type Address } from 'viem'
 
 import { createSubgraphClient } from '@ensdomains/ensjs/subgraph'
 
+import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
 import { ConfigWithEns, CreateQueryKey, QueryConfig } from '@app/types'
 import { prepareQueryOptions } from '@app/utils/prepareQueryOptions'
 import { useQuery } from '@app/utils/query/useQuery'
@@ -73,6 +74,8 @@ export const useResolverExists = <TParams extends UseResolverExistsParameters>({
   // params
   ...params
 }: TParams & UseResolverExistsConfig) => {
+  const hasSubgraph = useHasSubgraph()
+
   const initialOptions = useQueryOptions({
     params,
     scopeKey,
@@ -84,7 +87,7 @@ export const useResolverExists = <TParams extends UseResolverExistsParameters>({
   const preparedOptions = prepareQueryOptions({
     queryKey: initialOptions.queryKey,
     queryFn: initialOptions.queryFn,
-    enabled: enabled && !!params.name && !!params.address,
+    enabled: enabled && hasSubgraph && !!params.name && !!params.address,
     gcTime,
     staleTime,
   })

@@ -6,6 +6,7 @@ import {
   GetSubgraphRegistrantReturnType,
 } from '@ensdomains/ensjs/subgraph'
 
+import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, PartialBy, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
@@ -45,6 +46,8 @@ export const useSubgraphRegistrant = <TParams extends UseSubgraphRegistrantParam
   // params
   ...params
 }: TParams & UseSubgraphRegistrantConfig) => {
+  const hasSubgraph = useHasSubgraph()
+
   const initialOptions = useQueryOptions({
     params,
     scopeKey,
@@ -61,7 +64,7 @@ export const useSubgraphRegistrant = <TParams extends UseSubgraphRegistrantParam
   const query = useQuery({
     ...preparedOptions,
     gcTime,
-    enabled: enabled && !!params.name,
+    enabled: enabled && hasSubgraph && !!params.name,
     staleTime,
   })
 

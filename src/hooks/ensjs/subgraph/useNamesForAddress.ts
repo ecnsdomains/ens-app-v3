@@ -7,6 +7,7 @@ import {
   GetNamesForAddressReturnType,
 } from '@ensdomains/ensjs/subgraph'
 
+import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, InfiniteQueryConfig, PartialBy } from '@app/types'
 import { useInfiniteQuery } from '@app/utils/query/useInfiniteQuery'
@@ -57,6 +58,8 @@ export const useNamesForAddress = <TParams extends UseNamesForAddressParameters>
   // params
   ...params
 }: TParams & UseNamesForAddressConfig) => {
+  const hasSubgraph = useHasSubgraph()
+
   const paramsWithLowercaseSearchString = {
     ...params,
     filter: { ...params.filter, searchString: params.filter?.searchString?.toLocaleLowerCase() },
@@ -75,7 +78,7 @@ export const useNamesForAddress = <TParams extends UseNamesForAddressParameters>
     queryFn: initialOptions.queryFn,
     getNextPageParam: getNextPageParam(paramsWithLowercaseSearchString),
     initialPageParam,
-    enabled: enabled && !!paramsWithLowercaseSearchString.address,
+    enabled: enabled && hasSubgraph && !!paramsWithLowercaseSearchString.address,
     gcTime,
     staleTime,
   })
