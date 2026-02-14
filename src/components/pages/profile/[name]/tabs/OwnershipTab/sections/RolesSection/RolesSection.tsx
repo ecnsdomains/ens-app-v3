@@ -23,7 +23,11 @@ const Footer = styled.div(
   `,
 )
 
-const StyledCard = styled(Card)(cacheableComponentStyles, () => css``)
+const StyledCard = styled(Card)<{ $isCached?: boolean }>(
+  ({ theme, $isCached }) => css`
+    ${cacheableComponentStyles({ theme, $isCached })}
+  `,
+)
 
 type Props = {
   name: string

@@ -6,9 +6,9 @@ import ErrorScreen from '@app/components/@atoms/ErrorScreen'
 import Hamburger from '@app/components/@molecules/Hamburger/Hamburger'
 import { LeadingHeading } from '@app/components/LeadingHeading'
 
-import ENSFull from '../assets/ENSFull.svg'
+import ECNSMark from '../assets/ECNSMark.svg'
 
-const StyledECNS = styled(ENSFull)(
+const StyledECNS = styled(ECNSMark)(
   ({ theme }) => css`
     height: ${theme.space['8.5']};
   `,
@@ -38,7 +38,7 @@ export default function Page() {
     <>
       <Head>
         {/* this is wrapped in a string because of the way nextjs renders content, don't remove! */}
-        <title>{`ENS - ${t('notFound')}`}</title>
+        <title>{`ECNS - ${t('notFound')}`}</title>
       </Head>
       <StyledLeadingHeading>
         <LogoAndLanguage>

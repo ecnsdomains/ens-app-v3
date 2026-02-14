@@ -32,7 +32,7 @@ const Container = styled.div(
 type DropdownItemObject = {
   label: string
   onClick?: (value?: string) => void
-  wrapper?: (children: React.ReactNode, key: React.Key) => JSX.Element
+  wrapper?: (children: React.ReactNode, key: React.Key) => React.JSX.Element
   as?: 'button' | 'a'
   icon?: AsProp
   value?: string
@@ -486,7 +486,7 @@ export const LegacyDropdown = ({
   inheritContentWidth = false,
   ...props
 }: Props & (PropsWithIsOpen | PropsWithoutIsOpen)) => {
-  const dropdownRef = useRef<any>()
+  const dropdownRef = useRef<any>(null)
   const [internalIsOpen, internalSetIsOpen] = useState(false)
   const [isOpen, setIsOpen] = _setIsOpen
     ? [_isOpen, _setIsOpen]

@@ -38,7 +38,7 @@ const StyledBanner = styled(Banner)(
   `,
 )
 
-const LargeCheckIcon = styled.svg(
+const LargeCheckIcon = styled(CheckCircleSVG)(
   ({ theme }) => css`
     width: ${theme.space['12']};
     height: ${theme.space['12']};
@@ -131,7 +131,7 @@ const FaucetBanner = () => {
         <>
           <Dialog.Heading title="Your claim was submitted!" />
           <Dialog.Content>
-            <LargeCheckIcon as={CheckCircleSVG} />
+            <LargeCheckIcon />
             <Typography>{t('testnetFaucet.note')}</Typography>
           </Dialog.Content>
           <Dialog.Footer trailing={<Button onClick={closeDialog}>{t('action.close')}</Button>} />

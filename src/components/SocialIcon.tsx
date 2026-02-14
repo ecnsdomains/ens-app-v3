@@ -13,31 +13,27 @@ const SocialIconWrapper = styled.a(
   `,
 )
 
-const StyledIcon = styled.div<{ $iconColor?: string }>(
-  ({ theme, $iconColor }) => css`
-    height: 100%;
-    position: absolute;
-    transition: 0.15s all ease-in-out;
-    fill: ${theme.colors.greyPrimary};
+const iconStyles = ({ theme, $iconColor }: { theme: any; $iconColor?: string }) => css`
+  height: 100%;
+  position: absolute;
+  transition: 0.15s all ease-in-out;
+  fill: ${theme.colors.greyPrimary};
 
-    ${SocialIconWrapper}:hover && {
-      fill: ${$iconColor};
-    }
-  `,
-)
+  ${SocialIconWrapper}:hover && {
+    fill: ${$iconColor};
+  }
+`
 
-const StyledColoredIcon = styled.div(
-  () => css`
-    height: 100%;
-    position: absolute;
-    transition: 0.15s all ease-in-out;
-    opacity: 0;
+const coloredIconStyles = ({ theme }: { theme: any }) => css`
+  height: 100%;
+  position: absolute;
+  transition: 0.15s all ease-in-out;
+  opacity: 0;
 
-    ${SocialIconWrapper}:hover && {
-      opacity: 1;
-    }
-  `,
-)
+  ${SocialIconWrapper}:hover && {
+    opacity: 1;
+  }
+`
 
 export const SocialIcon = ({
   Icon,
@@ -50,10 +46,13 @@ export const SocialIcon = ({
   color?: string
   href: string
 }) => {
+  const StyledIcon = styled(Icon)<{ $iconColor?: string }>(iconStyles)
+  const StyledColoredIcon = ColoredIcon ? styled(ColoredIcon)(coloredIconStyles) : null
+
   return (
     <SocialIconWrapper href={href} target="_blank">
-      <StyledIcon key={href} $iconColor={color} as={Icon} />
-      {ColoredIcon && <StyledColoredIcon as={ColoredIcon} />}
+      <StyledIcon key={href} $iconColor={color} />
+      {StyledColoredIcon && <StyledColoredIcon />}
     </SocialIconWrapper>
   )
 }

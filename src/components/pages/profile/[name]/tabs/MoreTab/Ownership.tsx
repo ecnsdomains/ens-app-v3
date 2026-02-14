@@ -24,9 +24,9 @@ import { shortenAddress } from '@app/utils/utils'
 
 import { TabWrapper } from '../../../TabWrapper'
 
-const Container = styled(TabWrapper)(
-  cacheableComponentStyles,
-  ({ theme }) => css`
+const Container = styled(TabWrapper)<{ $isCached?: boolean }>(
+  ({ theme, $isCached }) => css`
+    ${cacheableComponentStyles({ theme, $isCached })}
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -63,7 +63,7 @@ const HeadingContainer = styled.div(
   `,
 )
 
-const AeroplaneIcon = styled.svg(
+const AeroplaneIcon = styled(AeroplaneSVG)(
   ({ theme }) => css`
     display: block;
     width: ${theme.space['4']};
@@ -317,7 +317,7 @@ const Ownership = ({
           {canSend && (
             <Button
               size="small"
-              prefix={() => <AeroplaneIcon as={AeroplaneSVG} />}
+              prefix={() => <AeroplaneIcon />}
               onClick={handleSend}
               data-testid="send-name-button"
             >
@@ -332,7 +332,7 @@ const Ownership = ({
                 buttonText: t('action.send', { ns: 'common' }),
                 mobileWidth: 150,
                 mobileButtonWidth: 'initial',
-                prefix: () => <AeroplaneIcon as={AeroplaneSVG} />,
+                prefix: () => <AeroplaneIcon />,
               }}
             />
           )}

@@ -17,7 +17,7 @@ const BaseLink = ({ href, ...rest }: PropsWithChildren<LinkProps>) => {
     return getDestination(urlObject)
   }, [href, referrer])
 
-  return <Link {...rest} legacyBehavior href={newHref} />
+  return <Link {...rest} href={newHref} />;
 }
 
 export const BaseLinkWithHistory = ({
@@ -34,7 +34,7 @@ export const BaseLinkWithHistory = ({
     return getDestination(urlObject)
   }, [href, router.asPath, router.query.referrer])
 
-  return <Link {...rest} legacyBehavior href={newHref} as={createDecorativeUrlObject(newHref)} />
+  return <Link {...rest} href={newHref} as={createDecorativeUrlObject(newHref)} />;
 }
 
 export default BaseLink

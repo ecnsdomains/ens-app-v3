@@ -1,3 +1,5 @@
+import type { SVGProps } from 'react'
+
 import dynamic from 'next/dynamic'
 
 import { QuestionCircleSVG } from '@ensdomains/thorin'
@@ -16,7 +18,7 @@ export const DynamicContentHashIcon = ({
   name,
   showDefault = true,
   ...props
-}: JSX.IntrinsicAttributes & {
+}: SVGProps<SVGSVGElement> & {
   name: ContentHashIconType | string
   showDefault?: boolean
 }) => {

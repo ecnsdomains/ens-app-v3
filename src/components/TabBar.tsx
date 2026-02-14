@@ -145,29 +145,30 @@ const BackButton = styled.button(
   `,
 )
 
-const ArrowOverlay = styled.svg<{ $isOpen: boolean }>(
-  ({ theme, $isOpen }) => css`
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: ${theme.space['10']};
-    height: ${theme.space['10']};
-    background: rgba(0, 0, 0, 0.25);
-    color: ${theme.colors.background};
-    padding: ${theme.space['2.5']};
-    opacity: 0;
+const arrowOverlayStyles = ({ theme, $isOpen }: { theme: any; $isOpen: boolean }) => css`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: ${theme.space['10']};
+  height: ${theme.space['10']};
+  background: rgba(0, 0, 0, 0.25);
+  color: ${theme.colors.background};
+  padding: ${theme.space['2.5']};
+  opacity: 0;
 
-    transition: opacity 0.15s ease-in-out;
+  transition: opacity 0.15s ease-in-out;
 
-    ${$isOpen &&
-    css`
-      opacity: 1;
-    `}
-  `,
-)
+  ${$isOpen &&
+  css`
+    opacity: 1;
+  `}
+`
+
+const CrossOverlay = styled(CrossSVG)<{ $isOpen: boolean }>(arrowOverlayStyles)
+const PersonOverlay = styled(PersonSVG)<{ $isOpen: boolean }>(arrowOverlayStyles)
 
 const profileRoute = getRoute('profile')
 
@@ -190,12 +191,12 @@ const TabBarProfile = ({
   return (
     <ExtraNavWrapper $isOpen={isOpen}>
       <AvatarWrapper onClick={() => setIsOpen((prev) => !prev)}>
-        <ArrowOverlay as={CrossSVG} $isOpen={isOpen} />
+        <CrossOverlay $isOpen={isOpen} />
         {avatar ? (
           <img loading="eager" decoding="sync" alt="avatar" src={avatar} />
         ) : (
           <>
-            <ArrowOverlay as={PersonSVG} $isOpen={!isOpen} />
+            <PersonOverlay $isOpen={!isOpen} />
             <img loading="eager" decoding="sync" alt="zorb" src={zorb} />
           </>
         )}

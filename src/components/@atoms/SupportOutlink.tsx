@@ -33,7 +33,7 @@ const StyledSupportIcon = styled(SupportQuestionIcon)(
   `,
 )
 
-const OutlinkIcon = styled.svg(
+const OutlinkIcon = styled(OutlinkSVG)(
   ({ theme }) => css`
     --size: calc(${theme.space['2.5']} + ${theme.space['0.25']});
     width: var(--size);
@@ -48,7 +48,7 @@ export const SupportOutlink = forwardRef<HTMLAnchorElement, ComponentProps<'a'>>
       <Typography color="inherit" fontVariant="smallBold">
         {children}
       </Typography>
-      <OutlinkIcon as={OutlinkSVG} />
+      <OutlinkIcon />
     </StyledAnchor>
   ),
 )

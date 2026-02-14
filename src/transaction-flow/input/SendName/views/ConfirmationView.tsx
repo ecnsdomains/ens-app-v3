@@ -39,7 +39,7 @@ const IconWrapper = styled.div(
   `,
 )
 
-const OutlinkWrapper = styled.div(
+const OutlinkWrapper = styled(OutlinkSVG)(
   ({ theme }) => css`
     width: ${theme.space[3]};
     height: ${theme.space[3]};
@@ -74,7 +74,7 @@ export const ConfirmationView = ({ onSubmit, onBack }: Props) => {
             <Typography fontVariant="body" color="indigo">
               {t('input.sendName.views.confirmation.learnMore')}
             </Typography>
-            <OutlinkWrapper as={OutlinkSVG} />
+            <OutlinkWrapper />
           </Link>
         )}
       </Dialog.Content>

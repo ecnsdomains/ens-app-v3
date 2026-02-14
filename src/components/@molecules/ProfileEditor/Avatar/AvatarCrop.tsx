@@ -48,7 +48,7 @@ const ImageContainer = styled.div(
   `,
 )
 
-const ImageCropBorder = styled.div(
+const ImageCropBorder = styled(CropBorderSVG)(
   ({ theme }) => css`
     width: ${theme.space.full};
     height: ${theme.space.full};
@@ -59,7 +59,7 @@ const ImageCropBorder = styled.div(
   `,
 )
 
-const ImageCropFrame = styled.div(
+const ImageCropFrame = styled(CropFrameSVG)(
   ({ theme }) => css`
     width: ${theme.space.full};
     height: ${theme.space.full};
@@ -408,8 +408,8 @@ export const CropComponent = ({
         <EditImageContainer data-testid="edit-image-container">
           <ImageWrapper>
             <ImageContainer>
-              <ImageCropBorder as={CropBorderSVG} />
-              <ImageCropFrame as={CropFrameSVG} />
+              <ImageCropBorder />
+              <ImageCropFrame />
               <StyledCanvas width={1024} height={1024} ref={canvasRef} />
             </ImageContainer>
           </ImageWrapper>

@@ -253,7 +253,7 @@ const TimezoneText = styled(Typography)(
   `,
 )
 
-const CalendarIcon = styled.svg(
+const CalendarIcon = styled(CalendarSVG)(
   ({ theme }) => css`
     color: ${theme.colors.background};
     width: ${theme.space['4']};
@@ -274,7 +274,7 @@ const usePointVars = (
   getPos: (i: number) => { x: number; y: number },
   name: string,
   setProperty: PropertyFunc,
-  ref: RefObject<HTMLDivElement>,
+  ref: RefObject<HTMLDivElement | null>,
 ) => {
   useEffect(() => {
     const set = setProperty(name)
@@ -605,7 +605,7 @@ const TemporaryPremium = ({ startDate, name }: Props) => {
               color: 'text',
             }))}
           >
-            <Button prefix={() => <CalendarIcon as={CalendarSVG} />}>
+            <Button prefix={() => <CalendarIcon />}>
               {t('action.remindMe', { ns: 'common' })}
             </Button>
           </Dropdown>

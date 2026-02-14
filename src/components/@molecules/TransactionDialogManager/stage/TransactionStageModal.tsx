@@ -60,7 +60,7 @@ const BarContainer = styled.div(
   `,
 )
 
-const WalletIcon = styled.svg(
+const WalletIcon = styled(WalletSVG)(
   ({ theme }) => css`
     width: ${theme.space['12']};
   `,
@@ -106,7 +106,7 @@ const ProgressTypography = styled(Typography)(
   `,
 )
 
-const AeroplaneIcon = styled.svg(
+const AeroplaneIcon = styled(AeroplaneSVG)(
   ({ theme }) => css`
     width: ${theme.space['4']};
     height: ${theme.space['4']};
@@ -114,13 +114,14 @@ const AeroplaneIcon = styled.svg(
   `,
 )
 
-const CircleIcon = styled.svg(
-  ({ theme }) => css`
-    width: ${theme.space['6']};
-    height: ${theme.space['6']};
-    color: ${theme.colors.background};
-  `,
-)
+const circleIconStyles = ({ theme }: { theme: any }) => css`
+  width: ${theme.space['6']};
+  height: ${theme.space['6']};
+  color: ${theme.colors.background};
+`
+
+const CircleTickIcon = styled(CircleTickSVG)(circleIconStyles)
+const CrossCircleIcon = styled(CrossCircleSVG)(circleIconStyles)
 
 const MessageTypography = styled(Typography)(
   () => css`
@@ -231,13 +232,13 @@ export const LoadBar = ({ status, sendTime }: { status: Status; sendTime: number
 
   const EndElement = useMemo(() => {
     if (status === 'complete') {
-      return <CircleIcon as={CircleTickSVG} />
+      return <CircleTickIcon />
     }
     if (status === 'failed') {
-      return <CircleIcon as={CrossCircleSVG} />
+      return <CrossCircleIcon />
     }
     if (progress !== 100) {
-      return <AeroplaneIcon as={AeroplaneSVG} />
+      return <AeroplaneIcon />
     }
     return <Spinner color="background" size="small" />
   }, [progress, status])
@@ -509,7 +510,7 @@ export const TransactionStageModal = ({
     }
     return (
       <>
-        <WalletIcon as={WalletSVG} />
+        <WalletIcon />
         <MessageTypography>{t('transaction.dialog.confirm.message')}</MessageTypography>
       </>
     )

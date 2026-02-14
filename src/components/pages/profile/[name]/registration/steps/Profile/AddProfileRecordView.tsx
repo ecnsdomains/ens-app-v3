@@ -153,7 +153,7 @@ export const AddProfileRecordView = ({ control, onAdd, onClose, showDismiss }: P
   }, [search, t, i18n])
 
   // Tracks when to skip updating the sidebar while options grid is scrolling
-  const shouldSkipObserverUpdateRef = useRef<boolean>()
+  const shouldSkipObserverUpdateRef = useRef<boolean>(undefined)
   const debouncedSetShouldSkipObserverUpdateRef = useDebouncedCallback(
     () => (shouldSkipObserverUpdateRef.current = false),
     1000,
@@ -170,7 +170,7 @@ export const AddProfileRecordView = ({ control, onAdd, onClose, showDismiss }: P
   const bottomRef = useRef<HTMLDivElement>(null)
 
   const sectionRefMap: {
-    [key in ProfileRecordGroup]?: React.RefObject<HTMLDivElement>
+    [key in ProfileRecordGroup]?: React.RefObject<HTMLDivElement | null>
   } = {
     general: generalRef,
     social: socialRef,

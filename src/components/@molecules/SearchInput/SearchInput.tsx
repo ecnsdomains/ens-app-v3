@@ -1,6 +1,7 @@
 import { QueryClient, useQueryClient } from '@tanstack/react-query'
 import {
   Dispatch,
+  JSX,
   RefObject,
   SetStateAction,
   useCallback,
@@ -9,7 +10,8 @@ import {
   useRef,
   useState,
 } from 'react'
-import { TFunction, useTranslation } from 'react-i18next'
+import type { TFunction } from 'i18next'
+import { useTranslation } from 'react-i18next'
 import useTransition, { TransitionState } from 'react-transition-state'
 import styled, { css } from 'styled-components'
 import { match } from 'ts-pattern'
@@ -146,7 +148,7 @@ const CancelButton = styled(Typography)(
 type MobileSearchInputProps = {
   state: TransitionState
   toggle: (value: boolean) => void
-  searchInputRef: RefObject<HTMLInputElement>
+  searchInputRef: RefObject<HTMLInputElement | null>
   SearchResultsElement: JSX.Element
   SearchInputElement: JSX.Element
 }
@@ -303,7 +305,7 @@ type CreateSearchHandlerProps = {
   chainId: SupportedChain['id']
   dropdownItems: SearchItem[]
   router: ReturnType<typeof useRouterWithHistory>
-  searchInputRef: RefObject<HTMLInputElement>
+  searchInputRef: RefObject<HTMLInputElement | null>
   setHistory: Dispatch<SetStateAction<HistoryItem[]>>
   setInputVal: Dispatch<SetStateAction<string>>
   queryClient: QueryClient
@@ -356,7 +358,7 @@ const createSearchHandler =
   }
 
 type UseAddEventListenersProps = {
-  searchInputRef: RefObject<HTMLInputElement>
+  searchInputRef: RefObject<HTMLInputElement | null>
   handleKeyDown: (e: KeyboardEvent) => void
   handleFocusIn: (e: FocusEvent) => void
   handleFocusOut: (e: FocusEvent) => void

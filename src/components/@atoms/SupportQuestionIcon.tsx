@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { QuestionSVG } from '@ensdomains/thorin'
 
-const StyledQuestion = styled.svg(
+const StyledQuestion = styled(QuestionSVG)(
   ({ theme }) => css`
     width: ${theme.space['6']};
     height: ${theme.space['6']};
@@ -15,5 +15,5 @@ const StyledQuestion = styled.svg(
 )
 
 export const SupportQuestionIcon = forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>(
-  (props, ref) => <StyledQuestion as={QuestionSVG} ref={ref} {...props} />,
+  (props, ref) => <StyledQuestion ref={ref} {...props} />,
 )

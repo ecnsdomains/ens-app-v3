@@ -1,6 +1,5 @@
 import type { UrlObject } from 'url'
 
-import Link from 'next/link'
 import { ComponentProps } from 'react'
 import styled, { css } from 'styled-components'
 
@@ -10,17 +9,23 @@ import OutlinkSVG from '@app/assets/Outlink.svg'
 
 import BaseLink from './@atoms/BaseLink'
 
-export const StyledAnchor = styled.a(
-  ({ theme }) => css`
-    padding-right: ${theme.space['4']};
-    color: ${theme.colors.accent};
-    cursor: pointer;
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    gap: ${theme.space['1']};
-  `,
-)
+const outlinkStyles = css`
+  padding-right: ${({ theme }) => theme.space['4']};
+  color: ${({ theme }) => theme.colors.accent};
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: ${({ theme }) => theme.space['1']};
+`
+
+export const StyledAnchor = styled.a`
+  ${outlinkStyles}
+`
+
+const StyledBaseLink = styled(BaseLink)`
+  ${outlinkStyles}
+`
 
 const OutlinkIcon = styled.div(
   ({ theme }) => css`
@@ -50,27 +55,35 @@ export const Outlink = ({
     icon?: AsProp
     iconPosition?: 'before' | 'after'
   }) => {
-  const InnerContent = (
-    <StyledAnchor rel="noreferrer noopener" target="_blank" role="link" {...props}>
+  const innerContent = (
+    <>
       {iconPosition === 'before' ? <OutlinkIcon as={icon} /> : null}
       <OutlinkTypography fontVariant={fontVariant} color="blue">
         {children}
       </OutlinkTypography>
       {iconPosition === 'after' ? <OutlinkIcon as={icon} /> : null}
-    </StyledAnchor>
+    </>
   )
 
+  // External URLs: use plain anchor with target="_blank"
   if (typeof href === 'string' && href.startsWith('http')) {
     return (
-      <Link href={href} passHref legacyBehavior>
-        {InnerContent}
-      </Link>
+      <StyledAnchor
+        href={href}
+        rel="noreferrer noopener"
+        target="_blank"
+        role="link"
+        {...props}
+      >
+        {innerContent}
+      </StyledAnchor>
     )
   }
 
+  // Internal URLs: use BaseLink for routing
   return (
-    <BaseLink href={href} passHref legacyBehavior>
-      {InnerContent}
-    </BaseLink>
+    <StyledBaseLink href={href} role="link" {...props}>
+      {innerContent}
+    </StyledBaseLink>
   )
 }

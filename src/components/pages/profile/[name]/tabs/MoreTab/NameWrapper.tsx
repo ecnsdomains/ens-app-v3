@@ -26,9 +26,9 @@ type Props = {
   address?: Address
 }
 
-const Container = styled(TabWrapper)(
-  cacheableComponentStyles,
-  ({ theme }) => css`
+const Container = styled(TabWrapper)<{ $isCached?: boolean }>(
+  ({ theme, $isCached }) => css`
+    ${cacheableComponentStyles({ theme, $isCached })}
     width: 100%;
     display: flex;
     flex-direction: column;

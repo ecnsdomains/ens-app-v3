@@ -9,8 +9,8 @@ import { useInitial } from '@app/hooks/useInitial'
 import { legacyFavouritesRoute, routes } from '@app/routes'
 import { useBreakpoint } from '@app/utils/BreakpointProvider'
 
-import ENSFull from '../assets/ENSFull.svg'
-import ENSWithGradient from '../assets/ENSWithGradient.svg'
+import ECNSMark from '../assets/ECNSMark.svg'
+import ECNSMarkGradient from '../assets/ECNSMarkGradient.svg'
 import BaseLink from './@atoms/BaseLink'
 import { RouteItem } from './@atoms/RouteItem/RouteItem'
 import { HeaderConnect } from './@molecules/ConnectButton/ConnectButton'
@@ -203,9 +203,9 @@ export const Header = () => {
           )}
         >
           {pathnameWithoutQuery === '/' ? (
-            <ENSFull height={space['12']} />
+            <ECNSMark height={space['12']} />
           ) : (
-            <ENSWithGradient height={space['12']} />
+            <ECNSMarkGradient height={space['12']} />
           )}
         </ConditionalWrapper>
         {pathnameWithoutQuery !== '/' && breakpoints.sm && (

@@ -72,7 +72,11 @@ const Container = styled.div(
   `,
 )
 
-const StyledCard = styled(Card)(cacheableComponentStyles)
+const StyledCard = styled(Card)<{ $isCached?: boolean }>(
+  ({ theme, $isCached }) => css`
+    ${cacheableComponentStyles({ theme, $isCached })}
+  `,
+)
 
 type Props = {
   name: string

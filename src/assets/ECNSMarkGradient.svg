@@ -1,0 +1,38 @@
+<svg viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g-ul" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5DE8B5"/>
+      <stop offset="100%" stop-color="#4FD4A4"/>
+    </linearGradient>
+    <linearGradient id="g-ur" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2E9E76"/>
+      <stop offset="100%" stop-color="#1A6B50"/>
+    </linearGradient>
+    <linearGradient id="g-bl" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#4FD4A4"/>
+      <stop offset="100%" stop-color="#3FB68B"/>
+    </linearGradient>
+    <linearGradient id="g-br" x1="1" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#1A6B50"/>
+      <stop offset="100%" stop-color="#0D3D2E"/>
+    </linearGradient>
+    <linearGradient id="g-ll" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5DE8B5"/>
+      <stop offset="100%" stop-color="#4FD4A4"/>
+    </linearGradient>
+    <linearGradient id="g-lr" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3FB68B"/>
+      <stop offset="100%" stop-color="#2E9E76"/>
+    </linearGradient>
+  </defs>
+  <!-- ETC Diamond Prism: 8-face mark with gradient fills -->
+  <polygon points="40,2 70,50 40,98 10,50" fill="#0D3D2E"/>
+  <polygon points="40,2 15,42 40,42" fill="url(#g-ul)"/>
+  <polygon points="40,2 65,42 40,42" fill="url(#g-ur)"/>
+  <polygon points="15,42 10,50 40,50 40,42" fill="url(#g-bl)"/>
+  <polygon points="65,42 70,50 40,50 40,42" fill="url(#g-br)"/>
+  <polygon points="10,50 15,58 40,58 40,50" fill="url(#g-bl)"/>
+  <polygon points="70,50 65,58 40,58 40,50" fill="url(#g-ur)"/>
+  <polygon points="15,58 40,98 40,58" fill="url(#g-ll)"/>
+  <polygon points="65,58 40,98 40,58" fill="url(#g-lr)"/>
+</svg>

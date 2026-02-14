@@ -1,3 +1,5 @@
+import type { SVGProps } from 'react'
+
 import CoinSVG from '@app/assets/Coin.svg'
 
 import { DynamicAddressIconName, dynamicAddressIcons } from './dynamicAddressIcons'
@@ -6,7 +8,7 @@ export const DynamicAddressIcon = ({
   name,
   showDefault = true,
   ...props
-}: JSX.IntrinsicAttributes & {
+}: SVGProps<SVGSVGElement> & {
   name: DynamicAddressIconName | string
   showDefault?: boolean
 }) => {

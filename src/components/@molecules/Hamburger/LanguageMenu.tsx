@@ -131,7 +131,7 @@ const LanguageItem = styled.div(
   `,
 )
 
-const CheckIcon = styled.svg(
+const CheckIcon = styled(CheckCircleSVG)(
   () => css`
     width: 1rem;
     height: 1rem;
@@ -174,7 +174,6 @@ const LanguageMenu = ({
           <LanguageItem key={lang} onClick={() => i18n.changeLanguage(lang)}>
             <div>
               <CheckIcon
-                as={CheckCircleSVG}
                 style={{ display: i18n.resolvedLanguage === lang ? 'block' : 'none' }}
               />
               <Typography>{ISO6391.getNativeName(lang)}</Typography>

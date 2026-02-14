@@ -35,6 +35,9 @@ const getChainName = (client: ClientWithEns): string => {
  * Filters out expired entries automatically
  */
 const loadExpiriesFromStorage = (): Map<string, number> => {
+  // SSR guard - localStorage is not available on the server
+  if (typeof window === 'undefined') return new Map()
+
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (!stored) return new Map()
@@ -56,6 +59,9 @@ const loadExpiriesFromStorage = (): Map<string, number> => {
  * Saves cache-bust expiry timestamps to localStorage
  */
 const saveExpiriesToStorage = (expiries: Map<string, number>) => {
+  // SSR guard - localStorage is not available on the server
+  if (typeof window === 'undefined') return
+
   try {
     const entries: [string, number][] = Array.from(expiries.entries())
     localStorage.setItem(STORAGE_KEY, JSON.stringify(entries))

@@ -3,6 +3,7 @@ import { Address } from 'viem'
 
 import { GetOwnerReturnType, GetWrapperDataReturnType } from '@ensdomains/ensjs/public'
 
+import { isNativeTld } from '@app/constants/tld'
 import { nameLevel } from '@app/utils/name'
 import { RegistrationStatus } from '@app/utils/registrationStatus'
 
@@ -64,7 +65,8 @@ export const getNameType = ({
   registrationStatus?: RegistrationStatus
   nameWrapperAddress: Address
 }): NameType => {
-  const tldType = name.endsWith('.eth') ? ('eth' as const) : ('dns' as const)
+  // Support both .eth and .etc as native TLDs (ENS/ECNS)
+  const tldType = isNativeTld(name) ? ('eth' as const) : ('dns' as const)
   const level = nameLevel(name)
   const wrapLevel = getWrapLevel({ wrapperData, ownerData })
 

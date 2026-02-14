@@ -63,7 +63,7 @@ const Badge = styled.div<{ $color: Color }>(
 
 export const VerificationBadge = forwardRef<HTMLElement, Props>(
   ({ showBadge, isVerified, type, verifier, tooltipContent, children, ...props }: Props, ref) => {
-    const clonedChild = cloneElement(children, { ref, ...props })
+    const clonedChild = cloneElement(children, { ref, ...props } as any)
 
     if (!showBadge) return clonedChild
 

@@ -16,6 +16,7 @@ import { localhost, mainnet, sepolia } from 'wagmi/chains'
 import { ccipRequest } from '@ensdomains/ensjs/utils'
 
 import { getChainsFromUrl, SupportedChain } from '@app/constants/chains'
+import { etcMainnet, mordor } from '@app/utils/chains/makeMordorChainWithEcns'
 
 import { isInsideSafe } from '../safe'
 import { rainbowKitConnectors } from './wallets'
@@ -100,6 +101,10 @@ const localStorageWithInvertMiddleware = (): Storage | undefined => {
   }
 }
 
+// ETC RPC URLs
+const mordorRpcUrl = 'https://rpc.mordor.etccooperative.org'
+const etcMainnetRpcUrl = 'https://etc.rivet.cloud'
+
 export const transports = {
   ...(isLocalProvider
     ? ({
@@ -111,6 +116,8 @@ export const transports = {
       })),
   [mainnet.id]: initialiseTransports('mainnet', [drpcUrl, tenderlyUrl]),
   [sepolia.id]: initialiseTransports('sepolia', [drpcUrl, tenderlyUrl]),
+  [mordor.id]: fallback([http(mordorRpcUrl)]),
+  [etcMainnet.id]: fallback([http(etcMainnetRpcUrl)]),
 } as const
 
 // This is a workaround to fix MetaMask defaulting to the wrong transaction type
@@ -152,7 +159,7 @@ const formatExtraTransactionRequestParameters = (
 const chains = getChainsFromUrl().map((c) => ({
   ...c,
   formatters: {
-    ...(c.formatters || {}),
+    ...((c as { formatters?: object }).formatters || {}),
     transactionRequest: {
       format: formatExtraTransactionRequestParameters,
     },

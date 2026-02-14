@@ -10,7 +10,7 @@ const anim = keyframes`
   }
 `
 
-export const cacheableComponentStyles = ({ $isCached }: { $isCached?: boolean }) => css`
+export const cacheableComponentStyles = ({ $isCached }: { theme: any; $isCached?: boolean }) => css`
   transition: opacity 0.15s ease-in-out;
   opacity: 1;
   ${$isCached &&

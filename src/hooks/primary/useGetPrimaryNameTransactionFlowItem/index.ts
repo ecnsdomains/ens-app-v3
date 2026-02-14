@@ -88,7 +88,7 @@ export const useGetPrimaryNameTransactionFlowItem = (
           resolvedAddress: profileAddress,
           address,
           isResolverAuthorized: resolverStatus?.isAuthorized,
-          isLatestResolverEthAddressSetToAddress: resolverStatus?.hasMigratedRecord,
+          isLatestResolverEthAddressSetToAddress: resolverStatus?.isMigratedProfileEqual,
         })
       ) {
         transactions.unshift(
@@ -127,7 +127,7 @@ export const useGetPrimaryNameTransactionFlowItem = (
     profileAddress,
     reverseRegistryName.data,
     resolverAddress,
-    resolverStatus?.hasMigratedRecord,
+    resolverStatus?.isMigratedProfileEqual,
     resolverStatus?.isAuthorized,
     t,
   ])

@@ -88,10 +88,6 @@ const StyledHeading = styled(Heading)(
   `,
 )
 
-const gridAreaStyle = ({ $name }: { $name: string }) => css`
-  grid-area: ${$name};
-`
-
 const moonpayInfoItems = Array.from({ length: 2 }, (_, i) => `steps.info.moonpayItems.${i}`)
 
 const RadioButtonContainer = styled.div(
@@ -158,22 +154,26 @@ const InfoItem = styled.div(
   `,
 )
 
-const CheckboxWrapper = styled.div(
-  () => css`
+const CheckboxWrapper = styled.div<{ $name: string }>(
+  ({ theme, $name }) => css`
     width: 100%;
+    grid-area: ${$name};
   `,
-  gridAreaStyle,
 )
 
-const OutlinedContainerDescription = styled(Typography)(gridAreaStyle)
+const OutlinedContainerDescription = styled(Typography)<{ $name: string }>(
+  ({ theme, $name }) => css`
+    grid-area: ${$name};
+  `,
+)
 
-const OutlinedContainerTitle = styled(Typography)(
-  ({ theme }) => css`
+const OutlinedContainerTitle = styled(Typography)<{ $name: string }>(
+  ({ theme, $name }) => css`
     font-size: ${theme.fontSizes.large};
     font-weight: ${theme.fontWeights.bold};
     white-space: nowrap;
+    grid-area: ${$name};
   `,
-  gridAreaStyle,
 )
 
 const EthInnerCheckbox = ({

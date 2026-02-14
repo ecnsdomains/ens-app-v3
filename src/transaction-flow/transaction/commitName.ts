@@ -1,4 +1,4 @@
-import type { TFunction } from 'react-i18next'
+import type { TFunction } from 'i18next'
 
 import { RegistrationParameters } from '@ensdomains/ensjs/utils'
 import { commitName } from '@ensdomains/ensjs/wallet'

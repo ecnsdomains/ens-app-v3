@@ -33,7 +33,7 @@ const SearchInputWrapper = styled.div<{ $size: 'medium' | 'extraLarge' }>(
   `,
 )
 
-const MagnifyingGlassIcon = styled.svg(
+const MagnifyingGlassIcon = styled(MagnifyingGlassSVG)(
   ({ theme }) => css`
     width: ${theme.space['4']};
     height: ${theme.space['4']};
@@ -79,7 +79,7 @@ export const SearchInputBox = forwardRef<HTMLInputElement, SearchInputBoxProps>(
           clearable
           autoComplete="off"
           autoCorrect="off"
-          icon={size === 'medium' ? <MagnifyingGlassIcon as={MagnifyingGlassSVG} /> : undefined}
+          icon={size === 'medium' ? <MagnifyingGlassIcon /> : undefined}
           spellCheck="false"
           data-testid="search-input-box"
         />

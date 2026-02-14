@@ -1,4 +1,4 @@
-import type { TFunction } from 'react-i18next'
+import type { TFunction } from 'i18next'
 
 import { getPrice } from '@ensdomains/ensjs/public'
 import { RegistrationParameters } from '@ensdomains/ensjs/utils'

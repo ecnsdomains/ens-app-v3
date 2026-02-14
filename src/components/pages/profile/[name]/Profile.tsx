@@ -84,12 +84,12 @@ export const NameAvailableBanner = ({
 }) => {
   const { t } = useTranslation('profile')
   return (
-    <BaseLink href={`/register/${normalisedName}`} passHref legacyBehavior>
+    <BaseLink href={`/register/${normalisedName}`}>
       <Banner
         alert="info"
-        as="a"
         icon={CheckCircleSVG}
         title={t('banner.available.title', { name: normalisedName })}
+        style={{ cursor: 'pointer' }}
       >
         <Trans
           ns="profile"

@@ -1,6 +1,6 @@
 import { UseInfiniteQueryOptions, UseQueryOptions } from '@tanstack/react-query'
 import { ComponentProps } from 'react'
-import type { TFunction } from 'react-i18next'
+import type { TFunction } from 'i18next'
 import type { Account, Address, Client, Hex, TransactionReceipt, Transport } from 'viem'
 
 import { GetRecordsReturnType } from '@ensdomains/ensjs/public'

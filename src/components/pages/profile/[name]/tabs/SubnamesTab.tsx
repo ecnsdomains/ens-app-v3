@@ -79,7 +79,7 @@ const AddSubnamesCard = styled(Card)(
   `,
 )
 
-const PlusPrefix = styled.svg(
+const PlusPrefix = styled(PlusSVG)(
   ({ theme }) => css`
     display: block;
     stroke-width: ${theme.space['0.75']};
@@ -217,7 +217,7 @@ export const SubnamesTab = ({
             <Button
               data-testid="add-subname-action"
               onClick={createSubname}
-              prefix={() => <PlusPrefix as={PlusSVG} />}
+              prefix={() => <PlusPrefix />}
             >
               {t('details.tabs.subnames.addSubname.action')}
             </Button>
@@ -230,7 +230,7 @@ export const SubnamesTab = ({
                 buttonText: t('details.tabs.subnames.addSubname.action'),
                 mobileWidth: 200,
                 mobilePlacement: 'top',
-                prefix: () => <PlusPrefix as={PlusSVG} />,
+                prefix: () => <PlusPrefix />,
               }}
             />
           )}

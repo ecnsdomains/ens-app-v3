@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { keepPreviousData } from '@tanstack/react-query'
 import { ReactNode, useCallback, useState } from 'react'
-import { TFunction, useTranslation } from 'react-i18next'
+import type { TFunction } from 'i18next'
+import { useTranslation } from 'react-i18next'
 import styled, { css, DefaultTheme, keyframes } from 'styled-components'
 import { useAccount, useClient } from 'wagmi'
 

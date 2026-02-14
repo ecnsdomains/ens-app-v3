@@ -63,7 +63,7 @@ const ImageContainer = styled.div(
   `,
 )
 
-const ImageCropBorder = styled.div(
+const ImageCropBorder = styled(CropBorderSVG)(
   ({ theme }) => css`
     width: 100%;
     height: 100%;
@@ -73,18 +73,10 @@ const ImageCropBorder = styled.div(
     justify-content: center;
     align-items: center;
     color: ${theme.colors.background};
-
-    svg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
   `,
 )
 
-const ImageCropFrame = styled.div(
+const ImageCropFrame = styled(CropFrameSVG)(
   ({ theme }) => css`
     width: 100%;
     height: 100%;
@@ -94,14 +86,6 @@ const ImageCropFrame = styled.div(
     justify-content: center;
     align-items: center;
     color: ${theme.colors.accent};
-
-    svg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
   `,
 )
 
@@ -559,8 +543,8 @@ export const CropComponent = ({
         <EditImageContainer data-testid="edit-image-container">
           <ImageWrapper>
             <ImageContainer>
-              <ImageCropBorder as={CropBorderSVG} />
-              <ImageCropFrame as={CropFrameSVG} />
+              <ImageCropBorder />
+              <ImageCropFrame />
               <OuterRatioLabel aria-label="Outer crop frame aspect ratio 3:1">3:1</OuterRatioLabel>
               <InnerRatioLabel aria-label="Inner grid lines aspect ratio 6:1">6:1</InnerRatioLabel>
               <BottomInnerRatioLabel aria-label="Bottom inner grid line aspect ratio 6:1">

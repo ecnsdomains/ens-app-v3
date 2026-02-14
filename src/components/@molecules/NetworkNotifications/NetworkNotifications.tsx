@@ -8,10 +8,18 @@ import { getSupportedChainById } from '@app/constants/chains'
 
 import { shouldOpenModal } from './utils'
 
-const appLinks = {
-  Ethereum: 'app.ens.domains',
-  Sepolia: 'sepolia.app.ens.domains',
-  Localhost: '',
+// Chain ID to app URL mapping
+const APP_LINKS_BY_CHAIN_ID = new Map<number, string>([
+  [1, 'app.ens.domains'], // Ethereum
+  [11155111, 'sepolia.app.ens.domains'], // Sepolia
+  [1337, ''], // Localhost
+  [63, 'app.ecns.domains'], // Mordor (ECNS testnet)
+  [61, 'app.ecns.domains'], // ETC (ECNS mainnet)
+])
+
+const getAppLink = (chainId: number | undefined): string => {
+  if (!chainId) return ''
+  return APP_LINKS_BY_CHAIN_ID.get(chainId) || ''
 }
 
 export const NetworkNotifications = () => {
@@ -27,6 +35,8 @@ export const NetworkNotifications = () => {
   }, [connectedChainId, accountChainId])
 
   const accountChainName = getSupportedChainById(accountChainId)?.name
+  const appLink = getAppLink(accountChainId)
+
   if (!accountChainName) return null
 
   return (
@@ -37,7 +47,7 @@ export const NetworkNotifications = () => {
       variant="desktop"
       onClose={() => setOpen(false)}
     >
-      <Button size="small" as="a" href={`https://${appLinks[accountChainName]}`}>
+      <Button size="small" as="a" href={`https://${appLink}`}>
         {t(`networkNotifications.${accountChainName}.action`)}
       </Button>
     </Toast>

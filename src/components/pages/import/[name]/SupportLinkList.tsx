@@ -32,7 +32,7 @@ const SupportLinksFirstItems = styled.div(
   `,
 )
 
-const StyledChevron = styled.svg(
+const StyledChevron = styled(DownChevronSVG)(
   ({ theme }) => css`
     width: ${theme.space['4']};
     height: ${theme.space['4']};
@@ -171,7 +171,7 @@ export const SupportLinkList = ({
           <SupportQuestionIcon />
           <Typography fontVariant="bodyBold">{title}</Typography>
         </SupportLinksFirstItems>
-        <StyledChevron data-contentvisible={contentVisible} as={DownChevronSVG} />
+        <StyledChevron data-contentvisible={contentVisible} />
       </SupportLinksHeader>
       <SupportLinksContent data-contentvisible={contentVisible}>
         {items.map((item) => (

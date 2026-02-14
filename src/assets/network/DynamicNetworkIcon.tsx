@@ -1,3 +1,5 @@
+import type { SVGProps } from 'react'
+
 import { QuestionCircleSVG } from '@ensdomains/thorin'
 
 import { DynamicNetworkIconName, dynamicNetworkIcons } from './dynamicNetworkIcons'
@@ -6,7 +8,7 @@ export const DynamicNetworkIcon = ({
   name,
   showDefault = true,
   ...props
-}: JSX.IntrinsicAttributes & {
+}: SVGProps<SVGSVGElement> & {
   name: DynamicNetworkIconName | string
   showDefault?: boolean
 }) => {

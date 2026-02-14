@@ -329,13 +329,6 @@ const MainMenu = ({ setCurrentView }: { setCurrentView: (view: HamburgerView) =>
         <SocialIcon Icon={SocialX} color="black" href={ENS_LINKS.X} />
         <SocialIcon Icon={SocialGithub} color="#0F0F0F" href={ENS_LINKS.GITHUB} />
         <SocialIcon Icon={SocialDiscord} color="#7F83FF" href={ENS_LINKS.DISCORD} />
-        <SocialIcon Icon={SocialMirror} ColoredIcon={SocialMirrorColour} href={ENS_LINKS.MIRROR} />
-        <SocialIcon
-          Icon={SocialDiscourse}
-          ColoredIcon={SocialDiscourseColour}
-          href={ENS_LINKS.DISCOURSE}
-        />
-        <SocialIcon Icon={SocialYoutube} color="#EE1919" href={ENS_LINKS.YOUTUBE} />
       </SocialSection>
       <NetworkSection />
     </Container>

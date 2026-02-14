@@ -174,7 +174,6 @@ const SelectPrimaryName = ({ data: { address }, dispatch, onDismiss }: Props) =>
   const resolverStatus = useResolverStatus({
     name: selectedName?.name!,
     enabled: !!selectedName && !isWrappedLoading,
-    migratedRecordsMatch: { type: 'address', match: { id: 60, value: address } },
   })
 
   const getPrimarynameTransactionFlowItem = useGetPrimaryNameTransactionFlowItem({

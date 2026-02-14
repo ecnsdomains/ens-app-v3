@@ -22,7 +22,7 @@ const ExpiryWrapper = styled.div(
   `,
 )
 
-const ClockIcon = styled.div<{ $color: Color }>(
+const ClockIcon = styled(ClockSVG)<{ $color: Color }>(
   ({ theme, $color }) => css`
     width: ${theme.space['5']};
     height: ${theme.space['5']};
@@ -43,13 +43,13 @@ export const ExpiryClock = ({ expiry }: { expiry: Date }) => {
   const difference = secondsToDays((expiry.getTime() - currentDate.getTime()) / 1000)
 
   if (difference < 0) {
-    return <ClockIcon data-testid="expiry-clock-red" $color="red" as={ClockSVG} />
+    return <ClockIcon data-testid="expiry-clock-red" $color="red"  />
   }
   if (difference < 90) {
-    return <ClockIcon data-testid="expiry-clock-orange" $color="orange" as={ClockSVG} />
+    return <ClockIcon data-testid="expiry-clock-orange" $color="orange"  />
   }
 
-  return <ClockIcon data-testid="expiry-clock-grey" $color="grey" as={ClockSVG} />
+  return <ClockIcon data-testid="expiry-clock-grey" $color="grey"  />
 }
 
 const makeTransPrefix = (inverse: boolean, hasGracePeriod: boolean) => {

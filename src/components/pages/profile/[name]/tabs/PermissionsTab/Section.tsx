@@ -56,15 +56,16 @@ const SectionItemContainer = styled.div<{ $screen?: 'desktop' | 'mobile' }>(
   `,
 )
 
-const SectionItemIcon = styled.svg<{ $color: Color }>(
-  ({ theme, $color }) => css`
-    display: block;
-    flex: 0 0 ${theme.space['6']};
-    width: ${theme.space['6']};
-    height: ${theme.space['6']};
-    color: ${theme.colors[`${$color}Primary`]};
-  `,
-)
+const sectionItemIconStyles = ({ theme, $color }: { theme: any; $color: Color }) => css`
+  display: block;
+  flex: 0 0 ${theme.space['6']};
+  width: ${theme.space['6']};
+  height: ${theme.space['6']};
+  color: ${theme.colors[`${$color}Primary`]};
+`
+
+const InfoIcon = styled(InfoCircleSVG)<{ $color: Color }>(sectionItemIconStyles)
+const DisabledIcon = styled(DisabledSVG)<{ $color: Color }>(sectionItemIconStyles)
 
 const SectionItemContent = styled.div(
   ({ theme }) => css`
@@ -87,9 +88,9 @@ export const SectionItem = ({
   return (
     <SectionItemContainer $screen={screen} {...props}>
       {icon === 'info' ? (
-        <SectionItemIcon as={InfoCircleSVG} $color="yellow" />
+        <InfoIcon $color="yellow" />
       ) : (
-        <SectionItemIcon as={DisabledSVG} $color="grey" />
+        <DisabledIcon $color="grey" />
       )}
       <SectionItemContent>{children}</SectionItemContent>
     </SectionItemContainer>

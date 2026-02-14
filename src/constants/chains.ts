@@ -4,6 +4,13 @@ import { localhost, mainnet, sepolia } from 'viem/chains'
 import type { Register } from '@app/local-contracts'
 import { addEnsContractsWithSubgraphAndOverrides } from '@app/overrides/addEnsContractsWithSubgraphAndOverrides'
 import { makeLocalhostChainWithEnsAndOverrides } from '@app/overrides/makeLocalhostChainWithEnsAndOverrides'
+import {
+  ecnsChains,
+  etcMainnet,
+  etcMainnetWithEcns,
+  mordor,
+  mordorWithEcns,
+} from '@app/utils/chains/makeMordorChainWithEcns'
 
 export const deploymentAddresses = JSON.parse(
   process.env.NEXT_PUBLIC_DEPLOYMENT_ADDRESSES || '{}',
@@ -28,14 +35,49 @@ export const sepoliaWithEns = addEnsContractsWithSubgraphAndOverrides({
   apiKey: ENS_SUBGRAPH_API_KEY,
 })
 
-export const chainsWithEns = [mainnetWithEns, sepoliaWithEns, localhostWithEns] as const
+// ECNS chains (ETC ecosystem)
+export { etcMainnet, etcMainnetWithEcns, mordor, mordorWithEcns }
+
+// All supported chains
+export const chainsWithEns = [
+  mainnetWithEns,
+  sepoliaWithEns,
+  localhostWithEns,
+  mordorWithEcns,
+  etcMainnetWithEcns,
+] as const
 
 export const getSupportedChainById = (chainId: number | undefined) =>
   chainId ? chainsWithEns.find((c) => c.id === chainId) : undefined
 
-export type SupportedChain = typeof mainnetWithEns | typeof sepoliaWithEns | typeof localhostWithEns
+export type SupportedChain =
+  | typeof mainnetWithEns
+  | typeof sepoliaWithEns
+  | typeof localhostWithEns
+  | typeof mordorWithEcns
+  | typeof etcMainnetWithEcns
 
-export const getNetworkFromUrl = (): 'mainnet' | 'sepolia' | 'localhost' | undefined => {
+// Detect if we're in ECNS mode (ETC chains only)
+const isEcnsMode = (): boolean => {
+  if (typeof window === 'undefined') return true // SSR default to ECNS
+  const chain = process.env.NEXT_PUBLIC_CHAIN_NAME
+  if (chain === 'ecns' || chain === 'mordor' || chain === 'etc') return true
+  // Check hostname for ecns.domains
+  const { hostname } = window.location
+  if (hostname.includes('ecns')) return true
+  // Default to ECNS for localhost
+  if (hostname === 'localhost' || hostname === '127.0.0.1') return true
+  return false
+}
+
+export const getNetworkFromUrl = ():
+  | 'mainnet'
+  | 'sepolia'
+  | 'localhost'
+  | 'mordor'
+  | 'etc'
+  | 'ecns'
+  | undefined => {
   if (typeof window === 'undefined') return undefined
 
   const { hostname } = window.location
@@ -45,10 +87,12 @@ export const getNetworkFromUrl = (): 'mainnet' | 'sepolia' | 'localhost' | undef
   const chain = process.env.NEXT_PUBLIC_CHAIN_NAME
   if (chain === 'sepolia') return 'sepolia' as const
   if (chain === 'mainnet') return 'mainnet' as const
+  if (chain === 'mordor') return 'mordor' as const
+  if (chain === 'etc') return 'etc' as const
+  if (chain === 'ecns') return 'ecns' as const
 
   // Previews
   if (segments.length === 4) {
-    /* Used for testing preview on mainnet at: test.app.ens.domains. Update by configuring dns */
     if (segments[0] === 'test') {
       return 'mainnet' as const
     }
@@ -57,22 +101,37 @@ export const getNetworkFromUrl = (): 'mainnet' | 'sepolia' | 'localhost' | undef
     }
   }
 
-  // Dev environment
+  // Dev environment - default to ECNS mode
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
     if (process.env.NEXT_PUBLIC_PROVIDER) return 'localhost' as const
-    return 'sepolia' as const
+    return 'ecns' as const // Multi-chain ECNS mode
+  }
+
+  // ECNS domains
+  if (hostname.includes('ecns')) {
+    return 'ecns' as const
   }
 
   return match(segments[0])
     .with('sepolia', () => 'sepolia' as const)
-    .otherwise(() => 'mainnet' as const)
+    .with('mordor', () => 'mordor' as const)
+    .otherwise(() => 'ecns' as const) // Default to ECNS multi-chain
 }
 
+// Get chains based on network mode
+// For ECNS: return both Mordor AND ETC mainnet (multi-chain)
+// For ENS: return single chain as before
 export const getChainsFromUrl = () => {
   const network = getNetworkFromUrl()
   return match(network)
     .with('mainnet', () => [mainnetWithEns])
     .with('sepolia', () => [sepoliaWithEns])
     .with('localhost', () => [localhostWithEns])
-    .otherwise(() => [mainnetWithEns])
+    .with('mordor', () => [mordorWithEcns]) // Single chain mode
+    .with('etc', () => [etcMainnetWithEcns]) // Single chain mode
+    .with('ecns', () => ecnsChains) // Multi-chain: Mordor + ETC mainnet
+    .otherwise(() => ecnsChains) // Default to ECNS multi-chain
 }
+
+// Check if current mode is ECNS (ETC ecosystem)
+export const isEcns = isEcnsMode

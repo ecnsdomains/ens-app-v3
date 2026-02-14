@@ -18,14 +18,14 @@ import { useHasGraphError } from '@app/utils/SyncProvider/SyncProvider'
 
 import { TabWrapper as OriginalTabWrapper } from '../../TabWrapper'
 
-const TabWrapper = styled(OriginalTabWrapper)(
-  () => css`
+const TabWrapper = styled(OriginalTabWrapper)<{ $isCached?: boolean }>(
+  ({ theme, $isCached }) => css`
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
+    ${cacheableComponentStyles({ theme, $isCached })}
   `,
-  cacheableComponentStyles,
 )
 
 const AllRecords = styled.div(

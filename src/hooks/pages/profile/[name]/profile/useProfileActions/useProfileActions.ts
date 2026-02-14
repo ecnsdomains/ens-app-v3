@@ -1,5 +1,6 @@
 import { ComponentProps, useMemo } from 'react'
-import { TFunction, useTranslation } from 'react-i18next'
+import type { TFunction } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 import { checkIsDecrypted } from '@ensdomains/ensjs/utils'
 import type { Button } from '@ensdomains/thorin'
@@ -93,9 +94,6 @@ export const useProfileActions = ({ name, enabled: enabled_ = true }: Props) => 
 
   const { data: resolverStatus, isLoading: isResolverStatusLoading } = useResolverStatus({
     name,
-    migratedRecordsMatch: address
-      ? { type: 'address', match: { id: 60, value: address } }
-      : undefined,
     enabled: enabled && !!ownerData,
   })
 
@@ -117,7 +115,7 @@ export const useProfileActions = ({ name, enabled: enabled_ = true }: Props) => 
     },
     expiryDate,
     fuses: wrapperData?.fuses || null,
-    isMigrated: profile?.isMigrated !== false,
+    isMigrated: true, // ECNS: no v1→v2 migration on ETC, always true
   })
 
   const isWrapped = !!wrapperData
