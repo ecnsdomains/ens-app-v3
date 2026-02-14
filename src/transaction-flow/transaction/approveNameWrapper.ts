@@ -1,5 +1,5 @@
 import type { TFunction } from 'i18next'
-import { Address, encodeFunctionData } from 'viem'
+import { Address, encodeFunctionData, zeroAddress } from 'viem'
 
 import { getChainContractAddress } from '@ensdomains/ensjs/contracts'
 
@@ -48,6 +48,16 @@ const registrySetApprovalForAllSnippet = [
 ] as const
 
 const transaction = async ({ client }: TransactionFunctionParameters<Data>) => {
+  const nameWrapperAddress = getChainContractAddress({
+    client,
+    contract: 'ensNameWrapper',
+  })
+
+  // Guard: NameWrapper not deployed on ECNS chains (Mordor/ETC mainnet)
+  if (nameWrapperAddress === zeroAddress) {
+    throw new Error('NameWrapper is not available on this chain.')
+  }
+
   return {
     to: getChainContractAddress({
       client,
@@ -56,13 +66,7 @@ const transaction = async ({ client }: TransactionFunctionParameters<Data>) => {
     data: encodeFunctionData({
       abi: registrySetApprovalForAllSnippet,
       functionName: 'setApprovalForAll',
-      args: [
-        getChainContractAddress({
-          client,
-          contract: 'ensNameWrapper',
-        }),
-        true,
-      ],
+      args: [nameWrapperAddress, true],
     }),
   }
 }

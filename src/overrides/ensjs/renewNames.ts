@@ -1,4 +1,4 @@
-import { encodeFunctionData, type Account, type Hex, type Transport } from 'viem'
+import { encodeFunctionData, zeroAddress, type Account, type Hex, type Transport } from 'viem'
 
 import type { ChainWithEns, ClientWithAccount } from '@ensdomains/ensjs/contracts'
 import { getChainContractAddress } from '@ensdomains/ensjs/contracts'
@@ -141,11 +141,20 @@ export const makeFunctionData = <TChain extends ChainWithEns, TAccount extends A
 
   // Case 2: Bulk renewal - use legacy bulk renewal contract (no referrer support)
   if (labels.length > 1) {
+    const bulkRenewalAddress = getChainContractAddress({
+      client: wallet,
+      contract: 'ensBulkRenewal',
+    })
+
+    // Guard: BulkRenewal not deployed on ECNS chains (Mordor/ETC mainnet)
+    if ((bulkRenewalAddress as string) === zeroAddress) {
+      throw new Error(
+        'Bulk renewal is not available on this chain. Please renew names individually.',
+      )
+    }
+
     return {
-      to: getChainContractAddress({
-        client: wallet,
-        contract: 'ensBulkRenewal',
-      }),
+      to: bulkRenewalAddress,
       data: encodeFunctionData({
         abi: legacyBulkRenewalAbi,
         functionName: 'renewAll',

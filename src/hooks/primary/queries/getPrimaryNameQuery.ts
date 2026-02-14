@@ -1,5 +1,5 @@
 import { readContract } from '@wagmi/core'
-import { Address, getChainContractAddress } from 'viem'
+import { Address, getChainContractAddress, zeroAddress } from 'viem'
 
 import { universalResolverReverseSnippet } from '@ensdomains/ensjs/contracts'
 
@@ -24,8 +24,18 @@ export const getPrimaryNameQuery =
   }): Promise<GetPrimaryNameQueryReturnType> => {
     try {
       const client = config.getClient()
+      const resolverAddress = getChainContractAddress({
+        chain: client.chain,
+        contract: 'ensUniversalResolver',
+      })
+
+      // Guard: UniversalResolver not deployed on ECNS chains (Mordor/ETC mainnet)
+      if (!resolverAddress || resolverAddress === zeroAddress) {
+        return null
+      }
+
       const result = await readContract(config, {
-        address: getChainContractAddress({ chain: client.chain, contract: 'ensUniversalResolver' }),
+        address: resolverAddress,
         abi: universalResolverReverseSnippet,
         functionName: 'reverse',
         args: [address, BigInt(coinType)],
