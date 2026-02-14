@@ -83,3 +83,24 @@ certificates
 .playwright-mcp
 .claude
 /thoughts
+
+# Planning & internal docs
+SESSION_NOTES.md
+PLANNING.md
+SCRATCH.md
+*.scratch.*
+*.draft.*
+
+# Blockchain & crypto
+keystore/
+*.keystore
+wallet.json
+mnemonic.txt
+
+# Secrets & credentials
+credentials.json
+service-account.json
+secrets/
+
+# IDE
+.vscode/settings.json

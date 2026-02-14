@@ -22,12 +22,16 @@ const babelIncludeRegexes = [
  * @type {import('next').NextConfig}
  * */
 const nextConfig = {
+  // Enable Turbopack with default config (silence webpack-only config warning)
+  turbopack: {},
   transpilePackages: [
     '@getpara/rainbowkit',
     '@getpara/rainbowkit-wallet',
     '@getpara/core-components',
     '@getpara/react-components',
+    '@getpara/react-common',
     '@getpara/react-sdk',
+    '@getpara/react-sdk-lite',
     '@getpara/core-sdk',
     '@getpara/web-sdk',
     '@getpara/wagmi-v2-integration',
@@ -37,10 +41,13 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  // change to true once infinite loop is fixed
-  swcMinify: true,
   images: {
-    domains: ['metadata.ens.domains'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'metadata.ens.domains',
+      },
+    ],
   },
   async headers() {
     // keep this in case we need to debug Safe in the future
@@ -181,6 +188,26 @@ const nextConfig = {
 
     config.resolve.mainFields = ['browser', 'module', 'main']
 
+    // Fix styled-components ESM/CJS resolution in SSR
+    // Forces all imports to use the same styled-components instance
+    const styledComponentsPath = path.resolve(
+      __dirname,
+      'node_modules/styled-components/dist/styled-components.esm.js',
+    )
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'styled-components': styledComponentsPath,
+    }
+
+    // Use NormalModuleReplacementPlugin to force resolution across vendor chunks
+    config.plugins.push(
+      new options.webpack.NormalModuleReplacementPlugin(
+        /^styled-components$/,
+        styledComponentsPath,
+      ),
+    )
+
     config.plugins.push(
       new StylelintPlugin({
         files: './src/**/*.tsx',
@@ -231,10 +258,6 @@ const nextConfig = {
     }
 
     return config
-  },
-  eslint: {
-    // next lint will ignore presets if not stated
-    dirs: ['src', 'src/components', 'src/pages', 'src/layouts', 'playwright', 'e2e'],
   },
   ...(process.env.NEXT_PUBLIC_IPFS
     ? {

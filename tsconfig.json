@@ -13,14 +13,21 @@
       "plugins": [
         {
           "name": "typescript-styled-plugin",
-          "tags": ["styled", "css"]
+          "tags": [
+            "styled",
+            "css"
+          ]
         }
       ]
     }
   },
   "compilerOptions": {
     "target": "es2020",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
@@ -32,24 +39,37 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "rootDir": ".",
     "baseUrl": "./",
     "incremental": true,
     "noErrorTruncation": true,
     "paths": {
-      "@app/*": ["./src/*"],
-      "@public/*": ["./public/*"],
-      "@root/*": ["./*"],
-      "rainbow-sprinkles": ["./node_modules/rainbow-sprinkles/"]
+      "@app/*": [
+        "./src/*"
+      ],
+      "@public/*": [
+        "./public/*"
+      ],
+      "@root/*": [
+        "./*"
+      ],
+      "rainbow-sprinkles": [
+        "./node_modules/rainbow-sprinkles/"
+      ]
     },
     "plugins": [
       {
         "name": "typescript-styled-plugin",
-        "tags": ["styled", "css"],
+        "tags": [
+          "styled",
+          "css"
+        ],
         "validate": false,
         "lint": {
-          "validProperties": ["flex-gap"]
+          "validProperties": [
+            "flex-gap"
+          ]
         }
       }
     ]
@@ -68,5 +88,9 @@
     "./node_modules/@ensdomains/ens-contracts/artifacts",
     "./deploy/.utils/*.ts"
   ],
-  "exclude": ["**/*.ignore.ts", "**/*.ignore.tsx", "functions/**/*"]
+  "exclude": [
+    "**/*.ignore.ts",
+    "**/*.ignore.tsx",
+    "functions/**/*"
+  ]
 }
