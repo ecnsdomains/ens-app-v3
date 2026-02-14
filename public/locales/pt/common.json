@@ -3,7 +3,7 @@
   "description": "Sua identidade em toda a Web3, um nome para todos os seus endereços de criptomoedas e seu site descentralizado.",
   "loading": "Carregando",
   "notFound": "404 Não encontrado",
-  "etherscan": "Etherscan",
+  "etherscan": "Blockscout",
   "action": {
     "cancel": "Cancelar",
     "change": "Alterar",
@@ -83,10 +83,10 @@
     "terms": "Termos de Uso",
     "privacy": "Política de Privacidade",
     "back": "Voltar",
-    "oldApp": "Antiga Aplicação ENS",
+    "oldApp": "Antiga Aplicação ECNS",
     "language": "Idioma",
     "currency": "Moeda",
-    "ipfsApp": "Aplicação ENS no IPFS",
+    "ipfsApp": "Aplicação ECNS no IPFS",
     "feedback": "Feedback",
     "syncMessage": "Sincronizando com a rede. As suas mudanças de transação ainda podem não ser visíveis."
   },
@@ -183,7 +183,7 @@
     },
     "networkLatency": {
       "title": "Sincronização de dados lenta",
-      "message": "A aplicação ENS está experimentando demoras devido a problemas de latência na rede."
+      "message": "A aplicação ECNS está experimentando demoras devido a problemas de latência na rede."
     }
   },
   "transaction": {
@@ -198,7 +198,7 @@
       "updateProfile": "Atualizar perfil",
       "setPrimaryName": "Definir nome principal",
       "resetPrimaryName": "Remover nome principal",
-      "updateEthAddress": "Atualizar endereço ETH",
+      "updateEthAddress": "Atualizar endereço ETC",
       "testSendName": "Enviar nome",
       "burnFuses": "Queimar permissões",
       "createSubname": "Criar subnome",
@@ -231,8 +231,8 @@
       "updateResolver": "Alterar resolver para",
       "updateProfile": "Atualizar registros no resolver existente",
       "setPrimaryName": "Definir o nome principal para seu endereço",
-      "updateEthAddress": "Atualizar o endereço ETH para este endereço",
-      "updateEthAddressOnLatestResolver": "Atualizar o endereço ETH no resolver mais recente",
+      "updateEthAddress": "Atualizar o endereço ETC para este endereço",
+      "updateEthAddressOnLatestResolver": "Atualizar o endereço ETC no resolver mais recente",
       "testSendName": "Definir controlador e registrante do nome",
       "createSubname": "Criar um novo subnome para o nome",
       "burnFuses": "Queimar as permissões escolhidas até que vença o nome",
@@ -328,7 +328,7 @@
     "error": {
       "unknown": "Ocorreu um erro desconhecido"
     },
-    "viewEtherscan": "Ver no Etherscan",
+    "viewEtherscan": "Ver no Blockscout",
     "viewMore": "Ver mais"
   },
   "search": {
@@ -362,7 +362,7 @@
     "empty": "Nenhuma opção encontrada"
   },
   "testnetFaucet": {
-    "explanation": "Cada endereço em {{ testnet }} pode reivindicar {{ amount }} {{ ticker }} para testar a aplicação ENS Manager, assim como qualquer outro uso nesta rede de teste.",
+    "explanation": "Cada endereço em {{ testnet }} pode reivindicar {{ amount }} {{ ticker }} para testar a aplicação ECNS Manager, assim como qualquer outro uso nesta rede de teste.",
     "note": "Pode levar alguns minutos para aparecer na sua carteira."
   },
   "roles": {
@@ -387,7 +387,7 @@
       "description": "Um endereço que pode alterar o perfil."
     },
     "eth-record": {
-      "title": "registro ETH",
+      "title": "registro ETC",
       "description": "O endereço para o qual este nome aponta."
     }
   },

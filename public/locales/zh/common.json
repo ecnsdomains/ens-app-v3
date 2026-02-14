@@ -3,7 +3,7 @@
   "description": "您在 web3 上的身份，一个名称就能解析到您所有的加密地址和您的去中心化网站。",
   "loading": "加载中",
   "notFound": "404 未找到",
-  "etherscan": "Etherscan",
+  "etherscan": "Blockscout",
   "action": {
     "cancel": "取消",
     "change": "更改",
@@ -83,10 +83,10 @@
     "terms": "使用条款",
     "privacy": "隐私策略",
     "back": "返回",
-    "oldApp": "旧版 ENS App",
+    "oldApp": "旧版 ECNS App",
     "language": "语言",
     "currency": "货币",
-    "ipfsApp": "IPFS ENS App",
+    "ipfsApp": "IPFS ECNS App",
     "feedback": "反馈",
     "syncMessage": "正在进行网络同步，您在交易中更改的内容可能还看不到。"
   },
@@ -183,7 +183,7 @@
     },
     "networkLatency": {
       "title": "数据同步缓慢",
-      "message": "由于网络延迟问题，ENS app 的运行速度正在受到影响。"
+      "message": "由于网络延迟问题，ECNS app 的运行速度正在受到影响。"
     }
   },
   "transaction": {
@@ -198,7 +198,7 @@
       "updateProfile": "更新个人资料",
       "setPrimaryName": "设置主名称",
       "resetPrimaryName": "移除主名称",
-      "updateEthAddress": "更新 ETH 地址",
+      "updateEthAddress": "更新 ETC 地址",
       "testSendName": "发送名称",
       "burnFuses": "烧毁权限",
       "createSubname": "创建子名称",
@@ -231,8 +231,8 @@
       "updateResolver": "将解析器更改为",
       "updateProfile": "更新现有解析器上的记录",
       "setPrimaryName": "为您的地址设置主名称",
-      "updateEthAddress": "将该地址更新到 ETH 地址记录",
-      "updateEthAddressOnLatestResolver": "在最新的解析器上更新 ETH 地址",
+      "updateEthAddress": "将该地址更新到 ETC 地址记录",
+      "updateEthAddressOnLatestResolver": "在最新的解析器上更新 ETC 地址",
       "testSendName": "设置该名称的管理员和注册人",
       "createSubname": "在该名称上创建子名称",
       "burnFuses": "烧毁选中的权限，直到名称过期",
@@ -328,7 +328,7 @@
     "error": {
       "unknown": "发生未知错误"
     },
-    "viewEtherscan": "在 Etherscan 上查看",
+    "viewEtherscan": "在 Blockscout 上查看",
     "viewMore": "查看详情"
   },
   "search": {
@@ -362,7 +362,7 @@
     "empty": "未找到选项"
   },
   "testnetFaucet": {
-    "explanation": "{{ testnet }} 上的每个地址都可以申请 {{amount}} {{ ticker }} 来进行 ENS 管理器 app 或其他网络测试。",
+    "explanation": "{{ testnet }} 上的每个地址都可以申请 {{amount}} {{ ticker }} 来进行 ECNS 管理器 app 或其他网络测试。",
     "note": "它可能在几分钟后才能出现在你的钱包里。"
   },
   "roles": {
@@ -387,7 +387,7 @@
       "description": "可以修改个人资料的地址。"
     },
     "eth-record": {
-      "title": "ETH 记录",
+      "title": "ETC 记录",
       "description": "这个名称指向的地址。"
     }
   },

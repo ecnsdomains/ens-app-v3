@@ -1,5 +1,5 @@
 {
-  "title": "注册 {{name}} - ENS",
+  "title": "注册 {{name}} - ECNS",
   "subtitle": "注册",
   "heading": "注册 {{name}}",
   "invoice": {
@@ -50,7 +50,7 @@
             },
             "placeholder": {
               "name": "约翰·史密斯",
-              "url": "https://ens.domains",
+              "url": "https://ecns.domains",
               "location": "元宇宙",
               "description": "我是一个来自田纳西州的农民。"
             }
@@ -76,8 +76,8 @@
               "email": "Email"
             },
             "placeholder": {
-              "com.twitter": "例如 ensdomains",
-              "com.github": "例如 ensdomains",
+              "com.twitter": "例如 ecnsdomains",
+              "com.github": "例如 ecnsdomains",
               "com.discord": "例如 nickjohnson",
               "org.telegram": "例如 nicksdjohnson",
               "email": "例如 hello@example.com"
@@ -151,8 +151,8 @@
           "decline": "返回"
         },
         "clearEth": {
-          "title": "清除 ETH 地址?",
-          "description": "如果没有设置 ETH 地址，人们便无法向该名称发送资金。此项可在以后更新。",
+          "title": "清除 ETC 地址?",
+          "description": "如果没有设置 ETC 地址，人们便无法向该名称发送资金。此项可在以后更新。",
           "confirm": "清除",
           "decline": "取消"
         }
@@ -181,12 +181,12 @@
       ],
       "setupProfile": "我希望先创建我的个人资料",
       "paymentMethod": "支付方式",
-      "notEnoughEth": "钱包中的 ETH 不足",
+      "notEnoughEth": "钱包中的 ETC 不足",
       "creditOrDebit": "信用卡或借记卡",
       "additionalFee": "附加手续费",
       "pendingMoonpayTransaction": "您的 Moonpay 交易正在处理中，这可能需要两分钟。您可以从收到的确认邮件中查看当前进度。",
-      "failedMoonpayTransaction": "您的 Moonpay 交易失败。请重试或选择 “以太坊” 支付方式。",
-      "ethereum": "以太坊",
+      "failedMoonpayTransaction": "您的 Moonpay 交易失败。请重试或选择 "Ethereum Classic" 支付方式。",
+      "ethereum": "Ethereum Classic",
       "processing": "处理中",
       "poweredBy": "技术支持来自",
       "moonpayModalHeader": "MoonPay 结账",

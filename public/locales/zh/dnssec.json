@@ -1,5 +1,5 @@
 {
-  "title": "将 {{name}} 引入 ENS",
+  "title": "将 {{name}} 引入 ECNS",
   "error": {
     "unknown": "发生未知错误",
     "noTxtRecord": "未找到记录",
@@ -19,14 +19,14 @@
   "steps": {
     "selectType": {
       "title": "认领 {{name}}",
-      "subtitle": "导入域名后可以将其用作 ENS 名称。",
+      "subtitle": "导入域名后可以将其用作 ECNS 名称。",
       "learnMore": "了解更多关于导入名称的信息",
       "select": {
         "heading": "您想如何导入您的域名？",
         "offchain": {
           "name": "链下",
           "tag": "免费",
-          "description": "您的名称将不会有链上代币。<br/>这不会影响其接收交易或作为主名称的能力。<br/><b>您将无法在 ENS app 内编辑您的个人资料。</b>"
+          "description": "您的名称将不会有链上代币。<br/>这不会影响其接收交易或作为主名称的能力。<br/><b>您将无法在 ECNS app 内编辑您的个人资料。</b>"
         },
         "onchain": {
           "name": "链上",
@@ -82,7 +82,7 @@
       "title": "恭喜！",
       "import": {
         "subtitle": "<gradient>{{name}}</gradient> 已导入",
-        "description": "此域名已成功导入 ENS。您现在可以查看此名称。",
+        "description": "此域名已成功导入 ECNS。您现在可以查看此名称。",
         "warning": "免 Gas 费的 DNS 名称目前不会显示在您的“名称”列表中。"
       },
       "claim": {

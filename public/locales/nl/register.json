@@ -1,5 +1,5 @@
 {
-  "title": "Registreer {{name}} op ENS",
+  "title": "Registreer {{name}} op ECNS",
   "subtitle": "Registreer",
   "heading": "Registreer {{name}}",
   "invoice": {
@@ -50,7 +50,7 @@
             },
             "placeholder": {
               "name": "Jan Jansen",
-              "url": "https://ens.domains",
+              "url": "https://ecns.domains",
               "location": "Metaverse",
               "description": "Ik ben een yield farmer uit het platteland van Tennessee."
             }
@@ -76,8 +76,8 @@
               "email": "Email"
             },
             "placeholder": {
-              "com.twitter": "bijv. ensdomains",
-              "com.github": "bijv. ensdomains",
+              "com.twitter": "bijv. ecnsdomains",
+              "com.github": "bijv. ecnsdomains",
               "com.discord": "bijv. nickjohnson",
               "org.telegram": "bijv. nicksdjohnson",
               "email": "bijv. hallo@voorbeeld.nl"
@@ -151,8 +151,8 @@
           "decline": "Terug"
         },
         "clearEth": {
-          "title": "ETH adres wissen?",
-          "description": "Zonder een ETH adres kunnen mensen geen geld naar deze naam sturen. Dit kan later aangepast worden.",
+          "title": "ETC adres wissen?",
+          "description": "Zonder een ETC adres kunnen mensen geen geld naar deze naam sturen. Dit kan later aangepast worden.",
           "confirm": "Wissen",
           "decline": "Annuleren"
         }

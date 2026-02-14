@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "{{name}} op ENS",
-    "description": "{{name}}'s profiel op de Ethereum Name Service"
+    "title": "{{name}} op ECNS",
+    "description": "{{name}}'s profiel op de Ethereum Classic Name Service"
   },
   "title": "Profiel",
   "yourWallet": "Jouw wallet",
@@ -18,7 +18,7 @@
         "setAsPrimaryName": {
           "label": "Zet als primaire naam",
           "title": "Zet je primaire naam",
-          "description": "Om dit als primaire naam te kunnen zetten, moet het ETH adres hetzelfde zijn als dit adres."
+          "description": "Om dit als primaire naam te kunnen zetten, moet het ETC adres hetzelfde zijn als dit adres."
         },
         "deleteSubname": {
           "label": "Verwijder subnaam"
@@ -40,7 +40,7 @@
       "makeOwnerDescription": "De eigenaar can versturen naar een nieuwe eigenaar en de manager veranderen",
       "makeManager": "Maak Manager",
       "makeManagerDescription": "De manager can records zetten en aanpassen.",
-      "inputPlaceholder": "Vul in Ethereum adres of een ENS naam",
+      "inputPlaceholder": "Vul in Ethereum Classic adres of een ECNS naam",
       "transferSubname": "Transfer Naam",
       "transferController": "Transfer Controller"
     },
@@ -52,7 +52,7 @@
       "startLabel": "Upgrade",
       "resumeLabel": "Hervat Upgrade",
       "boxTitle": "Unlock nieuwe features",
-      "boxDescription": "Je naam upgraden unlockt de laatste functionaliteit van ENS"
+      "boxDescription": "Je naam upgraden unlockt de laatste functionaliteit van ECNS"
     },
     "descriptions": {
       "owner": "Is eigenaar van en bestuurd de naam",
@@ -96,7 +96,7 @@
           "latest": "Laatste",
           "outdated": "Vervallen",
           "version": "Versie",
-          "etherscan": "Etherscan"
+          "etherscan": "Blockscout"
         },
         "fuses": {
           "label": "Fuses",

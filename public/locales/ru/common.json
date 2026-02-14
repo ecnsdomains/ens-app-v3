@@ -4,7 +4,7 @@
   "loading": "Загрузка",
   "unsupportedNetwork": "Неподдерживаемая сеть",
   "notFound": "404 Не Найдено",
-  "etherscan": "Etherscan",
+  "etherscan": "Blockscout",
   "action": {
     "cancel": "Отмена",
     "change": "Изменить",
@@ -78,7 +78,7 @@
     "terms": "Условия Пользования",
     "privacy": "Политика Конфиденциальности",
     "back": "Назад",
-    "oldApp": "Старое Приложение ENS",
+    "oldApp": "Старое Приложение ECNS",
     "language": "Язык",
     "theme": "Тема",
     "currency": "Валюта",
@@ -184,7 +184,7 @@
     },
     "networkLatency": {
       "title": "Медленная синхронизация данных",
-      "message": "Приложение ENS испытывает замедление из-за проблем с сетевой задержкой."
+      "message": "Приложение ECNS испытывает замедление из-за проблем с сетевой задержкой."
     }
   },
   "transaction": {
@@ -199,7 +199,7 @@
       "updateProfile": "Обновить профиль",
       "setPrimaryName": "Установить основное имя",
       "resetPrimaryName": "Удалить основное имя",
-      "updateEthAddress": "Обновить ETH адрес",
+      "updateEthAddress": "Обновить ETC адрес",
       "testSendName": "Отправить имя",
       "burnFuses": "Сжечь разрешения",
       "createSubname": "Создать поддомен",
@@ -228,8 +228,8 @@
       "updateResolver": "Изменить резолвер на",
       "updateProfile": "Обновить записи на существующем резолвере",
       "setPrimaryName": "Установить основное имя для вашего адреса",
-      "updateEthAddress": "Обновить ETH адрес на этот",
-      "updateEthAddressOnLatestResolver": "Обновить ETH адрес на последнем резолвере",
+      "updateEthAddress": "Обновить ETC адрес на этот",
+      "updateEthAddressOnLatestResolver": "Обновить ETC адрес на последнем резолвере",
       "testSendName": "Установить контроллера и регистранта имени",
       "createSubname": "Создать новый поддомен для имени",
       "burnFuses": "Сжечь выбранные разрешения до истечения имени",
@@ -323,7 +323,7 @@
     "error": {
       "unknown": "Произошла неизвестная ошибка"
     },
-    "viewEtherscan": "Посмотреть на Etherscan",
+    "viewEtherscan": "Посмотреть на Blockscout",
     "viewMore": "Посмотреть больше"
   },
   "search": {
@@ -356,7 +356,7 @@
     "empty": "Опции не найдены"
   },
   "testnetFaucet": {
-    "explanation": "Каждый адрес на {{ testnet }} может получить {{ amount }} {{ ticker }} для тестирования приложения ENS manager, а также для других тестов на тестовой сети.",
+    "explanation": "Каждый адрес на {{ testnet }} может получить {{ amount }} {{ ticker }} для тестирования приложения ECNS manager, а также для других тестов на тестовой сети.",
     "note": "Может занять несколько минут, чтобы появиться в вашем кошельке."
   },
   "roles": {
@@ -381,7 +381,7 @@
       "description": "Адрес, который может изменять профиль."
     },
     "eth-record": {
-      "title": "ETH запись",
+      "title": "ETC запись",
       "description": "Адрес, на который указывает это имя."
     }
   },

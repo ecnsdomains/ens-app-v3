@@ -1,5 +1,5 @@
 {
-  "title": "Importar {{name}} para ENS",
+  "title": "Importar {{name}} para ECNS",
   "error": {
     "unknown": "Ocorreu um erro desconhecido",
     "noTxtRecord": "Nenhum registro encontrado",
@@ -19,14 +19,14 @@
   "steps": {
     "selectType": {
       "title": "Reivindicar {{name}}",
-      "subtitle": "Importar nomes de domínio permite que sejam usados como nomes de ENS.",
+      "subtitle": "Importar nomes de domínio permite que sejam usados como nomes de ECNS.",
       "learnMore": "Mais informações sobre a importação de nomes",
       "select": {
         "heading": "Como você gostaria de importar seu domínio?",
         "offchain": {
           "name": "Offchain",
           "tag": "Gratuito",
-          "description": "Seu nome não terá um token onchain.<br/>Isso não afeta sua capacidade de receber transações ou usá-lo como nome principal.<br/><b>Você não poderá editar seu perfil da aplicação de ENS.</b>"
+          "description": "Seu nome não terá um token onchain.<br/>Isso não afeta sua capacidade de receber transações ou usá-lo como nome principal.<br/><b>Você não poderá editar seu perfil da aplicação de ECNS.</b>"
         },
         "onchain": {
           "name": "Onchain",
@@ -82,7 +82,7 @@
       "title": "Parabéns!",
       "import": {
         "subtitle": "<gradient>{{name}}</gradient> foi importado",
-        "description": "Este domínio foi importado com sucesso para ENS. Agora você pode ver este nome.",
+        "description": "Este domínio foi importado com sucesso para ECNS. Agora você pode ver este nome.",
         "warning": "Os nomes DNS sem gas atualmente não aparecem na sua lista de \"Nomes\"."
       },
       "claim": {

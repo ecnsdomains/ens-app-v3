@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "{{address}} 在 ENS",
-    "description": "{{address}} 在 ENS 上的所有名称"
+    "title": "{{address}} 在 ECNS",
+    "description": "{{address}} 在 ECNS 上的所有名称"
   },
   "addressDetails": "地址详情",
   "nameCount": "{{count}} 个名称",

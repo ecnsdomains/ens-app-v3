@@ -1,5 +1,5 @@
 {
-  "title": "Registrar {{name}} en ENS",
+  "title": "Registrar {{name}} en ECNS",
   "subtitle": "Registrar",
   "heading": "Registrar {{name}}",
   "invoice": {
@@ -151,8 +151,8 @@
           "decline": "Atrás"
         },
         "clearEth": {
-          "title": "¿Borrar dirección ETH?",
-          "description": "Sin una dirección ETH, las personas no podrán enviarte fondos a este nombre. Esto se puede actualizar más tarde.",
+          "title": "¿Borrar dirección ETC?",
+          "description": "Sin una dirección ETC, las personas no podrán enviarte fondos a este nombre. Esto se puede actualizar más tarde.",
           "confirm": "Borrar",
           "decline": "Cancelar"
         }
@@ -181,12 +181,12 @@
       ],
       "setupProfile": "Deseo configurar mi perfil primero",
       "paymentMethod": "Método de pago",
-      "notEnoughEth": "No hay suficiente ETH en la billetera",
+      "notEnoughEth": "No hay suficiente ETC en la billetera",
       "creditOrDebit": "Tarjeta de crédito o débito",
       "additionalFee": "Tarifa de procesamiento adicional",
       "pendingMoonpayTransaction": "Tu transacción con MoonPay se está procesando. Esto puede tardar hasta dos minutos. Puedes revisar el progreso en el correo de confirmación que recibiste.",
-      "failedMoonpayTransaction": "Tu transacción con MoonPay ha fallado. Intenta de nuevo o elige el método «Ethereum».",
-      "ethereum": "Ethereum",
+      "failedMoonpayTransaction": "Tu transacción con MoonPay ha fallado. Intenta de nuevo o elige el método «Ethereum Classic».",
+      "ethereum": "Ethereum Classic",
       "processing": "Procesando",
       "poweredBy": "Con tecnología de",
       "moonpayModalHeader": "Pago con MoonPay",

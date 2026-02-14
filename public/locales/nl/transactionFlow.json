@@ -35,7 +35,7 @@
           },
           "url": {
             "label": "Website",
-            "placeholder": "https://ens.domains"
+            "placeholder": "https://ecns.domains"
           },
           "location": {
             "label": "Location",
@@ -52,8 +52,8 @@
           "noOptions": "Geen account opties beschikbaar",
           "placeholder": {
             "default": "Voeg username hier toe",
-            "com.twitter": "e.g. ensdomains",
-            "com.github": "e.g. ensdomains",
+            "com.twitter": "e.g. ecnsdomains",
+            "com.github": "e.g. ecnsdomains",
             "com.discord": "e.g. nickjohnson"
           }
         },
@@ -117,7 +117,7 @@
     },
     "editResolver": {
       "latestLabel": "Gebruik laatste resolver",
-      "etherscan": "Etherscan",
+      "etherscan": "Blockscout",
       "latestMessage": "Je gebruikt de laatste resolver",
       "customLabel": "Handmatige resolver",
       "customPlaceholder": "Vul handmatige resolver adres hier"

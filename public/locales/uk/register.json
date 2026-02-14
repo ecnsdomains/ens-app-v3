@@ -1,5 +1,5 @@
 {
-  "title": "Зареєструвати {{name}} в ENS",
+  "title": "Зареєструвати {{name}} в ECNS",
   "subtitle": "Реєстрація",
   "heading": "Зареєструвати {{name}}",
   "invoice": {
@@ -50,7 +50,7 @@
             },
             "placeholder": {
               "name": "Джон Сміт",
-              "url": "https://ens.domains",
+              "url": "https://ecns.domains",
               "location": "Метавсесвіт",
               "description": "Я фермер з сільської місцевості Теннессі."
             }
@@ -76,8 +76,8 @@
               "email": "Email"
             },
             "placeholder": {
-              "com.twitter": "наприклад, ensdomains",
-              "com.github": "наприклад, ensdomains",
+              "com.twitter": "наприклад, ecnsdomains",
+              "com.github": "наприклад, ecnsdomains",
               "com.discord": "наприклад, nickjohnson",
               "org.telegram": "наприклад, nicksdjohnson",
               "email": "наприклад, hello@example.com"
@@ -151,8 +151,8 @@
           "decline": "Назад"
         },
         "clearEth": {
-          "title": "Очистити ETH адресу?",
-          "description": "Без встановленої ETH адреси люди не зможуть надсилати гроші на це ім'я. Це можна оновити пізніше.",
+          "title": "Очистити ETC адресу?",
+          "description": "Без встановленої ETC адреси люди не зможуть надсилати гроші на це ім'я. Це можна оновити пізніше.",
           "confirm": "Очистити",
           "decline": "Скасувати"
         }
@@ -182,7 +182,7 @@
       ],
       "setupProfile": "Я б хотів спочатку налаштувати свій профіль",
       "paymentMethod": "Спосіб оплати",
-      "notEnoughEth": "Недостатньо ETH в гаманці",
+      "notEnoughEth": "Недостатньо ETC в гаманці",
       "creditOrDebit": "Кредитна або дебетова картка",
       "additionalFee": "Додаткова плата за обробку",
       "pendingMoonpayTransaction": "Ваша транзакція MoonPay обробляється. Це може зайняти до двох хвилин. Ви можете перевірити свій прогрес з підтвердженням електронною поштою, яку ви отримали.",

@@ -177,7 +177,7 @@
     "editResolver": {
       "title": "Edit Resolver",
       "latestLabel": "Use latest resolver",
-      "etherscan": "Etherscan",
+      "etherscan": "Blockscout",
       "latestMessage": "You are on the latest resolver",
       "customLabel": "Custom resolver",
       "customPlaceholder": "Enter custom resolver address"
@@ -331,7 +331,7 @@
           "description": "You do not have permission to send this name."
         },
         "search": {
-          "placeholder": "ENS name or Ethereum address",
+          "placeholder": "ECNS name or ETC address",
           "views": {
             "error": {
               "message": "Something went wrong. Please try again."

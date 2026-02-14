@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "{{name}} en ENS",
-    "description": "Perfil de {{name}} en el Ethereum Name Service"
+    "title": "{{name}} en ECNS",
+    "description": "Perfil de {{name}} en el Ethereum Classic Name Service"
   },
   "title": "Perfil",
   "yourWallet": "Tu billetera",
@@ -31,7 +31,7 @@
         "setAsPrimaryName": {
           "label": "Establecer como nombre primario",
           "title": "Establecer tu nombre primario",
-          "description": "Para establecer tu nombre primario con este nombre, la dirección ETH debe coincidir con esta dirección."
+          "description": "Para establecer tu nombre primario con este nombre, la dirección ETC debe coincidir con esta dirección."
         },
         "deleteSubname": {
           "label": "Eliminar subnombre"
@@ -95,7 +95,7 @@
         },
         "contract": {
           "title": "Dirección del contrato",
-          "tooltip": "La dirección del contrato que habilita los nombres ENS envueltos (Wrapped).",
+          "tooltip": "La dirección del contrato que habilita los nombres ECNS envueltos (Wrapped).",
           "warning": "Algunas aplicaciones pueden mostrar la dirección del contrato como el propietario. Esto no afecta tu propiedad."
         }
       },
@@ -107,10 +107,10 @@
         "manager": "La dirección que puede cambiar el perfil, la configuración y los editores del perfil.",
         "profile-editor": "Una dirección que solo puede cambiar el perfil.",
         "subname-manager": "Una dirección o contrato responsable de las renovaciones de subnombres.",
-        "eth-record": "La dirección que recibirá fondos enviados a este nombre en mainnet.",
+        "eth-record": "La dirección que recibirá fondos enviados a este nombre en la red principal.",
         "grace-period": "Un periodo de gracia de 90 días tras la expiración, durante el cual el nombre aún puede extenderse pero no volver a registrarse.",
-        "contract-address": "La dirección del contrato que habilita los nombres ENS envueltos (Wrapped).",
-        "namewrapper": "El contrato que habilita los nombres ENS envueltos (Wrapped)."
+        "contract-address": "La dirección del contrato que habilita los nombres ECNS envueltos (Wrapped).",
+        "namewrapper": "El contrato que habilita los nombres ECNS envueltos (Wrapped)."
       }
     },
     "subnames": {
@@ -271,7 +271,7 @@
         "outdated": "Desactualizado",
         "wildcard": "Wildcard",
         "version": "Versión",
-        "etherscan": "Etherscan"
+        "etherscan": "Blockscout"
       },
       "fuses": {
         "label": "Fuses",
@@ -291,7 +291,7 @@
           "CANNOT_UNWRAP": "Puede desenvolver",
           "PARENT_CANNOT_CONTROL": "El padre puede controlar",
           "CAN_EXTEND_EXPIRY": "No puede extender la expiración",
-          "IS_DOT_ETH": "No es .eth"
+          "IS_DOT_ETH": "No es .etc"
         }
       },
       "ownership": {
@@ -315,7 +315,7 @@
         "wrapName": "Envolver nombre",
         "unwrap": "Desenvolver nombre",
         "unwrapWarning": "Este nombre ha revocado los permisos necesarios para realizar esta acción.",
-        "tooltip": "El Name Wrapper habilita funcionalidades adicionales en los nombres de ENS.",
+        "tooltip": "El Name Wrapper habilita funcionalidades adicionales en los nombres de ECNS.",
         "status": {
           "unwrapped": "Desenvuelto",
           "wrapped": "Envuelto"
@@ -356,7 +356,7 @@
       "makeOwnerDescription": "El propietario puede enviar el nombre a otro propietario y cambiar al administrador",
       "makeManager": "Hacer administrador",
       "makeManagerDescription": "El administrador puede cambiar y establecer registros.",
-      "inputPlaceholder": "Ingresa una dirección de Ethereum o nombre ENS",
+      "inputPlaceholder": "Ingresa una dirección de Ethereum Classic o nombre ECNS",
       "transferSubname": "Transferir nombre",
       "transferController": "Transferir controlador"
     },
@@ -368,7 +368,7 @@
       "startLabel": "Mejorar",
       "resumeLabel": "Reanudar mejora",
       "boxTitle": "Desbloquea nuevas funciones",
-      "boxDescription": "Mejorar tu nombre desbloquea la funcionalidad más reciente de ENS"
+      "boxDescription": "Mejorar tu nombre desbloquea la funcionalidad más reciente de ECNS"
     },
     "descriptions": {
       "owner": "Posee y controla el nombre",

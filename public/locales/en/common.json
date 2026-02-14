@@ -1,9 +1,9 @@
 {
-  "title": "Your web3 username",
-  "description": "Your identity across web3, one name for all your crypto addresses, and your decentralised website.",
+  "title": "> register yourname.etc",
+  "description": "On-chain identity for the immutable blockchain. One name for all your addresses.",
   "loading": "Loading",
   "notFound": "404 Not Found",
-  "etherscan": "Etherscan",
+  "etherscan": "Blockscout",
   "action": {
     "cancel": "Cancel",
     "change": "Change",
@@ -207,7 +207,7 @@
       "updateProfile": "Update profile",
       "setPrimaryName": "Set primary name",
       "resetPrimaryName": "Remove primary name",
-      "updateEthAddress": "Update ETH address",
+      "updateEthAddress": "Update ETC address",
       "testSendName": "Send name",
       "burnFuses": "Burn permissions",
       "createSubname": "Create subname",
@@ -241,8 +241,8 @@
       "updateResolver": "Change resolver to",
       "updateProfile": "Update records on existing resolver",
       "setPrimaryName": "Set the primary name for your address",
-      "updateEthAddress": "Update ETH address to this address",
-      "updateEthAddressOnLatestResolver": "Update ETH address on latest resolver",
+      "updateEthAddress": "Update ETC address to this address",
+      "updateEthAddressOnLatestResolver": "Update ETC address on latest resolver",
       "testSendName": "Set the controller and registrant of the name",
       "createSubname": "Create a new subname on the name",
       "burnFuses": "Burn the chosen permissions until name expiry",
@@ -340,7 +340,7 @@
     "error": {
       "unknown": "An unknown error occurred"
     },
-    "viewEtherscan": "View on Etherscan",
+    "viewEtherscan": "View on Blockscout",
     "viewOnBlockExplorer": "View on {{blockExplorer}}",
     "viewMore": "View More"
   },
@@ -401,7 +401,7 @@
       "description": "An address that can change the profile."
     },
     "eth-record": {
-      "title": "ETH record",
+      "title": "ETC record",
       "description": "The address that this name points to."
     }
   },

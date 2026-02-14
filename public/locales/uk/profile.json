@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "{{name}} на ENS",
-    "description": "Профіль {{name}} на Ethereum Name Service"
+    "title": "{{name}} на ECNS",
+    "description": "Профіль {{name}} на Ethereum Classic Name Service"
   },
   "title": "Профіль",
   "yourWallet": "Ваш гаманець",
@@ -25,7 +25,7 @@
         "setAsPrimaryName": {
           "label": "Встановити як основне ім'я",
           "title": "Встановіть ваше основне ім'я",
-          "description": "Щоб встановити це ім'я як основне, адреса ETH повинна відповідати цій адресі."
+          "description": "Щоб встановити це ім'я як основне, адреса ETC повинна відповідати цій адресі."
         },
         "deleteSubname": {
           "label": "Видалити субімена"
@@ -86,7 +86,7 @@
         },
         "contract": {
           "title": "Адреса контракту",
-          "tooltip": "Адреса контракту, який дозволяє Wrapped ENS імена.",
+          "tooltip": "Адреса контракту, який дозволяє Wrapped ECNS імена.",
           "warning": "Деякі додатки можуть показувати адресу контракту як власника. Це не впливає на ваше володіння."
         }
       },
@@ -100,8 +100,8 @@
         "subname-manager": "Адреса або контракт, відповідальний за продовження субімен.",
         "eth-record": "Адреса, яка отримуватиме кошти, надіслані на це ім'я на основній мережі.",
         "grace-period": "90-денний період після закінчення терміну, коли ім'я ще можна продовжити, але не пере-зареєструвати.",
-        "contract-address": "Адреса контракту, який дозволяє Wrapped ENS імена.",
-        "namewrapper": "Контракт, який дозволяє Wrapped ENS імена."
+        "contract-address": "Адреса контракту, який дозволяє Wrapped ECNS імена.",
+        "namewrapper": "Контракт, який дозволяє Wrapped ECNS імена."
       }
     },
     "subnames": {
@@ -262,7 +262,7 @@
         "outdated": "Застаріла",
         "wildcard": "Шаблон",
         "version": "Версія",
-        "etherscan": "Etherscan"
+        "etherscan": "Blockscout"
       },
       "fuses": {
         "label": "Запобіжники",
@@ -282,7 +282,7 @@
           "CANNOT_UNWRAP": "Не може розпакувати",
           "PARENT_CANNOT_CONTROL": "Батько може контролювати",
           "CAN_EXTEND_EXPIRY": "Не може продовжити термін дії",
-          "IS_DOT_ETH": "Не є .eth"
+          "IS_DOT_ETH": "Не є .etc"
         }
       },
       "ownership": {
@@ -341,7 +341,7 @@
       "makeOwnerDescription": "Власник може передати новому власнику і змінювати менеджера",
       "makeManager": "Зробити менеджером",
       "makeManagerDescription": "Менеджер може змінювати та встановлювати записи.",
-      "inputPlaceholder": "Введіть адресу Ethereum або ім'я ENS",
+      "inputPlaceholder": "Введіть адресу Ethereum Classic або ім'я ECNS",
       "transferSubname": "Передати ім'я",
       "transferController": "Передати контролер"
     },
@@ -353,7 +353,7 @@
       "startLabel": "Оновити",
       "resumeLabel": "Продовжити оновлення",
       "boxTitle": "Розблокувати нові функції",
-      "boxDescription": "Оновлення вашого імені розблоковує останні можливості ENS"
+      "boxDescription": "Оновлення вашого імені розблоковує останні можливості ECNS"
     },
     "descriptions": {
       "owner": "Володіє та контролює ім'я",

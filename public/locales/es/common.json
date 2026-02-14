@@ -3,7 +3,7 @@
   "description": "Tu identidad en todo Web3, un nombre para todas tus direcciones de criptomonedas y tu sitio web descentralizado.",
   "loading": "Cargando",
   "notFound": "404 No encontrado",
-  "etherscan": "Etherscan",
+  "etherscan": "Blockscout",
   "action": {
     "cancel": "Cancelar",
     "change": "Cambiar",
@@ -83,10 +83,10 @@
     "terms": "Términos de Uso",
     "privacy": "Política de Privacidad",
     "back": "Atrás",
-    "oldApp": "Aplicación anterior de ENS",
+    "oldApp": "Aplicación anterior de ECNS",
     "language": "Idioma",
     "currency": "Moneda",
-    "ipfsApp": "Aplicación ENS en IPFS",
+    "ipfsApp": "Aplicación ECNS en IPFS",
     "feedback": "Comentarios",
     "syncMessage": "Sincronizando con la red. Es posible que los cambios de tu transacción aún no sean visibles."
   },
@@ -183,7 +183,7 @@
     },
     "networkLatency": {
       "title": "Sincronización de datos lenta",
-      "message": "La aplicación de ENS está experimentando demoras debido a problemas de latencia en la red."
+      "message": "La aplicación de ECNS está experimentando demoras debido a problemas de latencia en la red."
     }
   },
   "transaction": {
@@ -198,7 +198,7 @@
       "updateProfile": "Actualizar perfil",
       "setPrimaryName": "Establecer nombre primario",
       "resetPrimaryName": "Eliminar nombre primario",
-      "updateEthAddress": "Actualizar dirección ETH",
+      "updateEthAddress": "Actualizar dirección ETC",
       "testSendName": "Enviar nombre",
       "burnFuses": "Quemar permisos",
       "createSubname": "Crear subnombre",
@@ -231,8 +231,8 @@
       "updateResolver": "Cambiar resolver a",
       "updateProfile": "Actualizar registros en el resolver existente",
       "setPrimaryName": "Establecer el nombre primario para tu dirección",
-      "updateEthAddress": "Actualizar la dirección ETH a esta dirección",
-      "updateEthAddressOnLatestResolver": "Actualizar dirección ETH en el resolver más reciente",
+      "updateEthAddress": "Actualizar la dirección ETC a esta dirección",
+      "updateEthAddressOnLatestResolver": "Actualizar dirección ETC en el resolver más reciente",
       "testSendName": "Establecer el controlador y titular del registro del nombre",
       "createSubname": "Crear un nuevo subnombre para el nombre",
       "burnFuses": "Quemar los permisos elegidos hasta que venza el nombre",
@@ -328,7 +328,7 @@
     "error": {
       "unknown": "Ocurrió un error desconocido"
     },
-    "viewEtherscan": "Ver en Etherscan",
+    "viewEtherscan": "Ver en Blockscout",
     "viewMore": "Ver más"
   },
   "search": {
@@ -362,7 +362,7 @@
     "empty": "No se encontraron opciones"
   },
   "testnetFaucet": {
-    "explanation": "Cada dirección en {{ testnet }} puede reclamar {{ amount }} {{ ticker }} para probar la aplicación ENS Manager, así como cualquier otro uso en esta red de prueba.",
+    "explanation": "Cada dirección en {{ testnet }} puede reclamar {{ amount }} {{ ticker }} para probar la aplicación ECNS Manager, así como cualquier otro uso en esta red de prueba.",
     "note": "Puede tardar unos minutos en aparecer en tu billetera."
   },
   "roles": {
@@ -387,7 +387,7 @@
       "description": "Una dirección que puede cambiar el perfil."
     },
     "eth-record": {
-      "title": "registro ETH",
+      "title": "registro ETC",
       "description": "La dirección a la que apunta este nombre."
     }
   },
@@ -413,11 +413,11 @@
   "homoglyph": {
     "content": "Este nombre contiene caracteres válidos en español (á, é, í, ó, ú, ü, ñ). A diferencia de otros idiomas:",
     "points": [
-      "Son ortografía correcta (ej: «canción.eth», «México.eth»)",
+      "Son ortografía correcta (ej: «canción.etc», «México.etc»)",
       "NO son sustitutos de caracteres ingleses",
       "Se conservan exactamente como los escribes:",
-      "- «sótano.eth» ≠ «sotano.eth»",
-      "- «pingüino.eth» ≠ «pinguino.eth»",
+      "- «sótano.etc» ≠ «sotano.etc»",
+      "- «pingüino.etc» ≠ «pinguino.etc»",
       "Algunos sistemas antiguos podrían no soportarlos"
     ],
     "link": "https://unicode.org/reports/tr36/",

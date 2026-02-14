@@ -9,7 +9,7 @@
       "noRecentTransactions": "Nenhuma transação recente",
       "clearTransactions": {
         "title": "Limpar histórico de transações",
-        "description": "Limpar seu histórico de transações removerá permanentemente essas transações do aplicativo ENS. Suas transações permanecerão visíveis na blockchain.",
+        "description": "Limpar seu histórico de transações removerá permanentemente essas transações do aplicativo ECNS. Suas transações permanecerão visíveis na blockchain.",
         "actionLabel": "Limpar histórico"
       }
     },

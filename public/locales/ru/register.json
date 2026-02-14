@@ -1,5 +1,5 @@
 {
-  "title": "Зарегистрируйте {{name}} в ENS",
+  "title": "Зарегистрируйте {{name}} в ECNS",
   "subtitle": "Регистрация",
   "heading": "Зарегистрировать {{name}}",
   "invoice": {
@@ -50,7 +50,7 @@
             },
             "placeholder": {
               "name": "John Doe",
-              "url": "https://ens.domains",
+              "url": "https://ecns.domains",
               "location": "Метавселенная",
               "description": "Я фермер из села в Теннесси."
             }
@@ -76,8 +76,8 @@
               "email": "Email"
             },
             "placeholder": {
-              "com.twitter": "например, ensdomains",
-              "com.github": "например, ensdomains",
+              "com.twitter": "например, ecnsdomains",
+              "com.github": "например, ecnsdomains",
               "com.discord": "например, nickjohnson",
               "org.telegram": "например, nicksdjohnson",
               "email": "например, hello@example.com"
@@ -151,8 +151,8 @@
           "decline": "Назад"
         },
         "clearEth": {
-          "title": "Очистить ETH адрес?",
-          "description": "Без установленного ETH адреса люди не смогут отправлять средства на это имя. Это можно обновить позже.",
+          "title": "Очистить ETC адрес?",
+          "description": "Без установленного ETC адреса люди не смогут отправлять средства на это имя. Это можно обновить позже.",
           "confirm": "Очистить",
           "decline": "Отмена"
         }
@@ -182,7 +182,7 @@
       ],
       "setupProfile": "Я хочу сначала настроить свой профиль",
       "paymentMethod": "Метод оплаты",
-      "notEnoughEth": "Недостаточно ETH в кошельке",
+      "notEnoughEth": "Недостаточно ETC в кошельке",
       "creditOrDebit": "Кредитная или дебетовая карта",
       "additionalFee": "Дополнительная плата за обработку",
       "pendingMoonpayTransaction": "Ваша транзакция MoonPay обрабатывается. Это может занять до двух минут. Вы можете проверить свой прогресс из подтверждающего письма, которое вы получили.",

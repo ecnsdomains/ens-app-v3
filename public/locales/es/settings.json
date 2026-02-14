@@ -9,7 +9,7 @@
       "noRecentTransactions": "Sin transacciones recientes",
       "clearTransactions": {
         "title": "Borrar historial de transacciones",
-        "description": "Borrar tu historial de transacciones eliminará permanentemente estas transacciones de la aplicación de ENS. Tus transacciones seguirán siendo visibles en la blockchain.",
+        "description": "Borrar tu historial de transacciones eliminará permanentemente estas transacciones de la aplicación de ECNS. Tus transacciones seguirán siendo visibles en la blockchain.",
         "actionLabel": "Borrar historial"
       }
     },

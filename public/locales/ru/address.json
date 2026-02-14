@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "{{address}} в ENS",
-    "description": "Все имена для {{address}} в Ethereum Name Service"
+    "title": "{{address}} в ECNS",
+    "description": "Все имена для {{address}} в Ethereum Classic Name Service"
   },
   "addressDetails": "Детали адреса",
   "nameCount": "{{count}} имён",
