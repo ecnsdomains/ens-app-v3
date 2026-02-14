@@ -30,7 +30,7 @@ import { useChainName } from '@app/hooks/chain/useChainName'
 import { useGasPrice } from '@app/hooks/chain/useGasPrice'
 import { useReadLocalStorage } from '@app/hooks/useLocalStorage'
 import { routes } from '@app/routes'
-import { ENS_LINKS } from '@app/utils/constants'
+import { ECNS_LINKS } from '@app/utils/constants'
 import { makeDisplay } from '@app/utils/currency'
 import { useGraphOutOfSync } from '@app/utils/SyncProvider/SyncProvider'
 import useUserConfig from '@app/utils/useUserConfig'
@@ -309,6 +309,7 @@ const MainMenu = ({ setCurrentView }: { setCurrentView: (view: HamburgerView) =>
           <div>
             <CurrencyToggle
               size="extraSmall"
+              crypto="ETC"
               fiat={userConfig.fiat}
               checked={userConfig.currency === 'fiat'}
               onChange={(e) => setCurrency(e.target.checked ? 'fiat' : 'eth')}
@@ -326,9 +327,9 @@ const MainMenu = ({ setCurrentView }: { setCurrentView: (view: HamburgerView) =>
         ))}
       </RoutesSection>
       <SocialSection>
-        <SocialIcon Icon={SocialX} color="black" href={ENS_LINKS.X} />
-        <SocialIcon Icon={SocialGithub} color="#0F0F0F" href={ENS_LINKS.GITHUB} />
-        <SocialIcon Icon={SocialDiscord} color="#7F83FF" href={ENS_LINKS.DISCORD} />
+        <SocialIcon Icon={SocialX} color="black" href={ECNS_LINKS.X} />
+        <SocialIcon Icon={SocialGithub} color="#0F0F0F" href={ECNS_LINKS.GITHUB} />
+        <SocialIcon Icon={SocialDiscord} color="#7F83FF" href={ECNS_LINKS.DISCORD} />
       </SocialSection>
       <NetworkSection />
     </Container>

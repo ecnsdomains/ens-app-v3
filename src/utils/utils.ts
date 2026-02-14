@@ -89,8 +89,14 @@ export const formatDurationOfDates = ({
   return durationStrings.join(', ') + postFix
 }
 
-export const makeEtherscanLink = (data: string, network?: string, route: string = 'tx') =>
-  `https://${!network || network === 'mainnet' ? '' : `${network}.`}etherscan.io/${route}/${data}`
+export const makeBlockExplorerLink = (data: string, chainId?: number, route: string = 'tx') => {
+  if (chainId === 63) return `https://blockscout.com/etc/mordor/${route}/${data}`
+  return `https://blockscout.com/etc/mainnet/${route}/${data}`
+}
+
+/** @deprecated Use makeBlockExplorerLink instead */
+export const makeEtherscanLink = (data: string, _network?: string, route: string = 'tx') =>
+  makeBlockExplorerLink(data, undefined, route)
 
 export const isBrowser = !!(
   typeof window !== 'undefined' &&

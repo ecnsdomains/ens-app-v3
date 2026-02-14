@@ -45,7 +45,7 @@ export const rainbowKitConnectors = connectorsForWallets(
     },
   ],
   {
-    appName: 'ENS',
+    appName: 'ECNS',
     projectId: WC_PROJECT_ID,
   },
 )

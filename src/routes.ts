@@ -15,16 +15,11 @@ import {
 
 export type PublicRoute =
   | 'search'
-  | 'governance'
   | 'community'
   | 'developers'
   | 'support'
-  | 'bounty'
   | 'terms'
   | 'privacy'
-  | 'oldApp'
-  | 'ipfsApp'
-  | 'feedback'
 export type ConnectedRoute = 'names' | 'profile' | 'favourites' | 'settings'
 export type AnyRoute = PublicRoute | ConnectedRoute | 'unknown'
 
@@ -101,44 +96,22 @@ export const routes: RouteItemObj[] = [
   },
   {
     name: 'support',
-    href: 'https://support.ens.domains',
+    href: 'mailto:support@ecns.domains',
     label: 'navigation.support',
     disabled: false,
     connected: false,
   },
   {
-    name: 'feedback',
-    href: 'https://docs.google.com/forms/d/e/1FAIpQLSfDzIszteoaqiayxUCpFLK1AgigoASHIPcsxFg8PZoS6R6Uzw/viewform?usp=sf_link',
-    label: 'navigation.feedback',
-    disabled: false,
-    connected: false,
-    onlyDropdown: true,
-  },
-  {
-    name: 'governance',
-    href: 'https://ensdao.org/',
-    label: 'navigation.governance',
-    disabled: false,
-    connected: false,
-  },
-  {
     name: 'community',
-    href: 'https://chat.ens.domains/',
+    href: 'https://discord.gg/ecns',
     label: 'navigation.community',
     disabled: false,
     connected: false,
   },
   {
     name: 'developers',
-    href: 'https://docs.ens.domains/',
+    href: 'https://docs.ecns.domains/',
     label: 'navigation.developers',
-    disabled: false,
-    connected: false,
-  },
-  {
-    name: 'bounty',
-    href: 'https://docs.ens.domains/bug-bounty-program',
-    label: 'navigation.bounty',
     disabled: false,
     connected: false,
   },
@@ -155,22 +128,6 @@ export const routes: RouteItemObj[] = [
     label: 'navigation.privacy',
     disabled: false,
     connected: false,
-  },
-  {
-    name: 'oldApp',
-    href: 'https://legacy.ens.domains',
-    label: 'navigation.oldApp',
-    disabled: false,
-    connected: false,
-    onlyDropdown: true,
-  },
-  {
-    name: 'ipfsApp',
-    href: 'https://app.ens.eth.limo/',
-    label: 'navigation.ipfsApp',
-    disabled: false,
-    connected: false,
-    onlyDropdown: true,
   },
 ]
 

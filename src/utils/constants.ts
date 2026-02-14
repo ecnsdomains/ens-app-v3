@@ -32,8 +32,6 @@ export const ECNS_LINKS = {
   HOMEPAGE: 'https://ecns.domains/',
 }
 
-// Legacy ENS_LINKS for compatibility
-export const ENS_LINKS = ECNS_LINKS
 
 export const DISCONNECTED_PLACEHOLDER_ADDRESS =
   '0x0000000000000000000000000000000000001234' as const

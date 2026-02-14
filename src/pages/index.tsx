@@ -25,6 +25,7 @@ const ECNS_GRADIENT = 'linear-gradient(330.4deg, #1A3A2E 4.54%, #3FB68B 59.2%, #
 
 const GradientTitle = styled.h1(
   ({ theme }) => css`
+    font-family: 'IBM 3270', 'IBM 3270 Narrow', 'Courier New', monospace;
     font-size: ${theme.fontSizes.headingTwo};
     text-align: center;
     font-weight: 800;
@@ -72,6 +73,13 @@ const Stack = styled.div(
     justify-content: center;
     flex-gap: ${theme.space['3']};
     gap: ${theme.space['3']};
+    padding: ${theme.space['8']};
+    background: radial-gradient(
+      ellipse at center,
+      rgba(15, 26, 21, 0.75) 0%,
+      transparent 70%
+    );
+    border-radius: ${theme.radii['2xLarge']};
   `,
 )
 
