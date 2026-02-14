@@ -68,7 +68,7 @@ const ErrorScreen = ({ errorType }: { errorType: ErrorType }) => {
           i18nKey="message"
           components={{
             HomeLink: <LinkWrapper />,
-            // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
+             
             SupportLink: <a href="https://support.ens.domains" />,
           }}
         />

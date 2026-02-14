@@ -77,7 +77,7 @@ export const TransactionDialogManager = ({
       {match([selectedKey, selectedItem])
         .with(
           [P.not(P.nullish), { input: P.not(P.nullish), currentFlowStage: 'input' }],
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+           
           ([_, _selectedItem]) => {
             const Component = DataInputComponents[_selectedItem.input.name]
             return (
@@ -96,7 +96,7 @@ export const TransactionDialogManager = ({
         )
         .with(
           [P.not(P.nullish), { intro: P.not(P.nullish), currentFlowStage: 'intro' }],
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+           
           ([_, _selectedItem]) => {
             const currentTx = _selectedItem.transactions[_selectedItem.currentTransaction]
             const currentStep =

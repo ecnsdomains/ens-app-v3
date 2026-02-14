@@ -1,4 +1,4 @@
-/* eslint-disable import/newline-after-import */
+ 
 import { WindowPostMessageStream } from '@metamask/post-message-stream'
 import { initializeProvider } from '@metamask/providers'
 

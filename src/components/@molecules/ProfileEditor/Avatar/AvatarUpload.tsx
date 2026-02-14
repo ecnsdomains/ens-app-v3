@@ -1,4 +1,4 @@
-/* eslint-disable no-multi-assign */
+ 
 import { sha256 } from '@noble/hashes/sha256'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'

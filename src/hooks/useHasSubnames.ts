@@ -29,7 +29,7 @@ const hasSubnamesQueryFn =
 
     while (!done) {
       try {
-        // eslint-disable-next-line no-await-in-loop
+         
         const result = await getSubnames(client, {
           name,
           previousPage: cursor,

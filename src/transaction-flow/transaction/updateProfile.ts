@@ -27,7 +27,7 @@ const displayItems = ({ name, records }: Data, t: TFunction): TransactionDisplay
 
   const recordsList = recordOptionsToToupleList(records)
 
-  /* eslint-disable no-nested-ternary */
+   
   const recordsItem =
     recordsList.length > 3
       ? [
@@ -45,7 +45,7 @@ const displayItems = ({ name, records }: Data, t: TFunction): TransactionDisplay
           } as TransactionDisplayItem,
         ]
       : []
-  /* eslint-enable no-nested-ternary */
+   
 
   return [
     {

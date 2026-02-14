@@ -132,7 +132,7 @@ export const UnknownLabelsForm = forwardRef<HTMLFormElement, Props>(
           >
             {labels.map(({ label, value, disabled }, inx) => (
               <Input
-                // eslint-disable-next-line react/no-array-index-key
+                 
                 key={`${inx}-${label}`}
                 placeholder={label}
                 label={label}

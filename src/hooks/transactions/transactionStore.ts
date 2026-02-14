@@ -1,6 +1,6 @@
-/* eslint-disable no-plusplus */
+ 
 
-/* eslint-disable @typescript-eslint/no-use-before-define */
+ 
 // this is taken from rainbowkit
 import { Address, Block, Hash, Hex } from 'viem'
 import { getBlock } from 'viem/actions'

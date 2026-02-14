@@ -32,10 +32,10 @@ const optimismPublicClient = createPublicClient({
 
 const THREE_DNS_RESOLVER_ADDRESS = '0xF97aAc6C8dbaEBCB54ff166d79706E3AF7a813c8'
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 export const getDotBoxAvailabilityOnchain =
   (_config: ConfigWithEns) =>
-  /* eslint-enable @typescript-eslint/no-unused-vars */
+   
   async <TParams extends UseDotBoxAvailabilityOnchainParameters>({
     queryKey: [{ name }],
   }: QueryFunctionContext<UseDotBoxAvailabilityOnchainQueryKey<TParams>>) => {

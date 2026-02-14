@@ -228,13 +228,13 @@ const Complete = ({ name, beautifiedName, callback, isMoonpayFlow, registrationD
     return data.map((item, i) => {
       if (item.type === 'emoji') {
         const str = String.fromCodePoint(...item.emoji)
-        // eslint-disable-next-line react/no-array-index-key
+         
         return <Fragment key={`${str}-${i}`}>{str}</Fragment>
       }
       let str = '.'
       if ('cps' in item) str = String.fromCodePoint(...item.cps)
       if ('cp' in item) str = String.fromCodePoint(item.cp)
-      // eslint-disable-next-line react/no-array-index-key
+       
       return <b key={`${str}-${i}`}>{str}</b>
     })
   }, [beautifiedName])

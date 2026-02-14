@@ -81,7 +81,7 @@ export const getSelectedIndex = (
       x.version === REGISTRATION_REDUCER_DATA_ITEM_VERSION,
   )
 
-/* eslint-disable no-param-reassign */
+ 
 const reducer = (state: RegistrationReducerData, action: RegistrationReducerAction) => {
   let selectedItemInx = getSelectedIndex(state, action.selected)
 
@@ -178,7 +178,7 @@ const reducer = (state: RegistrationReducerData, action: RegistrationReducerActi
   }
   return state
 }
-/* eslint-enable no-param-reassign */
+ 
 
 const useRegistrationReducer = ({
   address,

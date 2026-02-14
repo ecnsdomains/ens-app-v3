@@ -103,7 +103,7 @@ export const DogFood = ({
                   if (result) {
                     return undefined
                   }
-                  // eslint-disable-next-line no-empty
+                   
                 } catch (e) {
                   console.error('validation error: ', e)
                 }

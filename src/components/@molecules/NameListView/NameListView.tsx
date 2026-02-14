@@ -147,7 +147,7 @@ export const NameListView = ({ address, selfAddress, setError, setLoading }: Nam
       setSelectedNames([])
       setMode('view')
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [stage])
 
   const isNameExtendable = (name: Name) =>

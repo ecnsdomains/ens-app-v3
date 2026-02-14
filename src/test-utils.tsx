@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+ 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, renderHook, RenderHookOptions, RenderOptions } from '@testing-library/react'
 import user from '@testing-library/user-event'
@@ -63,7 +63,7 @@ const queryClient = new QueryClient({
 beforeEach(() => queryClient.clear())
 
 const privateKeyAccount = privateKeyToAccount(
-  // eslint-disable-next-line no-restricted-syntax
+   
   '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80',
 )
 const client = createClient({

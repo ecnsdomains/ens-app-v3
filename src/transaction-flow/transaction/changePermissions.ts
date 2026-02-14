@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-redeclare */
+ 
 import type { TFunction } from 'i18next'
 
 import { ChildFuseReferenceType, ParentFuseReferenceType } from '@ensdomains/ensjs/utils'

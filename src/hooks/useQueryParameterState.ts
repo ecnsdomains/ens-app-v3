@@ -20,7 +20,7 @@ export const useQueryParameterState = <T extends string | number>(
     const visibleUrl = new URL(router.asPath, window.location.href)
 
     for (const [key, queryVal] of Object.entries(router.query)) {
-      // eslint-disable-next-line no-continue
+       
       if (key === parameter) continue
       url.searchParams.set(key, queryVal as string)
       if (visibleSearchParams.has(key)) {

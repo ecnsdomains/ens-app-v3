@@ -42,7 +42,7 @@ const displayItems = (
     t('action.delete', { ns: 'common' }).toLocaleLowerCase(),
   )
 
-  /* eslint-disable no-nested-ternary */
+   
   const recordsItem =
     recordsList.length > 3
       ? [
@@ -60,7 +60,7 @@ const displayItems = (
           } as TransactionDisplayItem,
         ]
       : []
-  /* eslint-enable no-nested-ternary */
+   
 
   return [
     {

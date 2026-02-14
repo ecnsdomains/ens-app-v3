@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+ 
 import dynamic from 'next/dynamic'
 import { SVGProps } from 'react'
 

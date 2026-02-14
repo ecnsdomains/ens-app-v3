@@ -71,7 +71,7 @@ export const TransactionFlowProvider = ({ children }: { children: ReactNode }) =
     (current: InternalTransactionFlow) => {
       const updatedItems = current.items
       const { getCanRemoveItem } = helpers(current)
-      // eslint-disable-next-line guard-for-in
+       
       for (const key in updatedItems) {
         const item = updatedItems[key]
         if (getCanRemoveItem(item)) {

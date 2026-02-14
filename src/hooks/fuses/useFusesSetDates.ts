@@ -130,7 +130,7 @@ export const generateMatchedFuseBlockData = ({
     if (!blockQuery?.data) {
       hasIncompleteData = true
       hasAllSuccessData = false
-      // eslint-disable-next-line no-continue
+       
       continue
     }
     if (!blockQuery.isSuccess) hasAllSuccessData = false

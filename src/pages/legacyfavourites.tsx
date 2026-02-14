@@ -20,7 +20,7 @@ const Container = styled.div(
   `,
 )
 
-// eslint-disable-next-line react/no-unused-prop-types
+ 
 type Favourite = { name: string; expiry: Date }
 type Favourites = Favourite[]
 

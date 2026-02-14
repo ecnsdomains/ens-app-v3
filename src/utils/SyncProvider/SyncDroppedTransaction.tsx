@@ -1,4 +1,4 @@
-/* eslint-disable no-await-in-loop */
+ 
 import { useEffect, useRef } from 'react'
 import { TransactionNotFoundError, type Address } from 'viem'
 import { getTransaction, getTransactionCount } from 'viem/actions'

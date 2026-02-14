@@ -1,4 +1,4 @@
-/* eslint-disable no-multi-assign */
+ 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
@@ -218,9 +218,9 @@ export const CropComponent = ({
         x = max
         y = (size - h) / 2
       } else {
-        // eslint-disable-next-line no-multi-assign
+         
         w = h = cropSize
-        // eslint-disable-next-line no-multi-assign
+         
         x = y = max
       }
       ctx!.drawImage(image, x, y, w, h)

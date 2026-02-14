@@ -27,7 +27,7 @@ type Props = {
   onBack: () => void
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 export const SummaryView = ({ name, canResetProfile, onNext, onBack }: Props) => {
   const { t } = useTranslation('transactionFlow')
   const { control, register } = useFormContext<SendNameForm>()

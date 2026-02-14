@@ -105,7 +105,7 @@ export const getSelectedIndex = (state: DnsImportReducerData, selected: Selected
   )
 }
 
-/* eslint-disable no-param-reassign */
+ 
 const reducer = () => (state: DnsImportReducerData, action: DnsImportReducerAction) => {
   let selectedItemInx = getSelectedIndex(state, action.selected)
 
@@ -164,7 +164,7 @@ const reducer = () => (state: DnsImportReducerData, action: DnsImportReducerActi
 
   return state
 }
-/* eslint-enable no-param-reassign */
+ 
 
 export const useDnsImportReducer = ({
   address,

@@ -1,4 +1,4 @@
-/* eslint-disable no-nested-ternary */
+ 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Control, useWatch } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'

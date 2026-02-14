@@ -208,7 +208,7 @@ export const TransactionSection = () => {
                   return (
                     <TransactionContainer
                       data-testid={`transaction-${status}`}
-                      // eslint-disable-next-line react/no-array-index-key
+                       
                       key={`${hash}-${i}`}
                     >
                       <InfoContainer>

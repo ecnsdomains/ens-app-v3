@@ -46,7 +46,7 @@ export const getDropdownItems = ({
                 {children}
               </BaseLink>
             ),
-            as: 'a' as 'a',
+            as: 'a' as const,
             color: 'text',
             icon: PersonSVG,
           },

@@ -1,4 +1,4 @@
-/* eslint-disable no-multi-assign */
+ 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'

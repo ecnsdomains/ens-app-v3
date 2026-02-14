@@ -69,12 +69,12 @@ export function PrivacySection() {
           <Typography fontVariant="bodyBold">Cookie Consent</Typography>
           <Typography fontVariant="small">
             {match([consent, lastConsentDate])
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+               
               .with(['yes', P.instanceOf(Date)], ([_, date]) => (
                 <>Cookies accepted on {formatDate(date)}</>
               ))
               .with(['yes', P.nullish], () => <>Cookies accepted</>)
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+               
               .with(['no', P.instanceOf(Date)], ([_, date]) => (
                 <>Cookies declined on {formatDate(date)}</>
               ))

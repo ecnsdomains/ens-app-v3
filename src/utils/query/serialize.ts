@@ -21,7 +21,7 @@ function getReferenceKey(keys: string[], cutoff: number) {
 function getCutoff(array: any[], value: any) {
   const { length } = array
 
-  // eslint-disable-next-line no-plusplus
+   
   for (let index = 0; index < length; ++index) {
     if (array[index] === value) {
       return index + 1

@@ -4,7 +4,7 @@ import { SupportedSocialRecordKey } from '@app/constants/supportedSocialRecordKe
 
 import { normaliseTwitterRecordValue } from './normaliseTwitterRecordValue'
 
-/* eslint-disable @typescript-eslint/naming-convention */
+ 
 const NORMALISED_RECORD_KEY_MAPPING: { [key: string]: SupportedSocialRecordKey } = {
   twitter: 'com.twitter',
   x: 'com.twitter',
@@ -13,7 +13,7 @@ const NORMALISED_RECORD_KEY_MAPPING: { [key: string]: SupportedSocialRecordKey }
   telegram: 'org.telegram',
   discord: 'com.discord',
 }
-/* eslint-enable @typescript-eslint/naming-convention */
+ 
 
 export const normaliseProfileAccountsKey = (key: string) =>
   NORMALISED_RECORD_KEY_MAPPING[key] ?? key

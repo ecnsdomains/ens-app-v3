@@ -1,6 +1,6 @@
-/* eslint-disable default-case */
+ 
 
-/* eslint-disable no-param-reassign */
+ 
 import { useQueryClient } from '@tanstack/react-query'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'

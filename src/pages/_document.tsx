@@ -1,4 +1,4 @@
-/* eslint-disable react/no-danger */
+ 
 import { AppPropsType, AppType } from 'next/dist/shared/lib/utils'
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
@@ -119,7 +119,7 @@ export default class MyDocument extends Document {
           />
           {process.env.NEXT_PUBLIC_IPFS && (
             <>
-              {/* eslint-disable-next-line react/no-danger */}
+              { }
               <script dangerouslySetInnerHTML={{ __html: ipfsPathScript }} />
               {/* eslint-disable-next-line @next/next/no-css-tags */}
               <link rel="stylesheet" href="./fonts/fonts.css" />

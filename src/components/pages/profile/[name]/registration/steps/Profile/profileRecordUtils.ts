@@ -217,7 +217,7 @@ export const profileToProfileRecords = (profile?: Profile): ProfileRecord[] => {
           value,
         }
       }
-      /* eslint-disable no-nested-ternary */
+       
       const group: ProfileRecordGroup = supportedGeneralRecordKeys.includes(
         key as (typeof supportedGeneralRecordKeys)[number],
       )
@@ -225,7 +225,7 @@ export const profileToProfileRecords = (profile?: Profile): ProfileRecord[] => {
         : supportedSocialRecordKeys.includes(key as (typeof supportedSocialRecordKeys)[number])
         ? 'social'
         : 'custom'
-      /* eslint-enable no-nested-ternary */
+       
       return {
         key: key as string,
         type: 'text',

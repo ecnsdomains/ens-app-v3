@@ -1,4 +1,4 @@
-/* eslint-disable no-nested-ternary */
+ 
 import { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 

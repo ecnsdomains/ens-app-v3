@@ -1,8 +1,8 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+ 
 
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+ 
 
-/* eslint-disable jsx-a11y/interactive-supports-focus */
+ 
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import { match, P } from 'ts-pattern'

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+ 
 import { match, P } from 'ts-pattern'
 
 import {

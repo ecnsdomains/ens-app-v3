@@ -61,7 +61,7 @@ export const getRegistrationStatus = ({
   }
 
   if (isETH && is2LD) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+     
     if (expiryData && expiryData.expiry) {
       const { expiry: _expiry, gracePeriod } = expiryData
       const expiry = new Date(_expiry.date)
