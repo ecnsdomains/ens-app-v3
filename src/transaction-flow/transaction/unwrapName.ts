@@ -3,7 +3,7 @@ import type { TFunction } from 'i18next'
 import { unwrapName } from '@ensdomains/ensjs/wallet'
 
 import type { Transaction, TransactionDisplayItem, TransactionFunctionParameters } from '@app/types'
-import { checkETH2LDFromName } from '@app/utils/utils'
+import { checkNativeTld2LD } from '@app/utils/utils'
 
 type Data = {
   name: string
@@ -27,7 +27,7 @@ const displayItems = (
 const transaction = async ({ connectorClient, data }: TransactionFunctionParameters<Data>) => {
   const { address } = connectorClient.account
 
-  if (checkETH2LDFromName(data.name))
+  if (checkNativeTld2LD(data.name))
     return unwrapName.makeFunctionData(connectorClient, {
       name: data.name,
       newOwnerAddress: address,

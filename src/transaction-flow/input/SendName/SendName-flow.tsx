@@ -5,7 +5,7 @@ import { Address } from 'viem'
 
 import { useAbilities } from '@app/hooks/abilities/useAbilities'
 import { useAccountSafely } from '@app/hooks/account/useAccountSafely'
-import { useResolver } from '@app/hooks/ensjs/public/useResolver'
+import { useResolver } from '@app/hooks/nameservice/public/useResolver'
 import { useNameType } from '@app/hooks/nameType/useNameType'
 import useRoles from '@app/hooks/ownership/useRoles/useRoles'
 import { useBasicName } from '@app/hooks/useBasicName'
@@ -120,7 +120,7 @@ const SendName = ({ data: { name }, dispatch, onDismiss }: Props) => {
 
   const canSend = checkCanSend({ abilities: abilities.data, nameType: nameType.data })
   const canResetProfile =
-    abilities.data.canEditRecords && !!resolverSupport.data?.every((i) => !!i) && !!resolver.data
+    abilities.data.canEditRecords && !!resolverSupport.data?.every((i: boolean) => !!i) && !!resolver.data
 
   return (
     <FormProvider {...form}>

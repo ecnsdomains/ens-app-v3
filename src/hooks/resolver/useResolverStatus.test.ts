@@ -7,7 +7,7 @@ import { useContractAddress } from '@app/hooks/chain/useContractAddress'
 import { useResolverStatus } from '@app/hooks/resolver/useResolverStatus'
 import { Profile } from '@app/types/index'
 import { emptyAddress } from '@app/utils/constants'
-import { makeEthRecordItem, mergeAddressRecords } from '@app/utils/records'
+import { makeNativeCoinRecordItem, mergeAddressRecords } from '@app/utils/records'
 
 import { useProfile } from '../useProfile'
 import { useResolverIsAuthorised } from './useResolverIsAuthorised'
@@ -45,7 +45,7 @@ const createProfileData = ({
       [key]: value,
     })),
   ).map(([key, value]) => ({ key, value, type: 'text' }))
-  const coins = mergeAddressRecords([makeEthRecordItem('0x123')], _coinTypes)
+  const coins = mergeAddressRecords([makeNativeCoinRecordItem('0x123')], _coinTypes)
   const contentHash = _contentHash || { protocolType: 'ipfs', decoded: '0x123' }
   const abi = _abi || { contentType: 1, decoded: true, abi: '[{}]' }
   const resolverAddress = _resolverAddress ?? KNOWN_RESOLVER_DATA['1']![0].address

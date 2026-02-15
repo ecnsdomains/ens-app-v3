@@ -2,10 +2,11 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 import {
-  isEthAddressRecord,
+  isNativeCoinAddressRecord,
   profileEditorFormToProfileRecords,
   profileRecordsToProfileEditorForm,
 } from '@app/components/pages/profile/[name]/registration/steps/Profile/profileRecordUtils'
+import { SERVICES } from '@app/constants/brand'
 import { ProfileRecord, ProfileRecordGroup } from '@app/constants/profileRecordOptions'
 import { supportedAddresses } from '@app/constants/supportedAddresses'
 import { AvatarEditorType } from '@app/types'
@@ -23,7 +24,7 @@ const SINGLE_VALUE_RECORD_TYPES = ['contenthash']
 const SUPPORTED_AVUP_ENDPOINTS = [
   'https://euc.li',
   'https://ens.xyz',
-  'https://avatar-upload.ens-cf.workers.dev',
+  SERVICES.avatarUploadUrl,
   ...(process.env.NEXT_PUBLIC_AVUP_ENDPOINT ? [process.env.NEXT_PUBLIC_AVUP_ENDPOINT] : []),
 ]
 
@@ -106,7 +107,7 @@ export const useProfileEditorForm = (existingRecords: ProfileRecord[]) => {
         const address_ = normalizeCoinAddress({ coin: record.key, address: value })
         const result = validateCryptoAddress({ coin: record.key, address: address_ })
 
-        if (isEthAddressRecord(record) && !value) {
+        if (isNativeCoinAddressRecord(record) && !value) {
           return true
         }
 

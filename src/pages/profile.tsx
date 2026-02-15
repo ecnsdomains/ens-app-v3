@@ -3,7 +3,7 @@ import { useAccount } from 'wagmi'
 
 import ProfileContent from '@app/components/pages/profile/[name]/Profile'
 import { useDotBoxAvailabilityOffchain } from '@app/hooks/dotbox/useDotBoxAvailabilityOffchain'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { useInitial } from '@app/hooks/useInitial'
 import { useNameDetails } from '@app/hooks/useNameDetails'
 import { useRouterWithHistory } from '@app/hooks/useRouterWithHistory'

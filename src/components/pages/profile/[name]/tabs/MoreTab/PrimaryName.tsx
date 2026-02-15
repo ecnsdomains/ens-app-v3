@@ -5,7 +5,7 @@ import { useAccount } from 'wagmi'
 import { Button, Card, NametagSVG, RecordItem, Tag, Typography } from '@ensdomains/thorin'
 
 import { QuestionTooltip } from '@app/components/@molecules/QuestionTooltip/QuestionTooltip'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { usePrimaryNames } from '@app/hooks/primary/usePrimaryNames'
 import { useProfile } from '@app/hooks/useProfile'
 import { getL2PrimarySiteUrl } from '@app/utils/urls'

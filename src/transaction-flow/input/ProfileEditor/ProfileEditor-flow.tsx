@@ -19,7 +19,7 @@ import { ProfileRecordInput } from '@app/components/pages/profile/[name]/registr
 import { ProfileRecordTextarea } from '@app/components/pages/profile/[name]/registration/steps/Profile/ProfileRecordTextarea'
 import {
   getProfileRecordsDiff,
-  isEthAddressRecord,
+  isNativeCoinAddressRecord,
   profileEditorFormToProfileRecords,
   profileToProfileRecords,
 } from '@app/components/pages/profile/[name]/registration/steps/Profile/profileRecordUtils'
@@ -413,7 +413,7 @@ const ProfileEditor = ({ data = {}, transactions = [], dispatch, onDismiss }: Pr
                     error={errorForRecordAtIndex(index)}
                     validated={isDirtyForRecordAtIndex(index)}
                     onDelete={() => {
-                      if (isEthAddressRecord(field)) {
+                      if (isNativeCoinAddressRecord(field)) {
                         updateRecordAtIndex(index, { ...field, value: '' })
                       } else {
                         handleDeleteRecord(field, index)

@@ -6,6 +6,7 @@ import { Banner } from '@ensdomains/thorin'
 
 import BaseLink from '@app/components/@atoms/BaseLink'
 import { CacheableComponent } from '@app/components/@atoms/CacheableComponent'
+import { isCurrentTld } from '@app/constants/tld'
 import { useAbilities } from '@app/hooks/abilities/useAbilities'
 import { useFusesSetDates } from '@app/hooks/fuses/useFusesSetDates'
 import { useFusesStates } from '@app/hooks/fuses/useFusesStates'
@@ -38,7 +39,7 @@ export const PermissionsTab = ({ name, wrapperData, isCached: isBasicCached }: P
   const nameParts = name.split('.')
   const parentName = nameParts.slice(1).join('.')
 
-  const is2LDEth = nameParts.length === 2 && nameParts[1] === 'eth'
+  const is2LDEth = nameParts.length === 2 && isCurrentTld(nameParts[1])
   const isSubname = nameParts.length > 2
 
   const abilities = useAbilities({ name })

@@ -7,7 +7,7 @@ import { GetSupportedInterfacesReturnType } from '@ensdomains/ensjs/public'
 import { getKnownResolverData } from '@app/constants/resolverAddressData'
 import { RESOLVER_INTERFACE_IDS, ResolverInterfaceName } from '@app/constants/resolverInterfaceIds'
 
-import { useSupportedInterfaces } from './ensjs/public/useSupportedInterfaces'
+import { useSupportedInterfaces } from './nameservice/public/useSupportedInterfaces'
 
 type UseResolverHasInterfacesParameters<TInterfaceNames extends readonly ResolverInterfaceName[]> =
   {

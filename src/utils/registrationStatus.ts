@@ -29,7 +29,7 @@ export type RegistrationStatus =
 
 export const getRegistrationStatus = ({
   timestamp,
-  validation: { isETH, is2LD, isShort, type },
+  validation: { isNativeTld, is2LD, isShort, type },
   ownerData,
   wrapperData,
   expiryData,
@@ -39,7 +39,7 @@ export const getRegistrationStatus = ({
   name,
 }: {
   timestamp: number
-  validation: Partial<Omit<ParsedInputResult, 'normalised' | 'isValid'>>
+  validation: Partial<Omit<ParsedInputResult, 'normalised' | 'isValid' | 'isETH'>> & { isNativeTld?: boolean }
   ownerData?: GetOwnerReturnType
   wrapperData?: GetWrapperDataReturnType
   expiryData?: GetExpiryReturnType
@@ -50,17 +50,17 @@ export const getRegistrationStatus = ({
 }): RegistrationStatus => {
   if (name === '[root]') return 'owned'
 
-  if (isETH && is2LD && isShort) {
+  if (isNativeTld && is2LD && isShort) {
     return 'short'
   }
 
   if (!ownerData && ownerData !== null && !wrapperData) return 'invalid'
 
-  if (!isETH && !supportedTLD) {
+  if (!isNativeTld && !supportedTLD) {
     return 'unsupportedTLD'
   }
 
-  if (isETH && is2LD) {
+  if (isNativeTld && is2LD) {
      
     if (expiryData && expiryData.expiry) {
       const { expiry: _expiry, gracePeriod } = expiryData

@@ -7,7 +7,7 @@ import { CheckCircleSVG, Helper, Typography } from '@ensdomains/thorin'
 
 import RecordItem from '@app/components/RecordItem'
 import { DNS_TXT_RECORD_HELPER_LINKS } from '@app/constants/dnsLinks'
-import { useDnsOwner } from '@app/hooks/ensjs/dns/useDnsOwner'
+import { useDnsOwner } from '@app/hooks/nameservice/dns/useDnsOwner'
 import { sendEvent } from '@app/utils/analytics/events'
 import { shortenAddress } from '@app/utils/utils'
 

@@ -3,17 +3,18 @@ import { getAddress } from 'viem'
 
 import { truncateFormat } from '@ensdomains/ensjs/utils'
 
+import { isCurrentTldName } from '@app/constants/tld'
 import { getRegistrationStatus } from '@app/utils/registrationStatus'
 import { isLabelTooLong, yearsToSeconds } from '@app/utils/utils'
 
 import { useContractAddress } from './chain/useContractAddress'
 import useCurrentBlockTimestamp from './chain/useCurrentBlockTimestamp'
-import { useAddressRecord } from './ensjs/public/useAddressRecord'
-import { useExpiry } from './ensjs/public/useExpiry'
-import { useOwner, UseOwnerReturnType } from './ensjs/public/useOwner'
-import { usePrice } from './ensjs/public/usePrice'
-import { useWrapperData } from './ensjs/public/useWrapperData'
-import { useSubgraphRegistrant } from './ensjs/subgraph/useSubgraphRegistrant'
+import { useAddressRecord } from './nameservice/public/useAddressRecord'
+import { useExpiry } from './nameservice/public/useExpiry'
+import { useOwner, UseOwnerReturnType } from './nameservice/public/useOwner'
+import { usePrice } from './nameservice/public/usePrice'
+import { useWrapperData } from './nameservice/public/useWrapperData'
+import { useSubgraphRegistrant } from './nameservice/subgraph/useSubgraphRegistrant'
 import { usePccExpired } from './fuses/usePccExpired'
 import { useSupportsTLD } from './useSupportsTLD'
 import { useValidate } from './useValidate'
@@ -35,13 +36,13 @@ export const useBasicName = ({
 }: UseBasicNameOptions) => {
   const validation = useValidate({ input: name!, enabled: enabled && !!name })
 
-  const { name: _normalisedName, isValid, isShort, isETH, is2LD } = validation
+  const { name: _normalisedName, isValid, isShort, isNativeTld, is2LD } = validation
 
   const normalisedName = normalised ? name! : _normalisedName
 
   const { data: supportedTLD, isLoading: supportedTLDLoading } = useSupportsTLD(normalisedName)
 
-  const commonEnabled = enabled && !!name && isValid && !(isETH && isShort)
+  const commonEnabled = enabled && !!name && isValid && !(isNativeTld && isShort)
   const isRoot = name === '[root]'
 
   const {
@@ -61,7 +62,7 @@ export const useBasicName = ({
     isLoading: isExpiryLoading,
     isCachedData: isExpiryCachedData,
     refetchIfEnabled: refetchExpiry,
-  } = useExpiry({ name: normalisedName, enabled: commonEnabled && !isRoot && isETH && is2LD })
+  } = useExpiry({ name: normalisedName, enabled: commonEnabled && !isRoot && isNativeTld && is2LD })
   const {
     data: priceData,
     isLoading: isPriceLoading,
@@ -70,7 +71,7 @@ export const useBasicName = ({
   } = usePrice({
     nameOrNames: normalisedName,
     duration: yearsToSeconds(1),
-    enabled: commonEnabled && !isRoot && isETH && is2LD,
+    enabled: commonEnabled && !isRoot && isNativeTld && is2LD,
   })
   const {
     data: addrData,
@@ -137,7 +138,7 @@ export const useBasicName = ({
       !!(
         nameWrapperAddress &&
         !isWrapped &&
-        normalisedName?.endsWith('.eth') &&
+        normalisedName && isCurrentTldName(normalisedName) &&
         !isLabelTooLong(normalisedName) &&
         !!registrationStatus &&
         ['registered', 'imported', 'owned'].includes(registrationStatus)
@@ -152,7 +153,7 @@ export const useBasicName = ({
       subgraphEnabled &&
       registrationStatus === 'gracePeriod' &&
       is2LD &&
-      isETH &&
+      isNativeTld &&
       !isWrapped,
   })
 

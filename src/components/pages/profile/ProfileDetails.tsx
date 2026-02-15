@@ -14,7 +14,7 @@ import {
   ProfileAccountRecord,
   ProfileOtherRecord,
 } from '@app/utils/records/categoriseProfileTextRecords'
-import { checkETH2LDFromName, formatExpiry } from '@app/utils/utils'
+import { checkNativeTld2LD, formatExpiry } from '@app/utils/utils'
 
 import {
   AddressProfileButton,
@@ -328,7 +328,7 @@ export const ProfileDetails = ({
 
   const mappedOwners = ownershipInfoCalc(name, pccExpired, owners, gracePeriodEndDate, expiryDate)
 
-  const is2LDEth = checkETH2LDFromName(name)
+  const is2LDEth = checkNativeTld2LD(name)
 
   const actionWarnings = actions
     ?.filter((action) => !!action.warning)

@@ -8,7 +8,7 @@ import { PrimarySection } from '@app/components/pages/profile/settings/PrimarySe
 import { PrivacySection } from '@app/components/pages/profile/settings/PrivacySection'
 import { TransactionSection } from '@app/components/pages/profile/settings/TransactionSection/TransactionSection'
 import { WalletSection } from '@app/components/pages/profile/settings/WalletSection'
-import { useSubgraphMeta } from '@app/hooks/ensjs/subgraph/useSubgraphMeta'
+import { useSubgraphMeta } from '@app/hooks/nameservice/subgraph/useSubgraphMeta'
 import { useProtectedRoute } from '@app/hooks/useProtectedRoute'
 import { Content } from '@app/layouts/Content'
 import { IS_DEV_ENVIRONMENT } from '@app/utils/constants'

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { Button, Dialog, Input, Typography } from '@ensdomains/thorin'
 
+import { BRAND } from '@app/constants/brand'
 import { Outlink } from '@app/components/Outlink'
 import { validateImageUri } from '@app/validators/validateImageUri'
 
@@ -81,7 +82,7 @@ export const AvatarManual = ({
           <AvatarPreview $src={uri} />
           <Typography fontVariant="body" textAlign="center" color="textSecondary">
             Manual entry supports NFT, https, IPFS, and data URLs.
-            <Outlink href="https://docs.ens.domains/ensip/12" iconPosition="after">
+            <Outlink href={`${BRAND.docsUrl}/ensip/12`} iconPosition="after">
               Learn more about avatar URLs
             </Outlink>
           </Typography>

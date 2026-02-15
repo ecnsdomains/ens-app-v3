@@ -40,7 +40,7 @@ describe('getRegistrationStatus', () => {
     it('should return short if a name is short', async () => {
       const result = getRegistrationStatus({
         timestamp: Date.now(),
-        validation: { isETH: true, is2LD: true, isShort: true },
+        validation: { isNativeTld: true, is2LD: true, isShort: true },
       })
       expect(result).toBe('short')
     })
@@ -58,7 +58,7 @@ describe('getRegistrationStatus', () => {
       } as const
       const result = getRegistrationStatus({
         timestamp: Date.now(),
-        validation: { is2LD: true, isETH: true },
+        validation: { is2LD: true, isNativeTld: true },
         ownerData,
         wrapperData,
         expiryData,
@@ -74,7 +74,7 @@ describe('getRegistrationStatus', () => {
       } as const
       const result = getRegistrationStatus({
         timestamp: Date.now(),
-        validation: { is2LD: true, isETH: true },
+        validation: { is2LD: true, isNativeTld: true },
         ownerData,
         wrapperData,
         expiryData,
@@ -96,7 +96,7 @@ describe('getRegistrationStatus', () => {
 
       const result = getRegistrationStatus({
         timestamp: Date.now(),
-        validation: { is2LD: true, isETH: true },
+        validation: { is2LD: true, isNativeTld: true },
         ownerData,
         wrapperData,
         expiryData,
@@ -118,7 +118,7 @@ describe('getRegistrationStatus', () => {
 
       const result = getRegistrationStatus({
         timestamp: Date.now(),
-        validation: { is2LD: true, isETH: true },
+        validation: { is2LD: true, isNativeTld: true },
         ownerData,
         wrapperData,
         expiryData,
@@ -131,7 +131,7 @@ describe('getRegistrationStatus', () => {
     it('should use timestamp parameter for comparisons', () => {
       const result = getRegistrationStatus({
         timestamp: Date.now() - 1_000 * 60,
-        validation: { is2LD: true, isETH: true },
+        validation: { is2LD: true, isNativeTld: true },
         ownerData,
         wrapperData,
         expiryData: {
@@ -148,7 +148,7 @@ describe('getRegistrationStatus', () => {
   it('should return not owned if name has no owner, and is not 2LD', async () => {
     const result = getRegistrationStatus({
       timestamp: Date.now(),
-      validation: { is2LD: false, isETH: true, type: 'name' },
+      validation: { is2LD: false, isNativeTld: true, type: 'name' },
       wrapperData,
     })
     expect(result).toBe('notOwned')
@@ -168,7 +168,7 @@ describe('getRegistrationStatus', () => {
   it('should not return short if subdomain is short', () => {
     const result = getRegistrationStatus({
       timestamp: Date.now(),
-      validation: { is2LD: false, isETH: true, isShort: true, type: 'name' },
+      validation: { is2LD: false, isNativeTld: true, isShort: true, type: 'name' },
       wrapperData,
     })
     expect(result).toBe('notOwned')
@@ -208,7 +208,7 @@ describe('getRegistrationStatus', () => {
   it('should return owned if name has an owner', async () => {
     const result = getRegistrationStatus({
       timestamp: Date.now(),
-      validation: { is2LD: false, isETH: true },
+      validation: { is2LD: false, isNativeTld: true },
       ownerData,
       wrapperData,
       supportedTLD: true,
@@ -219,7 +219,7 @@ describe('getRegistrationStatus', () => {
   it('should return not supported tld if supportedTLD is falsy', () => {
     const result = getRegistrationStatus({
       timestamp: Date.now(),
-      validation: { is2LD: false, isETH: false },
+      validation: { is2LD: false, isNativeTld: false },
       wrapperData,
     })
     expect(result).toBe('unsupportedTLD')
@@ -228,7 +228,7 @@ describe('getRegistrationStatus', () => {
   it('should return unsupported tld for .club domains', () => {
     const result = getRegistrationStatus({
       timestamp: Date.now(),
-      validation: { is2LD: true, isETH: false },
+      validation: { is2LD: true, isNativeTld: false },
       name: 'test.club',
       wrapperData,
     })
@@ -238,7 +238,7 @@ describe('getRegistrationStatus', () => {
   it('should not return short if name is short but is not .eth', () => {
     const result = getRegistrationStatus({
       timestamp: Date.now(),
-      validation: { is2LD: false, isETH: false, isShort: true },
+      validation: { is2LD: false, isNativeTld: false, isShort: true },
       wrapperData,
       supportedTLD: true,
     })
@@ -248,7 +248,7 @@ describe('getRegistrationStatus', () => {
   it('should return not imported otherwise', async () => {
     const result = getRegistrationStatus({
       timestamp: Date.now(),
-      validation: { is2LD: false, isETH: false },
+      validation: { is2LD: false, isNativeTld: false },
       wrapperData,
       supportedTLD: true,
     })

@@ -1,12 +1,12 @@
 Last modified: 11/11/2022
 
 1. **Introduction**
-   1. This Privacy Policy (the “**Policy**”) sets out how the ENS Foundation (a foundation company limited by guarantee, incorporated in the Cayman Islands) and any of our subcontractors operating the ENSF websites (“**ENSF**”, “**we**”, “**our**” or “**us**”) and applications which refer to this Policy, may collect, use, disclose or otherwise process your Personal Data (as defined below). In this Policy, ENSF websites’ domain names include but are not limited to https://ens.domains/.
+   1. This Privacy Policy (the “**Policy**”) sets out how the ECNS Foundation (a foundation company limited by guarantee, incorporated in the Cayman Islands) and any of our subcontractors operating the ECNSF websites (“**ECNSF**”, “**we**”, “**our**” or “**us**”) and applications which refer to this Policy, may collect, use, disclose or otherwise process your Personal Data (as defined below). In this Policy, ECNSF websites’ domain names include but are not limited to https://ecns.domains/.
    2. This Policy applies to Personal Data in our possession or under our control, including Personal Data in the possession of organisations or persons that we have engaged to collect, use, disclose or process personal data for our purposes. By continuing to browse our website and use our services, you consent to our collection, use and disclosure of your Personal Data in accordance with the terms listed in this Policy.
    3. Please read this Policy carefully to understand how we will treat your Personal Data.
    4. In this Policy, “**Personal Data**” means data, whether true or not, about you who can be identified: (a) from that data; or (b) from that data and other information to which we have or are likely to have access.
    5. This Policy applies in conjunction with any other notices, contractual clauses and consent clauses that apply in relation to the collection, use and disclosure of your Personal Data by us.
-   6. If you have any comments on, or questions about this Policy, please email them to our data protection officer at privacy@ens.domains.
+   6. If you have any comments on, or questions about this Policy, please email them to our data protection officer at privacy@ecns.domains.
 2. **What Personal Data We May Collect About You**
    1. Depending on the nature of your interaction with us, different kinds of Personal Data (that we have grouped together below) which we may collect from you include:
       1. **Contact Data** e.g. email addresses, telephone numbers, first and last name, user name and other information you voluntarily provide to us in order to be contacted on our forum, communication channels or when update your user account data;
@@ -41,7 +41,7 @@ Last modified: 11/11/2022
 5. **The Purposes of Collection, Use, and Disclosure of Your Personal Data**
    1. We will only collect, use, and disclose your Personal Data in the following circumstances to:
       1. present website content effectively;
-      2. identify and display the ENS name representing your Ethereum blockchain address which may act as your username and profile;
+      2. identify and display the ECNS name representing your Ethereum Classic blockchain address which may act as your username and profile;
       3. send you administrative notifications, such as security, support, and maintenance advisories;
       4. provide customer support and respond to your requests and inquiries;
       5. provide information about services that you request, or which we think may interest you;
@@ -56,7 +56,7 @@ Last modified: 11/11/2022
    3. We may use your Personal Data without your knowledge or consent where this is required or permitted by law.
    4. The purposes listed in the above Clauses may continue to apply even in situations where your relationship with us (for example, pursuant to a contract) has been terminated or altered in any way, for a reasonable period thereafter (including, where applicable, a period to enable us to enforce our rights under a contract with you).
 6. **Reliance on the Legitimate Interests Exception**
-   1. We may collect, use or disclose your Personal Data without your consent for the legitimate interests of ENSF or another person. ENSF will assess the likely adverse effects on the individual and determine whether the legitimate interests outweigh any adverse effect.
+   1. We may collect, use or disclose your Personal Data without your consent for the legitimate interests of ECNSF or another person. ECNSF will assess the likely adverse effects on the individual and determine whether the legitimate interests outweigh any adverse effect.
    2. In line with the legitimate interests’ exception, we will collect, use or disclose your Personal Data for the following purposes:
       1. sanctions monitoring, money laundering, terrorism financing, fraud and credit risk detection and prevention; and
       2. detection and prevention of misuse of services.

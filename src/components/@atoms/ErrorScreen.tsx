@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components'
 
 import { AlertSVG, QuestionCircleSVG, Typography } from '@ensdomains/thorin'
 
+import { BRAND } from '@app/constants/brand'
+
 const Container = styled.div(
   ({ theme }) => css`
     --icon-color: ${theme.colors.red};
@@ -69,7 +71,7 @@ const ErrorScreen = ({ errorType }: { errorType: ErrorType }) => {
           components={{
             HomeLink: <LinkWrapper />,
              
-            SupportLink: <a href="https://support.ens.domains" />,
+            SupportLink: <a href={BRAND.supportUrl} />,
           }}
         />
       </Typography>

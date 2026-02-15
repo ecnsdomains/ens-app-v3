@@ -9,7 +9,7 @@ import { useBlockTimestamp } from '../chain/useBlockTimestamp'
 import { useContractAddress } from '../chain/useContractAddress'
 import { useEstimateGasWithStateOverride } from '../chain/useEstimateGasWithStateOverride'
 import { useGasPrice } from '../chain/useGasPrice'
-import { usePrice } from '../ensjs/public/usePrice'
+import { usePrice } from '../nameservice/public/usePrice'
 import useRegistrationParams from '../useRegistrationParams'
 import { calculateTransactions } from './calculateTransactions'
 

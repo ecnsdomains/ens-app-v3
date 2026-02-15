@@ -2,7 +2,7 @@ import { match } from 'ts-pattern'
 import { Address } from 'viem'
 
 import { createAccounts } from '../../playwright/fixtures/accounts'
-import { UseSubgraphRegistrantReturnType } from '../../src/hooks/ensjs/subgraph/useSubgraphRegistrant'
+import { UseSubgraphRegistrantReturnType } from '../../src/hooks/nameservice/subgraph/useSubgraphRegistrant'
 
 const mockUseSubgraphRegistrantTypes = ['owned', 'unowned'] as const
 export type MockUseSubgraphRegistrantType =

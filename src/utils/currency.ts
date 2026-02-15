@@ -1,5 +1,7 @@
 import { formatUnits } from 'viem'
 
+import { isNativeCoin } from '@app/constants/tld'
+
 export const makeDisplay = ({
   value,
   symbol,
@@ -24,7 +26,7 @@ export const makeDisplay = ({
     options.roundingPriority = 'lessPrecision'
     options.currency = undefined
     customSymbol = ` ${symbol}`
-  } else if (symbol === 'eth') {
+  } else if (isNativeCoin(symbol)) {
     if (number < 0.00001) {
       options.maximumSignificantDigits = 1
     }

@@ -18,6 +18,12 @@ const TRANSACTION_SEARCH_INTERVAL = 10000
 
 export const getAccountHistoryEndpoint = (address: string, chainId: number) => {
   switch (chainId) {
+    // ETC chains — use Blockscout API
+    case 61:
+      return `https://blockscout.com/etc/mainnet/api?module=account&action=txlist&address=${address}`
+    case 63:
+      return `https://blockscout.com/etc/mordor/api?module=account&action=txlist&address=${address}`
+    // ETH chains — use ENS workers (TODO: deploy ECNS equivalents)
     case 1:
       return `https://etherscan-api.ens-cf.workers.dev/accountHistory?address=${address}`
     case 5:

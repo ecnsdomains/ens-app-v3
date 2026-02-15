@@ -6,7 +6,7 @@ import {
   GetSubgraphRecordsReturnType,
 } from '@ensdomains/ensjs/subgraph'
 
-import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
+import { useHasSubgraph } from '@app/hooks/nameservice/subgraph/useHasSubgraph'
 import { usePrefetchQuery } from '@app/hooks/usePrefetchQuery'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, PartialBy, QueryConfig } from '@app/types'

@@ -1,7 +1,9 @@
 import { getAddress } from 'viem'
 
-export const isEthCoin = (coin: string | number): boolean =>
-  (typeof coin === 'string' && coin.toLowerCase() === 'eth') || coin === 60
+import { isNativeCoin } from '@app/constants/tld'
+
+/** @deprecated Use isNativeCoin from @app/constants/tld instead */
+export const isEthCoin = isNativeCoin
 
 export const normalizeCoinAddress = ({
   coin,

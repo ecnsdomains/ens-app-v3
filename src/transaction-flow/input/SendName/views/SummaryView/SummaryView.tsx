@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 import { Button, Dialog, Field } from '@ensdomains/thorin'
 
 import { AvatarWithIdentifier } from '@app/components/@molecules/AvatarWithIdentifier/AvatarWithIdentifier'
-import { useExpiry } from '@app/hooks/ensjs/public/useExpiry'
+import { useExpiry } from '@app/hooks/nameservice/public/useExpiry'
 import TransactionLoader from '@app/transaction-flow/TransactionLoader'
 
 import { DetailedSwitch } from '../../../ProfileEditor/components/DetailedSwitch'

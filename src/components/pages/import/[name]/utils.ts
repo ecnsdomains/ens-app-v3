@@ -11,7 +11,7 @@ import {
 import type { GetDnsImportDataReturnType } from '@ensdomains/ensjs/dns'
 
 import { addStateOverride } from '@app/hooks/chain/useEstimateGasWithStateOverride'
-import type { UseDnsOwnerError } from '@app/hooks/ensjs/dns/useDnsOwner'
+import type { UseDnsOwnerError } from '@app/hooks/nameservice/dns/useDnsOwner'
 import { createTransactionItem } from '@app/transaction-flow/transaction'
 
 export type DnsNavigationFunction = (direction: 'prev' | 'next') => void

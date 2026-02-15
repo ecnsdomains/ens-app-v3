@@ -4,7 +4,7 @@ import { Address } from 'viem'
 import { Typography } from '@ensdomains/thorin'
 
 import { AvatarWithZorb } from '@app/components/AvatarWithZorb'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { QuerySpace } from '@app/types'
 import { shortenAddress } from '@app/utils/utils'
 

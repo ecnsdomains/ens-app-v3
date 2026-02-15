@@ -6,7 +6,7 @@ import { useAccount, useEnsAvatar } from 'wagmi'
 
 import { Name } from '@ensdomains/ensjs/subgraph'
 
-import { useSubnames } from '@app/hooks/ensjs/subgraph/useSubnames'
+import { useSubnames } from '@app/hooks/nameservice/subgraph/useSubnames'
 import { useZorb } from '@app/hooks/useZorb'
 import { createDateAndValue } from '@app/utils/utils'
 
@@ -15,7 +15,7 @@ import { SubnamesTab } from './SubnamesTab'
 vi.mock('next/router', async () => await vi.importActual('next-router-mock'))
 vi.mock('wagmi')
 
-vi.mock('@app/hooks/ensjs/subgraph/useSubnames')
+vi.mock('@app/hooks/nameservice/subgraph/useSubnames')
 vi.mock('@app/hooks/useZorb')
 
 const mockUseAccount = mockFunction(useAccount)

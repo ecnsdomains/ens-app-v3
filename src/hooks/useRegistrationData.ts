@@ -3,12 +3,12 @@ import { labelhash } from 'viem'
 
 import { createSubgraphClient } from '@ensdomains/ensjs/subgraph'
 
-import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
+import { useHasSubgraph } from '@app/hooks/nameservice/subgraph/useHasSubgraph'
 import { ConfigWithEns, CreateQueryKey, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
 import { prepareQueryOptions } from '@app/utils/prepareQueryOptions'
 import { useQuery } from '@app/utils/query/useQuery'
-import { checkETH2LDFromName } from '@app/utils/utils'
+import { checkNativeTld2LD } from '@app/utils/utils'
 
 import { useQueryOptions } from './useQueryOptions'
 
@@ -90,7 +90,7 @@ const useRegistrationData = <TParams extends UseRegistrationDataParameters>({
   const preparedOptions = prepareQueryOptions({
     queryKey: initialOptions.queryKey,
     queryFn: initialOptions.queryFn,
-    enabled: enabled && hasSubgraph && !!params.name && checkETH2LDFromName(params.name),
+    enabled: enabled && hasSubgraph && !!params.name && checkNativeTld2LD(params.name),
     gcTime,
     staleTime,
   })

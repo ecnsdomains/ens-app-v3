@@ -17,11 +17,11 @@ csp += " 'self'"
 // allow plausible script
 csp += ' plausible.io'
 // allow PostHog
-csp += ' jakob.ens.domains'
+csp += ' jakob.ecns.domains'
 // allow cloudflare analytics script
 csp += ' https://static.cloudflareinsights.com'
 // allow loading from the pages domain for this app
-csp += ' *.ens-app-v3.pages.dev'
+csp += ' *.ecns-app.pages.dev'
 // allow intercom scripts
 csp += ' https://app.intercom.io'
 csp += ' https://widget.intercom.io'

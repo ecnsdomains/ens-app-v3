@@ -41,7 +41,7 @@
           },
           "url": {
             "label": "Sitio web",
-            "placeholder": "https://ens.domains"
+            "placeholder": "https://ecns.domains"
           },
           "location": {
             "label": "Ubicación",
@@ -405,7 +405,7 @@
       "wrappedWarning": "Sincronizar el administrador también desenvolverá este nombre. Esto quemará el NFT y restablecerá cualquier permiso."
     },
     "selectPrimaryName": {
-      "updateEthAddress": {
+      "updateNativeCoinAddress": {
         "title": "Actualizar dirección ETC",
         "description": "La dirección ETC para este nombre no coincide con esta billetera. Para usarlo como tu nombre primario, primero debes actualizar la dirección ETC."
       },

@@ -29,7 +29,7 @@ import { Card } from '@app/components/Card'
 import { useAccountSafely } from '@app/hooks/account/useAccountSafely'
 import { useContractAddress } from '@app/hooks/chain/useContractAddress'
 import { useEstimateFullRegistration } from '@app/hooks/gasEstimation/useEstimateRegistration'
-import { useEthPrice } from '@app/hooks/useEthPrice'
+import { useNativeCoinPrice } from '@app/hooks/useNativeCoinPrice'
 import { useBreakpoint } from '@app/utils/BreakpointProvider'
 import { ONE_DAY, ONE_YEAR } from '@app/utils/time'
 
@@ -365,7 +365,7 @@ export type ActionButtonProps = {
   balance: GetBalanceData | undefined
   totalRequiredBalance?: bigint
   estimatedTotal?: bigint
-  ethPrice?: bigint
+  nativeCoinPrice?: bigint
   durationType: 'date' | 'years'
 }
 
@@ -392,7 +392,7 @@ export const ActionButton = (props: ActionButtonProps) => {
         seconds,
         paymentMethodChoice,
         estimatedTotal,
-        ethPrice,
+        nativeCoinPrice,
         durationType,
         callback,
       }) => (
@@ -405,7 +405,7 @@ export const ActionButton = (props: ActionButtonProps) => {
               seconds,
               paymentMethodChoice,
               estimatedTotal,
-              ethPrice,
+              nativeCoinPrice,
               durationType,
             })
           }
@@ -420,7 +420,7 @@ export const ActionButton = (props: ActionButtonProps) => {
         (_props) =>
           typeof _props.balance?.value !== 'bigint' ||
           !_props.totalRequiredBalance ||
-          !_props.ethPrice,
+          !_props.nativeCoinPrice,
       ),
       () => (
         <Button data-testid="next-button" disabled>
@@ -448,7 +448,7 @@ export const ActionButton = (props: ActionButtonProps) => {
         seconds,
         paymentMethodChoice,
         estimatedTotal,
-        ethPrice,
+        nativeCoinPrice,
         durationType,
         callback,
       }) => (
@@ -460,7 +460,7 @@ export const ActionButton = (props: ActionButtonProps) => {
               seconds,
               paymentMethodChoice,
               estimatedTotal,
-              ethPrice,
+              nativeCoinPrice,
               durationType,
             })
           }
@@ -507,7 +507,7 @@ const Pricing = ({
   const { address } = useAccountSafely()
   const { data: balance } = useBalance({ address })
   const resolverAddress = useContractAddress({ contract: 'ensPublicResolver' })
-  const { data: ethPrice } = useEthPrice()
+  const { data: nativeCoinPrice } = useNativeCoinPrice()
 
   const [seconds, setSeconds] = useState(() => registrationData.seconds ?? ONE_YEAR)
   const [durationType, setDurationType] = useState<'date' | 'years'>(
@@ -619,7 +619,7 @@ const Pricing = ({
             balance,
             totalRequiredBalance,
             estimatedTotal,
-            ethPrice,
+            nativeCoinPrice,
             durationType,
           }}
         />

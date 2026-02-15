@@ -1,57 +1,43 @@
 import { QueryFunctionContext } from '@tanstack/react-query'
 
 import {
-  DnsDnssecVerificationFailedError,
-  DnsInvalidTxtRecordError,
-  DnsNoTxtRecordError,
-  DnsResponseStatusError,
-  UnsupportedNameTypeError,
-} from '@ensdomains/ensjs'
-import {
-  getDnsOffchainData,
-  GetDnsOffchainDataParameters,
-  GetDnsOffchainDataReturnType,
+  getDnsImportData,
+  GetDnsImportDataParameters,
+  GetDnsImportDataReturnType,
 } from '@ensdomains/ensjs/dns'
 
+import { isCurrentTld, isCurrentTldName } from '@app/constants/tld'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, PartialBy, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
 import { prepareQueryOptions } from '@app/utils/prepareQueryOptions'
 import { useQuery } from '@app/utils/query/useQuery'
 
-type UseDnsOffchainDataParameters = PartialBy<GetDnsOffchainDataParameters, 'name'>
+type UseDnsImportDataParameters = PartialBy<GetDnsImportDataParameters, 'name'>
 
-type UseDnsOffchainDataReturnType = GetDnsOffchainDataReturnType
+type UseDnsImportDataReturnType = GetDnsImportDataReturnType
 
-export type UseDnsOffchainDataError =
-  | UnsupportedNameTypeError
-  | DnsResponseStatusError
-  | DnsDnssecVerificationFailedError
-  | DnsNoTxtRecordError
-  | DnsInvalidTxtRecordError
-  | Error
+type UseDnsImportDataConfig = QueryConfig<UseDnsImportDataReturnType, Error>
 
-type UseDnsOffchainDataConfig = QueryConfig<UseDnsOffchainDataReturnType, UseDnsOffchainDataError>
-
-type QueryKey<TParams extends UseDnsOffchainDataParameters> = CreateQueryKey<
+type QueryKey<TParams extends UseDnsImportDataParameters> = CreateQueryKey<
   TParams,
-  'getDnsOffchainData',
+  'getDnsImportData',
   'standard'
 >
 
-export const getDnsOffchainDataQueryFn =
+export const getDnsImportDataQueryFn =
   (config: ConfigWithEns) =>
-  async <TParams extends UseDnsOffchainDataParameters>({
+  async <TParams extends UseDnsImportDataParameters>({
     queryKey: [{ name, ...params }, chainId],
   }: QueryFunctionContext<QueryKey<TParams>>) => {
     if (!name) throw new Error('name is required')
 
     const client = config.getClient({ chainId })
 
-    return getDnsOffchainData(client, { name, ...params })
+    return getDnsImportData(client, { name, ...params })
   }
 
-export const useDnsOffchainData = <TParams extends UseDnsOffchainDataParameters>({
+export const useDnsImportData = <TParams extends UseDnsImportDataParameters>({
   // config
   enabled = true,
   gcTime,
@@ -59,13 +45,13 @@ export const useDnsOffchainData = <TParams extends UseDnsOffchainDataParameters>
   scopeKey,
   // params
   ...params
-}: TParams & UseDnsOffchainDataConfig) => {
+}: TParams & UseDnsImportDataConfig) => {
   const initialOptions = useQueryOptions({
     params,
     scopeKey,
-    functionName: 'getDnsOffchainData',
+    functionName: 'getDnsImportData',
     queryDependencyType: 'standard',
-    queryFn: getDnsOffchainDataQueryFn,
+    queryFn: getDnsImportDataQueryFn,
   })
 
   const preparedOptions = prepareQueryOptions({
@@ -74,8 +60,8 @@ export const useDnsOffchainData = <TParams extends UseDnsOffchainDataParameters>
     enabled:
       enabled &&
       !!params.name &&
-      !params.name?.endsWith('.eth') &&
-      params.name !== 'eth' &&
+      !(params.name && isCurrentTldName(params.name)) &&
+      !isCurrentTld(params.name ?? '') &&
       params.name !== '[root]',
     gcTime,
     retry: 2,

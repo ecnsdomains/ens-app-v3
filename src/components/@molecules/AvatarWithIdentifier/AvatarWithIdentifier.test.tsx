@@ -13,7 +13,7 @@ const mockUsePrimary = vi.fn().mockImplementation(({ address }) => {
     isLoading: false,
   }
 })
-vi.mock('@app/hooks/ensjs/public/usePrimaryName', () => ({
+vi.mock('@app/hooks/nameservice/public/usePrimaryName', () => ({
   usePrimaryName: ({ address, enabled }: { address: unknown; enabled?: boolean }) =>
     !enabled ? { isLoading: false } : mockUsePrimary({ address }),
 }))

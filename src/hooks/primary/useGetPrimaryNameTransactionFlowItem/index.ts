@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import type { Address } from 'viem'
 
 import { useContractAddress } from '@app/hooks/chain/useContractAddress'
-import { useReverseRegistryName } from '@app/hooks/ensjs/public/useReverseRegistryName'
+import { useReverseRegistryName } from '@app/hooks/nameservice/public/useReverseRegistryName'
 import type { useResolverStatus } from '@app/hooks/resolver/useResolverStatus'
 import { makeIntroItem } from '@app/transaction-flow/intro/index'
 import { createTransactionItem, TransactionItem } from '@app/transaction-flow/transaction'
@@ -12,7 +12,7 @@ import { emptyAddress } from '@app/utils/constants'
 
 import {
   checkRequiresSetPrimaryNameTransaction,
-  checkRequiresUpdateEthAddressTransaction,
+  checkRequiresUpdateNativeCoinAddressTransaction,
   checkRequiresUpdateResolverTransaction,
   getIntroTranslation,
   IntroType,
@@ -49,11 +49,11 @@ export const useGetPrimaryNameTransactionFlowItem = (
   const callBack = useMemo(() => {
     if (!isActive) return undefined
     return (name: string) => {
-      let introType: IntroType = 'updateEthAddress'
+      let introType: IntroType = 'updateNativeCoinAddress'
       const transactions: (
         | TransactionItem<'setPrimaryName'>
         | TransactionItem<'updateResolver'>
-        | TransactionItem<'updateEthAddress'>
+        | TransactionItem<'updateNativeCoinAddress'>
       )[] = []
 
       if (
@@ -84,15 +84,15 @@ export const useGetPrimaryNameTransactionFlowItem = (
       }
 
       if (
-        checkRequiresUpdateEthAddressTransaction({
+        checkRequiresUpdateNativeCoinAddressTransaction({
           resolvedAddress: profileAddress,
           address,
           isResolverAuthorized: resolverStatus?.isAuthorized,
-          isLatestResolverEthAddressSetToAddress: resolverStatus?.isMigratedProfileEqual,
+          isLatestResolverNativeCoinAddressSetToAddress: resolverStatus?.isMigratedProfileEqual,
         })
       ) {
         transactions.unshift(
-          createTransactionItem('updateEthAddress', {
+          createTransactionItem('updateNativeCoinAddress', {
             name,
             address,
             latestResolver: !resolverStatus?.isAuthorized,

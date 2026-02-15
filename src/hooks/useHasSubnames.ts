@@ -2,7 +2,7 @@ import { QueryFunctionContext, queryOptions } from '@tanstack/react-query'
 
 import { getSubnames, Name } from '@ensdomains/ensjs/subgraph'
 
-import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
+import { useHasSubgraph } from '@app/hooks/nameservice/subgraph/useHasSubgraph'
 import { ConfigWithEns, CreateQueryKey } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
 import { useQuery } from '@app/utils/query/useQuery'

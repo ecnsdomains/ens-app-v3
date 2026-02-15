@@ -1,4 +1,4 @@
-import { useWrapperData } from './ensjs/public/useWrapperData'
+import { useWrapperData } from './nameservice/public/useWrapperData'
 
 type UseIsWrappedParameters = {
   name: string

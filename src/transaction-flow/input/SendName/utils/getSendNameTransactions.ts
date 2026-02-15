@@ -1,5 +1,6 @@
 import { Address } from 'viem'
 
+import { getNativeCoinSymbol } from '@app/constants/tld'
 import type { useAbilities } from '@app/hooks/abilities/useAbilities'
 import { createTransactionItem, TransactionItem } from '@app/transaction-flow/transaction'
 import { makeTransferNameOrSubnameTransactionItem } from '@app/transaction-flow/transaction/utils/makeTransferNameOrSubnameTransactionItem'
@@ -29,13 +30,13 @@ export const getSendNameTransactions = ({
 
   const _transactions = [
     setEthRecordOnly
-      ? createTransactionItem('updateEthAddress', { name, address: recipient })
+      ? createTransactionItem('updateNativeCoinAddress', { name, address: recipient })
       : null,
     setEthRecordAndResetProfile && resolverAddress
       ? createTransactionItem('resetProfileWithRecords', {
           name,
           records: {
-            coins: [{ coin: 'ETH', value: recipient }],
+            coins: [{ coin: getNativeCoinSymbol(), value: recipient }],
           },
           resolverAddress,
         })
@@ -64,7 +65,7 @@ export const getSendNameTransactions = ({
     ): transaction is
       | TransactionItem<'transferName'>
       | TransactionItem<'transferSubname'>
-      | TransactionItem<'updateEthAddress'>
+      | TransactionItem<'updateNativeCoinAddress'>
       | TransactionItem<'resetProfileWithRecords'> => !!transaction,
   )
 

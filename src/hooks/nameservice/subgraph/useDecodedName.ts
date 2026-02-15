@@ -8,7 +8,7 @@ import {
 } from '@ensdomains/ensjs/subgraph'
 import { checkIsDecrypted } from '@ensdomains/ensjs/utils'
 
-import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
+import { useHasSubgraph } from '@app/hooks/nameservice/subgraph/useHasSubgraph'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, PartialBy, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'

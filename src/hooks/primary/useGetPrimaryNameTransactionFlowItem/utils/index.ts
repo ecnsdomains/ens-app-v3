@@ -1,4 +1,4 @@
-export type IntroType = 'noResolver' | 'invalidResolver' | 'updateEthAddress'
+export type IntroType = 'noResolver' | 'invalidResolver' | 'updateNativeCoinAddress'
 
 export const getIntroTranslation = (type: IntroType, part: 'title' | 'description') =>
   `intro.selectPrimaryName.${type}.${part}`
@@ -38,18 +38,19 @@ export const checkRequiresUpdateResolverTransaction = ({
  *    primary right away
  * 2. Resolver is authorized, hence the user can update record
  * 3. Resolver is not authorized so the change will be made on the latest resolver. Check that the latest
- *    resolver doesn't already have the users eth address set.
+ *    resolver doesn't already have the users native coin address set.
  */
-export const checkRequiresUpdateEthAddressTransaction = ({
+export const checkRequiresUpdateNativeCoinAddressTransaction = ({
   resolvedAddress,
   address,
   isResolverAuthorized,
-  isLatestResolverEthAddressSetToAddress,
+  isLatestResolverNativeCoinAddressSetToAddress,
 }: {
   resolvedAddress?: string
   address?: string
   isResolverAuthorized?: boolean
-  isLatestResolverEthAddressSetToAddress?: boolean
+  isLatestResolverNativeCoinAddressSetToAddress?: boolean
 }) =>
   resolvedAddress !== address &&
-  (isResolverAuthorized || (!isResolverAuthorized && !isLatestResolverEthAddressSetToAddress))
+  (isResolverAuthorized ||
+    (!isResolverAuthorized && !isLatestResolverNativeCoinAddressSetToAddress))

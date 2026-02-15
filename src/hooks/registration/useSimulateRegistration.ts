@@ -6,7 +6,7 @@ import { makeRegistrationCallData, RegistrationParameters } from '@ensdomains/en
 
 import { calculateValueWithBuffer } from '@app/utils/utils'
 
-import { usePrice } from '../ensjs/public/usePrice'
+import { usePrice } from '../nameservice/public/usePrice'
 
 type UseSimulateRegistrationParameters = Pick<UseSimulateContractParameters, 'query'> & {
   registrationParams: RegistrationParameters

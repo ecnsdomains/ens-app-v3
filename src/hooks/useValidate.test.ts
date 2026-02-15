@@ -51,7 +51,7 @@ describe('useValidate', () => {
       isValid: undefined,
       isShort: undefined,
       is2LD: undefined,
-      isETH: undefined,
+      isNativeTld: undefined,
       labelDataArray: [],
     })
   })

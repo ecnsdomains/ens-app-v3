@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { DesyncedMessage } from '@app/components/@molecules/DesyncedMessage/DesyncedMessage'
 import { formatFullExpiry } from '@app/utils/utils'
 
-import { useDnsOwner } from './ensjs/dns/useDnsOwner'
+import { useDnsOwner } from './nameservice/dns/useDnsOwner'
 import { useBasicName } from './useBasicName'
 import { useProfile } from './useProfile'
 

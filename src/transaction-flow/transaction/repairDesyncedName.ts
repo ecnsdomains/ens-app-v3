@@ -1,7 +1,7 @@
 import type { TFunction } from 'i18next'
 import type { Hex } from 'viem'
 
-import renewNames from '@app/overrides/ensjs/renewNames'
+import renewNames from '@app/overrides/nameservice/renewNames'
 import { Transaction, TransactionDisplayItem, TransactionFunctionParameters } from '@app/types'
 
 type Data = {

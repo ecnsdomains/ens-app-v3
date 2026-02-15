@@ -22,7 +22,7 @@ Overrides the standard `renewNames` function from `@ensdomains/ensjs/wallet` wit
 **Usage:**
 
 ```typescript
-import renewNames from '@app/overrides/ensjs/renewNames'
+import renewNames from '@app/overrides/nameservice/renewNames'
 
 // Instead of:
 // import { renewNames } from '@ensdomains/ensjs/wallet'

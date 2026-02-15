@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { Button, Dialog } from '@ensdomains/thorin'
 
-import { useWrapperData } from '@app/hooks/ensjs/public/useWrapperData'
+import { useWrapperData } from '@app/hooks/nameservice/public/useWrapperData'
 import { TransactionDialogPassthrough } from '@app/transaction-flow/types'
 
 import { createTransactionItem } from '../../transaction/index'

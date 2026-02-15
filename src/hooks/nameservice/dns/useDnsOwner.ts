@@ -10,6 +10,7 @@ import {
 } from '@ensdomains/ensjs'
 import { getDnsOwner, GetDnsOwnerParameters, GetDnsOwnerReturnType } from '@ensdomains/ensjs/dns'
 
+import { isCurrentTld, isCurrentTldName } from '@app/constants/tld'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { CreateQueryKey, PartialBy, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
@@ -68,8 +69,8 @@ export const useDnsOwner = <TParams extends UseDnsOwnerParameters>({
     enabled:
       enabled &&
       !!params.name &&
-      !params.name?.endsWith('.eth') &&
-      params.name !== 'eth' &&
+      !(params.name && isCurrentTldName(params.name)) &&
+      !isCurrentTld(params.name ?? '') &&
       params.name !== '[root]',
     gcTime,
     retry: 2,

@@ -7,7 +7,7 @@ import { Button, Helper, Typography } from '@ensdomains/thorin'
 
 import MobileFullWidth from '@app/components/@atoms/MobileFullWidth'
 import { Card } from '@app/components/Card'
-import { useAddressRecord } from '@app/hooks/ensjs/public/useAddressRecord'
+import { useAddressRecord } from '@app/hooks/nameservice/public/useAddressRecord'
 import { useRouterWithHistory } from '@app/hooks/useRouterWithHistory'
 import useWindowSize from '@app/hooks/useWindowSize'
 

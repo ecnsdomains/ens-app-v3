@@ -18,8 +18,8 @@ import {
   SortType,
 } from '@app/components/@molecules/NameTableHeader/NameTableHeader'
 import { SpinnerRow } from '@app/components/@molecules/ScrollBoxWithSpinner'
-import { useReverseRegistryName } from '@app/hooks/ensjs/public/useReverseRegistryName'
-import { useNamesForAddress } from '@app/hooks/ensjs/subgraph/useNamesForAddress'
+import { useReverseRegistryName } from '@app/hooks/nameservice/public/useReverseRegistryName'
+import { useNamesForAddress } from '@app/hooks/nameservice/subgraph/useNamesForAddress'
 import { useGetPrimaryNameTransactionFlowItem } from '@app/hooks/primary/useGetPrimaryNameTransactionFlowItem'
 import { useResolverStatus } from '@app/hooks/resolver/useResolverStatus'
 import useDebouncedCallback from '@app/hooks/useDebouncedCallback'
@@ -179,7 +179,7 @@ const SelectPrimaryName = ({ data: { address }, dispatch, onDismiss }: Props) =>
   const getPrimarynameTransactionFlowItem = useGetPrimaryNameTransactionFlowItem({
     address,
     isWrapped,
-    profileAddress: selectedNameProfile?.coins.find((c) => c.id === 60)?.value,
+    profileAddress: selectedNameProfile?.coins.find((c: { id: number; value: string }) => c.id === 60)?.value,
     resolverAddress: selectedNameProfile?.resolverAddress,
     resolverStatus: resolverStatus.data,
   })

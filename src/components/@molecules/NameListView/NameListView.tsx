@@ -7,6 +7,7 @@ import type { Address } from 'viem'
 import { Name } from '@ensdomains/ensjs/subgraph'
 import { Button, Spinner } from '@ensdomains/thorin'
 
+import { isCurrentTld } from '@app/constants/tld'
 import FastForwardSVG from '@app/assets/FastForward.svg'
 import { InfiniteScrollContainer } from '@app/components/@atoms/InfiniteScrollContainer/InfiniteScrollContainer'
 import { TaggedNameItem } from '@app/components/@atoms/NameDetailItem/TaggedNameItem'
@@ -18,7 +19,7 @@ import {
 } from '@app/components/@molecules/NameTableHeader/NameTableHeader'
 import { TabWrapper } from '@app/components/pages/profile/TabWrapper'
 import { usePrefetchBlockTimestamp } from '@app/hooks/chain/useBlockTimestamp'
-import { useNamesForAddress } from '@app/hooks/ensjs/subgraph/useNamesForAddress'
+import { useNamesForAddress } from '@app/hooks/nameservice/subgraph/useNamesForAddress'
 import useDebouncedCallback from '@app/hooks/useDebouncedCallback'
 import { useQueryParameterState } from '@app/hooks/useQueryParameterState'
 import { useTransactionFlow } from '@app/transaction-flow/TransactionFlowProvider'
@@ -151,7 +152,7 @@ export const NameListView = ({ address, selfAddress, setError, setLoading }: Nam
   }, [stage])
 
   const isNameExtendable = (name: Name) =>
-    name.parentName === 'eth' && !!name.name && !name.name.includes('Invalid ENS Name')
+    isCurrentTld(name.parentName ?? '') && !!name.name && !name.name.includes('Invalid ECNS Name')
 
   const isNameDisabled = useCallback(
     (name: Name) => {

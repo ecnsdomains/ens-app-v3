@@ -1,5 +1,6 @@
 import { QueryFunctionContext } from '@tanstack/react-query'
 
+import { isCurrentTld } from '@app/constants/tld'
 import { CreateQueryKey, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
 import { prepareQueryOptions } from '@app/utils/prepareQueryOptions'
@@ -88,7 +89,7 @@ export const useDnsSecEnabled = <TParams extends UseDnsSecEnabledParameters>({
   const preparedOptions = prepareQueryOptions({
     queryKey: initialOptions.queryKey,
     queryFn: initialOptions.queryFn,
-    enabled: enabled && !!params.name && params.name !== 'eth' && params.name !== '[root]',
+    enabled: enabled && !!params.name && !isCurrentTld(params.name) && params.name !== '[root]',
     gcTime,
     retry: 2,
     staleTime,

@@ -15,7 +15,7 @@ type SearchSelectEvent = {
 type PaymentEvent = {
   eventName: 'payment_selected'
   customProperties: {
-    ethPrice: bigint
+    nativeCoinPrice: bigint
     duration: number
     durationType: 'date' | 'years'
     estimatedTotal: bigint
@@ -96,8 +96,8 @@ export const useEventTracker = () => {
         ({ eventName }) => sendTrackEvent(eventName, chain),
       )
       .with({ eventName: 'payment_selected' }, ({ eventName, customProperties }) => {
-        const { duration, ethPrice, estimatedTotal, paymentMethod } = customProperties
-        const paymentAmount = formatUnits((estimatedTotal * ethPrice) / BigInt(1e8), 18)
+        const { duration, nativeCoinPrice, estimatedTotal, paymentMethod } = customProperties
+        const paymentAmount = formatUnits((estimatedTotal * nativeCoinPrice) / BigInt(1e8), 18)
         const currencyUnit = userConfig.currency === 'fiat' ? userConfig.fiat : 'eth'
         const paymentType = paymentMethod === PaymentMethod.ethereum ? 'eth' : 'fiat'
 

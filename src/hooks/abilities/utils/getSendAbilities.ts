@@ -1,7 +1,7 @@
 import { match, P } from 'ts-pattern'
 import type { Address } from 'viem'
 
-import { checkDNS2LDFromName, checkETH2LDFromName, checkSubname } from '@app/utils/utils'
+import { checkDNS2LDFromName, checkNativeTld2LD, checkSubname } from '@app/utils/utils'
 
 import type { useBasicName } from '../../useBasicName'
 import type { SendAbilities } from '../useAbilities'
@@ -461,7 +461,7 @@ export const getSendAbilities = ({
   basicNameData: BasicName
   parentBasicNameData: BasicName
 }) => {
-  if (checkETH2LDFromName(name)) return get2LDEthAbilities({ address, basicNameData })
+  if (checkNativeTld2LD(name)) return get2LDEthAbilities({ address, basicNameData })
   if (checkSubname(name) || checkDNS2LDFromName(name))
     return getSubnameAbilities({ address, basicNameData, parentBasicNameData })
   return BASE_RESPONSE

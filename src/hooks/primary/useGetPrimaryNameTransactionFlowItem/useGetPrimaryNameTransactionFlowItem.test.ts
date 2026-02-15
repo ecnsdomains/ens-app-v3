@@ -4,11 +4,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { useContractAddress } from '@app/hooks/chain/useContractAddress'
 import { useResolverStatus } from '@app/hooks/resolver/useResolverStatus'
-import { useReverseRegistryName } from '@app/hooks/ensjs/public/useReverseRegistryName'
+import { useReverseRegistryName } from '@app/hooks/nameservice/public/useReverseRegistryName'
 
 import { useGetPrimaryNameTransactionFlowItem } from '.'
 
-vi.mock('@app/hooks/ensjs/public/useReverseRegistryName')
+vi.mock('@app/hooks/nameservice/public/useReverseRegistryName')
 vi.mock('@app/hooks/chain/useContractAddress')
 
 const mockUseReverseRegistryName = mockFunction(useReverseRegistryName)
@@ -142,7 +142,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
     })
   })
 
-  it('should return transaction updateResolver and updateEthAddress on latest resolver if the resolver status is unauthorized and latest resolver does not have eth record migrated', async () => {
+  it('should return transaction updateResolver and updateNativeCoinAddress on latest resolver if the resolver status is unauthorized and latest resolver does not have eth record migrated', async () => {
     const { result } = renderHook(() =>
       useGetPrimaryNameTransactionFlowItem({
         address: '0x123',
@@ -159,7 +159,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
             address: '0x123',
             latestResolver: true,
           },
-          name: 'updateEthAddress',
+          name: 'updateNativeCoinAddress',
         },
         {
           data: {
@@ -172,7 +172,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
     })
   })
 
-  it('should return transaction updateEthAddress if the profile address is not the same as the use address', () => {
+  it('should return transaction updateNativeCoinAddress if the profile address is not the same as the use address', () => {
     const { result } = renderHook(() =>
       useGetPrimaryNameTransactionFlowItem({
         address: '0x123',
@@ -189,7 +189,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
             name: 'test.eth',
             address: '0x123',
           },
-          name: 'updateEthAddress',
+          name: 'updateNativeCoinAddress',
         },
       ],
     })
@@ -227,7 +227,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
     })
   })
 
-  it('should return intro updateEthAddress.title if setting multi transaction and resolver is authorized', async () => {
+  it('should return intro updateNativeCoinAddress.title if setting multi transaction and resolver is authorized', async () => {
     const { result } = renderHook(() =>
       useGetPrimaryNameTransactionFlowItem({
         address: '0x1234',
@@ -238,7 +238,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
     )
     expect(result.current.callBack?.('primary.eth')).toMatchObject({
       intro: {
-        title: ['intro.selectPrimaryName.updateEthAddress.title', { ns: 'transactionFlow' }],
+        title: ['intro.selectPrimaryName.updateNativeCoinAddress.title', { ns: 'transactionFlow' }],
       },
     })
   })

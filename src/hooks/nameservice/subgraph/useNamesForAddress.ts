@@ -7,7 +7,7 @@ import {
   GetNamesForAddressReturnType,
 } from '@ensdomains/ensjs/subgraph'
 
-import { useHasSubgraph } from '@app/hooks/ensjs/subgraph/useHasSubgraph'
+import { useHasSubgraph } from '@app/hooks/nameservice/subgraph/useHasSubgraph'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { ConfigWithEns, CreateQueryKey, InfiniteQueryConfig, PartialBy } from '@app/types'
 import { useInfiniteQuery } from '@app/utils/query/useInfiniteQuery'

@@ -3,7 +3,7 @@ import type { Hex } from 'viem'
 
 import { getPrice } from '@ensdomains/ensjs/public'
 
-import renewNames from '@app/overrides/ensjs/renewNames'
+import renewNames from '@app/overrides/nameservice/renewNames'
 import { Transaction, TransactionDisplayItem, TransactionFunctionParameters } from '@app/types'
 
 import { calculateValueWithBuffer, formatDurationOfDates, formatExpiry } from '../../utils/utils'

@@ -9,7 +9,7 @@ import { encodeFuses } from '@ensdomains/ensjs/utils'
 
 import { ClientWithEns } from '@app/types'
 
-import { useNameHistory } from '../ensjs/subgraph/useNameHistory'
+import { useNameHistory } from '../nameservice/subgraph/useNameHistory'
 import {
   generateFuseSetBlocks,
   generateGetBlockQueryArray,
@@ -21,7 +21,7 @@ import {
 vi.mock('wagmi')
 vi.mock('viem/actions')
 
-vi.mock('../ensjs/subgraph/useNameHistory')
+vi.mock('../nameservice/subgraph/useNameHistory')
 
 const mockUseAccount = mockFunction(useAccount).mockImplementation(() => ({ address: '0x123' }))
 const mockUseClient = mockFunction(useClient)

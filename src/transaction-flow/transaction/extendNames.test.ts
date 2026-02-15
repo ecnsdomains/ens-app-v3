@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { Address, Hex } from 'viem'
 
 import { getPrice } from '@ensdomains/ensjs/public'
-import * as  renewNames from '@app/overrides/ensjs/renewNames'
+import * as  renewNames from '@app/overrides/nameservice/renewNames'
 
 import { ClientWithEns, ConnectorClientWithEns } from '@app/types'
 
@@ -12,7 +12,7 @@ import extendNamesTransaction from './extendNames'
 
 vi.mock('@ensdomains/ensjs/public')
 vi.mock('@ensdomains/ensjs/wallet')
-vi.mock('@app/overrides/ensjs/renewNames')
+vi.mock('@app/overrides/nameservice/renewNames')
 
 const mockGetPrice = mockFunction(getPrice)
 const mockRenewNames = mockFunction(renewNames.makeFunctionData)

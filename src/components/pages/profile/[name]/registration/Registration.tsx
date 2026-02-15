@@ -10,8 +10,9 @@ import { Dialog, Helper, Typography } from '@ensdomains/thorin'
 import { BaseLinkWithHistory } from '@app/components/@atoms/BaseLink'
 import { InnerDialog } from '@app/components/@atoms/InnerDialog'
 import { ProfileRecord } from '@app/constants/profileRecordOptions'
+import { isNativeCoin } from '@app/constants/tld'
 import { useContractAddress } from '@app/hooks/chain/useContractAddress'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { useNameDetails } from '@app/hooks/useNameDetails'
 import { useReferrer } from '@app/hooks/useReferrer'
 import useRegistrationReducer from '@app/hooks/useRegistrationReducer'
@@ -148,7 +149,7 @@ const Registration = ({ nameDetails, isLoading }: Props) => {
     reverseRecord,
     paymentMethodChoice,
     estimatedTotal,
-    ethPrice,
+    nativeCoinPrice,
     durationType,
   }: RegistrationStepData['pricing']) => {
     sendEvent('register:pricing', {
@@ -158,7 +159,7 @@ const Registration = ({ nameDetails, isLoading }: Props) => {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       estimated_total: estimatedTotal ?? 0n,
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      eth_price: ethPrice ?? 0n,
+      eth_price: nativeCoinPrice ?? 0n,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       payment_method: paymentMethodChoice,
       // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -202,7 +203,7 @@ const Registration = ({ nameDetails, isLoading }: Props) => {
 
     // If profile is in queue and reverse record is selected, make sure that eth record is included and is set to address
     if (item.queue.includes('profile') && reverseRecord) {
-      const recordsWithoutEth = item.records.filter((record) => record.key !== 'eth')
+      const recordsWithoutEth = item.records.filter((record) => !isNativeCoin(record.key))
       const newRecords: ProfileRecord[] = [
         { key: 'eth', group: 'address', type: 'addr', value: address! },
         ...recordsWithoutEth,

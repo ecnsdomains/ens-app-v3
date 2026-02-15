@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { useCoinChain } from '@app/hooks/chain/useCoinChain'
 import { useChainName } from '@app/hooks/chain/useChainName'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { useRouterWithHistory } from '@app/hooks/useRouterWithHistory'
 import { useBreakpoint } from '@app/utils/BreakpointProvider'
 import { formatExpiry, shortenAddress } from '@app/utils/utils'
@@ -34,7 +34,7 @@ vi.mock('next/router', () => ({
 }))
 
 vi.mock('@app/utils/BreakpointProvider')
-vi.mock('@app/hooks/ensjs/public/usePrimaryName')
+vi.mock('@app/hooks/nameservice/public/usePrimaryName')
 vi.mock('@app/hooks/chain/useCoinChain')
 vi.mock('@app/hooks/chain/useChainName')
 vi.mock('@app/hooks/useRouterWithHistory')

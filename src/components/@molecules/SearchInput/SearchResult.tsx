@@ -11,7 +11,7 @@ import { Address } from 'viem'
 import { Avatar, lightTheme, Spinner, Tag, Typography } from '@ensdomains/thorin'
 
 import { useDotBoxAvailabilityOnchain } from '@app/hooks/dotbox/useDotBoxAvailabilityOnchain'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { useBasicName } from '@app/hooks/useBasicName'
 import { useEnsAvatar } from '@app/hooks/useEnsAvatar'
 import { usePrefetchProfile } from '@app/hooks/useProfile'
@@ -490,7 +490,7 @@ export const SearchResult = ({
       />
     ))
     .with(
-      P.when(({ nameType }) => nameType === 'eth' || nameType === 'dns'),
+      P.when(({ nameType }) => nameType === 'native' || nameType === 'dns'),
       () => (
         <EthResultItem
           {...{

@@ -102,7 +102,7 @@ describe('SearchInput', () => {
     mockUseLocalStorage.mockReturnValue([
       [
         {
-          nameType: 'eth',
+          nameType: 'native',
           text: 'nick.eth',
         },
         {
@@ -110,7 +110,7 @@ describe('SearchInput', () => {
           text: '0xb6E040C9ECAaE172a89bD561c5F73e1C48d28cd9',
         },
         {
-          nameType: 'eth',
+          nameType: 'native',
           text: 'test.eth',
         },
       ],
@@ -138,7 +138,7 @@ describe('SearchInput', () => {
     mockUseLocalStorage.mockReturnValue([
       [
         {
-          nameType: 'eth',
+          nameType: 'native',
           text: 'nick.eth',
           lastAccessed: 1,
         },
@@ -177,7 +177,7 @@ describe('SearchInput', () => {
     mockUseLocalStorage.mockReturnValue([
       [
         {
-          nameType: 'eth',
+          nameType: 'native',
           text: 'nick.eth',
         },
         {
@@ -185,23 +185,23 @@ describe('SearchInput', () => {
           text: '0xb6E040C9ECAaE172a89bD561c5F73e1C48d28cd9',
         },
         {
-          nameType: 'eth',
+          nameType: 'native',
           text: 'test.eth',
         },
         {
-          nameType: 'eth',
+          nameType: 'native',
           text: 'test1.eth',
         },
         {
-          nameType: 'eth',
+          nameType: 'native',
           text: 'test2.eth',
         },
         {
-          nameType: 'eth',
+          nameType: 'native',
           text: 'test3.eth',
         },
         {
-          nameType: 'eth',
+          nameType: 'native',
           text: 'test4.eth',
         },
       ],

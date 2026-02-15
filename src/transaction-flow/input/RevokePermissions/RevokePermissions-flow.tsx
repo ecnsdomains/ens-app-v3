@@ -12,7 +12,7 @@ import {
 } from '@ensdomains/ensjs/utils'
 import { Button, Dialog } from '@ensdomains/thorin'
 
-import { useExpiry } from '@app/hooks/ensjs/public/useExpiry'
+import { useExpiry } from '@app/hooks/nameservice/public/useExpiry'
 import { createTransactionItem } from '@app/transaction-flow/transaction'
 import type changePermissions from '@app/transaction-flow/transaction/changePermissions'
 import { TransactionDialogPassthrough, TransactionFlowAction } from '@app/transaction-flow/types'

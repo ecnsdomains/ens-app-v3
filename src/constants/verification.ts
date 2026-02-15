@@ -1,5 +1,6 @@
 import { match } from 'ts-pattern'
 
+import { BRAND, SERVICES } from '@app/constants/brand'
 import { getNetworkFromUrl } from '@app/constants/chains'
 import type { VerificationProtocol } from '@app/transaction-flow/input/VerifyProfile/VerifyProfile-flow'
 
@@ -9,10 +10,10 @@ import type { VerificationProtocol } from '@app/transaction-flow/input/VerifyPro
 
 const VERIFICATION_ENV_CONFIGS = {
   staging: {
-    authWorkerBaseUrl: 'https://auth-worker-staging.ens-cf.workers.dev/v1',
+    authWorkerBaseUrl: SERVICES.authWorkerStagingUrl,
   },
   production: {
-    authWorkerBaseUrl: 'https://auth-worker.ens-cf.workers.dev/v1',
+    authWorkerBaseUrl: SERVICES.authWorkerUrl,
   },
 } as const
 
@@ -48,7 +49,7 @@ const DENTITY_ENV_CONFIGS = {
     iss: 'https://oidc.dentity.com',
     clientId: 'TWUfWhM_hs5osk9cR4adK',
     endpoint: 'https://oidc.dentity.com',
-    redirectUri: 'https://app.ens.domains',
+    redirectUri: BRAND.appUrl,
   },
 } as const
 

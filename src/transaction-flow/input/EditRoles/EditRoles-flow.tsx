@@ -73,7 +73,7 @@ const EditRoles = ({ data: { name }, dispatch, onDismiss }: Props) => {
     )
     const transactions = [
       dirtyValues['eth-record']
-        ? createTransactionItem('updateEthAddress', { name, address: dirtyValues['eth-record'] })
+        ? createTransactionItem('updateNativeCoinAddress', { name, address: dirtyValues['eth-record'] })
         : null,
       dirtyValues.manager
         ? makeTransferNameOrSubnameTransactionItem({
@@ -99,7 +99,7 @@ const EditRoles = ({ data: { name }, dispatch, onDismiss }: Props) => {
       ): t is
         | TransactionItem<'transferName'>
         | TransactionItem<'transferSubname'>
-        | TransactionItem<'updateEthAddress'> => !!t,
+        | TransactionItem<'updateNativeCoinAddress'> => !!t,
     )
 
     dispatch({

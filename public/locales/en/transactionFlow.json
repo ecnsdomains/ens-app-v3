@@ -50,7 +50,7 @@
           },
           "url": {
             "label": "Website",
-            "placeholder": "https://ens.domains"
+            "placeholder": "https://ecns.domains"
           },
           "location": {
             "label": "Location",
@@ -414,7 +414,7 @@
       "wrappedWarning": "Syncing the manager will also unwrap this name. This will burn the NFT and reset any permissions."
     },
     "selectPrimaryName": {
-      "updateEthAddress": {
+      "updateNativeCoinAddress": {
         "title": "Update ETH address",
         "description": "The ETH address for this name doesn't match this wallet. To use this as your primary name you will need to update the ETH address first."
       },

@@ -23,9 +23,10 @@ import { DynamicVerificationIcon } from '@app/assets/verification/DynamicVerific
 import { VerificationBadgeAccountTooltipContent } from '@app/components/@molecules/VerificationBadge/components/VerificationBadgeAccountTooltipContent'
 import { VerificationBadgeVerifierTooltipContent } from '@app/components/@molecules/VerificationBadge/components/VerificationBadgeVerifierTooltipContent'
 import { VerificationBadge } from '@app/components/@molecules/VerificationBadge/VerificationBadge'
+import { isNativeCoin } from '@app/constants/tld'
 import { useBlockExplorer } from '@app/hooks/chain/useBlockExplorer'
 import { useCoinChain } from '@app/hooks/chain/useCoinChain'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { useRouterWithHistory } from '@app/hooks/useRouterWithHistory'
 import { getDestinationAsHref } from '@app/routes'
 import { VerificationProtocol } from '@app/transaction-flow/input/VerifyProfile/VerifyProfile-flow'
@@ -126,11 +127,11 @@ export const AddressProfileButton = ({
   const iconKey = _iconKey.toLowerCase()
   const [, copy] = useCopyToClipboard()
   const { blockExplorer: currentChainBlockExplorer } = useBlockExplorer()
-  const coinChainResults = useCoinChain({ coinName: iconKey, enabled: iconKey !== 'eth' })
+  const coinChainResults = useCoinChain({ coinName: iconKey, enabled: !isNativeCoin(iconKey) })
   const { data } = coinChainResults
   // For ETH addresses, use the current chain's block explorer; for other coins, use coin-specific explorer
   const defaultBlockExplorer =
-    iconKey === 'eth' ? currentChainBlockExplorer : data?.blockExplorers?.default
+    isNativeCoin(iconKey) ? currentChainBlockExplorer : data?.blockExplorers?.default
   const referrer = router.query.referrer as string | undefined
 
   const IconComponent = useMemo(
@@ -139,7 +140,7 @@ export const AddressProfileButton = ({
   )
 
   const items = [
-    iconKey === 'eth'
+    isNativeCoin(iconKey)
       ? {
           icon: UpRightArrowIcon,
           label: 'View address',

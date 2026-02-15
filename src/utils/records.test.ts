@@ -7,7 +7,7 @@ import {
   hasAvatarRecordChange,
   hasHeaderRecordChange,
   hasMediaRecordChange,
-  makeProfileRecordsWithEthRecordItem,
+  makeProfileRecordsWithNativeCoinRecordItem,
   normalizeCoinName,
   profileRecordsToKeyValue,
 } from './records'
@@ -100,14 +100,14 @@ describe('checkProfileRecordsEqual', () => {
   })
 })
 
-describe('makeProfileRecordsWithEthRecordItem', () => {
+describe('makeProfileRecordsWithNativeCoinRecordItem', () => {
   it('should append eth record item to profile records', () => {
     const profileRecords = {
       texts: [{ key: 'key', value: 'value' }],
       coins: [{ id: 0, name: 'BTC', value: '0x123' }],
       contentHash: { protocolType: 'ipfs', decoded: '0x123' } as const,
     }
-    expect(makeProfileRecordsWithEthRecordItem(profileRecords, '0x1234')).toEqual({
+    expect(makeProfileRecordsWithNativeCoinRecordItem(profileRecords, '0x1234')).toEqual({
       texts: [{ key: 'key', value: 'value' }],
       coins: [
         { id: 0, name: 'BTC', value: '0x123' },
@@ -123,7 +123,7 @@ describe('makeProfileRecordsWithEthRecordItem', () => {
       coins: [{ id: 60, name: 'ETH', value: '0x123' }],
       contentHash: { protocolType: 'ipfs', decoded: '0x123' } as const,
     }
-    expect(makeProfileRecordsWithEthRecordItem(profileRecords, '0x1234')).toEqual({
+    expect(makeProfileRecordsWithNativeCoinRecordItem(profileRecords, '0x1234')).toEqual({
       texts: [{ key: 'key', value: 'value' }],
       coins: [{ id: 60, name: 'ETH', value: '0x1234' }],
       contentHash: { protocolType: 'ipfs', decoded: '0x123' },
@@ -136,7 +136,7 @@ describe('makeProfileRecordsWithEthRecordItem', () => {
       coins: [{ id: 0, name: 'BTC', value: '0x123' }],
       contentHash: { protocolType: 'ipfs', decoded: '0x123' } as const,
     }
-    expect(makeProfileRecordsWithEthRecordItem(profileRecords, undefined)).toEqual(profileRecords)
+    expect(makeProfileRecordsWithNativeCoinRecordItem(profileRecords, undefined)).toEqual(profileRecords)
   })
 })
 

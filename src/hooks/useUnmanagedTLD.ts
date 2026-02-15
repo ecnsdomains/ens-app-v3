@@ -3,7 +3,7 @@ import { useChainId } from 'wagmi'
 import { DNS_REGISTRAR_ADDRESSES } from '@app/constants/tldData'
 import { getTldFromName } from '@app/utils/utils'
 
-import { useOwner } from './ensjs/public/useOwner'
+import { useOwner } from './nameservice/public/useOwner'
 import { useCustomizedTLD } from './useCustomizedTLD'
 
 export const useUnmanagedTLD = (name = '') => {

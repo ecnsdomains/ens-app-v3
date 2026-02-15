@@ -11,6 +11,7 @@ import {
 } from '@ensdomains/thorin'
 import { DropdownItemObject } from '@ensdomains/thorin/dist/types/components/molecules/Dropdown/Dropdown'
 
+import { isCurrentTldName } from '@app/constants/tld'
 import { useAbilities } from '@app/hooks/abilities/useAbilities'
 import { useAccountSafely } from '@app/hooks/account/useAccountSafely'
 import { useNameType } from '@app/hooks/nameType/useNameType'
@@ -61,10 +62,10 @@ export const useRoleActions = ({ name, roles, details }: Props) => {
     const canSend = checkCanSend({ abilities: abilities.data, nameType: nameType.data })
     const canSendError = abilities.data?.canSendError
     const showSend = canSend || !!canSendError
-    const showSendDNS = showSend && name && !name.endsWith('.eth')
-    const showSendEth = showSend && name && name.endsWith('.eth')
+    const showSendDNS = showSend && name && !isCurrentTldName(name)
+    const showSendNative = showSend && name && isCurrentTldName(name)
     const canRefreshDNS =
-      !!account.address && name && !name.endsWith('.eth') && name.split('.').length === 2
+      !!account.address && name && !isCurrentTldName(name) && name.split('.').length === 2
     const showSyncManager = checkCanSyncManager({
       address: account.address,
       nameType: nameType.data,
@@ -104,7 +105,7 @@ export const useRoleActions = ({ name, roles, details }: Props) => {
               }),
           }
         : null,
-      showSendEth
+      showSendNative
         ? {
             type: 'send-name',
             icon: AeroplaneIcon,

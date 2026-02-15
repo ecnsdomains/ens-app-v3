@@ -5,8 +5,6 @@ import {
   CogSVG,
   DotGridActiveSVG,
   DotGridSVG,
-  HeartActiveSVG,
-  HeartSVG,
   MagnifyingGlassActiveSVG,
   MagnifyingGlassSVG,
   PersonActiveSVG,
@@ -20,7 +18,7 @@ export type PublicRoute =
   | 'support'
   | 'terms'
   | 'privacy'
-export type ConnectedRoute = 'names' | 'profile' | 'favourites' | 'settings'
+export type ConnectedRoute = 'names' | 'profile' | 'settings'
 export type AnyRoute = PublicRoute | ConnectedRoute | 'unknown'
 
 export type RouteItemObj = {
@@ -57,17 +55,6 @@ export const routes: RouteItemObj[] = [
     icon: {
       inactive: DotGridSVG,
       active: DotGridActiveSVG,
-    },
-  },
-  {
-    name: 'favourites',
-    href: '/my/favourites',
-    label: 'navigation.favourites',
-    disabled: true,
-    connected: true,
-    icon: {
-      inactive: HeartSVG,
-      active: HeartActiveSVG,
     },
   },
   {
@@ -130,18 +117,6 @@ export const routes: RouteItemObj[] = [
     connected: false,
   },
 ]
-
-export const legacyFavouritesRoute: RouteItemObj = {
-  name: 'favourites',
-  href: '/legacyfavourites',
-  label: 'navigation.favourites',
-  disabled: false,
-  connected: false,
-  icon: {
-    inactive: HeartSVG,
-    active: HeartActiveSVG,
-  },
-}
 
 export const getRoute = (name: PublicRoute | ConnectedRoute): RouteItemObj =>
   routes.find((route) => route.name === name) as RouteItemObj

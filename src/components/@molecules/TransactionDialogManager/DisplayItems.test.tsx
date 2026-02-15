@@ -2,12 +2,12 @@ import { mockFunction, render, screen } from '@app/test-utils'
 
 import { describe, expect, it, vi } from 'vitest'
 
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { TransactionDisplayItem } from '@app/types'
 
 import { DisplayItems } from './DisplayItems'
 
-vi.mock('@app/hooks/ensjs/public/usePrimaryName')
+vi.mock('@app/hooks/nameservice/public/usePrimaryName')
 
 const mockUsePrimaryName = mockFunction(usePrimaryName)
 

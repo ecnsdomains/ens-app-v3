@@ -2,14 +2,14 @@ import { mockFunction, render, screen } from '@app/test-utils'
 
 import { describe, expect, it, vi } from 'vitest'
 
-import { useEthPrice } from '@app/hooks/useEthPrice'
+import { useNativeCoinPrice } from '@app/hooks/useNativeCoinPrice'
 
 import { Invoice } from './Invoice'
 
-vi.mock('@app/hooks/useEthPrice')
+vi.mock('@app/hooks/useNativeCoinPrice')
 
-const mockUseEthPrice = mockFunction(useEthPrice)
-mockUseEthPrice.mockReturnValue({ data: BigInt(1e8), isLoading: false })
+const mockUseNativeCoinPrice = mockFunction(useNativeCoinPrice)
+mockUseNativeCoinPrice.mockReturnValue({ data: BigInt(1e8), isLoading: false })
 
 const items = [
   {

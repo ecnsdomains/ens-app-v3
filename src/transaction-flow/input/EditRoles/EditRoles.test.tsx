@@ -140,7 +140,7 @@ describe('EditRoles', () => {
             address: '0xnick',
             name: 'test.eth',
           },
-          name: 'updateEthAddress',
+          name: 'updateNativeCoinAddress',
         },
         {
           data: {

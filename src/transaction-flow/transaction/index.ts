@@ -21,7 +21,7 @@ import transferController from './transferController'
 import transferName from './transferName'
 import transferSubname from './transferSubname'
 import unwrapName from './unwrapName'
-import updateEthAddress from './updateEthAddress'
+import updateNativeCoinAddress from './updateNativeCoinAddress'
 import updateProfile from './updateProfile'
 import updateProfileRecords from './updateProfileRecords'
 import updateResolver from './updateResolver'
@@ -51,7 +51,7 @@ export const transactions = {
   transferName,
   transferSubname,
   unwrapName,
-  updateEthAddress,
+  updateNativeCoinAddress,
   updateProfile,
   updateProfileRecords,
   updateResolver,

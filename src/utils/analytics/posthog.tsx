@@ -10,7 +10,7 @@ import { sendEvent } from './events'
 
 function isProduction() {
   if (typeof window !== 'undefined') {
-    return !!window.location.host.match('ens.domains')
+    return !!window.location.host.match('ecns.domains')
   }
 }
 

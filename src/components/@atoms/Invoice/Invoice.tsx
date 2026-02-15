@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { Colors, Skeleton } from '@ensdomains/thorin'
 
+import { isNativeCoin } from '@app/constants/tld'
 import { CurrencyDisplay } from '@app/types'
 
 import { CurrencyText } from '../CurrencyText/CurrencyText'
@@ -50,7 +51,7 @@ type Props = {
 export const Invoice = ({ totalLabel = 'Estimated total', unit = 'eth', items }: Props) => {
   const filteredItems = items
     .map(({ value, bufferPercentage }) =>
-      value && unit === 'eth' && bufferPercentage ? (value * bufferPercentage) / 100n : value,
+      value && isNativeCoin(unit) && bufferPercentage ? (value * bufferPercentage) / 100n : value,
     )
     .filter((x): x is bigint => !!x)
   const total = filteredItems.reduce((a, b) => a + b, 0n)

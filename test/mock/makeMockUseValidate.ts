@@ -21,7 +21,7 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
       isShort: false,
       isValid: true,
       is2LD: false,
-      isETH: true,
+      isNativeTld: true,
       labelDataArray: [
         {
           input: [101, 116, 104],
@@ -41,7 +41,7 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
       isShort: false,
       isValid: true,
       is2LD: false,
-      isETH: false,
+      isNativeTld: false,
       labelDataArray: [
         {
           input: [99, 111, 109],
@@ -61,7 +61,7 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
       isShort: false,
       isValid: true,
       is2LD: true,
-      isETH: true,
+      isNativeTld: true,
       labelDataArray: [
         {
           input: [110, 97, 109, 101],
@@ -88,7 +88,7 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
       isShort: false,
       isValid: true,
       is2LD: true,
-      isETH: false,
+      isNativeTld: false,
       labelDataArray: [
         {
           input: [110, 97, 109, 101],
@@ -115,7 +115,7 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
       isShort: false,
       isValid: true,
       is2LD: true,
-      isETH: true,
+      isNativeTld: true,
       labelDataArray: [
         {
           input: [110, 97, 109, 101, 10084],
@@ -145,7 +145,7 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
       isShort: false,
       isValid: true,
       is2LD: false,
-      isETH: true,
+      isNativeTld: true,
       labelDataArray: [
         {
           input: [115, 117, 98, 110, 97, 109, 101],

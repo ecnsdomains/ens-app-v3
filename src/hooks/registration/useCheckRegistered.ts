@@ -2,8 +2,8 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { Address } from 'viem'
 
-import { useOwner } from '../ensjs/public/useOwner'
-import { useWrapperData } from '../ensjs/public/useWrapperData'
+import { useOwner } from '../nameservice/public/useOwner'
+import { useWrapperData } from '../nameservice/public/useWrapperData'
 
 export const useCheckRegistered = ({
   name,

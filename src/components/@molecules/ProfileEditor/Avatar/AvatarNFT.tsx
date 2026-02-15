@@ -15,6 +15,7 @@ import {
   Typography,
 } from '@ensdomains/thorin'
 
+import { SERVICES } from '@app/constants/brand'
 import { SpinnerRow } from '@app/components/@molecules/ScrollBoxWithSpinner'
 import { useChainName } from '@app/hooks/chain/useChainName'
 import { useNameDetails } from '@app/hooks/useNameDetails'
@@ -71,7 +72,7 @@ async function getNfts({
   owner: string
   pageKey: string
 }) {
-  const baseURL = `https://ens-nft-worker.ens-cf.workers.dev/v1/${network}/getNfts/`
+  const baseURL = `${SERVICES.nftWorkerUrl}/v1/${network}/getNfts/`
 
   const urlParams = new URLSearchParams()
 

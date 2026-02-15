@@ -16,6 +16,7 @@ import {
   HeaderViewType,
 } from '@app/components/@molecules/ProfileEditor/Header/HeaderViewManager'
 import { ProfileRecord } from '@app/constants/profileRecordOptions'
+import { isNativeCoin } from '@app/constants/tld'
 import { useContractAddress } from '@app/hooks/chain/useContractAddress'
 import { useLocalStorage } from '@app/hooks/useLocalStorage'
 import { ProfileEditorForm, useProfileEditorForm } from '@app/hooks/useProfileEditorForm'
@@ -101,7 +102,7 @@ const SubmitButton = ({
     name: 'header',
   })
 
-  const hasEthRecord = records.some((record) => record.key === 'eth' && record.value === address)
+  const hasEthRecord = records.some((record) => isNativeCoin(record.key) && record.value === address)
   const hasAvatar = !!avatar
   const hasHeader = !!header
   const hasOneRecord = records.length === 1
@@ -204,7 +205,7 @@ const Profile = ({ name, callback, registrationData, resolverExists }: Props) =>
   }
 
   const handleDeleteRecord = (record: ProfileRecord, index: number) => {
-    if (record.key === 'eth') return setModalOption('clear-eth')
+    if (isNativeCoin(record.key)) return setModalOption('clear-eth')
     removeRecordAtIndex(index)
     process.nextTick(() => trigger())
   }
@@ -365,7 +366,7 @@ const Profile = ({ name, callback, registrationData, resolverExists }: Props) =>
                   key={field.id}
                   recordKey={field.key}
                   group={field.group}
-                  disabled={field.key === 'eth' && registrationData.reverseRecord}
+                  disabled={isNativeCoin(field.key) && registrationData.reverseRecord}
                   label={labelForRecord(field)}
                   secondaryLabel={secondaryLabelForRecord(field)}
                   placeholder={placeholderForRecord(field)}

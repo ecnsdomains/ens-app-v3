@@ -6,8 +6,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { getDecodedName } from '@ensdomains/ensjs/subgraph'
 import { decodeLabelhash } from '@ensdomains/ensjs/utils'
 
-import { useReverseRegistryName } from '@app/hooks/ensjs/public/useReverseRegistryName'
-import { useNamesForAddress } from '@app/hooks/ensjs/subgraph/useNamesForAddress'
+import { useReverseRegistryName } from '@app/hooks/nameservice/public/useReverseRegistryName'
+import { useNamesForAddress } from '@app/hooks/nameservice/subgraph/useNamesForAddress'
 import { useGetPrimaryNameTransactionFlowItem } from '@app/hooks/primary/useGetPrimaryNameTransactionFlowItem'
 import { useResolverStatus } from '@app/hooks/resolver/useResolverStatus'
 import { useIsWrapped } from '@app/hooks/useIsWrapped'
@@ -34,12 +34,12 @@ vi.mock('@app/components/@atoms/NameDetailItem/TaggedNameItem', () => ({
 
 vi.mock('@ensdomains/ensjs/subgraph')
 
-vi.mock('@app/hooks/ensjs/subgraph/useNamesForAddress')
+vi.mock('@app/hooks/nameservice/subgraph/useNamesForAddress')
 vi.mock('@app/hooks/resolver/useResolverStatus')
 vi.mock('@app/hooks/useIsWrapped')
 vi.mock('@app/hooks/useProfile')
 vi.mock('@app/hooks/primary/useGetPrimaryNameTransactionFlowItem')
-vi.mock('@app/hooks/ensjs/public/useReverseRegistryName')
+vi.mock('@app/hooks/nameservice/public/useReverseRegistryName')
 
 const mockGetDecodedName = mockFunction(getDecodedName)
 const mockUseReverseRegistryName = mockFunction(useReverseRegistryName)

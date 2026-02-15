@@ -34,6 +34,34 @@ export const isNativeTld = (name: string): boolean => {
   return name.endsWith('.eth') || name.endsWith('.etc')
 }
 
+// Check if a TLD string matches the current chain's TLD
+export const isCurrentTld = (tld: string): boolean => tld === getCurrentTld()
+
+// Check if a full name ends with the current chain's TLD
+export const isCurrentTldName = (name: string): boolean =>
+  name.endsWith(`.${getCurrentTld()}`)
+
+// Native coin address record key — same as TLD (e.g., 'eth' for ETH, 'etc' for ETC)
+export const getNativeCoinKey = (): string => getCurrentTld()
+
+// SLIP44 coin types: ETH=60, ETC=61
+const CHAIN_COIN_TYPE_MAP = new Map<string, number>([
+  ['eth', 60],
+  ['etc', 61],
+])
+
+// Get the SLIP44 coin type number for the current chain's native coin
+export const getNativeCoinType = (): number => CHAIN_COIN_TYPE_MAP.get(getCurrentTld()) ?? 61
+
+// Get the uppercase symbol for the current chain's native coin (e.g., 'ETC', 'ETH')
+export const getNativeCoinSymbol = (): string => getCurrentTld().toUpperCase()
+
+// Check if a coin key or coin type is the native chain coin
+export const isNativeCoin = (coin: string | number): boolean => {
+  if (typeof coin === 'string') return coin.toLowerCase() === getCurrentTld()
+  return coin === CHAIN_COIN_TYPE_MAP.get(getCurrentTld())
+}
+
 // Get the TLD suffix
 export const ETH_TLD = 'eth'
 export const ETC_TLD = 'etc'

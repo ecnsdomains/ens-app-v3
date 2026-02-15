@@ -4,7 +4,7 @@ import { useAccount } from 'wagmi'
 import { CacheableComponent } from '@app/components/@atoms/CacheableComponent'
 import { getNetworkFromUrl } from '@app/constants/chains'
 import type { useAbilities } from '@app/hooks/abilities/useAbilities'
-import { useIsOffchainName } from '@app/hooks/ensjs/dns/useIsOffchainName'
+import { useIsOffchainName } from '@app/hooks/nameservice/dns/useIsOffchainName'
 import { useNameDetails } from '@app/hooks/useNameDetails'
 
 import { NameWrapper } from './NameWrapper'

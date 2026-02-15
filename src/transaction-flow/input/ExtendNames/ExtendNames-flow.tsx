@@ -15,10 +15,10 @@ import { PlusMinusControl } from '@app/components/@atoms/PlusMinusControl/PlusMi
 import { StyledName } from '@app/components/@atoms/StyledName/StyledName'
 import { DateSelection } from '@app/components/@molecules/DateSelection/DateSelection'
 import { useEstimateGasWithStateOverride } from '@app/hooks/chain/useEstimateGasWithStateOverride'
-import { useExpiry } from '@app/hooks/ensjs/public/useExpiry'
-import { usePrice } from '@app/hooks/ensjs/public/usePrice'
+import { useExpiry } from '@app/hooks/nameservice/public/useExpiry'
+import { usePrice } from '@app/hooks/nameservice/public/usePrice'
 import { useEnsAvatar } from '@app/hooks/useEnsAvatar'
-import { useEthPrice } from '@app/hooks/useEthPrice'
+import { useNativeCoinPrice } from '@app/hooks/useNativeCoinPrice'
 import { useReferrer } from '@app/hooks/useReferrer'
 import { useZorb } from '@app/hooks/useZorb'
 import { createTransactionItem } from '@app/transaction-flow/transaction'
@@ -190,7 +190,7 @@ const ExtendNames = ({
   const referrer = useReferrer()
   const referrerHex = getReferrerHex(referrer)
 
-  const { data: ethPrice, isLoading: isEthPriceLoading } = useEthPrice()
+  const { data: nativeCoinPrice, isLoading: isNativeCoinPriceLoading } = useNativeCoinPrice()
   const { address, isConnected: isAccountConnected } = useAccount()
   const { data: balance, isLoading: isBalanceLoading } = useBalance({
     address,
@@ -284,7 +284,7 @@ const ExtendNames = ({
   const view = flow[viewIdx]
 
   const isBaseDataLoading =
-    !isAccountConnected || isBalanceLoading || isExpiryEnabledAndLoading || isEthPriceLoading
+    !isAccountConnected || isBalanceLoading || isExpiryEnabledAndLoading || isNativeCoinPriceLoading
   const isRegisterLoading = isPriceLoading || (isEstimateGasLoading && !estimateGasLimitError)
 
   const { title, alert, buttonProps } = match(view)
@@ -320,7 +320,7 @@ const ExtendNames = ({
             startDateTimestamp: expiryDate?.getTime(),
             displayPrice: makeCurrencyDisplay({
               eth: totalRentFee,
-              ethPrice,
+              nativeCoinPrice,
               bufferPercentage: CURRENCY_FLUCTUATION_BUFFER_PERCENTAGE,
               currency: userConfig.currency === 'fiat' ? 'usd' : 'eth',
             }),

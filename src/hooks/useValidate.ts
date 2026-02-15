@@ -4,10 +4,11 @@ import { Prettify } from '@app/types'
 import { tryBeautify } from '@app/utils/beautify'
 
 export type ValidationResult = Prettify<
-  Partial<Omit<ParsedInputResult, 'normalised' | 'labelDataArray'>> & {
+  Partial<Omit<ParsedInputResult, 'normalised' | 'labelDataArray' | 'isETH'>> & {
     name: string
     beautifiedName: string
     isNonASCII: boolean | undefined
+    isNativeTld: boolean | undefined
     labelCount: number
     labelDataArray: ParsedInputResult['labelDataArray']
   }
@@ -23,7 +24,7 @@ const tryDecodeURIComponent = (input: string) => {
 
 export const validate = (input: string) => {
   const decodedInput = tryDecodeURIComponent(input)
-  const { normalised: name, ...parsedInput } = parseInput(decodedInput)
+  const { normalised: name, isETH, ...parsedInput } = parseInput(decodedInput)
   const isNonASCII = parsedInput.labelDataArray.some((dataItem) => dataItem.type !== 'ASCII')
   const outputName = name || input
 
@@ -32,6 +33,7 @@ export const validate = (input: string) => {
     name: outputName,
     beautifiedName: tryBeautify(outputName),
     isNonASCII,
+    isNativeTld: isETH,
     labelCount: parsedInput.labelDataArray.length,
   }
 }
@@ -45,7 +47,7 @@ const defaultData = Object.freeze({
   isValid: undefined,
   isShort: undefined,
   is2LD: undefined,
-  isETH: undefined,
+  isNativeTld: undefined,
   labelDataArray: [],
 })
 

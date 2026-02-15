@@ -6,7 +6,7 @@ import { dateFromDateDiff } from './date'
 import {
   calculateValueWithBuffer,
   checkDNSName,
-  checkETH2LDFromName,
+  checkNativeTld2LD,
   checkSubname,
   deleteProperties,
   deleteProperty,
@@ -160,30 +160,17 @@ describe('formatDurationOfDates', () => {
   })
 })
 
-describe('makeEtherscanLink', () => {
-  it('should use mainnet and /tx if no network/route is defined', () => {
+describe('makeBlockExplorerLink', () => {
+  it('should default to ETC mainnet blockscout', () => {
     const data = 'test'
     const result = makeEtherscanLink(data)
-    expect(result).toEqual(`https://etherscan.io/tx/${data}`)
-  })
-  it('should not use subdomain if network is mainnet', () => {
-    const data = 'test'
-    const network = 'mainnet'
-    const result = makeEtherscanLink(data, network)
-    expect(result).toEqual(`https://etherscan.io/tx/${data}`)
-  })
-  it('should use subdomain if network is not mainnet', () => {
-    const data = 'test'
-    const network = 'sepolia'
-    const result = makeEtherscanLink(data, network)
-    expect(result).toEqual(`https://${network}.etherscan.io/tx/${data}`)
+    expect(result).toEqual(`https://blockscout.com/etc/mainnet/tx/${data}`)
   })
   it('should allow custom route', () => {
     const data = 'test'
-    const network = 'sepolia'
     const route = 'address'
-    const result = makeEtherscanLink(data, network, route)
-    expect(result).toEqual(`https://${network}.etherscan.io/address/${data}`)
+    const result = makeEtherscanLink(data, undefined, route)
+    expect(result).toEqual(`https://blockscout.com/etc/mainnet/address/${data}`)
   })
 })
 
@@ -198,22 +185,22 @@ describe('checkDNSName', () => {
     const result = checkDNSName(name as any)
     expect(result).toEqual(false)
   })
-  it('should return false when name is a .eth name', () => {
-    const name = 'test.eth'
+  it('should return false when name uses the native TLD', () => {
+    const name = 'test.etc'
     const result = checkDNSName(name)
     expect(result).toEqual(false)
   })
 })
 
-describe('checkETH2LDFromName', () => {
-  it('should return true when name is a .eth name', () => {
-    const name = 'test.eth'
-    const result = checkETH2LDFromName(name)
+describe('checkNativeTld2LD', () => {
+  it('should return true when name is a native TLD 2LD', () => {
+    const name = 'test.etc'
+    const result = checkNativeTld2LD(name)
     expect(result).toEqual(true)
   })
   it('should return false when name is DNS name', () => {
     const name = 'test.com'
-    const result = checkETH2LDFromName(name)
+    const result = checkNativeTld2LD(name)
     expect(result).toEqual(false)
   })
 })
@@ -269,13 +256,13 @@ describe('getLabelFromName', () => {
 })
 
 describe('validateExpiry', () => {
-  it('should return expiry when name is 2ld .eth', () => {
-    const name = 'test.eth'
+  it('should return expiry when name is native TLD 2LD', () => {
+    const name = 'test.etc'
     const expiry = new Date()
     const result = validateExpiry({ name, expiry, fuses: {} as any })
     expect(result).toEqual(expiry)
   })
-  it('should return undefined when fuses is undefined and name is not 2ld .eth', () => {
+  it('should return undefined when fuses is undefined and name is not native TLD 2LD', () => {
     const name = 'test.com'
     const expiry = new Date()
     const result = validateExpiry({ name, expiry, fuses: undefined as any })
@@ -287,7 +274,7 @@ describe('validateExpiry', () => {
     const result = validateExpiry({ name, expiry, fuses: {} as any, pccExpired: true })
     expect(result).toEqual(expiry)
   })
-  it('should return undefined when PCC not burned and not 2ld .eth', () => {
+  it('should return undefined when PCC not burned and not native TLD 2LD', () => {
     const name = 'test.com'
     const expiry = new Date()
     const result = validateExpiry({
@@ -297,7 +284,7 @@ describe('validateExpiry', () => {
     })
     expect(result).toEqual(undefined)
   })
-  it('should return expiry when PCC burned and not 2ld .eth', () => {
+  it('should return expiry when PCC burned and not native TLD 2LD', () => {
     const name = 'test.com'
     const expiry = new Date()
     const result = validateExpiry({

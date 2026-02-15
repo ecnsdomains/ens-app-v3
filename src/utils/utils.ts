@@ -7,6 +7,7 @@ import type { GetPriceReturnType } from '@ensdomains/ensjs/public'
 import type { DecodedFuses } from '@ensdomains/ensjs/utils'
 
 import { KNOWN_RESOLVER_DATA } from '@app/constants/resolverAddressData'
+import { isCurrentTld } from '@app/constants/tld'
 import type { ConnectorClientWithEns } from '@app/types'
 
 import { CURRENCY_FLUCTUATION_BUFFER_PERCENTAGE } from './constants'
@@ -106,22 +107,24 @@ export const isBrowser = !!(
 
 export const checkDNSName = (name: string): boolean => {
   const labels = name?.split('.')
-
-  return !!labels && labels[labels.length - 1] !== 'eth'
+  return !!labels && !isCurrentTld(labels[labels.length - 1])
 }
 
-export const checkETH2LDFromName = (name: string): name is Eth2ldName => {
+export const checkNativeTld2LD = (name: string): name is Eth2ldName => {
   const labels = name.split('.')
   if (labels.length !== 2) return false
-  if (labels[1] !== 'eth') return false
+  if (!isCurrentTld(labels[1])) return false
   return true
 }
+
+/** @deprecated Use checkNativeTld2LD instead */
+export const checkETH2LDFromName = checkNativeTld2LD
 
 export const checkDNS2LDFromName = (name?: string) => {
   const labels = name?.split('.')
   if (!labels) return false
   if (labels.length !== 2) return false
-  if (labels[1] === 'eth') return false
+  if (isCurrentTld(labels[1])) return false
   return true
 }
 
@@ -165,7 +168,7 @@ export const validateExpiry = ({
   expiry: Date | undefined
   pccExpired?: boolean
 }) => {
-  const isDotETH = checkETH2LDFromName(name)
+  const isDotETH = checkNativeTld2LD(name)
   if (isDotETH) return expiry
   if (!fuses) return undefined
   return pccExpired || fuses.parent.PARENT_CANNOT_CONTROL ? expiry : undefined

@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { isSelfExtendable } from '@app/components/pages/profile/[name]/tabs/OwnershipTab/sections/ExpirySection/hooks/useExpiryActions'
-import { checkETH2LDFromName } from '@app/utils/utils'
+import { checkNativeTld2LD } from '@app/utils/utils'
 
 import { useAccountSafely } from '../account/useAccountSafely'
 import { useContractAddress } from '../chain/useContractAddress'
@@ -128,7 +128,7 @@ export const useAbilities = ({ name, enabled = true }: UseAbilitiesParameters) =
   const data: Abilities | undefined = useMemo(
     () => {
       if (!name || !address || isLoading) return DEFAULT_ABILITIES
-      const canExtend = !!name && checkETH2LDFromName(name)
+      const canExtend = !!name && checkNativeTld2LD(name)
       return {
         canExtend,
         canSelfExtend: canExtend && isSelfExtendable({ ...basicNameData, address }),

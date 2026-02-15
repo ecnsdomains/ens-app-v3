@@ -7,7 +7,7 @@ import CircleTick from '@app/assets/CircleTick.svg'
 import { useEnsAvatar } from '@app/hooks/useEnsAvatar'
 import { useZorb } from '@app/hooks/useZorb'
 import { INVALID_NAME } from '@app/utils/constants'
-import { checkETH2LDFromName } from '@app/utils/utils'
+import { checkNativeTld2LD } from '@app/utils/utils'
 
 import { safeDateObj } from '../../../utils/date'
 import { ShortExpiry } from '../ExpiryComponents/ExpiryComponents'
@@ -189,7 +189,7 @@ export const NameDetailItem = ({
             <StyledName name={truncatedName || name} disabled={disabled} />
             {_expiryDate && (
               <SubtitleWrapper>
-                <ShortExpiry expiry={_expiryDate} hasGracePeriod={checkETH2LDFromName(name)} />
+                <ShortExpiry expiry={_expiryDate} hasGracePeriod={checkNativeTld2LD(name)} />
               </SubtitleWrapper>
             )}
           </NameItemContent>

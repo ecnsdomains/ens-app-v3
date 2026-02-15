@@ -40,7 +40,7 @@ const Page = () => {
 
   const [isError, setIsError] = useState(false)
 
-  const getTextRecord = (key: string) => primaryProfile?.texts?.find((x) => x.key === key)
+  const getTextRecord = (key: string) => primaryProfile?.texts?.find((x: { key: string; value: string }) => x.key === key)
 
   const loading = !isReady || isPrimaryProfileLoading
 

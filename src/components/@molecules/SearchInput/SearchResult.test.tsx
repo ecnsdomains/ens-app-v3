@@ -3,13 +3,13 @@ import { fireEvent, mockFunction, render, screen } from '@app/test-utils'
 import { ComponentProps } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { useBasicName } from '@app/hooks/useBasicName'
 
 import { SearchResult, SearchResultProps } from './SearchResult'
 
 vi.mock('@app/hooks/useBasicName')
-vi.mock('@app/hooks/ensjs/public/usePrimaryName')
+vi.mock('@app/hooks/nameservice/public/usePrimaryName')
 
 const mockUseBasicName = mockFunction(useBasicName)
 const mockUsePrimaryName = mockFunction(usePrimaryName)
@@ -23,7 +23,7 @@ describe('SearchResult', () => {
     index: 0,
     selected: false,
     searchItem: {
-      nameType: 'eth',
+      nameType: 'native',
       text: 'nick.eth',
     },
     usingPlaceholder: false,

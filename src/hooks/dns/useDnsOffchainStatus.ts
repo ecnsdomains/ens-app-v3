@@ -7,8 +7,8 @@ import { GetDnsOffchainDataReturnType } from '@ensdomains/ensjs/dns'
 import { checkDnsAddressMatch, checkDnsError } from '@app/components/pages/import/[name]/utils'
 import { EXTENDED_DNS_RESOLVER_MAP } from '@app/constants/resolverAddressData'
 
-import { useDnsOffchainData } from '../ensjs/dns/useDnsOffchainData'
-import { useAddressRecord } from '../ensjs/public/useAddressRecord'
+import { useDnsOffchainData } from '../nameservice/dns/useDnsOffchainData'
+import { useAddressRecord } from '../nameservice/public/useAddressRecord'
 
 type UseDnsOffchainStatusParameters = {
   name?: string

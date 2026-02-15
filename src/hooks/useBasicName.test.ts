@@ -20,12 +20,12 @@ import { makeMockUseValidate } from '../../test/mock/makeMockUseValidate'
 import { makeMockUseWrapperDataData } from '../../test/mock/makeMockUseWrapperDataData.ts'
 import { useContractAddress } from './chain/useContractAddress'
 import useCurrentBlockTimestamp from './chain/useCurrentBlockTimestamp'
-import { useAddressRecord } from './ensjs/public/useAddressRecord'
-import { useExpiry } from './ensjs/public/useExpiry'
-import { useOwner } from './ensjs/public/useOwner'
-import { usePrice } from './ensjs/public/usePrice'
-import { useWrapperData } from './ensjs/public/useWrapperData'
-import { useSubgraphRegistrant } from './ensjs/subgraph/useSubgraphRegistrant'
+import { useAddressRecord } from './nameservice/public/useAddressRecord'
+import { useExpiry } from './nameservice/public/useExpiry'
+import { useOwner } from './nameservice/public/useOwner'
+import { usePrice } from './nameservice/public/usePrice'
+import { useWrapperData } from './nameservice/public/useWrapperData'
+import { useSubgraphRegistrant } from './nameservice/subgraph/useSubgraphRegistrant'
 import { useBasicName } from './useBasicName'
 import { useSupportsTLD } from './useSupportsTLD'
 import { useValidate } from './useValidate'
@@ -36,12 +36,12 @@ vi.mock('./useValidate')
 vi.mock('./useSupportsTLD')
 vi.mock('@app/utils/registrationStatus')
 
-vi.mock('./ensjs/public/useOwner')
-vi.mock('./ensjs/public/useExpiry')
-vi.mock('./ensjs/public/useWrapperData')
-vi.mock('./ensjs/public/usePrice')
-vi.mock('./ensjs/public/useAddressRecord')
-vi.mock('./ensjs/subgraph/useSubgraphRegistrant')
+vi.mock('./nameservice/public/useOwner')
+vi.mock('./nameservice/public/useExpiry')
+vi.mock('./nameservice/public/useWrapperData')
+vi.mock('./nameservice/public/usePrice')
+vi.mock('./nameservice/public/useAddressRecord')
+vi.mock('./nameservice/subgraph/useSubgraphRegistrant')
 vi.setSystemTime(new Date())
 
 const mockUseValidate = mockFunction(useValidate)
@@ -76,7 +76,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: true,
-        isETH: true,
+        isNativeTld: true,
         isShort: false,
         name: 'test.eth',
         labelCount: 2,
@@ -120,7 +120,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: true,
-        isETH: false,
+        isNativeTld: false,
         isShort: true,
         name: 'te.pw',
         labelCount: 2,
@@ -148,7 +148,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: true,
-        isETH: false,
+        isNativeTld: false,
         isShort: false,
         name: 'test.com',
         labelCount: 2,
@@ -235,7 +235,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: true,
-        isETH: true,
+        isNativeTld: true,
         isShort: false,
         name: 'test.eth',
         labelCount: 2,
@@ -275,7 +275,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: true,
-        isETH: true,
+        isNativeTld: true,
         isShort: false,
         name: 'test.eth',
         labelCount: 2,
@@ -315,7 +315,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: true,
-        isETH: true,
+        isNativeTld: true,
         isShort: false,
         name: 'test.eth',
         labelCount: 2,
@@ -353,7 +353,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: true,
-        isETH: true,
+        isNativeTld: true,
         isShort: false,
         name: 'test.eth',
         labelCount: 2,
@@ -391,7 +391,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: false,
-        isETH: true,
+        isNativeTld: true,
         isShort: false,
         name: 'abc.test.eth',
         labelCount: 3,
@@ -425,7 +425,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: false,
-        isETH: true,
+        isNativeTld: true,
         isShort: false,
         name: 'abc123.test.eth',
         labelCount: 3,
@@ -462,7 +462,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: true,
-        isETH: true,
+        isNativeTld: true,
         isShort: false,
         name: 'test.eth',
         labelCount: 2,
@@ -505,7 +505,7 @@ describe('useBasicName', () => {
       mockUseValidate.mockReturnValue({
         isValid: true,
         is2LD: true,
-        isETH: true,
+        isNativeTld: true,
         isShort: false,
         name: 'test.eth',
         labelCount: 2,

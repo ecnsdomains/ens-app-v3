@@ -3,14 +3,14 @@ import { mockFunction, render } from '@app/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import { TaggedNameItem } from '@app/components/@atoms/NameDetailItem/TaggedNameItem'
-import { useNamesForAddress } from '@app/hooks/ensjs/subgraph/useNamesForAddress'
+import { useNamesForAddress } from '@app/hooks/nameservice/subgraph/useNamesForAddress'
 import { createDateAndValue } from '@app/utils/utils'
 
 import { NameListView } from './NameListView'
 
 vi.mock('next/router', async () => await vi.importActual('next-router-mock'))
 vi.mock('@app/components/@atoms/NameDetailItem/TaggedNameItem')
-vi.mock('@app/hooks/ensjs/subgraph/useNamesForAddress')
+vi.mock('@app/hooks/nameservice/subgraph/useNamesForAddress')
 
 const mockTaggedNameItem = mockFunction(TaggedNameItem)
 const mockUseNamesForAddress = mockFunction(useNamesForAddress)

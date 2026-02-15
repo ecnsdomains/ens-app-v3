@@ -1,13 +1,17 @@
 import { Address } from 'viem'
 import { useReadContract } from 'wagmi'
 
-import { useAddressRecord } from './ensjs/public/useAddressRecord'
+import { useAddressRecord } from './nameservice/public/useAddressRecord'
 
-const ORACLE_ENS = 'eth-usd.data.eth'
+// TODO: Configure oracle per chain — this ENS name only resolves on Ethereum mainnet
+const ORACLE_NAME = 'eth-usd.data.eth'
 
-export const useEthPrice = () => {
+/** @deprecated Use useNativeCoinPrice instead */
+export const useEthPrice = useNativeCoinPrice
+
+export function useNativeCoinPrice() {
   const { data: address_ } = useAddressRecord({
-    name: ORACLE_ENS,
+    name: ORACLE_NAME,
   })
 
   const address = (address_?.value as Address) || undefined

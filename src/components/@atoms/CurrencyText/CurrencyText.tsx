@@ -1,6 +1,7 @@
 import { Skeleton } from '@ensdomains/thorin'
 
-import { useEthPrice } from '@app/hooks/useEthPrice'
+import { isNativeCoin } from '@app/constants/tld'
+import { useNativeCoinPrice } from '@app/hooks/useNativeCoinPrice'
 import { CurrencyDisplay } from '@app/types'
 import { makeDisplay } from '@app/utils/currency'
 
@@ -13,26 +14,26 @@ type Props = {
 
 export const makeCurrencyDisplay = ({
   eth,
-  ethPrice,
+  nativeCoinPrice,
   bufferPercentage = 100n,
   currency = 'eth',
-}: Props & { ethPrice?: bigint }) => {
-  if (!eth || !ethPrice) return '0.0000 ETH'
-  if (currency === 'eth')
+}: Props & { nativeCoinPrice?: bigint }) => {
+  if (!eth || !nativeCoinPrice) return '0.0000 ETH'
+  if (isNativeCoin(currency))
     return makeDisplay({ value: (eth * bufferPercentage) / 100n, symbol: 'eth' })
-  return makeDisplay({ value: (eth * ethPrice) / BigInt(1e8), symbol: currency })
+  return makeDisplay({ value: (eth * nativeCoinPrice) / BigInt(1e8), symbol: currency })
 }
 
 export const CurrencyText = ({ eth, bufferPercentage = 100n, currency = 'eth' }: Props) => {
-  const { data: ethPrice, isLoading: isEthPriceLoading } = useEthPrice()
+  const { data: nativeCoinPrice, isLoading: isNativeCoinPriceLoading } = useNativeCoinPrice()
 
-  const isLoading = isEthPriceLoading || !eth || !ethPrice
+  const isLoading = isNativeCoinPriceLoading || !eth || !nativeCoinPrice
 
   return (
     <Skeleton loading={isLoading}>
       {(() => {
         if (isLoading) return '0.0000 ETH'
-        return makeCurrencyDisplay({ eth, ethPrice, bufferPercentage, currency })
+        return makeCurrencyDisplay({ eth, nativeCoinPrice, bufferPercentage, currency })
       })()}
     </Skeleton>
   )

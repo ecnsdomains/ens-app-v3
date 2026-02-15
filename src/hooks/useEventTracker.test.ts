@@ -47,8 +47,8 @@ describe('useEventTracker', () => {
     const duration = 62985600
     const paymentMethod = 'ethereum' as PaymentMethod
     const estimatedTotal = 6818890518377750n
-    const ethPrice = 156058000000n
-    const paymentAmount = formatUnits((estimatedTotal * ethPrice) / BigInt(1e8), 18)
+    const nativeCoinPrice = 156058000000n
+    const paymentAmount = formatUnits((estimatedTotal * nativeCoinPrice) / BigInt(1e8), 18)
 
     const { result } = renderHook(() => useEventTracker())
     result.current.trackEvent({
@@ -57,7 +57,7 @@ describe('useEventTracker', () => {
         duration,
         paymentMethod,
         estimatedTotal,
-        ethPrice,
+        nativeCoinPrice,
         durationType: 'years',
       },
     })

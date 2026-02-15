@@ -7,7 +7,7 @@ import { useConnections, useDisconnect } from 'wagmi'
 import { Button, PersonSVG, Profile } from '@ensdomains/thorin'
 
 import { useAccountSafely } from '@app/hooks/account/useAccountSafely'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import useHasPendingTransactions from '@app/hooks/transactions/useHasPendingTransactions'
 import { useCopied } from '@app/hooks/useCopied'
 import { useEnsAvatar } from '@app/hooks/useEnsAvatar'

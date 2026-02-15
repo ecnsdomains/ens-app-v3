@@ -10,8 +10,8 @@ import { shouldOpenModal } from './utils'
 
 // Chain ID to app URL mapping
 const APP_LINKS_BY_CHAIN_ID = new Map<number, string>([
-  [1, 'app.ens.domains'], // Ethereum
-  [11155111, 'sepolia.app.ens.domains'], // Sepolia
+  [1, 'app.ecns.domains'], // Ethereum
+  [11155111, 'mordor.app.ecns.domains'], // Sepolia
   [1337, ''], // Localhost
   [63, 'app.ecns.domains'], // Mordor (ECNS testnet)
   [61, 'app.ecns.domains'], // ETC (ECNS mainnet)

@@ -8,16 +8,16 @@ import { GetOwnerReturnType, GetWrapperDataReturnType } from '@ensdomains/ensjs/
 import { DeepPartial } from '@app/types'
 import { emptyAddress } from '@app/utils/constants'
 
-import { useOwner } from './ensjs/public/useOwner'
-import { useWrapperData } from './ensjs/public/useWrapperData'
+import { useOwner } from './nameservice/public/useOwner'
+import { useWrapperData } from './nameservice/public/useWrapperData'
 import { usePccExpired } from './fuses/usePccExpired'
 import { useValidateSubnameLabel } from './useValidateSubnameLabel'
 
 const BYTE256 =
   '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
 
-vi.mock('@app/hooks/ensjs/public/useWrapperData')
-vi.mock('@app/hooks/ensjs/public/useOwner')
+vi.mock('@app/hooks/nameservice/public/useWrapperData')
+vi.mock('@app/hooks/nameservice/public/useOwner')
 vi.mock('@app/hooks/fuses/usePccExpired')
 
 const mockUseWrapperData = mockFunction(useWrapperData)

@@ -405,7 +405,7 @@
       "wrappedWarning": "同步管理员也将解除该名称的包装，这会烧毁 NFT 并重置所有权限。"
     },
     "selectPrimaryName": {
-      "updateEthAddress": {
+      "updateNativeCoinAddress": {
         "title": "更新 ETC 地址",
         "description": "该名称的 ETC 地址和当前钱包无法匹配。要使用该名称作为您的主名称，您需要先更新该名称的 ETC 地址记录。"
       },

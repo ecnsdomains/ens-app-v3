@@ -1,5 +1,6 @@
 import { CoinName, coinNameToTypeMap, coinTypeToNameMap } from '@ensdomains/address-encoder'
 
+import { getNativeCoinKey } from '@app/constants/tld'
 import coinsWithIcons from '@app/constants/coinsWithIcons.json'
 import coinsWithoutIcons from '@app/constants/coinsWithoutIcons.json'
 import { supportedContentHashKeys } from '@app/constants/supportedContentHashKeys'
@@ -114,7 +115,7 @@ export const sortValues: { [key: string]: { [key: string]: number } } = {
     return acc
   }, {}),
   address: coinsWithIcons.reduce<{ [key: string]: number }>((acc, key, index) => {
-    if (key === 'eth') acc[key] = 1
+    if (key === getNativeCoinKey()) acc[key] = 1
     else acc[key] = index + 300
     return acc
   }, {}),

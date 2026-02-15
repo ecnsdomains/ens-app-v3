@@ -11,7 +11,7 @@ import { GRACE_PERIOD } from '@app/utils/constants'
 import { safeDateObj } from '@app/utils/date'
 import { parentName } from '@app/utils/name'
 import { getSupportLink } from '@app/utils/supportLinks'
-import { checkETH2LDFromName } from '@app/utils/utils'
+import { checkNativeTld2LD } from '@app/utils/utils'
 
 type Input = {
   name: string
@@ -36,7 +36,7 @@ export const useExpiryDetails = ({ name, details }: Input, options: Options = {}
 
   const { t } = useTranslation('profile')
 
-  const isETH2LD = checkETH2LDFromName(name)
+  const isETH2LD = checkNativeTld2LD(name)
   const nameType = useNameType(name, { enabled })
   const parentData = useBasicName({
     name: parentName(name),

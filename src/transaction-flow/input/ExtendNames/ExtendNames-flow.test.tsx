@@ -4,26 +4,26 @@ import { describe, expect, it, vi } from 'vitest'
 import { useAccount, useBalance } from 'wagmi'
 
 import { useEstimateGasWithStateOverride } from '@app/hooks/chain/useEstimateGasWithStateOverride'
-import { useExpiry } from '@app/hooks/ensjs/public/useExpiry'
-import { usePrice } from '@app/hooks/ensjs/public/usePrice'
-import { useEthPrice } from '@app/hooks/useEthPrice'
+import { useExpiry } from '@app/hooks/nameservice/public/useExpiry'
+import { usePrice } from '@app/hooks/nameservice/public/usePrice'
+import { useNativeCoinPrice } from '@app/hooks/useNativeCoinPrice'
 import { useReferrer } from '@app/hooks/useReferrer'
 
 import { makeMockIntersectionObserver } from '../../../../test/mock/makeMockIntersectionObserver'
 import ExtendNames from './ExtendNames-flow'
 
 vi.mock('@app/hooks/chain/useEstimateGasWithStateOverride')
-vi.mock('@app/hooks/ensjs/public/usePrice')
+vi.mock('@app/hooks/nameservice/public/usePrice')
 vi.mock('wagmi')
-vi.mock('@app/hooks/ensjs/public/useExpiry')
-vi.mock('@app/hooks/useEthPrice')
+vi.mock('@app/hooks/nameservice/public/useExpiry')
+vi.mock('@app/hooks/useNativeCoinPrice')
 vi.mock('@app/hooks/useReferrer')
 
 const mockUseEstimateGasWithStateOverride = mockFunction(useEstimateGasWithStateOverride)
 const mockUsePrice = mockFunction(usePrice)
 const mockUseAccount = mockFunction(useAccount)
 const mockUseBalance = mockFunction(useBalance)
-const mockUseEthPrice = mockFunction(useEthPrice)
+const mockUseNativeCoinPrice = mockFunction(useNativeCoinPrice)
 const mockUseExpiry = mockFunction(useExpiry)
 const mockUseReferrer = mockFunction(useReferrer)
 
@@ -60,7 +60,7 @@ describe('Extendnames', () => {
   })
   mockUseAccount.mockReturnValue({ address: '0x1234', isConnected: true })
   mockUseBalance.mockReturnValue({ data: { balance: 100n }, isLoading: false })
-  mockUseEthPrice.mockReturnValue({ data: 100n, isLoading: false })
+  mockUseNativeCoinPrice.mockReturnValue({ data: 100n, isLoading: false })
   mockUseExpiry.mockReturnValue({ data: { expiry: { date: new Date() } }, isLoading: false })
   mockUseReferrer.mockReturnValue(undefined)
   it('should render', async () => {

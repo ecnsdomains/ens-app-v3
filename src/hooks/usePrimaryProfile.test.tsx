@@ -2,11 +2,11 @@ import { renderHook, waitFor } from '@app/test-utils'
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 
 import { usePrimaryProfile } from './usePrimaryProfile'
-import { usePrimaryName } from './ensjs/public/usePrimaryName'
-import { useRecords } from './ensjs/public/useRecords'
+import { usePrimaryName } from './nameservice/public/usePrimaryName'
+import { useRecords } from './nameservice/public/useRecords'
 
-vi.mock('./ensjs/public/usePrimaryName')
-vi.mock('./ensjs/public/useRecords')
+vi.mock('./nameservice/public/usePrimaryName')
+vi.mock('./nameservice/public/useRecords')
 
 const mockUsePrimaryName = vi.mocked(usePrimaryName)
 const mockUseRecords = vi.mocked(useRecords)

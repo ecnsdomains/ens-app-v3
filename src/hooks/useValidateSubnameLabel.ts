@@ -3,8 +3,8 @@ import { useMemo } from 'react'
 import { emptyAddress } from '@app/utils/constants'
 import { isLabelTooLong } from '@app/utils/utils'
 
-import { useOwner } from './ensjs/public/useOwner'
-import { useWrapperData } from './ensjs/public/useWrapperData'
+import { useOwner } from './nameservice/public/useOwner'
+import { useWrapperData } from './nameservice/public/useWrapperData'
 import { usePccExpired } from './fuses/usePccExpired'
 import { useValidate } from './useValidate'
 

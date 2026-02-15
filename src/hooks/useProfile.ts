@@ -8,12 +8,12 @@ import { supportedGeneralRecordKeys } from '@app/constants/supportedGeneralRecor
 import { supportedSocialRecordKeys } from '@app/constants/supportedSocialRecordKeys'
 import { getCoderByCoinNameWithTestnetSupport } from '@app/utils/records'
 
-import { usePrefetchRecords, useRecords } from './ensjs/public/useRecords'
-import { useDecodedName } from './ensjs/subgraph/useDecodedName'
+import { usePrefetchRecords, useRecords } from './nameservice/public/useRecords'
+import { useDecodedName } from './nameservice/subgraph/useDecodedName'
 import {
   useSubgraphRecords,
   UseSubgraphRecordsReturnType,
-} from './ensjs/subgraph/useSubgraphRecords'
+} from './nameservice/subgraph/useSubgraphRecords'
 
 const CUSTOM_RECORD_ADDITIONS = ['avatar']
 
@@ -55,8 +55,8 @@ const getProfileRecordsParameters = ({
           (coinName) => getCoderByCoinNameWithTestnetSupport(coinName).coinType,
         ),
         ...(subgraphRecords?.coins
-          .map((coinId) => parseInt(coinId))
-          .filter((coinId) => {
+          .map((coinId: string) => parseInt(coinId))
+          .filter((coinId: number) => {
             try {
               return !!getCoderByCoinType(coinId)
             } catch {
@@ -110,7 +110,7 @@ export const useProfile = ({
           }
         : {}),
       createdAt: subgraphRecords?.createdAt,
-      address: profile.coins.find((x) => x.id === 60)?.value as Address | undefined,
+      address: profile.coins.find((x: { id: number; value: string }) => x.id === 60)?.value as Address | undefined,
     }
   }, [profile, subgraphRecords, decodedName])
 

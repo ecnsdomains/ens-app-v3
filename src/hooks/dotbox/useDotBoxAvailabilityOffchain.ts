@@ -1,12 +1,13 @@
 import { QueryFunctionContext } from '@tanstack/react-query'
 
+import { SERVICES } from '@app/constants/brand'
 import { useQueryOptions } from '@app/hooks/useQueryOptions'
 import { CreateQueryKey, QueryConfig } from '@app/types'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
 import { prepareQueryOptions } from '@app/utils/prepareQueryOptions'
 import { useQuery } from '@app/utils/query/useQuery'
 
-const BOX_SEARCH_ENDPOINT = 'https://dotbox-worker.ens-cf.workers.dev/search'
+const BOX_SEARCH_ENDPOINT = `${SERVICES.dotboxWorkerUrl}/search`
 
 type UseDotBoxAvailabilityOffchainParameters = {
   name?: string

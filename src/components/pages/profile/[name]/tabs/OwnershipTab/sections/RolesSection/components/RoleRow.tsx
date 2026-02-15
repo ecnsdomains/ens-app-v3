@@ -16,11 +16,11 @@ import {
 
 import { AvatarWithIdentifier } from '@app/components/@molecules/AvatarWithIdentifier/AvatarWithIdentifier'
 import { useBlockExplorer } from '@app/hooks/chain/useBlockExplorer'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import type { Role } from '@app/hooks/ownership/useRoles/useRoles'
 import { useRouterWithHistory } from '@app/hooks/useRouterWithHistory'
 import { emptyAddress } from '@app/utils/constants'
-import { checkETH2LDFromName } from '@app/utils/utils'
+import { checkNativeTld2LD } from '@app/utils/utils'
 
 import { useRoleActions } from '../hooks/useRoleActions'
 import { RoleTag } from './RoleTag'
@@ -74,7 +74,7 @@ export const RoleRow = ({ name, address, roles, actions, isWrapped, isEmancipate
   const blockExplorerAction = useMemo(() => {
     const primaryName = primary.data?.name
     if (!primaryName || !blockExplorer) return null
-    const is2ldEth = checkETH2LDFromName(primaryName)
+    const is2ldEth = checkNativeTld2LD(primaryName)
     const hasToken = is2ldEth || isWrapped
     if (!hasToken) return null
     return {

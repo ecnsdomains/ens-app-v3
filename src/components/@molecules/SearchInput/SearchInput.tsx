@@ -33,11 +33,11 @@ import {
 import {
   UseAddressRecordQueryKey,
   UseAddressRecordReturnType,
-} from '@app/hooks/ensjs/public/useAddressRecord'
-import { UseExpiryQueryKey } from '@app/hooks/ensjs/public/useExpiry'
-import { UseOwnerQueryKey, UseOwnerReturnType } from '@app/hooks/ensjs/public/useOwner'
-import { UsePriceQueryKey } from '@app/hooks/ensjs/public/usePrice'
-import { UseWrapperDataQueryKey } from '@app/hooks/ensjs/public/useWrapperData'
+} from '@app/hooks/nameservice/public/useAddressRecord'
+import { UseExpiryQueryKey } from '@app/hooks/nameservice/public/useExpiry'
+import { UseOwnerQueryKey, UseOwnerReturnType } from '@app/hooks/nameservice/public/useOwner'
+import { UsePriceQueryKey } from '@app/hooks/nameservice/public/usePrice'
+import { UseWrapperDataQueryKey } from '@app/hooks/nameservice/public/useWrapperData'
 import { useLocalStorage } from '@app/hooks/useLocalStorage'
 import { createQueryKey } from '@app/hooks/useQueryOptions'
 import { useRouterWithHistory } from '@app/hooks/useRouterWithHistory'
@@ -45,6 +45,7 @@ import { useValidate, validate } from '@app/hooks/useValidate'
 import { useElementSize } from '@app/hooks/useWindowSize'
 import { CreateQueryKey, GenericQueryKey } from '@app/types'
 import { sendEvent } from '@app/utils/analytics/events'
+import { getCurrentTld } from '@app/constants/tld'
 import { useBreakpoint } from '@app/utils/BreakpointProvider'
 import { getRegistrationStatus } from '@app/utils/registrationStatus'
 import { thread, yearsToSeconds } from '@app/utils/utils'
@@ -259,7 +260,7 @@ const getRouteForSearchItem = ({
     if (boxStatus === 'available') return `/dotbox/${selectedItem.text}`
   }
 
-  if (selectedItem.nameType === 'eth' || selectedItem.nameType === 'dns') {
+  if (selectedItem.nameType === 'native' || selectedItem.nameType === 'dns') {
     const ownerData = getCachedQueryData<UseOwnerReturnType, UseOwnerQueryKey>({
       functionName: 'getOwner',
       params: { name: selectedItem.text },
@@ -435,22 +436,22 @@ const useSelectionManager = ({
   }, [state, setSelected])
 }
 
-const formatEthText = ({ name, isETH }: { name: string; isETH: boolean | undefined }) => {
+const formatNativeTldText = ({ name, isNativeTld }: { name: string; isNativeTld: boolean | undefined }) => {
   if (!name) return ''
-  if (isETH) return name
+  if (isNativeTld) return name
   if (name.includes('.')) return ''
   if (name === '[root]') return ''
-  return `${name}.eth`
+  return `${name}.${getCurrentTld()}`
 }
-const addEthDropdownItem =
-  ({ name, isETH }: { name: string; isETH: boolean | undefined }) =>
+const addNativeTldDropdownItem =
+  ({ name, isNativeTld }: { name: string; isNativeTld: boolean | undefined }) =>
   (dropdownItems: SearchItem[]): SearchItem[] => {
-    const formattedEthName = formatEthText({ name, isETH })
-    if (formattedEthName === '') return dropdownItems
+    const formattedName = formatNativeTldText({ name, isNativeTld })
+    if (formattedName === '') return dropdownItems
     return [
       {
-        text: formattedEthName,
-        nameType: 'eth',
+        text: formattedName,
+        nameType: 'native',
       } as const,
       ...dropdownItems,
     ]
@@ -557,18 +558,18 @@ const addHistoryDropdownItems =
     return dropdownItems
   }
 
-const formatDnsText = ({ name, isETH }: { name: string; isETH: boolean | undefined }) => {
+const formatDnsText = ({ name, isNativeTld }: { name: string; isNativeTld: boolean | undefined }) => {
   if (!name) return ''
   if (!name.includes('.')) return ''
   if (name.endsWith('.box')) return ''
-  if (isETH) return ''
+  if (isNativeTld) return ''
   if (name === '[root]') return ''
   return name
 }
 const addDnsDropdownItem =
-  ({ name, isETH }: { name: string; isETH: boolean | undefined }) =>
+  ({ name, isNativeTld }: { name: string; isNativeTld: boolean | undefined }) =>
   (dropdownItems: SearchItem[]): SearchItem[] => {
-    const formattedDnsName = formatDnsText({ name, isETH })
+    const formattedDnsName = formatDnsText({ name, isNativeTld })
     if (!formattedDnsName) return dropdownItems
     return [
       ...dropdownItems,
@@ -608,7 +609,7 @@ const useBuildDropdownItems = (inputVal: string, history: HistoryItem[]) => {
 
   const inputIsAddress = useMemo(() => isAddress(inputVal), [inputVal])
 
-  const { isValid, isETH, name } = useValidate({
+  const { isValid, isNativeTld, name } = useValidate({
     input: inputVal,
   })
 
@@ -616,16 +617,16 @@ const useBuildDropdownItems = (inputVal: string, history: HistoryItem[]) => {
     () =>
       thread(
         [],
-        addEthDropdownItem({ name, isETH }),
+        addNativeTldDropdownItem({ name, isNativeTld }),
         addBoxDropdownItem({ name, isValid }),
-        addDnsDropdownItem({ name, isETH }),
+        addDnsDropdownItem({ name, isNativeTld }),
         addAddressItem({ name, inputIsAddress }),
         addTldDropdownItem({ name }),
         addHistoryDropdownItems({ name, history }),
         addErrorDropdownItem({ name, isValid }),
         addInfoDropdownItem({ t }),
       ),
-    [inputIsAddress, name, isETH, isValid, history, t],
+    [inputIsAddress, name, isNativeTld, isValid, history, t],
   )
 }
 

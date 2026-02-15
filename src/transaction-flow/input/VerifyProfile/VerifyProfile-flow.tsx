@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { match, P } from 'ts-pattern'
 
 import { VERIFICATION_RECORD_KEY } from '@app/constants/verification'
-import { useOwner } from '@app/hooks/ensjs/public/useOwner'
+import { useOwner } from '@app/hooks/nameservice/public/useOwner'
 import { useProfile } from '@app/hooks/useProfile'
 import { useVerifiedRecords } from '@app/hooks/verification/useVerifiedRecords/useVerifiedRecords'
 import { TransactionDialogPassthrough } from '@app/transaction-flow/types'
@@ -31,7 +31,7 @@ const VerifyProfile = ({ data: { name }, dispatch, onDismiss }: Props) => {
   const ownerAddress = ownerData?.registrant ?? ownerData?.owner
 
   const { data: verificationData, isLoading: isVerificationLoading } = useVerifiedRecords({
-    verificationsRecord: profile?.texts?.find(({ key }) => key === VERIFICATION_RECORD_KEY)?.value,
+    verificationsRecord: profile?.texts?.find(({ key }: { key: string }) => key === VERIFICATION_RECORD_KEY)?.value,
     ownerAddress,
     name,
   })

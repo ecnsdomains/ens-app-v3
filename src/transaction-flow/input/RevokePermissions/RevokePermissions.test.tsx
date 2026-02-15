@@ -2,14 +2,14 @@ import { fireEvent, mockFunction, render, screen, userEvent, waitFor } from '@ap
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { createTransactionItem } from '@app/transaction-flow/transaction'
 import { DeepPartial } from '@app/types'
 
 import { makeMockIntersectionObserver } from '../../../../test/mock/makeMockIntersectionObserver'
 import RevokePermissions, { Props } from './RevokePermissions-flow'
 
-vi.mock('@app/hooks/ensjs/public/usePrimaryName')
+vi.mock('@app/hooks/nameservice/public/usePrimaryName')
 
 vi.spyOn(Date, 'now').mockImplementation(() => new Date('2023-01-01').getTime())
 

@@ -5,6 +5,7 @@ import { getChainContractAddress } from '@ensdomains/ensjs/contracts'
 import { getResolver } from '@ensdomains/ensjs/public'
 import { setAddressRecord } from '@ensdomains/ensjs/wallet'
 
+import { getNativeCoinKey } from '@app/constants/tld'
 import { Transaction, TransactionDisplayItem, TransactionFunctionParameters } from '@app/types'
 
 type Data = {
@@ -25,8 +26,8 @@ const displayItems = (
   {
     label: 'info',
     value: latestResolver
-      ? t(`transaction.info.updateEthAddressOnLatestResolver`)
-      : t(`transaction.info.updateEthAddress`),
+      ? t(`transaction.info.updateNativeCoinAddressOnLatestResolver`)
+      : t(`transaction.info.updateNativeCoinAddress`),
   },
   {
     label: 'address',
@@ -53,7 +54,7 @@ const transaction = async ({
   return setAddressRecord.makeFunctionData(connectorClient, {
     name: data.name,
     resolverAddress,
-    coin: 'eth',
+    coin: getNativeCoinKey(),
     value: address,
   })
 }

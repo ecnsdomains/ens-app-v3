@@ -8,14 +8,14 @@ import { GetSubgraphRecordsReturnType } from '@ensdomains/ensjs/subgraph'
 
 import { createDateAndValue } from '@app/utils/utils'
 
-import { useRecords } from './ensjs/public/useRecords'
-import { useDecodedName } from './ensjs/subgraph/useDecodedName'
-import { useSubgraphRecords } from './ensjs/subgraph/useSubgraphRecords'
+import { useRecords } from './nameservice/public/useRecords'
+import { useDecodedName } from './nameservice/subgraph/useDecodedName'
+import { useSubgraphRecords } from './nameservice/subgraph/useSubgraphRecords'
 import { useProfile } from './useProfile'
 
-vi.mock('./ensjs/subgraph/useSubgraphRecords')
-vi.mock('./ensjs/public/useRecords')
-vi.mock('./ensjs/subgraph/useDecodedName')
+vi.mock('./nameservice/subgraph/useSubgraphRecords')
+vi.mock('./nameservice/public/useRecords')
+vi.mock('./nameservice/subgraph/useDecodedName')
 
 const mockUseSubgraphRecords = mockFunction(useSubgraphRecords)
 const mockUseRecords = mockFunction(useRecords)

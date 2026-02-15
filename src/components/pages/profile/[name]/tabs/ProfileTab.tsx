@@ -10,13 +10,14 @@ import { ProfileDetails } from '@app/components/pages/profile/ProfileDetails'
 import { ProfileSnippet } from '@app/components/ProfileSnippet'
 import { VERIFICATION_RECORD_KEY } from '@app/constants/verification'
 import { useAbilities } from '@app/hooks/abilities/useAbilities'
-import { useIsOffchainName } from '@app/hooks/ensjs/dns/useIsOffchainName'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
+import { useIsOffchainName } from '@app/hooks/nameservice/dns/useIsOffchainName'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { useProfileActions } from '@app/hooks/pages/profile/[name]/profile/useProfileActions/useProfileActions'
 import { useNameDetails } from '@app/hooks/useNameDetails'
 import { useOwners } from '@app/hooks/useOwners'
 import { useVerifiedRecords } from '@app/hooks/verification/useVerifiedRecords/useVerifiedRecords'
 import { categoriseAndTransformTextRecords } from '@app/utils/records/categoriseProfileTextRecords'
+import { isCurrentTldName } from '@app/constants/tld'
 import { getSupportLink } from '@app/utils/supportLinks'
 import { validateExpiry } from '@app/utils/utils'
 import { getVerificationRecordItemProps } from '@app/utils/verification/getVerificationRecordItems'
@@ -139,7 +140,7 @@ const ProfileTab = ({ nameDetails, name }: Props) => {
             />
           </Helper>
         )}
-        {isWrapped && !normalisedName.endsWith('.eth') && (
+        {isWrapped && !isCurrentTldName(normalisedName) && (
           <Helper alert="warning" alignment="horizontal">
             {t('tabs.profile.warnings.wrappedDNS')}
           </Helper>

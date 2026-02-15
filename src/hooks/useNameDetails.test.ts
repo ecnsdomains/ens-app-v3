@@ -2,14 +2,14 @@ import { mockFunction, renderHook } from '@app/test-utils'
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { useDnsOwner } from './ensjs/dns/useDnsOwner'
+import { useDnsOwner } from './nameservice/dns/useDnsOwner'
 import { useBasicName } from './useBasicName'
 import { useNameDetails } from './useNameDetails'
 import { useProfile } from './useProfile'
 
 vi.mock('./useBasicName')
 vi.mock('./useProfile')
-vi.mock('./ensjs/dns/useDnsOwner')
+vi.mock('./nameservice/dns/useDnsOwner')
 
 const mockUseBasicName = mockFunction(useBasicName)
 const mockUseProfile = mockFunction(useProfile)

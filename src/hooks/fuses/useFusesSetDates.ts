@@ -15,7 +15,7 @@ import { ChildFuseKeys, decodeFuses, ParentFuseKeys } from '@ensdomains/ensjs/ut
 
 import { AnyFuseKey, ClientWithEns, CreateQueryKey } from '@app/types'
 
-import { useNameHistory } from '../ensjs/subgraph/useNameHistory'
+import { useNameHistory } from '../nameservice/subgraph/useNameHistory'
 import { createQueryKey } from '../useQueryOptions'
 
 type UseFusesSetDatesParameters = {

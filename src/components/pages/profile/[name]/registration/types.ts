@@ -23,7 +23,7 @@ export type RegistrationStepData = {
     reverseRecord: boolean
     paymentMethodChoice: PaymentMethod | ''
     estimatedTotal?: bigint
-    ethPrice?: bigint
+    nativeCoinPrice?: bigint
     durationType: 'date' | 'years'
   }
   profile: {

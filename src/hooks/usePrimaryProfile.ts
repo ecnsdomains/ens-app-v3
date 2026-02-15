@@ -3,7 +3,7 @@ import { Hex } from 'viem'
 
 import { GetRecordsReturnType } from '@ensdomains/ensjs/public'
 
-import { usePrimaryName } from './ensjs/public/usePrimaryName'
+import { usePrimaryName } from './nameservice/public/usePrimaryName'
 import { useProfile } from './useProfile'
 
 type UsePrimaryProfileParameters = {

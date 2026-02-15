@@ -7,7 +7,7 @@ import { RoleRow } from './RoleRow'
 vi.mock('next/router', async () => await vi.importActual('next-router-mock'))
 
 const mockUsePrimary = vi.fn().mockReturnValue({})
-vi.mock('@app/hooks/ensjs/public/usePrimaryName', () => ({
+vi.mock('@app/hooks/nameservice/public/usePrimaryName', () => ({
   usePrimaryName: () => ({
     ...mockUsePrimary(),
     isLoading: false,

@@ -10,6 +10,7 @@ import {
 } from '@ensdomains/ensjs/utils'
 
 import { testnetNetworks } from '@app/constants/networks'
+import { getNativeCoinSymbol, getNativeCoinType } from '@app/constants/tld'
 import { AddressRecord, Profile, TextRecord } from '@app/types'
 
 import { contentHashToString } from './contenthash'
@@ -110,23 +111,32 @@ export const checkProfileRecordsEqual = (a: Profile, b: Profile): boolean => {
   return true
 }
 
-export const makeEthRecordItem = (address: Address): AddressRecord => {
+export const makeNativeCoinRecordItem = (address: Address): AddressRecord => {
   return {
-    id: 60,
-    name: 'ETH',
+    id: getNativeCoinType(),
+    name: getNativeCoinSymbol(),
     value: address,
   }
 }
 
-export const makeProfileRecordsWithEthRecordItem = (
+/** @deprecated Use makeNativeCoinRecordItem instead */
+export const makeEthRecordItem = makeNativeCoinRecordItem
+
+export const makeProfileRecordsWithNativeCoinRecordItem = (
   records: Profile = {},
   address?: Address,
 ): Profile => {
   return {
     ...records,
-    coins: mergeAddressRecords(records?.coins, [...(address ? [makeEthRecordItem(address)] : [])]),
+    coins: mergeAddressRecords(
+      records?.coins,
+      [...(address ? [makeNativeCoinRecordItem(address)] : [])],
+    ),
   }
 }
+
+/** @deprecated Use makeProfileRecordsWithNativeCoinRecordItem instead */
+export const makeProfileRecordsWithEthRecordItem = makeProfileRecordsWithNativeCoinRecordItem
 
 export const profileRecordsToKeyValue = async (records: Profile): Promise<RecordOptions> => {
   const contentHash = contentHashToString(records?.contentHash)

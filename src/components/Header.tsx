@@ -6,7 +6,7 @@ import { useAccount } from 'wagmi'
 
 import { useRecentTransactions } from '@app/hooks/transactions/useRecentTransactions'
 import { useInitial } from '@app/hooks/useInitial'
-import { legacyFavouritesRoute, routes } from '@app/routes'
+import { routes } from '@app/routes'
 import { useBreakpoint } from '@app/utils/BreakpointProvider'
 
 import ECNSMark from '../assets/ECNSMark.svg'
@@ -148,14 +148,8 @@ export const Header = () => {
 
   let RouteItems: ReactNode
 
-  let routesNoSearchWithFavourites = routesNoSearch
-
-  if (globalThis?.localStorage?.getItem('ensFavourites')) {
-    routesNoSearchWithFavourites = [...routesNoSearchWithFavourites, legacyFavouritesRoute]
-  }
-
   if (!isInitial && isConnected) {
-    RouteItems = routesNoSearchWithFavourites.map((route) => (
+    RouteItems = routesNoSearch.map((route) => (
       <RouteItem
         key={route.name}
         route={route}

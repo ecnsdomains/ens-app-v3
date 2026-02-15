@@ -4,7 +4,7 @@ import { Config, useChainId } from 'wagmi'
 import { GetEnsAvatarQueryKey } from 'wagmi/query'
 
 import { SupportedChain } from '@app/constants/chains'
-import { useSubgraphClient } from '@app/hooks/ensjs/subgraph/useSubgraphClient'
+import { useSubgraphClient } from '@app/hooks/nameservice/subgraph/useSubgraphClient'
 import { clearRelevantNameQueriesFromRegisterOrImport } from '@app/hooks/transactions/clearRelevantNameQueriesFromRegisterOrImport'
 import { Transaction } from '@app/hooks/transactions/transactionStore'
 import { useRecentTransactions } from '@app/hooks/transactions/useRecentTransactions'

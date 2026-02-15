@@ -101,7 +101,7 @@ describe('getSendNameTransactions', () => {
     ])
   })
 
-  it('should return 3 transactions (updateEthAddress, transferName, transferName) if resetProfile, sendManager and sendOwner is true', () => {
+  it('should return 3 transactions (updateNativeCoinAddress, transferName, transferName) if resetProfile, sendManager and sendOwner is true', () => {
     expect(
       getSendNameTransactions({
         name: 'test.eth',
@@ -128,7 +128,7 @@ describe('getSendNameTransactions', () => {
         resolverAddress: '0xresolver',
       }),
     ).toEqual([
-      createTransactionItem('updateEthAddress', { name: 'test.eth', address: '0xrecipient' }),
+      createTransactionItem('updateNativeCoinAddress', { name: 'test.eth', address: '0xrecipient' }),
       createTransactionItem('transferName', {
         name: 'test.eth',
         newOwnerAddress: '0xrecipient',

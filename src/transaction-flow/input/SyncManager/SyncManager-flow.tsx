@@ -5,7 +5,7 @@ import { Dialog } from '@ensdomains/thorin'
 
 import { useAbilities } from '@app/hooks/abilities/useAbilities'
 import { useAccountSafely } from '@app/hooks/account/useAccountSafely'
-import { useDnsImportData } from '@app/hooks/ensjs/dns/useDnsImportData'
+import { useDnsImportData } from '@app/hooks/nameservice/dns/useDnsImportData'
 import { useNameType } from '@app/hooks/nameType/useNameType'
 import { useNameDetails } from '@app/hooks/useNameDetails'
 import { createTransactionItem, TransactionItem } from '@app/transaction-flow/transaction'
@@ -47,16 +47,16 @@ const SyncManager = ({ data: { name }, dispatch, onDismiss }: Props) => {
     dnsOwner: details.dnsOwner,
   })
 
-  const syncType = nameType.data?.startsWith('dns') ? 'dns' : 'eth'
+  const syncType = nameType.data?.startsWith('dns') ? 'dns' : 'native'
   const needsProof = nameType.data?.startsWith('dns') || !baseCanSynManager
   const dnsImportData = useDnsImportData({ name, enabled: needsProof })
 
-  const canSyncEth =
+  const canSyncNative =
     baseCanSynManager &&
-    syncType === 'eth' &&
+    syncType === 'native' &&
     !!abilities.data?.sendNameFunctionCallDetails?.sendManager?.contract
   const canSyncDNS = baseCanSynManager && syncType === 'dns' && !!dnsImportData.data
-  const canSyncManager = canSyncEth || canSyncDNS
+  const canSyncManager = canSyncNative || canSyncDNS
 
   const isLoading =
     !account ||
@@ -77,7 +77,7 @@ const SyncManager = ({ data: { name }, dispatch, onDismiss }: Props) => {
             dnsImportData: dnsImportData.data!,
           })
         : null,
-      canSyncEth && account.address
+      canSyncNative && account.address
         ? makeTransferNameOrSubnameTransactionItem({
             name,
             newOwnerAddress: account.address,

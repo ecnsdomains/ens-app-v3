@@ -8,10 +8,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { useAbilities } from '@app/hooks/abilities/useAbilities'
 import { useAccountSafely } from '@app/hooks/account/useAccountSafely'
 import { useContractAddress } from '@app/hooks/chain/useContractAddress'
-import { useExpiry } from '@app/hooks/ensjs/public/useExpiry'
-import { useOwner } from '@app/hooks/ensjs/public/useOwner'
-import { usePrimaryName } from '@app/hooks/ensjs/public/usePrimaryName'
-import { useWrapperData } from '@app/hooks/ensjs/public/useWrapperData'
+import { useExpiry } from '@app/hooks/nameservice/public/useExpiry'
+import { useOwner } from '@app/hooks/nameservice/public/useOwner'
+import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
+import { useWrapperData } from '@app/hooks/nameservice/public/useWrapperData'
 import { useGetPrimaryNameTransactionFlowItem } from '@app/hooks/primary/useGetPrimaryNameTransactionFlowItem'
 import { useResolverStatus } from '@app/hooks/resolver/useResolverStatus'
 import { useProfile } from '@app/hooks/useProfile'
@@ -32,12 +32,12 @@ vi.mock('@app/hooks/account/useAccountSafely')
 vi.mock('@app/hooks/abilities/useAbilities')
 
 vi.mock('@app/hooks/useProfile')
-vi.mock('@app/hooks/ensjs/public/useOwner')
-vi.mock('@app/hooks/ensjs/public/useWrapperData')
-vi.mock('@app/hooks/ensjs/public/useExpiry')
+vi.mock('@app/hooks/nameservice/public/useOwner')
+vi.mock('@app/hooks/nameservice/public/useWrapperData')
+vi.mock('@app/hooks/nameservice/public/useExpiry')
 
 vi.mock('@app/hooks/resolver/useResolverStatus')
-vi.mock('@app/hooks/ensjs/public/usePrimaryName')
+vi.mock('@app/hooks/nameservice/public/usePrimaryName')
 
 vi.mock('@app/utils/SyncProvider/SyncProvider')
 
@@ -162,7 +162,7 @@ describe('useProfileActions', () => {
               name,
               address: '0x1234567890',
             },
-            name: 'updateEthAddress',
+            name: 'updateNativeCoinAddress',
           },
         ],
       }),

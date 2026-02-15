@@ -9,7 +9,7 @@ import { useAccount, useChainId } from 'wagmi'
 import { Input } from '@ensdomains/thorin'
 
 import { Spacer } from '@app/components/@atoms/Spacer'
-import { useAddressRecord } from '@app/hooks/ensjs/public/useAddressRecord'
+import { useAddressRecord } from '@app/hooks/nameservice/public/useAddressRecord'
 import useDebouncedCallback from '@app/hooks/useDebouncedCallback'
 import { createQueryKey } from '@app/hooks/useQueryOptions'
 

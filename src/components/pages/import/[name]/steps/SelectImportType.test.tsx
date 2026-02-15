@@ -10,7 +10,7 @@ import { useAccount } from 'wagmi'
 import { lightTheme } from '@ensdomains/thorin'
 
 import { useDnsOffchainStatus } from '@app/hooks/dns/useDnsOffchainStatus'
-import { useResolver } from '@app/hooks/ensjs/public/useResolver'
+import { useResolver } from '@app/hooks/nameservice/public/useResolver'
 import { useUnmanagedTLD } from '@app/hooks/useUnmanagedTLD'
 import i18n from '@app/i18n'
 

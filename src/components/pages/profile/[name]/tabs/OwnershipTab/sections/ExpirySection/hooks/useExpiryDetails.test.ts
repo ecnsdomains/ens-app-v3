@@ -2,7 +2,7 @@ import { renderHook } from '@app/test-utils'
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { checkETH2LDFromName } from '@app/utils/utils'
+import { checkNativeTld2LD } from '@app/utils/utils'
 
 import { useExpiryDetails } from './useExpiryDetails'
 
@@ -27,7 +27,7 @@ const mockUseRegistrationData = vi.fn().mockReturnValue({
 })
 vi.mock('@app/hooks/useRegistrationData', () => ({
   default: ({ name, enabled }: any) =>
-    enabled && checkETH2LDFromName(name) ? mockUseRegistrationData() : { isLoading: false },
+    enabled && checkNativeTld2LD(name) ? mockUseRegistrationData() : { isLoading: false },
 }))
 
 vi.mock('@app/hooks/chain/useChainName', () => ({
