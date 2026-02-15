@@ -44,7 +44,7 @@ describe('UnknownLabels', () => {
   })
   it('should render', () => {
     renderHelper({
-      name: `${labels.sub}.test123.eth`,
+      name: `${labels.sub}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
       },
@@ -53,7 +53,7 @@ describe('UnknownLabels', () => {
   })
   it('should render inputs for all labels', () => {
     renderHelper({
-      name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+      name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
       },
@@ -66,7 +66,7 @@ describe('UnknownLabels', () => {
   })
   it('should only allow inputs for unknown labels', () => {
     renderHelper({
-      name: `${labels.sub}.test123.eth`,
+      name: `${labels.sub}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
       },
@@ -79,7 +79,7 @@ describe('UnknownLabels', () => {
     let input: HTMLElement
     beforeEach(async () => {
       renderHelper({
-        name: `${labels.sub}.test123.eth`,
+        name: `${labels.sub}.test123.etc`,
         transactionFlowItem: {
           transactions: [],
         },
@@ -108,7 +108,7 @@ describe('UnknownLabels', () => {
   })
   it('should only allow inputs for unknown labels where there are known labels in between them', () => {
     renderHelper({
-      name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+      name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
       },
@@ -121,18 +121,18 @@ describe('UnknownLabels', () => {
   })
   it('should show TLD on last input as suffix', () => {
     renderHelper({
-      name: `${labels.sub}.test123.eth`,
+      name: `${labels.sub}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
       },
     })
     expect(
       screen.getByTestId(`unknown-label-input-test123`).parentElement!.querySelector('label'),
-    ).toHaveTextContent('.eth')
+    ).toHaveTextContent('.etc')
   })
   it('should not allow submit when inputs are empty', () => {
     renderHelper({
-      name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+      name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
       },
@@ -141,7 +141,7 @@ describe('UnknownLabels', () => {
   })
   it('should not allow submit when inputs have errors', async () => {
     renderHelper({
-      name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+      name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
       },
@@ -154,7 +154,7 @@ describe('UnknownLabels', () => {
   })
   it('should allow submit when inputs are filled and valid', async () => {
     renderHelper({
-      name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+      name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
       },
@@ -167,7 +167,7 @@ describe('UnknownLabels', () => {
   })
   it('should replace all unknown label names in transactions array with the new ones', async () => {
     renderHelper({
-      name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+      name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
       transactionFlowItem: {
         transactions: [
           {
@@ -179,7 +179,7 @@ describe('UnknownLabels', () => {
           {
             name: 'wrapName',
             data: {
-              name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+              name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
             },
           },
         ],
@@ -206,7 +206,7 @@ describe('UnknownLabels', () => {
           {
             name: 'wrapName',
             data: {
-              name: `cool.sub.nice.test.test123.eth`,
+              name: `cool.sub.nice.test.test123.etc`,
             },
           },
         ],
@@ -215,7 +215,7 @@ describe('UnknownLabels', () => {
   })
   it('should replace name in intro with new name', async () => {
     renderHelper({
-      name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+      name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
         intro: {
@@ -223,7 +223,7 @@ describe('UnknownLabels', () => {
           content: {
             name: 'WrapName',
             data: {
-              name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+              name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
             },
           },
         },
@@ -246,7 +246,7 @@ describe('UnknownLabels', () => {
           content: {
             name: 'WrapName',
             data: {
-              name: `cool.sub.nice.test.test123.eth`,
+              name: `cool.sub.nice.test.test123.etc`,
             },
           },
         },
@@ -255,7 +255,7 @@ describe('UnknownLabels', () => {
   })
   it('should pass through all other transaction item props', async () => {
     renderHelper({
-      name: `cool.${labels.sub}.nice.${labels.test}.test123.eth`,
+      name: `cool.${labels.sub}.nice.${labels.test}.test123.etc`,
       transactionFlowItem: {
         transactions: [],
         resumable: true,

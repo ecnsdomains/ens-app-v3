@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, Mock, vi } from 'vitest'
 import { useLocalStorage } from '@app/hooks/useLocalStorage'
 
 import { PrivacySection } from './index'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/useLocalStorage', () => ({
   useLocalStorage: vi.fn(),
@@ -35,7 +36,7 @@ describe('PrivacySection', () => {
     const mockHistory = [
       {
         nameType: 'address',
-        text: 'example.eth',
+        text: testDomain('example'),
         lastAccessed: Date.now(),
       },
     ]
@@ -54,7 +55,7 @@ describe('PrivacySection', () => {
     const mockHistory = [
       {
         nameType: 'address',
-        text: 'example.eth',
+        text: testDomain('example'),
         lastAccessed: Date.now(),
       },
     ]

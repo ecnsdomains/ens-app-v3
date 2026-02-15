@@ -8,6 +8,7 @@ import { useLocalStorage } from '@app/hooks/useLocalStorage'
 
 import { RegistrationReducerDataItem } from '../../types'
 import Profile from './Profile'
+import { testDomain, COIN_KEY } from '@root/test/chainConstants'
 
 vi.mock('wagmi')
 
@@ -19,12 +20,12 @@ const mockUseAccount = mockFunction(useAccount)
 const mockUseContractAddress = mockFunction(useContractAddress)
 const mockUseLocalStorage = mockFunction(useLocalStorage)
 
-const name = 'test.eth'
+const name = testDomain('test')
 
 const defaultRegistrationData = {
   records: [
     {
-      key: 'eth',
+      key: COIN_KEY,
       value: '0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7',
       group: 'address',
       type: 'addr',
@@ -136,7 +137,7 @@ describe('Profile', () => {
     )
   })
 
-  it('should disable eth record if registrationData.reverseRecord is true', async () => {
+  it('should disable native coin record if registrationData.reverseRecord is true', async () => {
     render(
       <Profile
         name={name}
@@ -146,12 +147,12 @@ describe('Profile', () => {
       />,
     )
 
-    const ethRecord = screen.getByTestId('profile-record-input-eth')
-    expect(ethRecord.querySelector('input')).toBeDisabled()
-    expect(screen.getByTestId('profile-record-input-eth-delete-button')).toBeDisabled()
+    const coinRecord = screen.getByTestId(`profile-record-input-${COIN_KEY}`)
+    expect(coinRecord.querySelector('input')).toBeDisabled()
+    expect(screen.getByTestId(`profile-record-input-${COIN_KEY}-delete-button`)).toBeDisabled()
   })
 
-  it('should prompt user before deleting eth record', async () => {
+  it('should prompt user before deleting native coin record', async () => {
     render(
       <Profile
         name={name}
@@ -161,7 +162,7 @@ describe('Profile', () => {
       />,
     )
 
-    await userEvent.click(screen.getByTestId('profile-record-input-eth-delete-button'))
+    await userEvent.click(screen.getByTestId(`profile-record-input-${COIN_KEY}-delete-button`))
     await waitFor(() =>
       expect(screen.getByText('steps.profile.confirmations.clearEth.title')).toBeInTheDocument(),
     )

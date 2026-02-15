@@ -7,6 +7,7 @@ import { useChainName } from '@app/hooks/chain/useChainName'
 
 import { makeMockIntersectionObserver } from '../../../../../test/mock/makeMockIntersectionObserver'
 import { HeaderUpload } from './HeaderUpload'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('wagmi')
 vi.mock('@app/hooks/chain/useChainName')
@@ -28,7 +29,7 @@ const props = {
   handleCancel: mockHandleCancel,
   handleSubmit: mockHandleSubmit,
   headerFile: mockFile,
-  name: 'test.eth',
+  name: testDomain('test'),
 }
 
 describe('<HeaderUpload />', () => {
@@ -74,7 +75,7 @@ describe('<HeaderUpload />', () => {
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalled()
       const fetchCall = (global.fetch as any).mock.calls[0]
-      expect(fetchCall[0]).toBe('https://euc.li/test.eth/h')
+      expect(fetchCall[0]).toBe(`https://euc.li/${testDomain('test')}/h`)
       expect(fetchCall[1].method).toBe('PUT')
       expect(fetchCall[1].headers).toEqual({ 'Content-Type': 'application/json' })
       expect(fetchCall[1].body).toBe(
@@ -91,7 +92,7 @@ describe('<HeaderUpload />', () => {
     await waitFor(() =>
       expect(mockHandleSubmit).toHaveBeenCalledWith(
         'upload',
-        'https://euc.li/test.eth/h',
+        `https://euc.li/${testDomain('test')}/h`,
         mockFileDataURL,
       ),
     )
@@ -114,7 +115,7 @@ describe('<HeaderUpload />', () => {
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalled()
       const fetchCall = (global.fetch as any).mock.calls[0]
-      expect(fetchCall[0]).toBe('https://euc.li/sepolia/test.eth/h')
+      expect(fetchCall[0]).toBe(`https://euc.li/sepolia/${testDomain('test')}/h`)
       expect(fetchCall[1].method).toBe('PUT')
       expect(fetchCall[1].headers).toEqual({ 'Content-Type': 'application/json' })
       expect(fetchCall[1].body).toBe(

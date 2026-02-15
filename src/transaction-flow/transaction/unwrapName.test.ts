@@ -7,6 +7,7 @@ import { unwrapName } from '@ensdomains/ensjs/wallet'
 import { ClientWithEns, ConnectorClientWithEns } from '@app/types'
 
 import unwrapNameFlowTransaction from './unwrapName'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 vi.mock('wagmi')
 
@@ -15,7 +16,7 @@ vi.mock('@ensdomains/ensjs/wallet')
 const mockUnwrapName = mockFunction(unwrapName.makeFunctionData)
 
 describe('unwrapName', () => {
-  const name = 'myname.eth'
+  const name = testDomain('myname')
   const data = { name }
 
   describe('displayItems', () => {
@@ -49,12 +50,12 @@ describe('unwrapName', () => {
       await unwrapNameFlowTransaction.transaction({
         client,
         connectorClient,
-        data: { name: 'test.eth' },
+        data: { name: testDomain('test') },
       })
       expect(mockUnwrapName).toHaveBeenCalledWith(
         connectorClient,
         expect.objectContaining({
-          name: 'test.eth',
+          name: testDomain('test'),
           newOwnerAddress: address,
           newRegistrantAddress: address,
         }),
@@ -62,7 +63,7 @@ describe('unwrapName', () => {
     })
 
     it('should not provide registrant when name is not an eth 2ld', async () => {
-      const subname = 'sub.test.eth'
+      const subname = testSub('sub', 'test')
       const dataWithSubname = { name: subname }
       await unwrapNameFlowTransaction.transaction({
         client,
@@ -72,7 +73,7 @@ describe('unwrapName', () => {
       expect(mockUnwrapName).toHaveBeenCalledWith(
         connectorClient,
         expect.objectContaining({
-          name: 'sub.test.eth',
+          name: testSub('sub', 'test'),
           newOwnerAddress: address,
         }),
       )

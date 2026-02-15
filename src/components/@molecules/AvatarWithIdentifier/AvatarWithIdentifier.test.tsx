@@ -3,13 +3,14 @@ import { render, screen } from '@app/test-utils'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { AvatarWithIdentifier } from './AvatarWithIdentifier'
+import { testDomain } from '@root/test/chainConstants'
 
 const mockUsePrimary = vi.fn().mockImplementation(({ address }) => {
   return {
     data:
       address === '0xaddressWithoutAPrimaryName'
         ? undefined
-        : { beautifiedName: 'test.eth', name: 'test.eth' },
+        : { beautifiedName: testDomain('test'), name: testDomain('test') },
     isLoading: false,
   }
 })
@@ -33,13 +34,13 @@ describe('AvatarWithIdentifier', () => {
 
   it('should render name and address', async () => {
     render(<AvatarWithIdentifier address="0x1234" />)
-    expect(screen.getByText('test.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('test'))).toBeVisible()
     expect(screen.getByText('0x1234')).toBeVisible()
   })
 
   it('should overwrite subtitle if prop is provided', async () => {
     render(<AvatarWithIdentifier address="0x1234" subtitle="subtitle" />)
-    expect(screen.getByText('test.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('test'))).toBeVisible()
     expect(screen.getByText('subtitle')).toBeVisible()
     expect(screen.queryByText('0x1234')).toEqual(null)
   })
@@ -65,8 +66,8 @@ describe('AvatarWithIdentifier', () => {
   })
 
   it('should not call usePrimary if name is provided', async () => {
-    render(<AvatarWithIdentifier address="0x1234" name="name.eth" />)
+    render(<AvatarWithIdentifier address="0x1234" name={testDomain('name')} />)
     expect(mockUsePrimary).not.toHaveBeenCalled()
-    expect(screen.getByText('name.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('name'))).toBeVisible()
   })
 })

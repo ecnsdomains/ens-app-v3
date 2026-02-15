@@ -4,6 +4,7 @@ import { ComponentProps } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
 import { NameDetailSnippet } from './NameSnippet'
+import { testDomain } from '@root/test/chainConstants'
 
 type NameDetailSnippetProps = ComponentProps<typeof NameDetailSnippet>
 
@@ -14,7 +15,7 @@ vi.setConfig({ testTimeout: 5000 })
 
 describe('NameSnippetMobile', () => {
   const baseMockData = {
-    name: 'nick.eth',
+    name: testDomain('nick'),
     network: 1,
   }
 

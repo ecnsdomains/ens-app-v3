@@ -1,7 +1,6 @@
 /* eslint-disable no-await-in-loop */
-import { render, screen, userEvent, waitFor } from '@app/test-utils'
+import { render, renderHook, screen, userEvent, waitFor } from '@app/test-utils'
 
-import { renderHook } from '@testing-library/react-hooks'
 import { useForm } from 'react-hook-form'
 import { describe, expect, it, vi } from 'vitest'
 
@@ -72,7 +71,7 @@ describe('AddProfileRecordView', () => {
     render(<AddProfileRecordView control={result.current.control} />)
     await userEvent.click(screen.getByTestId('profile-record-option-ipfs'))
     expect(screen.getByTestId('profile-record-option-ipfs')).toHaveStyle(
-      'background-color: rgb(238, 245, 255)',
+      'background-color: rgb(209, 228, 255)',
     )
     expect(screen.getByTestId('profile-record-option-skynet')).toBeDisabled()
     expect(screen.getByTestId('profile-record-option-swarm')).toBeDisabled()

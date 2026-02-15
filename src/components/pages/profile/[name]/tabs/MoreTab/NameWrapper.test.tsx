@@ -4,13 +4,14 @@ import { makeMockUseWrapperDataData } from '@root/test/mock/makeMockUseWrapperDa
 import { describe, expect, it, vi } from 'vitest'
 
 import { NameWrapper } from './NameWrapper'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('./Token/WrapButton', () => ({ default: () => <div data-testid="wrap-button" /> }))
 vi.mock('./Token/UnwrapButton', () => ({ default: () => <div data-testid="unwrap-button" /> }))
 
 describe('NameWrapper', () => {
   it('should show wrapped status for unwrapped name', () => {
-    const name = 'nick.eth'
+    const name = testDomain('nick')
     render(
       <NameWrapper
         {...{
@@ -26,7 +27,7 @@ describe('NameWrapper', () => {
     )
   })
   it('should show wrapped status for wrapped name', () => {
-    const name = 'nick.eth'
+    const name = testDomain('nick')
     render(
       <NameWrapper
         {...{
@@ -46,7 +47,7 @@ describe('NameWrapper', () => {
     )
   })
   it('should show wrap button if unwrapped', () => {
-    const name = 'nick.eth'
+    const name = testDomain('nick')
     render(
       <NameWrapper
         address="0xaaa"
@@ -59,7 +60,7 @@ describe('NameWrapper', () => {
     expect(screen.getByTestId('wrap-button')).toBeVisible()
   })
   it('should show unwrap button if wrapped', () => {
-    const name = 'nick.eth'
+    const name = testDomain('nick')
     render(
       <NameWrapper
         isWrapped
@@ -75,7 +76,7 @@ describe('NameWrapper', () => {
     expect(screen.getByTestId('unwrap-button')).toBeVisible()
   })
   it('should not show unwrap button if wrapped but not owned', () => {
-    const name = 'nick.eth'
+    const name = testDomain('nick')
     render(
       <NameWrapper
         isWrapped
@@ -90,7 +91,7 @@ describe('NameWrapper', () => {
     expect(screen.queryByTestId('unwrap-button')).not.toBeInTheDocument()
   })
   it('should not show unwrap button if wrapped but disconnected', () => {
-    const name = 'nick.eth'
+    const name = testDomain('nick')
     render(
       <NameWrapper
         isWrapped
@@ -104,7 +105,7 @@ describe('NameWrapper', () => {
     expect(screen.queryByTestId('unwrap-button')).not.toBeInTheDocument()
   })
   it('should show lock icon and disable unwrap button if name is locked', () => {
-    const name = 'nick.eth'
+    const name = testDomain('nick')
     render(
       <NameWrapper
         isWrapped
@@ -126,7 +127,7 @@ describe('NameWrapper', () => {
         isWrapped
         canBeWrapped={false}
         address={'0xaaa'}
-        {...{ name: 'nick.eth', wrapperData: makeMockUseWrapperDataData('wrapped') }}
+        {...{ name: testDomain('nick'), wrapperData: makeMockUseWrapperDataData('wrapped') }}
         ownerData={{
           owner: '0xaaa',
           ownershipLevel: 'nameWrapper',
@@ -141,7 +142,7 @@ describe('NameWrapper', () => {
         isWrapped
         canBeWrapped={false}
         address={'0xaaa'}
-        {...{ name: 'nick.eth', wrapperData: makeMockUseWrapperDataData('emancipated') }}
+        {...{ name: testDomain('nick'), wrapperData: makeMockUseWrapperDataData('emancipated') }}
         ownerData={{
           owner: '0xaaa',
           ownershipLevel: 'nameWrapper',
@@ -158,7 +159,7 @@ describe('NameWrapper', () => {
       <NameWrapper
         isWrapped
         canBeWrapped={false}
-        {...{ name: 'nick.eth', wrapperData: makeMockUseWrapperDataData('wrapped') }}
+        {...{ name: testDomain('nick'), wrapperData: makeMockUseWrapperDataData('wrapped') }}
         ownerData={{
           owner: '0xaaa',
           ownershipLevel: 'nameWrapper',
@@ -172,7 +173,7 @@ describe('NameWrapper', () => {
       <NameWrapper
         isWrapped
         canBeWrapped={false}
-        {...{ name: 'nick.eth', wrapperData: makeMockUseWrapperDataData('emancipated') }}
+        {...{ name: testDomain('nick'), wrapperData: makeMockUseWrapperDataData('emancipated') }}
         ownerData={{
           owner: '0xaaa',
           ownershipLevel: 'nameWrapper',

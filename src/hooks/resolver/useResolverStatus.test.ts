@@ -12,6 +12,7 @@ import { makeNativeCoinRecordItem, mergeAddressRecords } from '@app/utils/record
 import { useProfile } from '../useProfile'
 import { useResolverIsAuthorised } from './useResolverIsAuthorised'
 import { useResolverType } from './useResolverType'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/useProfile')
 vi.mock('@app/hooks/resolver/useResolverType')
@@ -97,7 +98,7 @@ beforeEach(() => {
 
 describe('useResolverStatus', () => {
   it('should return expected values for base mock data', () => {
-    const { result } = renderHook(() => useResolverStatus({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverStatus({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       createResult([
         'hasLatestResolver',
@@ -130,7 +131,7 @@ describe('useResolverStatus', () => {
   })
 
   it('should return data is undefined if enabled is false', () => {
-    const { result } = renderHook(() => useResolverStatus({ name: 'test.eth', enabled: false }))
+    const { result } = renderHook(() => useResolverStatus({ name: testDomain('test'), enabled: false }))
     expect(result.current).toMatchObject(
       expect.objectContaining({ data: undefined, isLoading: false }),
     )
@@ -142,7 +143,7 @@ describe('useResolverStatus', () => {
 
   it('should not return hasLatestResolver is true if resolverType is not latest', () => {
     mockUseResolverType.mockReturnValueOnce({ data: { type: 'outdated' } })
-    const { result } = renderHook(() => useResolverStatus({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverStatus({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       createResult([
         'hasProfile',
@@ -166,7 +167,7 @@ describe('useResolverStatus', () => {
       data: createProfileData({ texts: [{ key: 'nickname', value: 'Rumpleskilskin' }] }),
       isLoading: false,
     })
-    const { result } = renderHook(() => useResolverStatus({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverStatus({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       createResult([
         'hasProfile',
@@ -189,7 +190,7 @@ describe('useResolverStatus', () => {
       data: { resolverAddress: KNOWN_RESOLVER_DATA['1']![0].address },
       isLoading: false,
     })
-    const { result } = renderHook(() => useResolverStatus({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverStatus({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       createResult([
         'hasProfile',
@@ -207,7 +208,7 @@ describe('useResolverStatus', () => {
 
   it('should not call useProfile for latest resolver if skipCompare option is true', () => {
     mockUseResolverType.mockReturnValueOnce({ data: { type: 'outdated' } })
-    const { result } = renderHook(() => useResolverStatus({ name: 'test.eth', compare: false }))
+    const { result } = renderHook(() => useResolverStatus({ name: testDomain('test'), compare: false }))
     expect(result.current).toMatchObject(
       createResult([
         'hasProfile',
@@ -229,7 +230,7 @@ describe('useResolverStatus', () => {
       isLoading: false,
       data: createProfileData({ resolverAddress: emptyAddress }),
     })
-    const { result } = renderHook(() => useResolverStatus({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverStatus({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       createResult([
         'hasProfile',
@@ -255,7 +256,7 @@ describe('useResolverStatus', () => {
       data: { isAuthorised: false, isValid: false },
       isLoading: false,
     })
-    const { result } = renderHook(() => useResolverStatus({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverStatus({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       createResult(['hasProfile', 'hasMigratedProfile', 'isMigratedProfileEqual']),
     )

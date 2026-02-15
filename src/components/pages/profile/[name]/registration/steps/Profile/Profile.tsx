@@ -16,7 +16,7 @@ import {
   HeaderViewType,
 } from '@app/components/@molecules/ProfileEditor/Header/HeaderViewManager'
 import { ProfileRecord } from '@app/constants/profileRecordOptions'
-import { isNativeCoin } from '@app/constants/tld'
+import { getNativeCoinKey, isNativeCoin } from '@app/constants/tld'
 import { useContractAddress } from '@app/hooks/chain/useContractAddress'
 import { useLocalStorage } from '@app/hooks/useLocalStorage'
 import { ProfileEditorForm, useProfileEditorForm } from '@app/hooks/useProfileEditorForm'
@@ -292,7 +292,7 @@ const Profile = ({ name, callback, registrationData, resolverExists }: Props) =>
               confirmLabel={t('steps.profile.confirmations.clearEth.confirm')}
               declineLabel={t('steps.profile.confirmations.clearEth.decline')}
               onConfirm={() => {
-                removeRecordByTypeAndKey('address', 'eth')
+                removeRecordByTypeAndKey('address', getNativeCoinKey())
                 setModalOpen(false)
               }}
               onDecline={() => setModalOpen(false)}

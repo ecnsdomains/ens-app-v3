@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { match, P } from 'ts-pattern'
 
+import { TLD, testDomain, testSub } from '../chainConstants'
 import { MockUseAddrRecordType } from './makeMockUseAddrRecordData'
 import { makeMockUseExpiryData, MockUseExpiryType } from './makeMockUseExpiryData'
 import { makeMockUseOwnerData, MockUseOwnerType } from './makeMockUseOwnerData'
@@ -227,9 +228,15 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
       ? new Date(expiryDate.getTime() + expiryData.gracePeriod * 1000)
       : undefined
 
+  const rawOwnerData = makeMockUseOwnerData(useOwnerType)
+  // Mirror useBasicName hook behavior: always spread registrant onto ownerData
+  const ownerData = rawOwnerData
+    ? { ...rawOwnerData, registrant: rawOwnerData.registrant ?? undefined }
+    : rawOwnerData
+
   const BaseBasicName = {
     ...makeMockUseValidate(useValidateType),
-    ownerData: makeMockUseOwnerData(useOwnerType),
+    ownerData,
     wrapperData: makeMockUseWrapperDataData(useWrapperDataType),
     priceData: makeMockUsePriceData(usePriceType),
     expiryDate,
@@ -238,8 +245,8 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
   return match(type)
     .with('eth', () => ({
       ...BaseBasicName,
-      normalisedName: 'eth',
-      truncatedName: 'eth',
+      normalisedName: TLD,
+      truncatedName: TLD,
       canBeWrapped: false,
       pccExpired: false,
       registrationStatus: 'owned' as const,
@@ -249,8 +256,8 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
     }))
     .with('eth-available-2ld', () => ({
       ...BaseBasicName,
-      normalisedName: 'name.eth',
-      truncatedName: 'name.eth',
+      normalisedName: testDomain('name'),
+      truncatedName: testDomain('name'),
       isWrapped: false,
       pccExpired: false,
       canBeWrapped: false,
@@ -267,9 +274,9 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
       ),
       () => ({
         ...BaseBasicName,
-        normalisedName: 'name.eth',
-        truncatedName: 'name.eth',
-        canBeWrapped: true,
+        normalisedName: testDomain('name'),
+        truncatedName: testDomain('name'),
+        canBeWrapped: false,
         pccExpired: false,
         registrationStatus: 'registered' as const,
         isCachedData: false,
@@ -288,8 +295,8 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
       ),
       () => ({
         ...BaseBasicName,
-        normalisedName: 'name.eth',
-        truncatedName: 'name.eth',
+        normalisedName: testDomain('name'),
+        truncatedName: testDomain('name'),
         isWrapped: true,
         pccExpired: false,
         canBeWrapped: false,
@@ -301,8 +308,8 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
     .with('eth-unwrapped-2ld:grace-period', () => ({
       ...BaseBasicName,
       ownerData: makeMockUseOwnerData('registrar:grace-period:subgraph-registrant'),
-      normalisedName: 'name.eth',
-      truncatedName: 'name.eth',
+      normalisedName: testDomain('name'),
+      truncatedName: testDomain('name'),
       registrationStatus: 'gracePeriod' as const,
       isWrapped: false,
       pccExpired: false,
@@ -313,8 +320,8 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
     .with('eth-unwrapped-2ld:grace-period:unowned', () => ({
       ...BaseBasicName,
       ownerData: makeMockUseOwnerData('registrar:grace-period:subgraph-registrant:unowned'),
-      normalisedName: 'name.eth',
-      truncatedName: 'name.eth',
+      normalisedName: testDomain('name'),
+      truncatedName: testDomain('name'),
       registrationStatus: 'gracePeriod' as const,
       isWrapped: false,
       pccExpired: false,
@@ -331,8 +338,8 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
       ),
       () => ({
         ...BaseBasicName,
-        normalisedName: 'name.eth',
-        truncatedName: 'name.eth',
+        normalisedName: testDomain('name'),
+        truncatedName: testDomain('name'),
         registrationStatus: 'gracePeriod' as const,
         isWrapped: true,
         pccExpired: false,
@@ -343,12 +350,12 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
     )
     .with(P.union('eth-unwrapped-subname', 'eth-unwrapped-subname:unowned'), () => ({
       ...BaseBasicName,
-      normalisedName: 'subname.name.eth',
-      truncatedName: 'subname.name.eth',
+      normalisedName: testSub('subname', 'name'),
+      truncatedName: testSub('subname', 'name'),
       registrationStatus: 'owned' as const,
       isWrapped: false,
       pccExpired: false,
-      canBeWrapped: true,
+      canBeWrapped: false,
       isLoading: false,
       isCachedData: false,
     }))
@@ -363,8 +370,8 @@ export const makeMockUseBasicName = (type: MockUseBasicNameType) => {
       ),
       () => ({
         ...BaseBasicName,
-        normalisedName: 'subname.name.eth',
-        truncatedName: 'subname.name.eth',
+        normalisedName: testSub('subname', 'name'),
+        truncatedName: testSub('subname', 'name'),
         registrationStatus: 'owned' as const,
         isWrapped: true,
         pccExpired: false,

@@ -21,6 +21,7 @@ import { useBasicName } from '../useBasicName'
 import { useHasSubnames } from '../useHasSubnames'
 import { useParentBasicName } from '../useParentBasicName'
 import { useAbilities } from './useAbilities'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/account/useAccountSafely')
 vi.mock('@app/hooks/useBasicName')
@@ -42,7 +43,7 @@ mockUseContractAddress.mockImplementation(makeMockUseContractAddress)
 
 describe('useAbilities', () => {
   describe('basic abilities', () => {
-    const name = 'nick.eth'
+    const name = testDomain('nick')
     const ownerAddress = '0x123'
     const account = ownerAddress
 

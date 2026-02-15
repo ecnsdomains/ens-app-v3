@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { createQueryKey } from '../useQueryOptions'
 import { clearRelevantNameQueriesFromRegisterOrImport } from './clearRelevantNameQueriesFromRegisterOrImport'
 import { Transaction } from './transactionStore'
+import { testDomain } from '@root/test/chainConstants'
 
 const createTransactionData = ({
   name,
@@ -40,13 +41,13 @@ describe('clearRelevantNameQueriesFromRegisterOrImport', () => {
     queryClient = new QueryClient()
   })
   it('should remove queries with name if registerName transaction is complete', () => {
-    const queryKey = createTestQueryKey('test.eth')
+    const queryKey = createTestQueryKey(testDomain('test'))
     queryClient.setQueryData(queryKey, 'initial')
     clearRelevantNameQueriesFromRegisterOrImport({
       queryClient,
       chainId: 1,
       updatedTransactions: [
-        createTransactionData({ name: 'test.eth', status: 'confirmed', action: 'registerName' }),
+        createTransactionData({ name: testDomain('test'), status: 'confirmed', action: 'registerName' }),
       ],
     })
 
@@ -54,7 +55,7 @@ describe('clearRelevantNameQueriesFromRegisterOrImport', () => {
   })
 
   it('should remove queries with name if importDnsName transaction is complete', () => {
-    const queryKey = createTestQueryKey('test.eth')
+    const queryKey = createTestQueryKey(testDomain('test'))
     queryClient.setQueryData(queryKey, 'initial')
     clearRelevantNameQueriesFromRegisterOrImport({
       queryClient,
@@ -63,7 +64,7 @@ describe('clearRelevantNameQueriesFromRegisterOrImport', () => {
         {
           action: 'importDnsName',
           status: 'confirmed',
-          key: `import-test.eth-0x1234567890123456789012345678901234567890`,
+          key: `import-${testDomain('test')}-0x1234567890123456789012345678901234567890`,
           hash: '0x1234567890123456789012345678901234567890123456789012345678901234',
           searchRetries: 0,
         } as Transaction,
@@ -74,27 +75,27 @@ describe('clearRelevantNameQueriesFromRegisterOrImport', () => {
   })
 
   it('should remove queries with name if claimDnsName transaction is complete', () => {
-    const queryKey = createTestQueryKey('test.eth')
+    const queryKey = createTestQueryKey(testDomain('test'))
     queryClient.setQueryData(queryKey, 'initial')
     clearRelevantNameQueriesFromRegisterOrImport({
       queryClient,
       chainId: 1,
       updatedTransactions: [
-        createTransactionData({ name: 'test.eth', status: 'confirmed', action: 'claimDnsName' }),
+        createTransactionData({ name: testDomain('test'), status: 'confirmed', action: 'claimDnsName' }),
       ],
     })
     expect(queryClient.getQueryData(queryKey)).toBeUndefined()
   })
 
   it('should call queryKey with correct name even if it has a lot of dashes ', () => {
-    const queryKey = createTestQueryKey('-test-test-test-test-.eth')
+    const queryKey = createTestQueryKey(testDomain('-test-test-test-test-'))
     queryClient.setQueryData(queryKey, 'initial')
     clearRelevantNameQueriesFromRegisterOrImport({
       queryClient,
       chainId: 1,
       updatedTransactions: [
         createTransactionData({
-          name: '-test-test-test-test-.eth',
+          name: testDomain('-test-test-test-test-'),
           status: 'confirmed',
           action: 'registerName',
         }),
@@ -105,14 +106,14 @@ describe('clearRelevantNameQueriesFromRegisterOrImport', () => {
   })
 
   it('should call not call queryKey if status or action are incorrect ', () => {
-    const queryKey = createTestQueryKey('test.eth')
+    const queryKey = createTestQueryKey(testDomain('test'))
     queryClient.setQueryData(queryKey, 'initial')
     clearRelevantNameQueriesFromRegisterOrImport({
       queryClient,
       chainId: 1,
       updatedTransactions: [
-        createTransactionData({ name: 'test.eth', status: 'pending', action: 'registerName' }),
-        createTransactionData({ name: 'test.eth', status: 'confirmed', action: 'commitName' }),
+        createTransactionData({ name: testDomain('test'), status: 'pending', action: 'registerName' }),
+        createTransactionData({ name: testDomain('test'), status: 'confirmed', action: 'commitName' }),
       ],
     })
 
@@ -120,15 +121,15 @@ describe('clearRelevantNameQueriesFromRegisterOrImport', () => {
   })
 
   it('should remove multiple queries', () => {
-    const queryKey = createTestQueryKey('test.eth')
-    const queryKey2 = createTestQueryKey('test.eth', { functionName: 'getSomethingElse' })
+    const queryKey = createTestQueryKey(testDomain('test'))
+    const queryKey2 = createTestQueryKey(testDomain('test'), { functionName: 'getSomethingElse' })
     queryClient.setQueryData(queryKey, 'initial')
     queryClient.setQueryData(queryKey2, 'initial')
     clearRelevantNameQueriesFromRegisterOrImport({
       queryClient,
       chainId: 1,
       updatedTransactions: [
-        createTransactionData({ name: 'test.eth', status: 'confirmed', action: 'registerName' }),
+        createTransactionData({ name: testDomain('test'), status: 'confirmed', action: 'registerName' }),
       ],
     })
 

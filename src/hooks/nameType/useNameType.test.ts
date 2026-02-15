@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { makeMockUseBasicName } from '../../../test/mock/makeMockUseBasicName'
 import { makeMockUseContractAddress } from '../../../test/mock/makeMockUseContractAddress'
 import { useNameType } from './useNameType'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 const mockBasicData = vi.fn()
 vi.mock('@app/hooks/useBasicName', () => ({
@@ -77,7 +78,7 @@ describe('useNameType', () => {
         },
         pccExpired: true,
       })
-      const { result } = renderHook(() => useNameType('test.eth'))
+      const { result } = renderHook(() => useNameType(testDomain('test')))
       expect(result.current.data).toEqual('eth-locked-2ld')
     })
 
@@ -106,31 +107,31 @@ describe('useNameType', () => {
   describe('wrap level', () => {
     it('should return unwrapped', async () => {
       mockBasicData.mockReturnValue(makeMockUseBasicName('eth-unwrapped-2ld'))
-      const { result } = renderHook(() => useNameType('test.eth'))
+      const { result } = renderHook(() => useNameType(testDomain('test')))
       expect(result.current.data).toEqual('eth-unwrapped-2ld')
     })
 
     it('should return wrapped', async () => {
       mockBasicData.mockReturnValue(makeMockUseBasicName('eth-wrapped-subname'))
-      const { result } = renderHook(() => useNameType('test.eth'))
+      const { result } = renderHook(() => useNameType(testDomain('test')))
       expect(result.current.data).toEqual('eth-wrapped-2ld')
     })
 
     it('should return emancipated', async () => {
       mockBasicData.mockReturnValue(makeMockUseBasicName('eth-emancipated-2ld'))
-      const { result } = renderHook(() => useNameType('test.eth'))
+      const { result } = renderHook(() => useNameType(testDomain('test')))
       expect(result.current.data).toEqual('eth-emancipated-2ld')
     })
 
     it('should return locked', async () => {
       mockBasicData.mockReturnValue(makeMockUseBasicName('eth-locked-2ld'))
-      const { result } = renderHook(() => useNameType('test.eth'))
+      const { result } = renderHook(() => useNameType(testDomain('test')))
       expect(result.current.data).toEqual('eth-locked-2ld')
     })
 
     it('should return unwrapped subname', async () => {
       mockBasicData.mockReturnValue(makeMockUseBasicName('eth-unwrapped-subname'))
-      const { result } = renderHook(() => useNameType('sub.test.eth'))
+      const { result } = renderHook(() => useNameType(testSub('sub', 'test')))
       expect(result.current.data).toEqual('eth-unwrapped-subname')
     })
 
@@ -139,25 +140,25 @@ describe('useNameType', () => {
         ...makeMockUseBasicName('eth-wrapped-subname'),
         pccExpired: true,
       })
-      const { result } = renderHook(() => useNameType('sub.test.eth'))
+      const { result } = renderHook(() => useNameType(testSub('sub', 'test')))
       expect(result.current.data).toEqual('eth-pcc-expired-subname')
     })
 
     it('should return for grace period unwrapped', async () => {
       mockBasicData.mockReturnValue(makeMockUseBasicName('eth-unwrapped-2ld:grace-period'))
-      const { result } = renderHook(() => useNameType('name.eth'))
+      const { result } = renderHook(() => useNameType(testDomain('name')))
       expect(result.current.data).toEqual('eth-unwrapped-2ld:grace-period')
     })
 
     it('should return for grace period emancipated', async () => {
       mockBasicData.mockReturnValue(makeMockUseBasicName('eth-emancipated-2ld:grace-period'))
-      const { result } = renderHook(() => useNameType('name.eth'))
+      const { result } = renderHook(() => useNameType(testDomain('name')))
       expect(result.current.data).toEqual('eth-emancipated-2ld:grace-period')
     })
 
     it('should return for grace period licked', async () => {
       mockBasicData.mockReturnValue(makeMockUseBasicName('eth-locked-2ld:grace-period'))
-      const { result } = renderHook(() => useNameType('name.eth'))
+      const { result } = renderHook(() => useNameType(testDomain('name')))
       expect(result.current.data).toEqual('eth-locked-2ld:grace-period')
     })
   })

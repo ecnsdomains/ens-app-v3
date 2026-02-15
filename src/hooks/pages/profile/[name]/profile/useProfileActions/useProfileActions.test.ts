@@ -22,6 +22,7 @@ import { createDateAndValue } from '@app/utils/utils'
 
 import { transactions } from '../../../../../../transaction-flow/transaction/index'
 import { useProfileActions } from './useProfileActions'
+import { testDomain } from '@root/test/chainConstants'
 
 const NOW_TIMESTAMP = 1588994800000
 vi.spyOn(Date, 'now').mockImplementation(() => NOW_TIMESTAMP)
@@ -175,14 +176,14 @@ describe('useProfileActions', () => {
   })
 
   it('returns an object with profileActions and isLoading properties', () => {
-    const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+    const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
     expect(result.current).toHaveProperty('profileActions')
     expect(result.current).toHaveProperty('isLoading')
   })
 
   it('returns an empty array for profileActions if address is falsy', () => {
     mockUseAccountSafely.mockReturnValue({ address: undefined })
-    const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+    const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
     expect(result.current.profileActions).toEqual([])
   })
 
@@ -191,12 +192,12 @@ describe('useProfileActions', () => {
       data: undefined,
       isLoading: true,
     })
-    const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+    const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
     expect(result.current.profileActions).toEqual([])
   })
 
   it('returns the correct action if subnameAbilities.canDelete is true', () => {
-    const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+    const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
     expect(result.current.profileActions).toContainEqual(
       expect.objectContaining({
         label: 'tabs.profile.actions.deleteSubname.label',
@@ -206,7 +207,7 @@ describe('useProfileActions', () => {
   })
 
   it('returns the correct action if subnameAbilities.canReclaim is true', () => {
-    const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+    const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
     expect(result.current.profileActions).toContainEqual(
       expect.objectContaining({
         label: 'tabs.profile.actions.reclaim.label',
@@ -224,7 +225,7 @@ describe('useProfileActions', () => {
       },
       isLoading: false,
     })
-    const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+    const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
     expect(result.current.profileActions).toContainEqual(
       expect.objectContaining({
         label: 'tabs.profile.actions.deleteSubname.label',
@@ -235,17 +236,17 @@ describe('useProfileActions', () => {
 
   describe('delete subname', () => {
     it('should return a single transaction with normal subname when address is parent owner', () => {
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const deleteAction = result.current.profileActions?.find(
         (a) => a.label === 'tabs.profile.actions.deleteSubname.label',
       )
       deleteAction!.onClick()
-      expect(mockCreateTransactionFlow).toHaveBeenCalledWith('deleteSubname-test.eth', {
+      expect(mockCreateTransactionFlow).toHaveBeenCalledWith(testDomain('deleteSubname-test'), {
         transactions: [
           {
             name: 'deleteSubname',
             data: {
-              name: 'test.eth',
+              name: testDomain('test'),
               contract: 'testcontract',
               method: 'testmethod',
             },
@@ -261,14 +262,14 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const deleteAction = result.current.profileActions?.find(
         (a) => a.label === 'tabs.profile.actions.deleteSubname.label',
       )
       deleteAction!.onClick()
       expect(mockUsePreparedDataInput).toHaveBeenCalledWith(
-        `delete-subname-not-parent-warning-test.eth`,
-        { name: 'test.eth', contract: 'testcontract' },
+        `delete-subname-not-parent-warning-test.etc`,
+        { name: testDomain('test'), contract: 'testcontract' },
       )
     })
     it('should return a two step transaction flow for an unwrapped subname with wrapped parent', () => {
@@ -279,18 +280,18 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const deleteAction = result.current.profileActions?.find(
         (a) => a.label === 'tabs.profile.actions.deleteSubname.label',
       )
       deleteAction!.onClick()
-      expect(mockCreateTransactionFlow).toHaveBeenCalledWith('deleteSubname-test.eth', {
+      expect(mockCreateTransactionFlow).toHaveBeenCalledWith(testDomain('deleteSubname-test'), {
         transactions: [
           {
             name: 'transferSubname',
             data: {
               contract: 'nameWrapper',
-              name: 'test.eth',
+              name: testDomain('test'),
               newOwnerAddress: '0x1234567890',
             },
           },
@@ -298,7 +299,7 @@ describe('useProfileActions', () => {
             name: 'deleteSubname',
             data: {
               contract: 'nameWrapper',
-              name: 'test.eth',
+              name: testDomain('test'),
               method: 'setRecord',
             },
           },
@@ -319,7 +320,7 @@ describe('useProfileActions', () => {
 
   describe('set primary name', () => {
     it('should return an action for a single transaction with base mock data', async () => {
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -327,7 +328,7 @@ describe('useProfileActions', () => {
       setPrimaryAction?.onClick()
       expect(mockCreateTransactionFlow).toHaveBeenCalled()
       expect(mockCreateTransactionFlow.mock.calls[0][0]).toBe(
-        'setPrimaryName-test.eth-0x1234567890',
+        `setPrimaryName-${testDomain('test')}-0x1234567890`,
       )
       expect(mockCreateTransactionFlow.mock.calls[0][1].transactions.length).toBe(1)
     })
@@ -347,7 +348,7 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -369,7 +370,7 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -384,7 +385,7 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -399,7 +400,7 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -413,7 +414,7 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -422,10 +423,10 @@ describe('useProfileActions', () => {
 
     it('should not return an action if primary name matches current name', () => {
       mockUsePrimaryName.mockReturnValue({
-        data: { name: 'test.eth', beautifiedName: 'test.eth' },
+        data: { name: testDomain('test'), beautifiedName: testDomain('test') },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -455,7 +456,7 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -481,7 +482,7 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -500,7 +501,7 @@ describe('useProfileActions', () => {
         },
         isLoading: false,
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       const setPrimaryAction = result.current.profileActions?.find(
         (action: any) => action.label === 'tabs.profile.actions.setAsPrimaryName.label',
       )
@@ -533,7 +534,7 @@ describe('useProfileActions', () => {
         isLoading: false,
       })
 
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
 
       expect(result.current.profileActions).toEqual(
         expect.arrayContaining([
@@ -553,7 +554,7 @@ describe('useProfileActions', () => {
         isLoading: false,
       })
 
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
 
       expect(result.current.profileActions).toEqual(
         expect.arrayContaining([
@@ -573,7 +574,7 @@ describe('useProfileActions', () => {
         isLoading: false,
       })
 
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
 
       expect(result.current.profileActions).toEqual(
         expect.arrayContaining([
@@ -597,7 +598,7 @@ describe('useProfileActions', () => {
         isLoading: false,
       })
 
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
 
       expect(result.current.profileActions).toEqual(
         expect.arrayContaining([
@@ -624,7 +625,7 @@ describe('useProfileActions', () => {
       mockUseAccountSafely.mockReturnValue({
         address: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       expect(result.current.profileActions).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
@@ -647,7 +648,7 @@ describe('useProfileActions', () => {
       mockUseAccountSafely.mockReturnValue({
         address: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       expect(result.current.profileActions).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
@@ -670,7 +671,7 @@ describe('useProfileActions', () => {
       mockUseAccountSafely.mockReturnValue({
         address: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       expect(result.current.profileActions).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
@@ -693,7 +694,7 @@ describe('useProfileActions', () => {
       mockUseAccountSafely.mockReturnValue({
         address: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
       })
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       expect(result.current.profileActions).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
@@ -717,7 +718,7 @@ describe('useProfileActions', () => {
         address: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
       })
 
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       expect(result.current.profileActions).not.toEqual(
         expect.arrayContaining([
           expect.objectContaining({
@@ -740,7 +741,7 @@ describe('useProfileActions', () => {
         address: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
       })
 
-      const { result } = renderHook(() => useProfileActions({ name: 'test.eth' }))
+      const { result } = renderHook(() => useProfileActions({ name: testDomain('test') }))
       expect(result.current.profileActions).toEqual(
         expect.arrayContaining([
           expect.objectContaining({

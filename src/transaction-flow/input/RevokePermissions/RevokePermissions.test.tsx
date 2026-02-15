@@ -8,6 +8,7 @@ import { DeepPartial } from '@app/types'
 
 import { makeMockIntersectionObserver } from '../../../../test/mock/makeMockIntersectionObserver'
 import RevokePermissions, { Props } from './RevokePermissions-flow'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/nameservice/public/usePrimaryName')
 
@@ -23,7 +24,7 @@ makeMockIntersectionObserver()
 type Data = Props['data']
 const makeData = (overrides: DeepPartial<Data> = {}) => {
   const defaultData = {
-    name: 'test.eth',
+    name: testDomain('test'),
     flowType: 'revoke-pcc',
     owner: '0x1234',
     parentFuses: {
@@ -70,7 +71,7 @@ describe('RevokePermissions', () => {
       render(
         <RevokePermissions
           data={makeData({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             flowType: 'revoke-pcc',
             minExpiry: 1672531200,
             maxExpiry: 1675238574,
@@ -143,7 +144,7 @@ describe('RevokePermissions', () => {
 
       const nameConfirmation = screen.getByTestId('input-name-confirmation')
 
-      fireEvent.change(nameConfirmation, { target: { value: 'sub.test.eth' } })
+      fireEvent.change(nameConfirmation, { target: { value: testSub('sub', 'test') } })
 
       await userEvent.click(nextButton)
 
@@ -152,7 +153,7 @@ describe('RevokePermissions', () => {
           name: 'setTransactions',
           payload: [
             createTransactionItem('changePermissions', {
-              name: 'sub.test.eth',
+              name: testSub('sub', 'test'),
               contract: 'setChildFuses',
               fuses: {
                 parent: ['PARENT_CANNOT_CONTROL', 'CAN_EXTEND_EXPIRY'],
@@ -176,7 +177,7 @@ describe('RevokePermissions', () => {
       render(
         <RevokePermissions
           data={makeData({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             flowType: 'revoke-pcc',
             minExpiry: 1675238574,
             maxExpiry: 1675238574,
@@ -214,7 +215,7 @@ describe('RevokePermissions', () => {
       render(
         <RevokePermissions
           data={makeData({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             flowType: 'revoke-pcc',
             minExpiry: 1672531200,
             maxExpiry: 1675238574,
@@ -259,7 +260,7 @@ describe('RevokePermissions', () => {
 
       const nameConfirmation = screen.getByTestId('input-name-confirmation')
 
-      fireEvent.change(nameConfirmation, { target: { value: 'sub.test.eth' } })
+      fireEvent.change(nameConfirmation, { target: { value: testSub('sub', 'test') } })
 
       await userEvent.click(nextButton)
 
@@ -268,7 +269,7 @@ describe('RevokePermissions', () => {
           name: 'setTransactions',
           payload: [
             createTransactionItem('changePermissions', {
-              name: 'sub.test.eth',
+              name: testSub('sub', 'test'),
               contract: 'setChildFuses',
               fuses: {
                 parent: ['PARENT_CANNOT_CONTROL', 'CAN_EXTEND_EXPIRY'],
@@ -287,7 +288,7 @@ describe('RevokePermissions', () => {
       render(
         <RevokePermissions
           data={makeData({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             flowType: 'grant-extend-expiry',
             minExpiry: Math.floor(new Date('2022-01-01').getTime() / 1000),
             maxExpiry: Math.floor(new Date('2024-01-01').getTime() / 1000),
@@ -345,7 +346,7 @@ describe('RevokePermissions', () => {
           name: 'setTransactions',
           payload: [
             createTransactionItem('changePermissions', {
-              name: 'sub.test.eth',
+              name: testSub('sub', 'test'),
               contract: 'setChildFuses',
               fuses: {
                 parent: ['CAN_EXTEND_EXPIRY'],
@@ -362,7 +363,7 @@ describe('RevokePermissions', () => {
       render(
         <RevokePermissions
           data={makeData({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             flowType: 'grant-extend-expiry',
             minExpiry: 1675238574,
             maxExpiry: 1675238574,
@@ -401,7 +402,7 @@ describe('RevokePermissions', () => {
           name: 'setTransactions',
           payload: [
             createTransactionItem('changePermissions', {
-              name: 'sub.test.eth',
+              name: testSub('sub', 'test'),
               contract: 'setChildFuses',
               fuses: {
                 parent: ['CAN_EXTEND_EXPIRY'],
@@ -420,7 +421,7 @@ describe('RevokePermissions', () => {
       render(
         <RevokePermissions
           data={makeData({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             flowType: 'revoke-permissions',
             parentFuses: {
               PARENT_CANNOT_CONTROL: true,
@@ -474,7 +475,7 @@ describe('RevokePermissions', () => {
 
       const nameConfirmation = screen.getByTestId('input-name-confirmation')
 
-      fireEvent.change(nameConfirmation, { target: { value: 'sub.test.eth' } })
+      fireEvent.change(nameConfirmation, { target: { value: testSub('sub', 'test') } })
 
       await userEvent.click(nextButton)
 
@@ -483,7 +484,7 @@ describe('RevokePermissions', () => {
           name: 'setTransactions',
           payload: [
             createTransactionItem('changePermissions', {
-              name: 'sub.test.eth',
+              name: testSub('sub', 'test'),
               contract: 'setFuses',
               fuses: [
                 'CANNOT_UNWRAP',
@@ -502,7 +503,7 @@ describe('RevokePermissions', () => {
       render(
         <RevokePermissions
           data={makeData({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             flowType: 'revoke-permissions',
             parentFuses: {
               PARENT_CANNOT_CONTROL: true,
@@ -545,7 +546,7 @@ describe('RevokePermissions', () => {
 
       const nameConfirmation = screen.getByTestId('input-name-confirmation')
 
-      fireEvent.change(nameConfirmation, { target: { value: 'sub.test.eth' } })
+      fireEvent.change(nameConfirmation, { target: { value: testSub('sub', 'test') } })
 
       await userEvent.click(nextButton)
 
@@ -554,7 +555,7 @@ describe('RevokePermissions', () => {
           name: 'setTransactions',
           payload: [
             createTransactionItem('changePermissions', {
-              name: 'sub.test.eth',
+              name: testSub('sub', 'test'),
               contract: 'setFuses',
               fuses: [
                 'CANNOT_TRANSFER',
@@ -572,7 +573,7 @@ describe('RevokePermissions', () => {
       render(
         <RevokePermissions
           data={makeData({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             flowType: 'revoke-permissions',
             parentFuses: {
               PARENT_CANNOT_CONTROL: true,
@@ -619,7 +620,7 @@ describe('RevokePermissions', () => {
 
       const nameConfirmation = screen.getByTestId('input-name-confirmation')
 
-      fireEvent.change(nameConfirmation, { target: { value: 'sub.test.eth' } })
+      fireEvent.change(nameConfirmation, { target: { value: testSub('sub', 'test') } })
 
       await userEvent.click(nextButton)
 
@@ -628,7 +629,7 @@ describe('RevokePermissions', () => {
           name: 'setTransactions',
           payload: [
             createTransactionItem('changePermissions', {
-              name: 'sub.test.eth',
+              name: testSub('sub', 'test'),
               contract: 'setFuses',
               fuses: ['CANNOT_SET_RESOLVER', 'CANNOT_SET_TTL'],
             }),
@@ -643,7 +644,7 @@ describe('RevokePermissions', () => {
       render(
         <RevokePermissions
           data={makeData({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             flowType: 'revoke-change-fuses',
             parentFuses: {
               PARENT_CANNOT_CONTROL: true,
@@ -692,7 +693,7 @@ describe('RevokePermissions', () => {
 
       const nameConfirmation = screen.getByTestId('input-name-confirmation')
 
-      fireEvent.change(nameConfirmation, { target: { value: 'sub.test.eth' } })
+      fireEvent.change(nameConfirmation, { target: { value: testSub('sub', 'test') } })
 
       await userEvent.click(nextButton)
 
@@ -701,7 +702,7 @@ describe('RevokePermissions', () => {
           name: 'setTransactions',
           payload: [
             createTransactionItem('changePermissions', {
-              name: 'sub.test.eth',
+              name: testSub('sub', 'test'),
               contract: 'setFuses',
               fuses: ['CANNOT_BURN_FUSES'],
             }),

@@ -3,6 +3,7 @@ import { render, screen } from '@app/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import { AvatarWithLink } from './AvatarWithLink'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('next/router', () => ({
   useRouter: () => ({
@@ -31,7 +32,7 @@ vi.mock('@app/routes', () => ({
 
 describe('AvatarWithLink', () => {
   it('should render', async () => {
-    render(<AvatarWithLink label="label" name="test.eth" />)
-    expect(screen.getByTestId('avatar-with-link')).toHaveAttribute('href', '/profile/test.eth')
+    render(<AvatarWithLink label="label" name={testDomain('test')} />)
+    expect(screen.getByTestId('avatar-with-link')).toHaveAttribute('href', '/profile/test.etc')
   })
 })

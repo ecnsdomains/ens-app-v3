@@ -18,6 +18,7 @@ import SelectPrimaryName, {
   getNameFromUnknownLabels,
   hasEncodedLabel,
 } from './SelectPrimaryName-flow'
+import { testDomain, testSub, DOT_TLD, TLD } from '@root/test/chainConstants'
 
 const encodeLabel = (label: string) => `[${labelhash(label).slice(2)}]`
 
@@ -46,7 +47,7 @@ const mockUseReverseRegistryName = mockFunction(useReverseRegistryName)
 mockGetDecodedName.mockImplementation((_: any, { name }) => Promise.resolve(name))
 
 const makeName = (index: number, overwrites?: any) => ({
-  name: `test${index}.eth`,
+  name: `test${index}${DOT_TLD}`,
   id: `0x${index}`,
   ...overwrites,
 })
@@ -90,7 +91,7 @@ mockUseProfile.mockReturnValue({
 const mockUseGetPrimaryNameTransactionItem = mockFunction(useGetPrimaryNameTransactionFlowItem)
 mockUseGetPrimaryNameTransactionItem.mockReturnValue({
   callBack: () => ({
-    transactions: [createTransactionItem('setPrimaryName', { name: 'test.eth', address: '0x123' })],
+    transactions: [createTransactionItem('setPrimaryName', { name: testDomain('test'), address: '0x123' })],
   }),
   isLoading: false,
 })
@@ -108,62 +109,62 @@ afterEach(() => {
 
 describe('hasEncodedLabel', () => {
   it('should return true if an encoded label exists', () => {
-    expect(hasEncodedLabel(`${encodeLabel('test')}.eth`)).toBe(true)
+    expect(hasEncodedLabel(`${encodeLabel('test')}${DOT_TLD}`)).toBe(true)
   })
 
   it('should return false if an encoded label does not exist', () => {
-    expect(hasEncodedLabel('test.test.test.eth')).toBe(false)
+    expect(hasEncodedLabel('test.test.test.etc')).toBe(false)
   })
 })
 
 describe('getNameFromUnknownLabels', () => {
   it('should return the name if no encoded label exists', () => {
-    expect(getNameFromUnknownLabels('test.test.eth', { labels: [], tld: '' })).toBe('test.test.eth')
+    expect(getNameFromUnknownLabels(testSub('test', 'test'), { labels: [], tld: '' })).toBe(testSub('test', 'test'))
   })
 
   it('should return the decoded name if encoded label exists', () => {
     expect(
       getNameFromUnknownLabels(
-        `${encodeLabel('test1')}.${encodeLabel('test2')}.${encodeLabel('test3')}.eth`,
+        `${encodeLabel('test1')}.${encodeLabel('test2')}.${encodeLabel('test3')}${DOT_TLD}`,
         {
           labels: [
             { label: decodeLabelhash(encodeLabel('test1')), value: 'test1', disabled: false },
             { label: decodeLabelhash(encodeLabel('test2')), value: 'test2', disabled: false },
             { label: decodeLabelhash(encodeLabel('test3')), value: 'test3', disabled: false },
           ],
-          tld: 'eth',
+          tld: TLD,
         },
       ),
-    ).toBe('test1.test2.test3.eth')
+    ).toBe(`test1.test2.test3${DOT_TLD}`)
   })
 
   it('should skip unknown labels if they do not match the original labels', () => {
     expect(
       getNameFromUnknownLabels(
-        `${encodeLabel('test1')}.${encodeLabel('test2')}.${encodeLabel('test3')}.eth`,
+        `${encodeLabel('test1')}.${encodeLabel('test2')}.${encodeLabel('test3')}${DOT_TLD}`,
         {
           labels: [
             { label: decodeLabelhash(encodeLabel('test2')), value: 'test2', disabled: false },
             { label: decodeLabelhash(encodeLabel('test2')), value: 'test2', disabled: false },
             { label: decodeLabelhash(encodeLabel('test2')), value: 'test2', disabled: false },
           ],
-          tld: 'eth',
+          tld: TLD,
         },
       ),
-    ).toBe(`${encodeLabel('test1')}.test2.${encodeLabel('test3')}.eth`)
+    ).toBe(`${encodeLabel('test1')}.test2.${encodeLabel('test3')}${DOT_TLD}`)
   })
 
   it('should be able to handle mixed encoded and decoded names', () => {
     expect(
-      getNameFromUnknownLabels(`${encodeLabel('test1')}.test2.${encodeLabel('test3')}.eth`, {
+      getNameFromUnknownLabels(`${encodeLabel('test1')}.test2.${encodeLabel('test3')}${DOT_TLD}`, {
         labels: [
           { label: decodeLabelhash(encodeLabel('test2')), value: 'test2', disabled: false },
           { label: 'test2', value: 'test2', disabled: true },
           { label: decodeLabelhash(encodeLabel('test2')), value: 'test2', disabled: false },
         ],
-        tld: 'eth',
+        tld: TLD,
       }),
-    ).toBe(`${encodeLabel('test1')}.test2.${encodeLabel('test3')}.eth`)
+    ).toBe(`${encodeLabel('test1')}.test2.${encodeLabel('test3')}${DOT_TLD}`)
   })
 })
 
@@ -205,15 +206,15 @@ describe('SelectPrimaryName', () => {
       <SelectPrimaryName data={{ address: '0x123' }} dispatch={() => {}} onDismiss={() => {}} />,
     )
     await waitFor(() => {
-      expect(screen.getByText('test1.eth')).toBeInTheDocument()
-      expect(screen.getByText('test2.eth')).toBeInTheDocument()
-      expect(screen.getByText('test3.eth')).toBeInTheDocument()
+      expect(screen.getByText(testDomain('test1'))).toBeInTheDocument()
+      expect(screen.getByText(testDomain('test2'))).toBeInTheDocument()
+      expect(screen.getByText(testDomain('test3'))).toBeInTheDocument()
     })
   })
 
   it('should not show primary name in list', async () => {
     mockUseReverseRegistryName.mockReturnValue({
-      data: 'test2.eth',
+      data: testDomain('test2'),
       isLoading: false,
       status: 'success',
     })
@@ -221,9 +222,9 @@ describe('SelectPrimaryName', () => {
       <SelectPrimaryName data={{ address: '0x123' }} dispatch={() => {}} onDismiss={() => {}} />,
     )
     await waitFor(() => {
-      expect(screen.getByText('test1.eth')).toBeInTheDocument()
-      expect(screen.queryByText('test2.eth')).not.toBeInTheDocument()
-      expect(screen.getByText('test3.eth')).toBeInTheDocument()
+      expect(screen.getByText(testDomain('test1'))).toBeInTheDocument()
+      expect(screen.queryByText(testDomain('test2'))).not.toBeInTheDocument()
+      expect(screen.getByText(testDomain('test3'))).toBeInTheDocument()
     })
   })
 
@@ -232,7 +233,7 @@ describe('SelectPrimaryName', () => {
       <SelectPrimaryName data={{ address: '0x123' }} dispatch={() => {}} onDismiss={() => {}} />,
     )
     expect(screen.getByTestId('primary-next')).toBeDisabled()
-    await userEvent.click(screen.getByText('test1.eth'))
+    await userEvent.click(screen.getByText(testDomain('test1')))
     await waitFor(() => expect(screen.getByTestId('primary-next')).not.toBeDisabled())
   })
 
@@ -244,7 +245,7 @@ describe('SelectPrimaryName', () => {
         onDismiss={() => {}}
       />,
     )
-    await userEvent.click(screen.getByText('test1.eth'))
+    await userEvent.click(screen.getByText(testDomain('test1')))
     await userEvent.click(screen.getByTestId('primary-next'))
     await waitFor(() => expect(mockDispatch).toBeCalled())
   })
@@ -256,7 +257,7 @@ describe('SelectPrimaryName', () => {
           [
             ...new Array(5).fill(0).map((_, i) => makeName(i)),
             {
-              name: `${encodeLabel('test')}.eth`,
+              name: `${encodeLabel('test')}${DOT_TLD}`,
               id: '0xhash',
             },
           ],
@@ -264,7 +265,7 @@ describe('SelectPrimaryName', () => {
       },
       isLoading: false,
     })
-    mockGetDecodedName.mockReturnValueOnce(Promise.resolve('test.eth'))
+    mockGetDecodedName.mockReturnValueOnce(Promise.resolve(testDomain('test')))
     render(
       <SelectPrimaryName
         data={{ address: '0x123' }}
@@ -272,7 +273,7 @@ describe('SelectPrimaryName', () => {
         onDismiss={() => {}}
       />,
     )
-    await userEvent.click(screen.getByText(`${encodeLabel('test')}.eth`))
+    await userEvent.click(screen.getByText(`${encodeLabel('test')}${DOT_TLD}`))
     await userEvent.click(screen.getByTestId('primary-next'))
     expect(mockDispatch).toHaveBeenCalled()
   })
@@ -284,7 +285,7 @@ describe('SelectPrimaryName', () => {
           [
             ...new Array(3).fill(0).map((_, i) => makeName(i)),
             {
-              name: `${encodeLabel('test')}.eth`,
+              name: `${encodeLabel('test')}${DOT_TLD}`,
               id: '0xhash',
             },
           ],
@@ -292,7 +293,7 @@ describe('SelectPrimaryName', () => {
       },
       isLoading: false,
     })
-    mockGetDecodedName.mockReturnValueOnce(Promise.resolve(`${encodeLabel('test')}.eth`))
+    mockGetDecodedName.mockReturnValueOnce(Promise.resolve(`${encodeLabel('test')}${DOT_TLD}`))
     render(
       <SelectPrimaryName
         data={{ address: '0x123' }}
@@ -301,7 +302,7 @@ describe('SelectPrimaryName', () => {
       />,
     )
     expect(screen.getByTestId('primary-next')).toBeDisabled()
-    await userEvent.click(screen.getByText(`${encodeLabel('test')}.eth`))
+    await userEvent.click(screen.getByText(`${encodeLabel('test')}${DOT_TLD}`))
     await waitFor(() => expect(screen.getByTestId('primary-next')).not.toBeDisabled())
     await userEvent.click(screen.getByTestId('primary-next'))
     await waitFor(() => expect(screen.getByTestId('unknown-labels-form')).toBeInTheDocument())
@@ -309,19 +310,9 @@ describe('SelectPrimaryName', () => {
     await waitFor(() => expect(screen.getByTestId('unknown-labels-confirm')).not.toBeDisabled())
     await userEvent.click(screen.getByTestId('unknown-labels-confirm'))
     expect(mockDispatch).toHaveBeenCalled()
-    expect(mockDispatch.mock.calls[0][0].payload[0]).toMatchInlineSnapshot(
-      {
-        data: { name: 'test.eth' },
-      },
-      `
-      {
-        "data": {
-          "address": "0x123",
-          "name": "test.eth",
-        },
-        "name": "setPrimaryName",
-      }
-    `,
-    )
+    expect(mockDispatch.mock.calls[0][0].payload[0]).toMatchObject({
+      data: { name: testDomain('test'), address: '0x123' },
+      name: 'setPrimaryName',
+    })
   })
 })

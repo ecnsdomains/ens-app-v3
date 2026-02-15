@@ -7,6 +7,7 @@ import { useIsWrapped } from '../useIsWrapped'
 import { useProfile } from '../useProfile'
 import { useResolverHasInterfaces } from '../useResolverHasInterfaces'
 import { useResolverIsAuthorised } from './useResolverIsAuthorised'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('wagmi')
 
@@ -58,7 +59,7 @@ describe('useResolverIsAuthorised', () => {
         isNameWrapperAware: true,
       },
     })
-    const { result } = renderHook(() => useResolverIsAuthorised({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverIsAuthorised({ name: testDomain('test') }))
     await waitFor(() => result.current.data !== undefined)
     expect(result.current.data).toMatchObject({
       isAuthorised: true,
@@ -82,7 +83,7 @@ describe('useResolverIsAuthorised', () => {
         isNameWrapperAware: false,
       },
     })
-    const { result } = renderHook(() => useResolverIsAuthorised({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverIsAuthorised({ name: testDomain('test') }))
     await waitFor(() => result.current.data !== undefined)
     expect(mockUseProfile).toHaveBeenCalled()
     expect(result.current.data).toMatchObject({
@@ -107,7 +108,7 @@ describe('useResolverIsAuthorised', () => {
         isNameWrapperAware: true,
       },
     })
-    const { result } = renderHook(() => useResolverIsAuthorised({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverIsAuthorised({ name: testDomain('test') }))
     await waitFor(() => result.current.data !== undefined)
     expect(mockUseProfile).toHaveBeenCalled()
     expect(result.current.data).toMatchObject({
@@ -126,7 +127,7 @@ describe('useResolverIsAuthorised', () => {
     mockUseResolverHasInterfaces.mockReturnValue({
       data: [false],
     })
-    const { result } = renderHook(() => useResolverIsAuthorised({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverIsAuthorised({ name: testDomain('test') }))
     await waitFor(() => result.current.data !== undefined)
     expect(result.current.data).toMatchObject({
       isAuthorised: false,
@@ -147,7 +148,7 @@ describe('useResolverIsAuthorised', () => {
     mockUseEstimateGas.mockReturnValue({
       isError: true,
     })
-    const { result } = renderHook(() => useResolverIsAuthorised({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverIsAuthorised({ name: testDomain('test') }))
     await waitFor(() => result.current.data !== undefined)
     expect(result.current.data).toMatchObject({
       isAuthorised: false,

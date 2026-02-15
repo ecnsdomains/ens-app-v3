@@ -7,6 +7,7 @@ import { useResolverStatus } from '@app/hooks/resolver/useResolverStatus'
 import { useReverseRegistryName } from '@app/hooks/nameservice/public/useReverseRegistryName'
 
 import { useGetPrimaryNameTransactionFlowItem } from '.'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/nameservice/public/useReverseRegistryName')
 vi.mock('@app/hooks/chain/useContractAddress')
@@ -15,11 +16,12 @@ const mockUseReverseRegistryName = mockFunction(useReverseRegistryName)
 const mockUseContractAddress = mockFunction(useContractAddress)
 
 const createResolverStatusData = (
-  overwrites: { isAuthorized?: boolean; hasMigratedRecord?: boolean } = {},
+  overwrites: { isAuthorized?: boolean; hasMigratedRecord?: boolean; isMigratedProfileEqual?: boolean } = {},
 ) =>
   ({
     isAuthorized: true,
     hasMigratedRecord: true,
+    isMigratedProfileEqual: overwrites.isMigratedProfileEqual ?? overwrites.hasMigratedRecord ?? true,
     ...overwrites,
   }) as unknown as ReturnType<typeof useResolverStatus>['data']
 
@@ -27,7 +29,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     mockUseReverseRegistryName.mockReturnValue({
-      data: 'test.eth',
+      data: testDomain('test'),
       isLoading: false,
       isFetching: false,
     })
@@ -44,7 +46,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData(),
       }),
     )
-    expect(result.current.callBack?.('test.eth')).toBeNull()
+    expect(result.current.callBack?.(testDomain('test'))).toBeNull()
   })
 
   it('should return transaction SetPrimaryName if the reverseRegistryName is undefined.', async () => {
@@ -62,11 +64,11 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData(),
       }),
     )
-    expect(result.current.callBack?.('test.eth')).toMatchObject({
+    expect(result.current.callBack?.(testDomain('test'))).toMatchObject({
       transactions: [
         {
           data: {
-            name: 'test.eth',
+            name: testDomain('test'),
             address: '0x123',
           },
           name: 'setPrimaryName',
@@ -85,11 +87,11 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData(),
       }),
     )
-    expect(result.current.callBack?.('primary.eth')).toMatchObject({
+    expect(result.current.callBack?.(testDomain('primary'))).toMatchObject({
       transactions: [
         {
           data: {
-            name: 'primary.eth',
+            name: testDomain('primary'),
             address: '0x123',
           },
           name: 'setPrimaryName',
@@ -107,11 +109,11 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData({ isAuthorized: false }),
       }),
     )
-    expect(result.current.callBack?.('test.eth')).toMatchObject({
+    expect(result.current.callBack?.(testDomain('test'))).toMatchObject({
       transactions: [
         {
           data: {
-            name: 'test.eth',
+            name: testDomain('test'),
             contract: 'registry',
           },
           name: 'updateResolver',
@@ -129,11 +131,11 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData({ isAuthorized: false }),
       }),
     )
-    expect(result.current.callBack?.('test.eth')).toMatchObject({
+    expect(result.current.callBack?.(testDomain('test'))).toMatchObject({
       transactions: [
         {
           data: {
-            name: 'test.eth',
+            name: testDomain('test'),
             contract: 'nameWrapper',
           },
           name: 'updateResolver',
@@ -151,11 +153,11 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData({ isAuthorized: false, hasMigratedRecord: false }),
       }),
     )
-    expect(result.current.callBack?.('test.eth')).toMatchObject({
+    expect(result.current.callBack?.(testDomain('test'))).toMatchObject({
       transactions: [
         {
           data: {
-            name: 'test.eth',
+            name: testDomain('test'),
             address: '0x123',
             latestResolver: true,
           },
@@ -163,7 +165,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         },
         {
           data: {
-            name: 'test.eth',
+            name: testDomain('test'),
             contract: 'registry',
           },
           name: 'updateResolver',
@@ -182,11 +184,11 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData(),
       }),
     )
-    expect(result.current.callBack?.('test.eth')).toMatchObject({
+    expect(result.current.callBack?.(testDomain('test'))).toMatchObject({
       transactions: [
         {
           data: {
-            name: 'test.eth',
+            name: testDomain('test'),
             address: '0x123',
           },
           name: 'updateNativeCoinAddress',
@@ -204,7 +206,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData({ isAuthorized: false, hasMigratedRecord: false }),
       }),
     )
-    expect(result.current.callBack?.('test.eth')).toMatchObject({
+    expect(result.current.callBack?.(testDomain('test'))).toMatchObject({
       intro: {
         title: ['intro.selectPrimaryName.noResolver.title', { ns: 'transactionFlow' }],
       },
@@ -220,7 +222,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData({ isAuthorized: false, hasMigratedRecord: false }),
       }),
     )
-    expect(result.current.callBack?.('test.eth')).toMatchObject({
+    expect(result.current.callBack?.(testDomain('test'))).toMatchObject({
       intro: {
         title: ['intro.selectPrimaryName.invalidResolver.title', { ns: 'transactionFlow' }],
       },
@@ -236,7 +238,7 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData(),
       }),
     )
-    expect(result.current.callBack?.('primary.eth')).toMatchObject({
+    expect(result.current.callBack?.(testDomain('primary'))).toMatchObject({
       intro: {
         title: ['intro.selectPrimaryName.updateNativeCoinAddress.title', { ns: 'transactionFlow' }],
       },
@@ -253,8 +255,8 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData(),
       }),
     )
-    expect(result.current.callBack?.('primary.eth')?.transactions.length).toBe(1)
-    expect(result.current.callBack?.('primary.eth')?.intro).toBeUndefined()
+    expect(result.current.callBack?.(testDomain('primary'))?.transactions.length).toBe(1)
+    expect(result.current.callBack?.(testDomain('primary'))?.intro).toBeUndefined()
   })
 
   it('should return 3 transaction steps if profile address does not match user address and resolver is not authorized', () => {
@@ -267,6 +269,6 @@ describe('useGetPrimaryNameTransactionFlowItem', () => {
         resolverStatus: createResolverStatusData({ isAuthorized: false, hasMigratedRecord: false }),
       }),
     )
-    expect(result.current.callBack?.('primary.eth')?.transactions.length).toBe(3)
+    expect(result.current.callBack?.(testDomain('primary'))?.transactions.length).toBe(3)
   })
 })

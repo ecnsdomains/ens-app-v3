@@ -7,6 +7,7 @@ import { useChainName } from '@app/hooks/chain/useChainName'
 
 import { makeMockIntersectionObserver } from '../../../../../test/mock/makeMockIntersectionObserver'
 import { AvatarUpload } from './AvatarUpload'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('wagmi')
 
@@ -29,7 +30,7 @@ const props = {
   handleCancel: mockHandleCancel,
   handleSubmit: mockHandleSubmit,
   avatar: mockFile,
-  name: 'test.eth',
+  name: testDomain('test'),
 }
 
 describe('<AvatarUpload />', () => {
@@ -72,7 +73,7 @@ describe('<AvatarUpload />', () => {
     fireEvent.click(screen.getByTestId('continue-button'))
     fireEvent.click(screen.getByTestId('upload-button'))
     await waitFor(() =>
-      expect(global.fetch).toBeCalledWith('https://euc.li/test.eth', {
+      expect(global.fetch).toBeCalledWith('https://euc.li/test.etc', {
         method: 'PUT',
         headers: {
           // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -90,7 +91,7 @@ describe('<AvatarUpload />', () => {
     await waitFor(() =>
       expect(mockHandleSubmit).toHaveBeenCalledWith(
         'upload',
-        'https://euc.li/test.eth',
+        'https://euc.li/test.etc',
         mockFileDataURL,
       ),
     )
@@ -110,7 +111,7 @@ describe('<AvatarUpload />', () => {
     fireEvent.click(screen.getByTestId('continue-button'))
     fireEvent.click(screen.getByTestId('upload-button'))
     await waitFor(() =>
-      expect(global.fetch).toBeCalledWith('https://euc.li/sepolia/test.eth', {
+      expect(global.fetch).toBeCalledWith('https://euc.li/sepolia/test.etc', {
         method: 'PUT',
         headers: {
           // eslint-disable-next-line @typescript-eslint/naming-convention

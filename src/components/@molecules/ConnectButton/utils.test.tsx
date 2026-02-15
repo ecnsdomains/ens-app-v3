@@ -2,6 +2,7 @@ import { Address } from 'viem'
 import { describe, expect, it, vi } from 'vitest'
 
 import { getDropdownItems } from './utils'
+import { testDomain } from '@root/test/chainConstants'
 
 describe('getDropdownItems', () => {
   const mockT = (key: string) => key
@@ -40,7 +41,7 @@ describe('getDropdownItems', () => {
   it('should include profile item when primary name exists', () => {
     const items = getDropdownItems({
       ...baseProps,
-      primary: { name: 'test.eth' },
+      primary: { name: testDomain('test') },
     })
 
     expect(items).toHaveLength(5)

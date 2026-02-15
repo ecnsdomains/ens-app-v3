@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { useAccount } from 'wagmi'
 
 import { useExpiryActions } from './useExpiryActions'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 vi.mock('wagmi')
 const mockUseAccount = mockFunction(useAccount)
@@ -26,7 +27,7 @@ describe('useExpiryActions', () => {
   it('should render if expiryDetails contains a expiry type data with a valid expiry date', () => {
     const { result } = renderHook(() =>
       useExpiryActions({
-        name: 'test.eth',
+        name: testDomain('test'),
         expiryDetails: [{ type: 'expiry', date: new Date('3255803954000') }],
       }),
     )
@@ -39,7 +40,7 @@ describe('useExpiryActions', () => {
     mockUseAccount.mockReturnValue({ address: undefined, isConnected: false })
     const { result } = renderHook(() =>
       useExpiryActions({
-        name: 'test.eth',
+        name: testDomain('test'),
         expiryDetails: [{ type: 'expiry', date: new Date('3255803954000') }],
       }),
     )
@@ -54,7 +55,7 @@ describe('useExpiryActions', () => {
   it('should render null if name is subname and if expiryDetails contains a expiry type data with a valid expiry date', () => {
     const { result } = renderHook(() =>
       useExpiryActions({
-        name: 'sub.test.eth',
+        name: testSub('sub', 'test'),
         expiryDetails: [{ type: 'expiry', date: new Date('3255803954000') }],
       }),
     )
@@ -64,7 +65,7 @@ describe('useExpiryActions', () => {
   it('should return null if expiryDetails contains a expiry type data but an invalid expiry date', () => {
     const { result } = renderHook(() =>
       useExpiryActions({
-        name: 'test.eth',
+        name: testDomain('test'),
         expiryDetails: [{ type: 'expiry', date: undefined as unknown as Date }],
       }),
     )
@@ -74,7 +75,7 @@ describe('useExpiryActions', () => {
   it('should return null if expiryDetails does not contain a expiry type data', () => {
     const { result } = renderHook(() =>
       useExpiryActions({
-        name: 'test.eth',
+        name: testDomain('test'),
         expiryDetails: [{ type: 'expiry', date: undefined as unknown as Date }],
       }),
     )
@@ -85,7 +86,7 @@ describe('useExpiryActions', () => {
     mockUseAccount.mockReturnValue({ address: '0xabc', isConnected: true })
     const { result } = renderHook(() =>
       useExpiryActions({
-        name: 'test.eth',
+        name: testDomain('test'),
         expiryDetails: [{ type: 'expiry', date: new Date('3255803954000') }],
       }),
     )

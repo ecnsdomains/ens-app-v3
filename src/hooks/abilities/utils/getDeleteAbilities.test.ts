@@ -8,6 +8,7 @@ import { emptyAddress } from '@app/utils/constants'
 
 import { useAbilities } from '../useAbilities'
 import { getDeleteAbilities } from './getDeleteAbilities'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 type WrapperData = NonNullable<GetWrapperDataReturnType>
 const makeWrapperData = (overrides: DeepPartial<WrapperData> = {}) => {
@@ -60,7 +61,7 @@ const unwrapped2LDEth = {
   }),
   parentWrapperData: makeWrapperData(),
   isParentWrapped: false,
-  name: 'test.eth',
+  name: testDomain('test'),
   ownerData: makeOwnerData({
     ownershipLevel: 'registrar',
     owner: '0xName',
@@ -76,7 +77,7 @@ const wrapped2LDEth = {
   }),
   parentWrapperData: makeWrapperData(),
   isParentWrapped: true,
-  name: 'test.eth',
+  name: testDomain('test'),
   ownerData: makeOwnerData({
     ownershipLevel: 'nameWrapper',
     owner: '0xName',
@@ -99,7 +100,7 @@ const unwrappedSubname = {
   }),
   parentWrapperData: makeWrapperData(),
   isParentWrapped: false,
-  name: 'sub.test.eth',
+  name: testSub('sub', 'test'),
   ownerData: makeOwnerData({
     ownershipLevel: 'registry',
     owner: '0xName',
@@ -121,7 +122,7 @@ const wrappedSubname = {
     owner: '0xParent',
   }),
   isParentWrapped: true,
-  name: 'sub.test.eth',
+  name: testSub('sub', 'test'),
   ownerData: makeOwnerData({
     ownershipLevel: 'nameWrapper',
     owner: '0xName',
@@ -145,7 +146,7 @@ const expiredWrappedSubname = {
     owner: '0xParent',
   }),
   isParentWrapped: true,
-  name: 'sub.test.eth',
+  name: testSub('sub', 'test'),
   ownerData: makeOwnerData({
     ownershipLevel: 'registry',
     owner: '0xNameWrapper',
@@ -171,7 +172,7 @@ const wrappedSubnameWithPCCBurned = {
     },
   }),
   isParentWrapped: true,
-  name: 'sub.test.eth',
+  name: testSub('sub', 'test'),
   ownerData: makeOwnerData({
     ownershipLevel: 'nameWrapper',
     owner: '0xName',

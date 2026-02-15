@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 import React from 'react'
 
 import { ProfileSnippet, getUserDefinedUrl } from './ProfileSnippet'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('next/navigation', () => ({
   useSearchParams: () => new URLSearchParams(),
@@ -34,7 +35,7 @@ describe('ProfileSnippet', () => {
   it('should render warning when hasMismatch is true', () => {
     render(
       <ProfileSnippet
-        name="MetaMask.eth"
+        name={testDomain('MetaMask')}
         hasMismatch={true}
       />
     )
@@ -45,7 +46,7 @@ describe('ProfileSnippet', () => {
   it('should show View Profile button even when hasMismatch is true', () => {
     render(
       <ProfileSnippet
-        name="MetaMask.eth"
+        name={testDomain('MetaMask')}
         button="viewProfile"
         hasMismatch={true}
       />
@@ -57,7 +58,7 @@ describe('ProfileSnippet', () => {
   it('should show primary name tag when isPrimary is true and no mismatch', () => {
     render(
       <ProfileSnippet
-        name="test.eth"
+        name={testDomain('test')}
         isPrimary={true}
         hasMismatch={false}
       />
@@ -69,20 +70,20 @@ describe('ProfileSnippet', () => {
   it('should not beautify name when hasMismatch is true', () => {
     const { container } = render(
       <ProfileSnippet
-        name="MetaMask.eth"
+        name={testDomain('MetaMask')}
         hasMismatch={true}
       />
     )
     
     // The name should be displayed as-is without beautification
     const nameElement = container.querySelector('[data-testid="profile-snippet-name"]')
-    expect(nameElement?.textContent).toBe('MetaMask.eth')
+    expect(nameElement?.textContent).toBe(testDomain('MetaMask'))
   })
   
   it('should render both primary tag and warning when both conditions are true', () => {
     render(
       <ProfileSnippet
-        name="MetaMask.eth"
+        name={testDomain('MetaMask')}
         isPrimary={true}
         hasMismatch={true}
       />

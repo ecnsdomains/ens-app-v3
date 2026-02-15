@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { useNativeCoinPrice } from '@app/hooks/useNativeCoinPrice'
 
 import { Invoice } from './Invoice'
+import { COIN_KEY, COIN_SYMBOL } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/useNativeCoinPrice')
 
@@ -23,14 +24,14 @@ const items = [
 ]
 
 describe('Invoice', () => {
-  it('should render correctly in eth mode', async () => {
-    render(<Invoice items={items} totalLabel="total" unit="eth" />)
+  it(`should render correctly in ${COIN_KEY} mode`, async () => {
+    render(<Invoice items={items} totalLabel="total" unit={COIN_KEY as any} />)
     expect(screen.getByText('line 1')).toBeVisible()
-    expect(screen.getByText('1.0000 ETH')).toBeVisible()
+    expect(screen.getByText(`1.0000 ${COIN_SYMBOL}`)).toBeVisible()
     expect(screen.getByText('line 2')).toBeVisible()
-    expect(screen.getByText('2.0000 ETH')).toBeVisible()
+    expect(screen.getByText(`2.0000 ${COIN_SYMBOL}`)).toBeVisible()
     expect(screen.getByText('total')).toBeVisible()
-    expect(screen.getByText('3.0000 ETH')).toBeVisible()
+    expect(screen.getByText(`3.0000 ${COIN_SYMBOL}`)).toBeVisible()
   })
 
   it('should render correctly in usd mode', async () => {

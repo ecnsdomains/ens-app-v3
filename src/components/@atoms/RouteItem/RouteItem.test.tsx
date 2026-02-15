@@ -56,7 +56,7 @@ describe('RouteItem', () => {
       connected: true,
     }
     render(<RouteItem route={route} asText />)
-    expect(screen.getByText('test').closest('a')).not.toHaveAttribute('href')
+    expect(screen.getByText('test').closest('a')).toBeNull()
   })
 
   it('should show text if asText is true', () => {

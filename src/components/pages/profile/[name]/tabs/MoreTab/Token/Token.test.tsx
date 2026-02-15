@@ -10,6 +10,7 @@ import { useParentBasicName } from '@app/hooks/useParentBasicName'
 import { useBreakpoint } from '@app/utils/BreakpointProvider'
 
 import Token from './Token'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/useParentBasicName')
 vi.mock('@app/hooks/chain/useChainName')
@@ -38,12 +39,12 @@ mockUseParentBasicName.mockImplementation(() => {
 describe('Token', () => {
   describe('tokenids', () => {
     it('should not show tokenid section for unwrapped non .eth 2ld', () => {
-      const name = 'sub.nick.eth'
+      const name = testSub('sub', 'nick')
       render(<Token {...({ name, isWrapped: false } as any)} />)
       expect(screen.queryByTestId('token-ids')).not.toBeInTheDocument()
     })
     it('should show correct decimal and hex for unwrapped .eth 2ld', () => {
-      const name = 'nick.eth'
+      const name = testDomain('nick')
       const label = 'nick'
       const labelHash = labelhash(label)
       const tokenId = BigInt(labelHash).toString(10)
@@ -53,7 +54,7 @@ describe('Token', () => {
       expect(screen.getByText(tokenId)).toBeVisible()
     })
     it('should show correct decimal and hex for wrapped .eth 2ld name', () => {
-      const name = 'nick.eth'
+      const name = testDomain('nick')
       const hexId = namehash(name)
       const decId = BigInt(hexId).toString(10)
 
@@ -70,7 +71,7 @@ describe('Token', () => {
       expect(screen.getByText(decId)).toBeVisible()
     })
     it('should show correct decimal and hex for wrapped other name', () => {
-      const name = 'sub.nick.eth'
+      const name = testSub('sub', 'nick')
       const hexId = namehash(name)
       const decId = BigInt(hexId).toString(10)
 
@@ -89,12 +90,12 @@ describe('Token', () => {
   })
   describe('etherscan link', () => {
     it('should not show any link for unwrapped non .eth 2ld', () => {
-      const name = 'sub.nick.eth'
+      const name = testSub('sub', 'nick')
       render(<Token {...({ name, isWrapped: false } as any)} />)
       expect(screen.queryByTestId('etherscan-nft-link')).not.toBeInTheDocument()
     })
     it('should show correct link for unwrapped .eth 2ld', () => {
-      const name = 'nick.eth'
+      const name = testDomain('nick')
       const label = 'nick'
       const labelHash = labelhash(label)
       const tokenId = BigInt(labelHash).toString(10)
@@ -106,7 +107,7 @@ describe('Token', () => {
       )
     })
     it('should show correct link for wrapped .eth 2ld', () => {
-      const name = 'nick.eth'
+      const name = testDomain('nick')
       const hexId = namehash(name)
       const decId = BigInt(hexId).toString(10)
 
@@ -125,7 +126,7 @@ describe('Token', () => {
       )
     })
     it('should show correct link for wrapped other', () => {
-      const name = 'sub.nick.eth'
+      const name = testSub('sub', 'nick')
       const hexId = namehash(name)
       const decId = BigInt(hexId).toString(10)
 

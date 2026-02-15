@@ -17,6 +17,7 @@ import {
   getBlockQueryFn,
   useFusesSetDates,
 } from './useFusesSetDates'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('wagmi')
 vi.mock('viem/actions')
@@ -445,7 +446,7 @@ describe('useFusesSetDates', () => {
       },
       isSuccess: true,
     })
-    const { result } = renderHook(() => useFusesSetDates({ name: 'test.eth' }))
+    const { result } = renderHook(() => useFusesSetDates({ name: testDomain('test') }))
 
     await waitFor(() => expect(result.current.isLoading).toBe(false))
 
@@ -466,7 +467,7 @@ describe('useFusesSetDates', () => {
       },
       isSuccess: true,
     })
-    const { result } = renderHook(() => useFusesSetDates({ name: 'test.eth' }))
+    const { result } = renderHook(() => useFusesSetDates({ name: testDomain('test') }))
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true))
 
@@ -494,7 +495,7 @@ describe('useFusesSetDates', () => {
       },
       isSuccess: true,
     })
-    const { result } = renderHook(() => useFusesSetDates({ name: 'test.eth' }))
+    const { result } = renderHook(() => useFusesSetDates({ name: testDomain('test') }))
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true))
 

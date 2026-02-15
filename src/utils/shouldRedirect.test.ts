@@ -2,6 +2,7 @@ import mockRouter from 'next-router-mock'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { shouldRedirect } from './shouldRedirect'
+import { DOT_TLD, testDomain, testSub } from '@root/test/chainConstants'
 
 vi.mock('next/router', async () => await vi.importActual('next-router-mock'))
 
@@ -70,7 +71,7 @@ describe('shouldRedirect', () => {
         name,
         isLoading: false,
         registrationStatus: 'invalid',
-        item: { name: '.eth' },
+        item: { name: DOT_TLD },
         step: 'transaction',
       },
     }
@@ -80,9 +81,9 @@ describe('shouldRedirect', () => {
 
   it('Profile.tsx should "/profile/[decodedName]" expected path if has valid arguments', () => {
     const name = 'test'
-    const decodedName = 'test.eth'
+    const decodedName = testDomain('test')
     const normalisedName =
-      '[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b].test.eth'
+      testSub('[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b]', 'test')
     const params = {
       name,
       isSelf: false,
@@ -99,7 +100,7 @@ describe('shouldRedirect', () => {
     const name = 'test'
     const decodedName = ''
     const normalisedName =
-      '[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b].test.eth'
+      testSub('[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b]', 'test')
     const params = {
       name,
       isSelf: false,
@@ -114,9 +115,9 @@ describe('shouldRedirect', () => {
 
   it('Profile.tsx should "/profile/[name]" expected path if has valid arguments', () => {
     const name = 'test'
-    const decodedName = 'test.eth'
+    const decodedName = testDomain('test')
     const normalisedName =
-      '[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b].test.eth'
+      testSub('[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b]', 'test')
     const params = {
       name,
       isSelf: true,
@@ -131,9 +132,9 @@ describe('shouldRedirect', () => {
 
   it('Profile.tsx should "/profile/[name]" expected path if invalid tab', () => {
     const name = 'test'
-    const decodedName = 'test.eth'
+    const decodedName = testDomain('test')
     const normalisedName =
-      '[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b].test.eth'
+      testSub('[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b]', 'test')
     const params = {
       name,
       isSelf: true,

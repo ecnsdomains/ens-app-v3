@@ -3,6 +3,7 @@ import { renderHook } from '@app/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import useRoles from './useRoles'
+import { testDomain } from '@root/test/chainConstants'
 
 const mockGetRoles = vi.fn().mockReturnValue([
   {
@@ -43,7 +44,7 @@ vi.mock('@app/hooks/useParentBasicName', () => ({
 
 describe('useRoles', () => {
   it('should return an empty array if no roles are passed', () => {
-    const { result } = renderHook(() => useRoles('test.eth'))
+    const { result } = renderHook(() => useRoles(testDomain('test')))
     expect(mockGetRoles).toHaveBeenCalled()
     expect(result.current.data).toEqual([
       { address: '0x123', role: 'owner' },
@@ -53,7 +54,7 @@ describe('useRoles', () => {
   })
 
   it('should return a list of grouped roles if grouped is true', () => {
-    const { result } = renderHook(() => useRoles('test.eth', { grouped: true }))
+    const { result } = renderHook(() => useRoles(testDomain('test'), { grouped: true }))
     expect(mockGetRoles).toHaveBeenCalled()
     expect(result.current.data).toEqual([
       {
@@ -83,7 +84,7 @@ it('should grouped falsy address together', () => {
       role: 'eth-record',
     },
   ])
-  const { result } = renderHook(() => useRoles('test.eth', { grouped: true }))
+  const { result } = renderHook(() => useRoles(testDomain('test'), { grouped: true }))
   expect(mockGetRoles).toHaveBeenCalled()
   expect(result.current.data).toEqual([
     {

@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { useResolverStatus } from '@app/hooks/resolver/useResolverStatus'
 
 import { TaggedNameItemWithFuseCheck } from './TaggedNameItemWithFuseCheck'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/resolver/useResolverStatus')
 
@@ -21,7 +22,7 @@ mockUseResolverStatus.mockReturnValue({
 })
 
 const baseProps: any = {
-  name: 'test.eth',
+  name: testDomain('test'),
   relation: {
     resolvedAddress: true,
     wrappedOwner: false,
@@ -32,7 +33,7 @@ const baseProps: any = {
 describe('TaggedNameItemWithFuseCheck', () => {
   it('should render a tagged name item with mock data', () => {
     render(<TaggedNameItemWithFuseCheck {...baseProps} />)
-    expect(screen.getByText('test.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('test'))).toBeVisible()
   })
 
   it('should not render a tagged name item with mock data', () => {
@@ -54,7 +55,7 @@ describe('TaggedNameItemWithFuseCheck', () => {
         }}
       />,
     )
-    expect(screen.queryByText('test.eth')).toBe(null)
+    expect(screen.queryByText(testDomain('test'))).toBe(null)
   })
 
   it('should render a tagged name item if isAuthorized is true', () => {
@@ -76,7 +77,7 @@ describe('TaggedNameItemWithFuseCheck', () => {
         }}
       />,
     )
-    expect(screen.getByText('test.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('test'))).toBeVisible()
   })
 
   it('should render a tagged name item if isResolvedAddress is true', () => {
@@ -98,7 +99,7 @@ describe('TaggedNameItemWithFuseCheck', () => {
         }}
       />,
     )
-    expect(screen.getByText('test.eth')).toBeInTheDocument()
+    expect(screen.getByText(testDomain('test'))).toBeInTheDocument()
   })
 
   it('should render a tagged name item if isWrappedOwner is false', () => {
@@ -120,7 +121,7 @@ describe('TaggedNameItemWithFuseCheck', () => {
         }}
       />,
     )
-    expect(screen.getByText('test.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('test'))).toBeVisible()
   })
 
   it('should render a tagged name item if CANNOT_SET_RESOLVER is false', () => {
@@ -142,6 +143,6 @@ describe('TaggedNameItemWithFuseCheck', () => {
         }}
       />,
     )
-    expect(screen.getByText('test.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('test'))).toBeVisible()
   })
 })

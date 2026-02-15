@@ -3,6 +3,7 @@ import { renderHook } from '@app/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import { useOwnershipWarning } from './useOwnershipWarning'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/account/useAccountSafely', () => ({
   useAccountSafely: () => ({
@@ -23,7 +24,7 @@ describe('useOwnershipWarning', () => {
   it('should return a warning if user is owner not manager of 2ld eth name ', async () => {
     const { result } = renderHook(() =>
       useOwnershipWarning({
-        name: 'test.eth',
+        name: testDomain('test'),
         nameType: {
           data: 'eth-unwrapped-2ld',
           isLoading: false,

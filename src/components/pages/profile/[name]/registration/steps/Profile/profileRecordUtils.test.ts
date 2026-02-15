@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { ProfileRecord } from '@app/constants/profileRecordOptions'
 import { Profile } from '@app/types'
 import { createDateAndValue } from '@app/utils/utils'
+import { COIN_KEY } from '@root/test/chainConstants'
 
 import {
   getProfileRecordsDiff,
@@ -573,7 +574,7 @@ describe('profileToProfileRecords', () => {
       }
       const records = [
         {
-          key: 'eth',
+          key: COIN_KEY,
           type: 'addr',
           group: 'address',
           value: '',
@@ -599,7 +600,7 @@ describe('profileToProfileRecords', () => {
       }
       const records = [
         {
-          key: 'eth',
+          key: COIN_KEY,
           type: 'addr',
           group: 'address',
           value: '',
@@ -625,7 +626,7 @@ describe('profileToProfileRecords', () => {
       }
       const records = [
         {
-          key: 'eth',
+          key: COIN_KEY,
           type: 'addr',
           group: 'address',
           value: '',
@@ -651,7 +652,7 @@ describe('profileToProfileRecords', () => {
       }
       const records = [
         {
-          key: 'eth',
+          key: COIN_KEY,
           type: 'addr',
           group: 'address',
           value: '',
@@ -677,7 +678,7 @@ describe('profileToProfileRecords', () => {
       }
       const records = [
         {
-          key: 'eth',
+          key: COIN_KEY,
           type: 'addr',
           group: 'address',
           value: '',
@@ -703,7 +704,7 @@ describe('profileToProfileRecords', () => {
       }
       const records = [
         {
-          key: 'eth',
+          key: COIN_KEY,
           type: 'addr',
           group: 'address',
           value: '',
@@ -729,7 +730,7 @@ describe('profileToProfileRecords', () => {
       }
       const records = [
         {
-          key: 'eth',
+          key: COIN_KEY,
           type: 'addr',
           group: 'address',
           value: '',
@@ -755,7 +756,7 @@ describe('profileToProfileRecords', () => {
       }
       const records = [
         {
-          key: 'eth',
+          key: COIN_KEY,
           type: 'addr',
           group: 'address',
           value: '',
@@ -770,7 +771,7 @@ describe('getProfileRecordsDiff', () => {
   it('should return an eth record with value = "" if the eth record is cleared', () => {
     const currentRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '',
@@ -779,7 +780,7 @@ describe('getProfileRecordsDiff', () => {
 
     const previousRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
@@ -788,7 +789,7 @@ describe('getProfileRecordsDiff', () => {
     const recordsDiff = getProfileRecordsDiff(currentRecords, previousRecords)
     expect(recordsDiff).toEqual([
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '',
@@ -799,7 +800,7 @@ describe('getProfileRecordsDiff', () => {
   it('should return an empty array if both records have an empty eth record', () => {
     const currentRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '',
@@ -808,7 +809,7 @@ describe('getProfileRecordsDiff', () => {
 
     const previousRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '',
@@ -821,7 +822,7 @@ describe('getProfileRecordsDiff', () => {
   it('should return an eth record with new value if the eth record is updated', () => {
     const currentRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
@@ -830,7 +831,7 @@ describe('getProfileRecordsDiff', () => {
 
     const previousRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
@@ -839,7 +840,7 @@ describe('getProfileRecordsDiff', () => {
     const recordsDiff = getProfileRecordsDiff(currentRecords, previousRecords)
     expect(recordsDiff).toEqual([
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
@@ -850,7 +851,7 @@ describe('getProfileRecordsDiff', () => {
   it('should return an empty array if eth record exists but is not updated', () => {
     const currentRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
@@ -859,7 +860,7 @@ describe('getProfileRecordsDiff', () => {
 
     const previousRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         type: 'addr',
         group: 'address',
         value: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',

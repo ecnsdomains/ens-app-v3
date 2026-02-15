@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { yearsToSeconds } from '@app/utils/utils'
 
 import useRegistrationParams from './useRegistrationParams'
+import { COIN_KEY } from '@root/test/chainConstants'
 
 describe('useRegistrationParams()', () => {
   it('should return correct default registration params', () => {
@@ -18,7 +19,7 @@ describe('useRegistrationParams()', () => {
           secret: '0xsecret',
           records: [
             {
-              key: 'eth',
+              key: COIN_KEY,
               value: '0x4B2D639Ac1b0497e932F8ce234EFd3b3Df9a9b74',
               group: 'address',
               type: 'addr',
@@ -38,7 +39,7 @@ describe('useRegistrationParams()', () => {
           "clearRecords": false,
           "coins": [
             {
-              "coin": "eth",
+              "coin": "etc",
               "value": "0x4B2D639Ac1b0497e932F8ce234EFd3b3Df9a9b74",
             },
           ],
@@ -61,7 +62,7 @@ describe('useRegistrationParams()', () => {
           secret: '0xsecret',
           records: [
             {
-              key: 'eth',
+              key: COIN_KEY,
               value: '0x4B2D639Ac1b0497e932F8ce234EFd3b3Df9a9b74',
               group: 'address',
               type: 'addr',
@@ -93,7 +94,7 @@ describe('useRegistrationParams()', () => {
           "clearRecords": false,
           "coins": [
             {
-              "coin": "eth",
+              "coin": "etc",
               "value": "0x4B2D639Ac1b0497e932F8ce234EFd3b3Df9a9b74",
             },
             {
@@ -157,7 +158,7 @@ describe('useRegistrationParams()', () => {
           secret: '0xsecret',
           records: [
             {
-              key: 'eth',
+              key: COIN_KEY,
               value: '0x4B2D639Ac1b0497e932F8ce234EFd3b3Df9a9b74',
               group: 'address',
               type: 'addr',
@@ -177,7 +178,7 @@ describe('useRegistrationParams()', () => {
           "clearRecords": false,
           "coins": [
             {
-              "coin": "eth",
+              "coin": "etc",
               "value": "0x4B2D639Ac1b0497e932F8ce234EFd3b3Df9a9b74",
             },
           ],
@@ -201,7 +202,7 @@ describe('useRegistrationParams()', () => {
           secret: '0xsecret',
           records: [
             {
-              key: 'eth',
+              key: COIN_KEY,
               value: '0x4B2D639Ac1b0497e932F8ce234EFd3b3Df9a9b74',
               group: 'address',
               type: 'addr',
@@ -222,7 +223,7 @@ describe('useRegistrationParams()', () => {
           "clearRecords": false,
           "coins": [
             {
-              "coin": "eth",
+              "coin": "etc",
               "value": "0x4B2D639Ac1b0497e932F8ce234EFd3b3Df9a9b74",
             },
           ],

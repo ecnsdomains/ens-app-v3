@@ -3,12 +3,13 @@ import { describe, expect, it } from 'vitest'
 import { createTransactionItem } from '@app/transaction-flow/transaction'
 
 import { getSendNameTransactions } from './getSendNameTransactions'
+import { testDomain, COIN_SYMBOL } from '@root/test/chainConstants'
 
 describe('getSendNameTransactions', () => {
   it('should return 3 transactions (resetProfileWithRecords, transferName, transferName) if setEthRecord, resetProfile, sendManager and sendOwner is true', () => {
     expect(
       getSendNameTransactions({
-        name: 'test.eth',
+        name: testDomain('test'),
         recipient: '0xrecipient',
         transactions: {
           setEthRecord: true,
@@ -33,19 +34,19 @@ describe('getSendNameTransactions', () => {
       }),
     ).toEqual([
       createTransactionItem('resetProfileWithRecords', {
-        name: 'test.eth',
-        records: { coins: [{ coin: 'ETH', value: '0xrecipient' }] },
+        name: testDomain('test'),
+        records: { coins: [{ coin: COIN_SYMBOL, value: '0xrecipient' }] },
         resolverAddress: '0xresolver',
       }),
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendManager',
         contract: 'registrar',
         reclaim: true,
       }),
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendOwner',
         contract: 'registry',
@@ -56,7 +57,7 @@ describe('getSendNameTransactions', () => {
   it('should return 3 transactions (resetProfileWithRecords, transferName, transferName) if setEthRecord, resetProfile, sendManager and sendOwner is true', () => {
     expect(
       getSendNameTransactions({
-        name: 'test.eth',
+        name: testDomain('test'),
         recipient: '0xrecipient',
         transactions: {
           setEthRecord: false,
@@ -81,19 +82,19 @@ describe('getSendNameTransactions', () => {
       }),
     ).toEqual([
       createTransactionItem('resetProfileWithRecords', {
-        name: 'test.eth',
-        records: { coins: [{ coin: 'ETH', value: '0xrecipient' }] },
+        name: testDomain('test'),
+        records: { coins: [{ coin: COIN_SYMBOL, value: '0xrecipient' }] },
         resolverAddress: '0xresolver',
       }),
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendManager',
         contract: 'registrar',
         reclaim: false,
       }),
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendOwner',
         contract: 'registry',
@@ -104,7 +105,7 @@ describe('getSendNameTransactions', () => {
   it('should return 3 transactions (updateNativeCoinAddress, transferName, transferName) if resetProfile, sendManager and sendOwner is true', () => {
     expect(
       getSendNameTransactions({
-        name: 'test.eth',
+        name: testDomain('test'),
         recipient: '0xrecipient',
         transactions: {
           setEthRecord: true,
@@ -128,16 +129,16 @@ describe('getSendNameTransactions', () => {
         resolverAddress: '0xresolver',
       }),
     ).toEqual([
-      createTransactionItem('updateNativeCoinAddress', { name: 'test.eth', address: '0xrecipient' }),
+      createTransactionItem('updateNativeCoinAddress', { name: testDomain('test'), address: '0xrecipient' }),
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendManager',
         contract: 'registrar',
         reclaim: true,
       }),
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendOwner',
         contract: 'registry',
@@ -148,7 +149,7 @@ describe('getSendNameTransactions', () => {
   it('should return 2 transactions (transferName, transferName) if sendManager and sendOwner is true', () => {
     expect(
       getSendNameTransactions({
-        name: 'test.eth',
+        name: testDomain('test'),
         recipient: '0xrecipient',
         transactions: {
           setEthRecord: false,
@@ -173,14 +174,14 @@ describe('getSendNameTransactions', () => {
       }),
     ).toEqual([
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendManager',
         contract: 'registrar',
         reclaim: true,
       }),
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendOwner',
         contract: 'registry',
@@ -191,7 +192,7 @@ describe('getSendNameTransactions', () => {
   it('should return 2 transactions (transferSubname, transferSubname) if sendManager and sendOwner is true and isOwnerOrManager is false', () => {
     expect(
       getSendNameTransactions({
-        name: 'test.eth',
+        name: testDomain('test'),
         recipient: '0xrecipient',
         transactions: {
           setEthRecord: false,
@@ -216,14 +217,14 @@ describe('getSendNameTransactions', () => {
       }),
     ).toEqual([
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendManager',
         contract: 'registrar',
         reclaim: true,
       }),
       createTransactionItem('transferName', {
-        name: 'test.eth',
+        name: testDomain('test'),
         newOwnerAddress: '0xrecipient',
         sendType: 'sendOwner',
         contract: 'registry',
@@ -234,7 +235,7 @@ describe('getSendNameTransactions', () => {
   it('should return 0 transactions if sendManager and sendOwner is true but abilities.sendNameFunctionCallDetails is undefined', () => {
     expect(
       getSendNameTransactions({
-        name: 'test.eth',
+        name: testDomain('test'),
         recipient: '0xrecipient',
         transactions: {
           setEthRecord: false,

@@ -9,6 +9,7 @@ import * as  renewNames from '@app/overrides/nameservice/renewNames'
 import { ClientWithEns, ConnectorClientWithEns } from '@app/types'
 
 import extendNamesTransaction from './extendNames'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@ensdomains/ensjs/public')
 vi.mock('@ensdomains/ensjs/wallet')
@@ -36,7 +37,7 @@ describe('extendNamesTransaction', () => {
       const ONE_YEAR_SECONDS = 31536000
 
       const data = {
-        names: ['test.eth'],
+        names: [testDomain('test')],
         duration: ONE_YEAR_SECONDS,
         startDateTimestamp: JAN_1_2022_TIMESTAMP,
         displayPrice: '0.1 ETH',
@@ -48,7 +49,7 @@ describe('extendNamesTransaction', () => {
       expect(result).toEqual([
         {
           label: 'name',
-          value: 'test.eth',
+          value: testDomain('test'),
           type: 'name',
         },
         {
@@ -75,7 +76,7 @@ describe('extendNamesTransaction', () => {
       const ONE_YEAR_SECONDS = 31536000
 
       const data = {
-        names: ['test1.eth', 'test2.eth'],
+        names: [testDomain('test1'), testDomain('test2')],
         duration: ONE_YEAR_SECONDS,
         startDateTimestamp: JAN_1_2022_TIMESTAMP,
         displayPrice: '0.2 ETH',
@@ -137,7 +138,7 @@ describe('extendNamesTransaction', () => {
 
       testCases.forEach(({ duration, expectedDuration, expectedExpiry }) => {
         const data = {
-          names: ['test.eth'],
+          names: [testDomain('test')],
           duration,
           startDateTimestamp: JAN_1_2022_TIMESTAMP,
           displayPrice: '0.1 ETH',
@@ -158,7 +159,7 @@ describe('extendNamesTransaction', () => {
 
     it('should return display items without newExpiry when startDateTimestamp is not provided', () => {
       const data = {
-        names: ['test.eth'],
+        names: [testDomain('test')],
         duration: 31536000,
         displayPrice: '1.02',
         hasWrapped: false,
@@ -180,7 +181,7 @@ describe('extendNamesTransaction', () => {
 
     it('should calculate price and create transaction data', async () => {
       const data = {
-        names: ['test.eth'],
+        names: [testDomain('test')],
         duration: 31536000, // 1 year
         hasWrapped: false,
       }
@@ -199,11 +200,11 @@ describe('extendNamesTransaction', () => {
       })
 
       expect(mockGetPrice).toHaveBeenCalledWith(mockClient, {
-        nameOrNames: ['test.eth'],
+        nameOrNames: [testDomain('test')],
         duration: 31536000,
       })
       expect(mockRenewNames).toHaveBeenCalledWith(mockConnectorClient, {
-        nameOrNames: ['test.eth'],
+        nameOrNames: [testDomain('test')],
         duration: 31536000,
         value: BigInt('1020000000000000000'),
         hasWrapped: false,
@@ -218,7 +219,7 @@ describe('extendNamesTransaction', () => {
 
     it('should throw error when price is not found', async () => {
       const data = {
-        names: ['test.eth'],
+        names: [testDomain('test')],
         duration: 31536000,
         hasWrapped: false,
       }

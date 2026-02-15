@@ -4,6 +4,7 @@ import { describe, expect, it, vi, beforeEach } from 'vitest'
 import { usePrimaryProfile } from './usePrimaryProfile'
 import { usePrimaryName } from './nameservice/public/usePrimaryName'
 import { useRecords } from './nameservice/public/useRecords'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('./nameservice/public/usePrimaryName')
 vi.mock('./nameservice/public/useRecords')
@@ -43,10 +44,10 @@ describe('usePrimaryProfile', () => {
   it('should return primary name data with match and originalName fields', async () => {
     const address = '0x1234567890abcdef' as any
     const primaryData = {
-      name: 'metamask.eth',
-      originalName: 'MetaMask.eth',
+      name: testDomain('metamask'),
+      originalName: testDomain('MetaMask'),
       match: false,
-      beautifiedName: 'MetaMask.eth',
+      beautifiedName: testDomain('MetaMask'),
     }
     
     const recordsData = {
@@ -84,10 +85,10 @@ describe('usePrimaryProfile', () => {
   it('should handle mismatched names correctly', async () => {
     const address = '0x43e47385f6b3f8bdbe02c210bf5c74b6c34ff441' as any
     const primaryData = {
-      name: 'metamask.eth',
-      originalName: 'MetaMask.eth',
+      name: testDomain('metamask'),
+      originalName: testDomain('MetaMask'),
       match: false,
-      beautifiedName: 'MetaMask.eth',
+      beautifiedName: testDomain('MetaMask'),
     }
     
     mockUsePrimaryName.mockReturnValue({
@@ -106,9 +107,9 @@ describe('usePrimaryProfile', () => {
 
     await waitFor(() => {
       expect(result.current.data).toEqual({
-        name: 'metamask.eth',
+        name: testDomain('metamask'),
         match: false,
-        originalName: 'MetaMask.eth',
+        originalName: testDomain('MetaMask'),
       })
     })
   })

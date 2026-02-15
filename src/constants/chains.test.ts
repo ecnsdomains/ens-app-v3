@@ -1,6 +1,8 @@
 import { localhost, mainnet, sepolia } from 'viem/chains'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { ecnsChains } from '@app/utils/chains/makeMordorChainWithEcns'
+
 import {
   getChainsFromUrl,
   getNetworkFromUrl,
@@ -127,16 +129,16 @@ describe('chains', () => {
         expect(result).toBe('localhost')
       })
 
-      it('should return sepolia for localhost without local provider', async () => {
+      it('should return ecns for localhost without local provider', async () => {
         delete process.env.NEXT_PUBLIC_PROVIDER
         // @ts-ignore
         global.window.location = createMockLocation('localhost')
-        
+
         // Re-import the module to pick up the cleared environment variable
         vi.resetModules()
         const { getNetworkFromUrl: getNetworkFromUrlFresh } = await import('./chains')
         const result = getNetworkFromUrlFresh()
-        expect(result).toBe('sepolia')
+        expect(result).toBe('ecns')
       })
 
       it('should return localhost for 127.0.0.1 with local provider', async () => {
@@ -150,15 +152,15 @@ describe('chains', () => {
         expect(result).toBe('localhost')
       })
 
-      it('should return sepolia for 127.0.0.1 without local provider', async () => {
+      it('should return ecns for 127.0.0.1 without local provider', async () => {
         delete process.env.NEXT_PUBLIC_PROVIDER
         // @ts-ignore
         global.window.location = createMockLocation('127.0.0.1')
-        
+
         vi.resetModules()
         const { getNetworkFromUrl: getNetworkFromUrlFresh } = await import('./chains')
         const result = getNetworkFromUrlFresh()
-        expect(result).toBe('sepolia')
+        expect(result).toBe('ecns')
       })
 
       it('should return sepolia for sepolia subdomain', () => {
@@ -168,28 +170,28 @@ describe('chains', () => {
         expect(result).toBe('sepolia')
       })
 
-      it('should return mainnet for app.ens.domains', () => {
+      it('should return ecns for app.ens.domains', () => {
         // @ts-ignore
         global.window.location = createMockLocation('app.ens.domains')
         const result = getNetworkFromUrl()
-        expect(result).toBe('mainnet')
+        expect(result).toBe('ecns')
       })
 
-      it('should return mainnet for unknown hostname', () => {
+      it('should return ecns for unknown hostname', () => {
         // @ts-ignore
         global.window.location = createMockLocation('unknown.example.com')
         const result = getNetworkFromUrl()
-        expect(result).toBe('mainnet')
+        expect(result).toBe('ecns')
       })
     })
   })
 
   describe('getChainsFromUrl', () => {
-    it('should return mainnet chains for mainnet network', () => {
+    it('should return ecns chains for ecns network', () => {
       // @ts-ignore
       global.window.location = createMockLocation('app.ens.domains')
       const result = getChainsFromUrl()
-      expect(result).toEqual([mainnetWithEns])
+      expect(result).toEqual(ecnsChains)
     })
 
     it('should return sepolia chains for sepolia network', () => {
@@ -210,13 +212,13 @@ describe('chains', () => {
       expect(result).toEqual([localhostWithEnsFresh])
     })
 
-    it('should return mainnet for undefined network', () => {
+    it('should return ecns chains for undefined network', () => {
       Object.defineProperty(global, 'window', {
         value: undefined,
         writable: true,
       })
       const result = getChainsFromUrl()
-      expect(result).toMatchObject([mainnetWithEns])
+      expect(result).toEqual(ecnsChains)
     })
   })
 

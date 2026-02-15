@@ -21,6 +21,7 @@ import { makeMockIntersectionObserver } from '../../../../../test/mock/makeMockI
 import { useMockedUseQueryOptions } from '../../../../../test/mock/useMockedUseQueryOptions'
 import { calculateGasLimit, transactionSuccessHandler } from './query'
 import { handleBackToInput, TransactionStageModal } from './TransactionStageModal'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/account/useAccountSafely')
 vi.mock('@app/hooks/chain/useChainName')
@@ -62,7 +63,7 @@ const mockTransactionRequest: TransactionRequest = {
 const mockTransaction: GenericTransaction = {
   name: 'updateResolver',
   data: {
-    name: 'other-registrant.eth',
+    name: testDomain('other-registrant'),
     contract: 'registry',
     resolverAddress: '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41',
     oldResolverAddress: '0x1613beB3B2C4f22Ee086B2b38C1476A3cE7f78E8',
@@ -236,7 +237,7 @@ describe('TransactionStageModal', () => {
           <ComponentWithDefaultProps
             transaction={{
               ...mockTransaction,
-              data: { ...mockTransaction.data, name: 'test.eth' },
+              data: { ...mockTransaction.data, name: testDomain('test') },
             }}
             key="component-default"
           />,

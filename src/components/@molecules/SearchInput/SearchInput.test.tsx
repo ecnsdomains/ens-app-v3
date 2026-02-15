@@ -8,6 +8,7 @@ import { useBreakpoint } from '@app/utils/BreakpointProvider'
 
 import { SearchInput } from './SearchInput'
 import { SearchResult } from './SearchResult'
+import { testDomain, DOT_TLD } from '@root/test/chainConstants'
 
 vi.mock('next/router', async () => await vi.importActual('next-router-mock'))
 vi.mock('@app/utils/BreakpointProvider')
@@ -103,7 +104,7 @@ describe('SearchInput', () => {
       [
         {
           nameType: 'native',
-          text: 'nick.eth',
+          text: testDomain('nick'),
         },
         {
           nameType: 'address',
@@ -111,7 +112,7 @@ describe('SearchInput', () => {
         },
         {
           nameType: 'native',
-          text: 'test.eth',
+          text: testDomain('test'),
         },
       ],
     ])
@@ -130,16 +131,16 @@ describe('SearchInput', () => {
       timeout: 500,
     })
 
-    expect(screen.getByText('nick.eth')).toBeInTheDocument()
+    expect(screen.getByText(testDomain('nick'))).toBeInTheDocument()
     expect(screen.getByText('0xb6E040C9ECAaE172a89bD561c5F73e1C48d28cd9')).toBeInTheDocument()
-    expect(screen.getByText('test.eth')).toBeInTheDocument()
+    expect(screen.getByText(testDomain('test'))).toBeInTheDocument()
   })
   it('should show history items in correct order', async () => {
     mockUseLocalStorage.mockReturnValue([
       [
         {
           nameType: 'native',
-          text: 'nick.eth',
+          text: testDomain('nick'),
           lastAccessed: 1,
         },
         {
@@ -149,7 +150,7 @@ describe('SearchInput', () => {
         },
         {
           nameType: 'name',
-          text: 'test.eth',
+          text: testDomain('test'),
           lastAccessed: 2,
         },
       ],
@@ -170,15 +171,15 @@ describe('SearchInput', () => {
     })
 
     expect(container.children[0]).toHaveTextContent('0xb6E040C9ECAaE172a89bD561c5F73e1C48d28cd9')
-    expect(container.children[1]).toHaveTextContent('test.eth')
-    expect(container.children[2]).toHaveTextContent('nick.eth')
+    expect(container.children[1]).toHaveTextContent(testDomain('test'))
+    expect(container.children[2]).toHaveTextContent(testDomain('nick'))
   })
   it('should show a maximum of 6 history items', async () => {
     mockUseLocalStorage.mockReturnValue([
       [
         {
           nameType: 'native',
-          text: 'nick.eth',
+          text: testDomain('nick'),
         },
         {
           nameType: 'address',
@@ -186,23 +187,23 @@ describe('SearchInput', () => {
         },
         {
           nameType: 'native',
-          text: 'test.eth',
+          text: testDomain('test'),
         },
         {
           nameType: 'native',
-          text: 'test1.eth',
+          text: testDomain('test1'),
         },
         {
           nameType: 'native',
-          text: 'test2.eth',
+          text: testDomain('test2'),
         },
         {
           nameType: 'native',
-          text: 'test3.eth',
+          text: testDomain('test3'),
         },
         {
           nameType: 'native',
-          text: 'test4.eth',
+          text: testDomain('test4'),
         },
       ],
     ])
@@ -221,8 +222,8 @@ describe('SearchInput', () => {
       timeout: 500,
     })
 
-    expect(screen.getByText('test2.eth')).toBeInTheDocument()
-    expect(screen.queryByText('test4.eth')).not.toBeInTheDocument()
+    expect(screen.getByText(testDomain('test2'))).toBeInTheDocument()
+    expect(screen.queryByText(testDomain('test4'))).not.toBeInTheDocument()
   })
   it('should show address search as valid', async () => {
     const address = '0xb6E040C9ECAaE172a89bD561c5F73e1C48d28cd9'
@@ -244,7 +245,7 @@ describe('SearchInput', () => {
     await userEvent.type(screen.getByTestId('search-input-box'), address)
 
     await waitFor(() =>
-      expect(screen.queryByText(`${address.toLowerCase()}.eth`)).toBeInTheDocument(),
+      expect(screen.queryByText(`${address.toLowerCase()}${DOT_TLD}`)).toBeInTheDocument(),
     )
   })
   it('should show invalid search as invalid', async () => {
@@ -290,7 +291,7 @@ describe('SearchInput', () => {
       () => {
         const results = screen.getByTestId('search-input-results')
         expect(results).toBeInTheDocument()
-        expect(results).toHaveTextContent('test.eth')
+        expect(results).toHaveTextContent(testDomain('test'))
       },
       {
         timeout: 300,
@@ -325,7 +326,7 @@ describe('SearchInput', () => {
       () => {
         const results = screen.getByTestId('search-input-results')
         expect(results).toBeInTheDocument()
-        expect(results).toHaveTextContent('test.eth')
+        expect(results).toHaveTextContent(testDomain('test'))
       },
       {
         timeout: 300,
@@ -355,7 +356,7 @@ describe('SearchInput', () => {
       expect.objectContaining({
         usingPlaceholder: true,
       }),
-      expect.anything(),
+      undefined,
     )
 
     // Wait for debounce to complete
@@ -366,7 +367,7 @@ describe('SearchInput', () => {
           expect.objectContaining({
             usingPlaceholder: false,
           }),
-          expect.anything(),
+          undefined,
         )
       },
       {
@@ -397,7 +398,7 @@ describe('SearchInput', () => {
       expect.objectContaining({
         usingPlaceholder: true,
       }),
-      expect.objectContaining({}),
+      undefined,
     )
 
     // Type second part immediately
@@ -406,7 +407,7 @@ describe('SearchInput', () => {
       expect.objectContaining({
         usingPlaceholder: true,
       }),
-      expect.objectContaining({}),
+      undefined,
     )
 
     // Wait for debounce to complete
@@ -416,7 +417,7 @@ describe('SearchInput', () => {
           expect.objectContaining({
             usingPlaceholder: false,
           }),
-          expect.anything(),
+          undefined,
         )
       },
       {

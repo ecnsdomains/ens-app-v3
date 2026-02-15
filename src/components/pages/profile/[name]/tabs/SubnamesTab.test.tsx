@@ -11,6 +11,7 @@ import { useZorb } from '@app/hooks/useZorb'
 import { createDateAndValue } from '@app/utils/utils'
 
 import { SubnamesTab } from './SubnamesTab'
+import { testDomain, DOT_TLD, TLD } from '@root/test/chainConstants'
 
 vi.mock('next/router', async () => await vi.importActual('next-router-mock'))
 vi.mock('wagmi')
@@ -27,13 +28,13 @@ const mockIntersectionObserver = vi.fn()
 
 const makeSubname = (_: any, i: number): Name => {
   const label = `test-${i}`
-  const name = `${label}.eth`
+  const name = `${label}${DOT_TLD}`
   const nameHash = namehash(name)
   const labelHash = labelhash(label)
   const owner = '0xb6E040C9ECAaE172a89bD561c5F73e1C48d28cd9'
 
   return {
-    parentName: 'eth',
+    parentName: TLD,
     createdAt: createDateAndValue(Date.now()),
     expiryDate: null,
     fuses: null,
@@ -69,7 +70,7 @@ describe('SubnamesTab', () => {
   })
 
   const baseMockData = {
-    name: 'nick.eth',
+    name: testDomain('nick'),
     network: 1,
     canEdit: false,
     isWrapped: false,
@@ -100,7 +101,7 @@ describe('SubnamesTab', () => {
     mockUseSubnames.mockReturnValue(subnamesMockData)
     render(<SubnamesTab {...baseMockData} />)
     subnamesMockData.infiniteData.forEach((subname) =>
-      expect(screen.getByText(subname.truncatedName!.replace('.eth', ''))).toBeVisible(),
+      expect(screen.getByText(subname.truncatedName!.replace(DOT_TLD, ''))).toBeVisible(),
     )
   })
   it('should show create subname button if canEdit is true', () => {

@@ -3,9 +3,10 @@ import { describe, expect, it } from 'vitest'
 import { GetDnsImportDataReturnType } from '@ensdomains/ensjs/dns'
 
 import { createImportTransactionRequests } from './utils'
+import { testDomain } from '@root/test/chainConstants'
 
 const address = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' as const
-const testName = 'test.eth' as const
+const testName = testDomain('test') as const
 const dnsImportData = [] as GetDnsImportDataReturnType
 const publicResolverAddress = '0xpublicresolver'
 const dnsRegistrarAddress = '0xdnsregistrar'

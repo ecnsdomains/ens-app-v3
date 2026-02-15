@@ -2,15 +2,16 @@
 import { match } from 'ts-pattern'
 
 import { ValidationResult } from '@app/hooks/useValidate'
+import { TLD, DOT_TLD, testDomain, testSub } from '../chainConstants'
 
 export const mockUseValidateConfig = {
-  eth: { input: 'eth' },
+  eth: { input: TLD },
   dns: { input: 'com' },
-  'valid-2ld': { input: 'name.eth' },
+  'valid-2ld': { input: testDomain('name') },
   'valid-2ld:dns': { input: 'name.com' },
-  'invalid-2ld': { input: 'name❤️.eth' },
-  'valid-subname': { input: 'subname.name.eth' },
-} as const
+  'invalid-2ld': { input: `name❤️${DOT_TLD}` },
+  'valid-subname': { input: testSub('subname', 'name') },
+}
 export type MockUseValidateType = keyof typeof mockUseValidateConfig
 export const mockUseValidateTypes = Object.keys(mockUseValidateConfig) as MockUseValidateType[]
 
@@ -24,15 +25,15 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
       isNativeTld: true,
       labelDataArray: [
         {
-          input: [101, 116, 104],
+          input: [...Buffer.from(TLD)],
           offset: 0,
-          tokens: [[101, 116, 104]],
+          tokens: [[...Buffer.from(TLD)]],
           type: 'ASCII',
-          output: [101, 116, 104],
+          output: [...Buffer.from(TLD)],
         },
       ],
-      name: 'eth',
-      beautifiedName: 'eth',
+      name: TLD,
+      beautifiedName: TLD,
       isNonASCII: false,
       labelCount: 1,
     }))
@@ -71,15 +72,15 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
           output: [110, 97, 109, 101],
         },
         {
-          input: [101, 116, 104],
+          input: [...Buffer.from(TLD)],
           offset: 5,
-          tokens: [[101, 116, 104]],
+          tokens: [[...Buffer.from(TLD)]],
           type: 'ASCII',
-          output: [101, 116, 104],
+          output: [...Buffer.from(TLD)],
         },
       ],
-      name: 'name.eth',
-      beautifiedName: 'name.eth',
+      name: testDomain('name'),
+      beautifiedName: testDomain('name'),
       isNonASCII: false,
       labelCount: 2,
     }))
@@ -126,22 +127,22 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
           output: [110, 97, 109, 101, 10084],
         },
         {
-          input: [101, 116, 104],
+          input: [...Buffer.from(TLD)],
           offset: 6,
-          tokens: [[101, 116, 104]],
+          tokens: [[...Buffer.from(TLD)]],
           type: 'ASCII',
           emoji: undefined,
-          output: [101, 116, 104],
+          output: [...Buffer.from(TLD)],
         },
       ],
-      name: 'name❤.eth',
-      beautifiedName: 'name❤️.eth',
+      name: `name❤${DOT_TLD}`,
+      beautifiedName: `name❤️${DOT_TLD}`,
       isNonASCII: true,
       labelCount: 2,
     }))
     .with('valid-subname', () => ({
       type: 'name' as const,
-      name: 'subname.name.eth',
+      name: testSub('subname', 'name'),
       isShort: false,
       isValid: true,
       is2LD: false,
@@ -162,14 +163,14 @@ export const makeMockUseValidate = (type: MockUseValidateType): ValidationResult
           output: [110, 97, 109, 101],
         },
         {
-          input: [101, 116, 104],
+          input: [...Buffer.from(TLD)],
           offset: 13,
-          tokens: [[101, 116, 104]],
+          tokens: [[...Buffer.from(TLD)]],
           type: 'ASCII',
-          output: [101, 116, 104],
+          output: [...Buffer.from(TLD)],
         },
       ],
-      beautifiedName: 'subname.name.eth',
+      beautifiedName: testSub('subname', 'name'),
       isNonASCII: false,
       labelCount: 3,
     }))

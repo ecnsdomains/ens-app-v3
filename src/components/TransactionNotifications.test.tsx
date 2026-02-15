@@ -1,6 +1,6 @@
 import { mockFunction, render, screen, waitFor } from '@app/test-utils'
 
-import { act } from '@testing-library/react'
+import { act, fireEvent } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import { useChainName } from '@app/hooks/chain/useChainName'
@@ -70,17 +70,21 @@ describe('Notifications', () => {
 
     rerender(<TransactionNotifications />)
 
-    await waitFor(() => screen.queryByText('transaction.status.confirmed1.notifyTitle'), {
-      timeout: 500,
-    }).then((el) => expect(el).toBeInTheDocument())
+    await waitFor(() => {
+      expect(screen.getByText('transaction.status.confirmed1.notifyTitle')).toBeInTheDocument()
+    }, { timeout: 500 })
 
-    act(() => {
-      vi.advanceTimersByTime(8350)
+    // Close the first toast manually (Thorin Toast msToShow=8e6 is too long for fake timers)
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('toast-close-icon'))
     })
 
-    await waitFor(() => screen.queryByText('transaction.status.confirmed2.notifyTitle'), {
-      timeout: 500,
-    }).then((el) => expect(el).toBeInTheDocument())
+    // Advance past the 300ms cleanup setTimeout to show next queued notification
+    await act(async () => {
+      vi.advanceTimersByTime(350)
+    })
+
+    expect(screen.getByText('transaction.status.confirmed2.notifyTitle')).toBeInTheDocument()
   })
   it('should show the correct title and description for a notification', async () => {
     const { rerender } = render(<TransactionNotifications />)

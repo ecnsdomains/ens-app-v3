@@ -18,7 +18,7 @@ describe('useActiveRoute', () => {
       query: {
         from: 'search',
       },
-      pathname: '/profile/test.eth',
+      pathname: '/profile/test.etc',
     })
     const { result } = renderHook(() => useActiveRoute())
     expect(result.current).toEqual('search')

@@ -9,6 +9,7 @@ import { lightTheme } from '@ensdomains/thorin'
 
 import Page from '../../pages/address'
 import { useRouter } from 'next/router'
+import { testDomain } from '@root/test/chainConstants'
 
 // Mock Next.js router
 vi.mock('next/router', () => ({
@@ -29,8 +30,8 @@ vi.mock('@app/hooks/usePrimaryProfile', () => ({
     if (address === '0x43e47385f6b3f8bdbe02c210bf5c74b6c34ff441') {
       return {
         data: {
-          name: 'metamask.eth',
-          originalName: 'MetaMask.eth',
+          name: testDomain('metamask'),
+          originalName: testDomain('MetaMask'),
           match: false,
           texts: [
             { key: 'description', value: 'MetaMask wallet' },
@@ -113,12 +114,12 @@ describe('Address Page', () => {
     </QueryClientProvider>
   )
 
-  it('should display MetaMask.eth with original capitalization', async () => {
+  it('should display MetaMask.etc with original capitalization', async () => {
     render(<Page />, { wrapper })
 
     await waitFor(() => {
       const profileName = screen.getByTestId('profile-name')
-      expect(profileName.textContent).toBe('MetaMask.eth')
+      expect(profileName.textContent).toBe(testDomain('MetaMask'))
     })
   })
 

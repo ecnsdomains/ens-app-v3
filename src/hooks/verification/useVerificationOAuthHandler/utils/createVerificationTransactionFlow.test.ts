@@ -1,12 +1,13 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { createVerificationTransactionFlow } from './createVerificationTransactionFlow'
+import { testDomain } from '@root/test/chainConstants'
 
 const mockCreateTransaction = vi.fn()
 const mockRouter = { push: vi.fn() }
 
 const defaultProps = {
-  name: 'name.eth',
+  name: testDomain('name'),
   verifier: 'dentity' as const,
   verifiedPresentationUri: 'https://verifiedPresentationUri',
   resolverAddress: '0xresolver',
@@ -25,11 +26,11 @@ describe('createVerificationTransactionFlow', () => {
 
   it('should return a transaction item', () => {
     createVerificationTransactionFlow(defaultProps)
-    expect(mockCreateTransaction).toBeCalledWith('update-verification-record-name.eth', {
+    expect(mockCreateTransaction).toBeCalledWith(testDomain('update-verification-record-name'), {
       transactions: [
         {
           data: {
-            name: 'name.eth',
+            name: testDomain('name'),
             verifier: 'dentity',
             resolverAddress: '0xresolver',
             verifiedPresentationUri: 'https://verifiedPresentationUri',

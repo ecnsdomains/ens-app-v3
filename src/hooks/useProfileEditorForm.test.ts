@@ -7,9 +7,10 @@ import { supportedAddresses } from '@app/constants/supportedAddresses'
 
 import profileRecordOptions, { grouped, ProfileRecord } from '../constants/profileRecordOptions'
 import { isDirtyForRecordAtIndexCalc, useProfileEditorForm } from './useProfileEditorForm'
+import { COIN_KEY } from '@root/test/chainConstants'
 
 const baseRecord: ProfileRecord = {
-  key: 'eth',
+  key: COIN_KEY,
   group: 'address',
   type: 'addr',
   value: '0xb794f5ea0ba39494ce839613fffba74279579268',
@@ -84,7 +85,7 @@ describe('useProfileEditorForm', () => {
       const { result } = renderHook(() => useProfileEditorForm(records))
       expect(
         await result.current.validatorForRecord({
-          key: 'eth',
+          key: COIN_KEY,
           group: 'address',
           type: 'addr',
         })(validEth),
@@ -95,7 +96,7 @@ describe('useProfileEditorForm', () => {
       const { result } = renderHook(() => useProfileEditorForm(records))
       expect(
         typeof (await result.current.validatorForRecord({
-          key: 'eth',
+          key: COIN_KEY,
           group: 'address',
           type: 'addr',
         })(invalidEth)),
@@ -290,7 +291,7 @@ describe('useProfileEditorForm', () => {
     it('should be able to remove a address record by type and key', async () => {
       const { result } = renderHook(() => useProfileEditorForm(records))
       act(() => {
-        result.current.removeRecordByGroupAndKey('address', 'eth')
+        result.current.removeRecordByGroupAndKey('address', COIN_KEY)
       })
       expect(result.current.getRecords().length).toBe(1)
     })
@@ -386,7 +387,7 @@ describe('useProfileEditorForm', () => {
     it('should not be able to add a address record if the record already exists', () => {
       const { result } = renderHook(() => useProfileEditorForm(records))
       result.current.addRecords({
-        key: 'eth',
+        key: COIN_KEY,
         group: 'address',
         type: 'addr',
         value: 'test',
@@ -440,7 +441,7 @@ describe('isDirtyForRecordAtIndexCalc', () => {
     const index = 0
     const defaultRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         group: 'address',
         type: 'addr',
         value: '0xb794f5ea0ba39494ce839613fffba74279579268',
@@ -448,7 +449,7 @@ describe('isDirtyForRecordAtIndexCalc', () => {
     ]
     const currentRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         group: 'address',
         type: 'addr',
         value: '0xdifferent',
@@ -461,7 +462,7 @@ describe('isDirtyForRecordAtIndexCalc', () => {
     const index = 0
     const defaultRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         group: 'address',
         type: 'addr',
         value: '0xb794f5ea0ba39494ce839613fffba74279579268',
@@ -469,7 +470,7 @@ describe('isDirtyForRecordAtIndexCalc', () => {
     ]
     const currentRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         group: 'address',
         type: 'addr',
         value: '0xb794f5ea0ba39494ce839613fffba74279579268',
@@ -482,7 +483,7 @@ describe('isDirtyForRecordAtIndexCalc', () => {
     const index = 0
     const defaultRecords: ProfileRecord[] = [
       {
-        key: 'eth',
+        key: COIN_KEY,
         group: 'address',
         type: 'addr',
         value: '0xb794f5ea0ba39494ce839613fffba74279579268',

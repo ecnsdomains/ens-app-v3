@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 
 import { makeMockIntersectionObserver } from '../../../../../test/mock/makeMockIntersectionObserver'
 import { NameConfirmationWarningView } from './NameConfirmationWarningView'
+import { testDomain } from '@root/test/chainConstants'
 
 makeMockIntersectionObserver()
 
@@ -14,7 +15,7 @@ describe('NameConfirmationWarningView', () => {
 
     const { getByTestId } = render(
       <NameConfirmationWarningView
-        name="test.eth"
+        name={testDomain('test')}
         expiry={new Date()}
         setDisabled={hook.current[1]}
       />,
@@ -22,7 +23,7 @@ describe('NameConfirmationWarningView', () => {
 
     const input = getByTestId('input-name-confirmation')
 
-    fireEvent.change(input, { target: { value: 'smth.eth' } })
+    fireEvent.change(input, { target: { value: testDomain('smth') } })
 
     expect(hook.current[0]).toBe(true)
   })
@@ -31,7 +32,7 @@ describe('NameConfirmationWarningView', () => {
 
     const { getByTestId } = render(
       <NameConfirmationWarningView
-        name="test.eth"
+        name={testDomain('test')}
         expiry={new Date()}
         setDisabled={hook.current[1]}
       />,
@@ -39,7 +40,7 @@ describe('NameConfirmationWarningView', () => {
 
     const input = getByTestId('input-name-confirmation')
 
-    fireEvent.change(input, { target: { value: 'test.eth' } })
+    fireEvent.change(input, { target: { value: testDomain('test') } })
 
     expect(hook.current[0]).toBe(false)
   })

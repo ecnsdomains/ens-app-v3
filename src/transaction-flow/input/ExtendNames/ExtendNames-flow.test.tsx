@@ -11,6 +11,7 @@ import { useReferrer } from '@app/hooks/useReferrer'
 
 import { makeMockIntersectionObserver } from '../../../../test/mock/makeMockIntersectionObserver'
 import ExtendNames from './ExtendNames-flow'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/chain/useEstimateGasWithStateOverride')
 vi.mock('@app/hooks/nameservice/public/usePrice')
@@ -67,7 +68,7 @@ describe('Extendnames', () => {
     render(
       <ExtendNames
         {...{
-          data: { names: ['nick.eth'], hasWrapped: false },
+          data: { names: [testDomain('nick')], hasWrapped: false },
           dispatch: () => null,
           onDismiss: () => null,
         }}
@@ -84,7 +85,7 @@ describe('Extendnames', () => {
     render(
       <ExtendNames
         {...{
-          data: { names: ['nick.eth'], isSelf: true, hasWrapped: false },
+          data: { names: [testDomain('nick')], isSelf: true, hasWrapped: false },
           dispatch: () => null,
           onDismiss: () => null,
         }}
@@ -101,7 +102,7 @@ describe('Extendnames', () => {
     render(
       <ExtendNames
         {...{
-          data: { names: ['nick.eth'], isSelf: true, hasWrapped: false },
+          data: { names: [testDomain('nick')], isSelf: true, hasWrapped: false },
           dispatch: () => null,
           onDismiss: () => null,
         }}

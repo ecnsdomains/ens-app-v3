@@ -9,6 +9,7 @@ import { useClearRecentTransactions } from '@app/hooks/transactions/useClearRece
 import { useRecentTransactions } from '@app/hooks/transactions/useRecentTransactions'
 
 import { makeMockIntersectionObserver } from '../../../../../../test/mock/makeMockIntersectionObserver'
+import { DOT_TLD } from '@root/test/chainConstants'
 import { TransactionSection } from './TransactionSection'
 
 vi.mock('@app/hooks/chain/useChainName')
@@ -119,11 +120,11 @@ describe('TransactionSection', () => {
         action: 'registerName',
         // eslint-disable-next-line no-restricted-syntax
         hash: '0x4d6cf7e1c8620a59c8a0d2d2c9bf9bbca6dbf65e694f01d1e5f85c87315e20c7',
-        key: 'register-test-hyphens.eth-0x99b7A9E80F46F7d0eB11b5147e6fF64E47698b6C',
+        key: `register-test-hyphens${DOT_TLD}-0x99b7A9E80F46F7d0eB11b5147e6fF64E47698b6C`,
       },
     ])
     render(<TransactionSection />)
-    expect(screen.getByText('transaction.description.registerName: test-hyphens.eth')).toBeVisible()
+    expect(screen.getByText(`transaction.description.registerName: test-hyphens${DOT_TLD}`)).toBeVisible()
   })
   it('should correctly display registration transactions without hyphens', () => {
     mockUseRecentTransactions.mockReturnValue([
@@ -132,11 +133,11 @@ describe('TransactionSection', () => {
         action: 'registerName',
         // eslint-disable-next-line no-restricted-syntax
         hash: '0x4d6cf7e1c8620a59c8a0d2d2c9bf9bbca6dbf65e694f01d1e5f85c87315e20c7',
-        key: 'register-test.eth-0x99b7A9E80F46F7d0eB11b5147e6fF64E47698b6C',
+        key: `register-test${DOT_TLD}-0x99b7A9E80F46F7d0eB11b5147e6fF64E47698b6C`,
       },
     ])
     render(<TransactionSection />)
-    expect(screen.getByText('transaction.description.registerName: test.eth')).toBeVisible()
+    expect(screen.getByText(`transaction.description.registerName: test${DOT_TLD}`)).toBeVisible()
   })
   it('should correctly display commit transactions with hyphens', () => {
     mockUseRecentTransactions.mockReturnValue([
@@ -145,11 +146,11 @@ describe('TransactionSection', () => {
         action: 'commitName',
         // eslint-disable-next-line no-restricted-syntax
         hash: '0x4d6cf7e1c8620a59c8a0d2d2c9bf9bbca6dbf65e694f01d1e5f85c87315e20c7',
-        key: 'commit-test-hyphens.eth-0x99b7A9E80F46F7d0eB11b5147e6fF64E47698b6C',
+        key: `commit-test-hyphens${DOT_TLD}-0x99b7A9E80F46F7d0eB11b5147e6fF64E47698b6C`,
       },
     ])
     render(<TransactionSection />)
-    expect(screen.getByText('transaction.description.commitName: test-hyphens.eth')).toBeVisible()
+    expect(screen.getByText(`transaction.description.commitName: test-hyphens${DOT_TLD}`)).toBeVisible()
   })
   it('should correctly display commit transactions without hyphens', () => {
     mockUseRecentTransactions.mockReturnValue([
@@ -158,10 +159,10 @@ describe('TransactionSection', () => {
         action: 'commitName',
         // eslint-disable-next-line no-restricted-syntax
         hash: '0x4d6cf7e1c8620a59c8a0d2d2c9bf9bbca6dbf65e694f01d1e5f85c87315e20c7',
-        key: 'commit-test.eth-0x99b7A9E80F46F7d0eB11b5147e6fF64E47698b6C',
+        key: `commit-test${DOT_TLD}-0x99b7A9E80F46F7d0eB11b5147e6fF64E47698b6C`,
       },
     ])
     render(<TransactionSection />)
-    expect(screen.getByText('transaction.description.commitName: test.eth')).toBeVisible()
+    expect(screen.getByText(`transaction.description.commitName: test${DOT_TLD}`)).toBeVisible()
   })
 })

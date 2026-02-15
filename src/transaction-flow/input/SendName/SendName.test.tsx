@@ -3,6 +3,7 @@ import { render, screen, userEvent } from '@app/test-utils'
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
 
 import SendName from './SendName-flow'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/account/useAccountSafely', () => ({
   useAccountSafely: () => ({ address: '0xowner' }),
@@ -104,13 +105,13 @@ afterEach(() => {
 
 describe('SendName', () => {
   it('should render', async () => {
-    render(<SendName data={{ name: 'test.eth' }} dispatch={mockDispatch} onDismiss={() => {}} />)
+    render(<SendName data={{ name: testDomain('test') }} dispatch={mockDispatch} onDismiss={() => {}} />)
     await userEvent.type(screen.getByTestId('send-name-search-input'), 'nick')
     await userEvent.click(screen.getByTestId('search-result-0xnick'))
   })
 
   it('should disable the row if it is the current send role ', async () => {
-    render(<SendName data={{ name: 'test.eth' }} dispatch={mockDispatch} onDismiss={() => {}} />)
+    render(<SendName data={{ name: testDomain('test') }} dispatch={mockDispatch} onDismiss={() => {}} />)
     await userEvent.type(screen.getByTestId('send-name-search-input'), 'owner')
     expect(screen.getByTestId('search-result-0xowner')).toBeDisabled()
   })

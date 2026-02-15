@@ -6,6 +6,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { MOONPAY_WORKER_URL } from '@app/utils/constants'
 
 import { useMoonpayRegistration } from './useMoonpayRegistration'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/account/useAccountSafely', () => ({
   useAccountSafely: () => ({ address: '0x123' }),
@@ -14,7 +15,7 @@ vi.mock('@app/hooks/account/useAccountSafely', () => ({
 describe('useMoonpayRegistration', () => {
   it('should check up on transaction status every second if a there is a currentExternalTransactionId', async () => {
     const mockDispatch = vi.fn()
-    const normalisedName = 'test.eth'
+    const normalisedName = testDomain('test')
     const selected = {} as any
     const item = {
       externalTransactionId: '0x123',
@@ -30,7 +31,7 @@ describe('useMoonpayRegistration', () => {
   })
   it('should stop refetching once transaction is complete', async () => {
     const mockDispatch = vi.fn()
-    const normalisedName = 'test.eth'
+    const normalisedName = testDomain('test')
     const selected = {} as any
     let item = {
       externalTransactionId: '0x123',
@@ -68,7 +69,7 @@ describe('useMoonpayRegistration', () => {
   })
   it('should stop refetching if name changes and new name does not have a currentExternalTransactionId', async () => {
     const mockDispatch = vi.fn()
-    let normalisedName = 'test.eth'
+    let normalisedName = testDomain('test')
     const selected = {} as any
     let item = {
       externalTransactionId: '0x123',
@@ -84,7 +85,7 @@ describe('useMoonpayRegistration', () => {
     )
     await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2), { timeout: 2000 })
 
-    normalisedName = 'test2.eth'
+    normalisedName = testDomain('test2')
     item = {
       externalTransactionId: undefined,
     }
@@ -95,7 +96,7 @@ describe('useMoonpayRegistration', () => {
     const registrationDuration = 5
     const chainId = 1
     const mockDispatch = vi.fn()
-    const normalisedName = 'test.eth'
+    const normalisedName = testDomain('test')
     const tokenId = labelhash('test')
     const selected = {} as any
     const item = {

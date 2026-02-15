@@ -8,6 +8,7 @@ import { useChainName } from '@app/hooks/chain/useChainName'
 import { trackEvent } from '@app/utils/analytics'
 
 import { useEventTracker } from './useEventTracker'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/chain/useChainName')
 vi.mock('@app/utils/analytics', () => ({
@@ -29,7 +30,7 @@ describe('useEventTracker', () => {
   })
 
   test.each([
-    ['search_selected_eth', 'test.eth'],
+    ['search_selected_eth', testDomain('test')],
     ['search_selected_box', 'test.box'],
   ])('should call trackEvent with correct arguments for %s event', (eventName, name) => {
     const { result } = renderHook(() => useEventTracker())

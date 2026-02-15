@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { useBreakpoint } from '@app/utils/BreakpointProvider'
 
 import { RecordsTab } from './RecordsTab'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/utils/BreakpointProvider')
 
@@ -13,7 +14,7 @@ mockUseBreakpoint.mockReturnValue({ sm: true, md: true, lg: true })
 
 describe('RecordsTab', () => {
   const baseMockData = {
-    name: 'nick.eth',
+    name: testDomain('nick'),
     network: 1,
     resolverAddress: '0x123' as any,
     isWrapped: false,

@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { checkNativeTld2LD } from '@app/utils/utils'
 
 import { useExpiryDetails } from './useExpiryDetails'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 const mockUseNameType = vi.fn()
 vi.mock('@app/hooks/nameType/useNameType', () => ({
@@ -48,7 +49,7 @@ describe('useExpiryDetails', () => {
         })
         const { result } = renderHook(() =>
           useExpiryDetails({
-            name: 'test.eth',
+            name: testDomain('test'),
             details: {
               expiryDate: new Date(3255803954000),
               isLoading: false,
@@ -87,7 +88,7 @@ describe('useExpiryDetails', () => {
 
         const { result } = renderHook(() =>
           useExpiryDetails({
-            name: 'sub.test.eth',
+            name: testSub('sub', 'test'),
             details: {
               wrapperData: {
                 expiry: { date: new Date(3255803954000) },
@@ -124,7 +125,7 @@ describe('useExpiryDetails', () => {
 
           const { result } = renderHook(() =>
             useExpiryDetails({
-              name: 'sub.test.eth',
+              name: testSub('sub', 'test'),
               details: {
                 expiryDate: new Date(3255803954000),
                 isLoading: false,

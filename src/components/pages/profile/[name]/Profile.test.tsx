@@ -8,6 +8,7 @@ import { useProfile } from '@app/hooks/useProfile'
 import { useBreakpoint } from '@app/utils/BreakpointProvider'
 
 import ProfileContent, { NameAvailableBanner } from './Profile'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/useBasicName')
 vi.mock('@app/hooks/useProfile')
@@ -35,7 +36,7 @@ const mockUseNameDetails = mockFunction(useNameDetails)
 describe('ProfileContent - Unsupported TLDs', () => {
   it('should display the expiry date of the name', () => {
     const date = new Date(0)
-    render(<NameAvailableBanner {...{ normalisedName: 'nick.eth', expiryDate: date }} />)
+    render(<NameAvailableBanner {...{ normalisedName: testDomain('nick'), expiryDate: date }} />)
     expect(
       screen.getByText('1970', {
         exact: false,

@@ -7,6 +7,7 @@ import { createAccounts } from '../../../../playwright/fixtures/accounts'
 import { makeMockUseAbilitiesData } from '../../../../test/mock/makeMockUseAbilitiesData'
 import { makeMockUseBasicName } from '../../../../test/mock/makeMockUseBasicName'
 import { getSendAbilities } from './getSendAbilities'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>
@@ -32,8 +33,8 @@ type MockData = {
 
 const ownerAddress = '0x123'
 const account = createAccounts().getAddress('user')
-const name = 'name.eth'
-const subname = 'sub.nick.eth'
+const name = testDomain('name')
+const subname = testSub('sub', 'nick')
 
 const partialUserStates = {
   unwrappedNameOwner: {
@@ -868,7 +869,7 @@ describe('getSendAbilities', () => {
 
 const mockGetSendAbilitiesConfig = {
   'eth-unwrapped-2ld:owner': {
-    name: 'name.eth',
+    name: testDomain('name'),
     basicNameType: 'eth-unwrapped-2ld:owner',
     parentBasicNameType: 'eth',
   },

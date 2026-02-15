@@ -8,6 +8,7 @@ import { emptyAddress } from '@app/utils/constants'
 
 import { useAbilities } from '../useAbilities'
 import { getReclaimAbilities } from './getReclaimAbilities'
+import { testSub } from '@root/test/chainConstants'
 
 type WrapperData = NonNullable<GetWrapperDataReturnType>
 const makeWrapperData = (overrides: DeepPartial<WrapperData> = {}) => {
@@ -67,7 +68,7 @@ const expiredWrappedSubname = {
     owner: '0xParent',
   }),
   isParentWrapped: true,
-  name: 'sub.test.eth',
+  name: testSub('sub', 'test'),
   ownerData: makeOwnerData({
     ownershipLevel: 'registry',
     owner: '0xNameWrapper',

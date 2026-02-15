@@ -8,6 +8,7 @@ import { secondsToDate, secondsToDateInput } from '@app/utils/date'
 import { formatExpiry } from '@app/utils/utils'
 
 import { Calendar } from './Calendar'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/utils/BreakpointProvider')
 
@@ -33,11 +34,11 @@ describe('Calendar', () => {
     expect(screen.getByTestId('calendar')).toHaveAttribute('min', secondsToDateInput(value))
   })
   it('should allow setting minimum date', () => {
-    render(<Calendar value={value} onChange={() => {}} min={min} name="test.eth" />)
+    render(<Calendar value={value} onChange={() => {}} min={min} name={testDomain('test')} />)
     expect(screen.getByTestId('calendar')).toHaveAttribute('min', secondsToDateInput(min))
   })
   it('should not allow setting a date below minimum', () => {
-    render(<Calendar value={min} onChange={() => {}} min={value} name="test.eth" />)
+    render(<Calendar value={min} onChange={() => {}} min={value} name={testDomain('test')} />)
 
     expect(screen.getByTestId('calendar')).toHaveValue(secondsToDateInput(value))
   })

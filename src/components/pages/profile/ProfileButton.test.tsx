@@ -11,6 +11,7 @@ import { useBreakpoint } from '@app/utils/BreakpointProvider'
 import { formatExpiry, shortenAddress } from '@app/utils/utils'
 
 import { AddressProfileButton, OwnerProfileButton } from './ProfileButton'
+import { testDomain, COIN_KEY } from '@root/test/chainConstants'
 
 vi.mock('next/router', () => ({
   useRouter: () => ({
@@ -59,8 +60,8 @@ mockUsePrimaryName.mockImplementation(({ address, enabled }) => {
     data: enabled
       ? {
           // eslint-disable-next-line no-nested-ternary
-          name: isNoPrimary ? undefined : 'primary.eth',
-          beautifiedName: isNoPrimary ? undefined : 'primary.eth',
+          name: isNoPrimary ? undefined : testDomain('primary'),
+          beautifiedName: isNoPrimary ? undefined : testDomain('primary'),
         }
       : undefined,
     isLoading: false,
@@ -69,7 +70,7 @@ mockUsePrimaryName.mockImplementation(({ address, enabled }) => {
 
 const mockUseCoinChain = mockFunction(useCoinChain)
 mockUseCoinChain.mockImplementation(({ coinName }) => {
-  if (coinName !== 'eth') {
+  if (coinName !== COIN_KEY) {
     return {
       data: null,
     }
@@ -104,7 +105,7 @@ mockUseRouterWithHistory.mockReturnValue({
 
 describe('<OwnerProfileButton/>', () => {
   it('renders', () => {
-    render(<OwnerProfileButton iconKey="name.owner" value="name.eth" />)
+    render(<OwnerProfileButton iconKey="name.owner" value={testDomain('name')} />)
     expect(screen.getByTestId('owner-profile-button-name.owner')).toBeInTheDocument()
   })
 
@@ -148,7 +149,7 @@ describe('<OwnerProfileButton/>', () => {
       render(<OwnerProfileButton iconKey="name.owner" value={ADDRESS_TYPE.Primary} />)
       const element = screen.getByTestId('owner-profile-button-name.owner')
       expect(element).toBeInTheDocument()
-      expect(element).toHaveTextContent(`name.ownerprimary.eth`)
+      expect(element).toHaveTextContent(`name.ownerprimary.etc`)
     })
   })
 
@@ -167,35 +168,35 @@ describe('<OwnerProfileButton/>', () => {
       expect(element).toHaveTextContent(`name.parenteth`)
     })
 
-    it('should display link to /name.eth if value is not tld', () => {
-      render(<OwnerProfileButton iconKey="name.parent" value="name.eth" />)
+    it('should display link to /name.etc if value is not tld', () => {
+      render(<OwnerProfileButton iconKey="name.parent" value={testDomain('name')} />)
       const element = screen.getByTestId('owner-profile-button-name.parent')
       expect(element).toBeInTheDocument()
-      expect(element).toHaveTextContent(`name.parentname.eth`)
+      expect(element).toHaveTextContent(`name.parentname.etc`)
     })
   })
 })
 
 describe('<AddressProfileButton/>', () => {
   it('renders', () => {
-    render(<AddressProfileButton iconKey="eth" value={ADDRESS_TYPE.NoPrimary} />)
-    expect(screen.getByTestId('address-profile-button-eth')).toBeInTheDocument()
+    render(<AddressProfileButton iconKey={COIN_KEY} value={ADDRESS_TYPE.NoPrimary} />)
+    expect(screen.getByTestId(`address-profile-button-${COIN_KEY}`)).toBeInTheDocument()
   })
 
   describe('dropdown', () => {
     const user = userEvent.setup()
 
     it('should render dropdown on click', async () => {
-      render(<AddressProfileButton iconKey="eth" value={ADDRESS_TYPE.NoPrimary} />)
-      const addressProfileBtn = screen.getByTestId('address-profile-button-eth')
+      render(<AddressProfileButton iconKey={COIN_KEY} value={ADDRESS_TYPE.NoPrimary} />)
+      const addressProfileBtn = screen.getByTestId(`address-profile-button-${COIN_KEY}`)
 
       await user.click(addressProfileBtn)
       expect(screen.getByTestId('dropdown-menu')).toBeInTheDocument()
     })
 
     it('should have view address', async () => {
-      render(<AddressProfileButton iconKey="eth" value={ADDRESS_TYPE.NoPrimary} />)
-      const addressProfileBtn = screen.getByTestId('address-profile-button-eth')
+      render(<AddressProfileButton iconKey={COIN_KEY} value={ADDRESS_TYPE.NoPrimary} />)
+      const addressProfileBtn = screen.getByTestId(`address-profile-button-${COIN_KEY}`)
       await user.click(addressProfileBtn)
 
       const viewAddressButton = screen.getAllByText((content, element) => {
@@ -206,8 +207,8 @@ describe('<AddressProfileButton/>', () => {
     })
 
     it('should have copy address', async () => {
-      render(<AddressProfileButton iconKey="eth" value={ADDRESS_TYPE.NoPrimary} />)
-      const addressProfileBtn = screen.getByTestId('address-profile-button-eth')
+      render(<AddressProfileButton iconKey={COIN_KEY} value={ADDRESS_TYPE.NoPrimary} />)
+      const addressProfileBtn = screen.getByTestId(`address-profile-button-${COIN_KEY}`)
       await user.click(addressProfileBtn)
 
       const copyButton = screen.getAllByText((content, element) => {
@@ -220,8 +221,8 @@ describe('<AddressProfileButton/>', () => {
     })
 
     it('should have view on block explorer', async () => {
-      render(<AddressProfileButton iconKey="eth" value={ADDRESS_TYPE.NoPrimary} />)
-      const addressProfileBtn = screen.getByTestId('address-profile-button-eth')
+      render(<AddressProfileButton iconKey={COIN_KEY} value={ADDRESS_TYPE.NoPrimary} />)
+      const addressProfileBtn = screen.getByTestId(`address-profile-button-${COIN_KEY}`)
       await user.click(addressProfileBtn)
 
       const viewBlockExplorerBtn = screen.getAllByText((content, element) => {

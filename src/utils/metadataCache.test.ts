@@ -8,6 +8,7 @@ import {
   getCacheBustExpiry,
   setCacheBustExpiry,
 } from './metadataCache'
+import { testDomain } from '@root/test/chainConstants'
 
 describe('metadataCache', () => {
   beforeEach(() => {
@@ -21,7 +22,7 @@ describe('metadataCache', () => {
 
   describe('basic functionality', () => {
     it('should set and get timestamps', () => {
-      const url = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
+      const url = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
       const timestamp = Date.now()
 
       setCacheBustExpiry(url, timestamp)
@@ -41,8 +42,8 @@ describe('metadataCache', () => {
     })
 
     it('should handle multiple URLs', () => {
-      const url1 = 'https://metadata.ens.domains/mainnet/avatar/test1.eth'
-      const url2 = 'https://metadata.ens.domains/mainnet/header/test2.eth'
+      const url1 = 'https://metadata.ens.domains/mainnet/avatar/test1.etc'
+      const url2 = 'https://metadata.ens.domains/mainnet/header/test2.etc'
       const timestamp1 = Date.now()
       const timestamp2 = Date.now() + 1000
 
@@ -57,7 +58,7 @@ describe('metadataCache', () => {
 
   describe('localStorage persistence', () => {
     it('should persist expiry timestamp to localStorage', () => {
-      const url = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
+      const url = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
       const timestamp = Date.now()
 
       setCacheBustExpiry(url, timestamp)
@@ -76,8 +77,8 @@ describe('metadataCache', () => {
     })
 
     it('should persist multiple timestamps', () => {
-      const url1 = 'https://metadata.ens.domains/mainnet/avatar/test1.eth'
-      const url2 = 'https://metadata.ens.domains/mainnet/header/test2.eth'
+      const url1 = 'https://metadata.ens.domains/mainnet/avatar/test1.etc'
+      const url2 = 'https://metadata.ens.domains/mainnet/header/test2.etc'
       const timestamp1 = Date.now()
       const timestamp2 = Date.now() + 1000
 
@@ -90,7 +91,7 @@ describe('metadataCache', () => {
     })
 
     it('should store expiry time 1 hour in the future', () => {
-      const url = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
+      const url = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
       const timestamp = Date.now()
 
       setCacheBustExpiry(url, timestamp)
@@ -110,13 +111,13 @@ describe('metadataCache', () => {
     it('should respect max cache size of 100 entries', () => {
       // Add 101 entries
       for (let i = 0; i < 101; i++) {
-        setCacheBustExpiry(`https://test${i}.eth`, Date.now())
+        setCacheBustExpiry(`https://test${i}.etc`, Date.now())
       }
 
       // First entry should be evicted (oldest)
-      expect(getCacheBustExpiry('https://test0.eth')).toBeUndefined()
+      expect(getCacheBustExpiry('https://test0.etc')).toBeUndefined()
       // Last entry should still exist
-      expect(getCacheBustExpiry('https://test100.eth')).toBeDefined()
+      expect(getCacheBustExpiry('https://test100.etc')).toBeDefined()
     })
 
     it('should update LRU order when getting timestamp', () => {
@@ -160,7 +161,7 @@ describe('metadataCache', () => {
       localStorage.setItem('ens-metadata-cache-expiries', 'invalid-json')
 
       // Should not throw, should return empty map
-      const url = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
+      const url = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
       expect(getCacheBustExpiry(url)).toBeUndefined()
     })
 
@@ -171,7 +172,7 @@ describe('metadataCache', () => {
         throw new DOMException('QuotaExceededError')
       })
 
-      const url = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
+      const url = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
       const timestamp = Date.now()
 
       // Should not throw error
@@ -184,8 +185,8 @@ describe('metadataCache', () => {
 
   describe('TTL expiry', () => {
     it('should filter out expired entries on load from localStorage', () => {
-      const url1 = 'https://metadata.ens.domains/mainnet/avatar/fresh.eth'
-      const url2 = 'https://metadata.ens.domains/mainnet/avatar/expired.eth'
+      const url1 = 'https://metadata.ens.domains/mainnet/avatar/fresh.etc'
+      const url2 = 'https://metadata.ens.domains/mainnet/avatar/expired.etc'
 
       const now = Date.now()
       const freshExpiry = now + 3600000 // Expires in 1 hour
@@ -211,7 +212,7 @@ describe('metadataCache', () => {
     })
 
     it('should return undefined for expired timestamp at runtime', () => {
-      const url = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
+      const url = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
 
       // Set timestamp that expired 1 second ago
       const expiredTimestamp = Date.now() - 3600000 - 1000 // More than 1 hour ago
@@ -223,7 +224,7 @@ describe('metadataCache', () => {
     })
 
     it('should remove expired entry from cache and localStorage on get', () => {
-      const url = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
+      const url = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
 
       // Set timestamp that will expire
       const expiredTimestamp = Date.now() - 3600000 - 1000 // More than 1 hour ago
@@ -244,7 +245,7 @@ describe('metadataCache', () => {
     })
 
     it('should return current timestamp for non-expired entry', () => {
-      const url = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
+      const url = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
       const timestamp = Date.now()
 
       setCacheBustExpiry(url, timestamp)
@@ -261,9 +262,9 @@ describe('metadataCache', () => {
         chain: { id: 1, name: 'Mainnet' },
       } as ClientWithEns
 
-      bustMediaCache('test.eth', mockClient, 'avatar')
+      bustMediaCache(testDomain('test'), mockClient, 'avatar')
 
-      const avatarUrl = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
+      const avatarUrl = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
       expect(getCacheBustExpiry(avatarUrl)).toBeDefined()
     })
 
@@ -272,9 +273,9 @@ describe('metadataCache', () => {
         chain: { id: 1, name: 'Mainnet' },
       } as ClientWithEns
 
-      bustMediaCache('test.eth', mockClient, 'header')
+      bustMediaCache(testDomain('test'), mockClient, 'header')
 
-      const headerUrl = 'https://metadata.ens.domains/mainnet/header/test.eth'
+      const headerUrl = 'https://metadata.ens.domains/mainnet/header/test.etc'
       expect(getCacheBustExpiry(headerUrl)).toBeDefined()
     })
 
@@ -283,10 +284,10 @@ describe('metadataCache', () => {
         chain: { id: 1, name: 'Mainnet' },
       } as ClientWithEns
 
-      bustMediaCache('test.eth', mockClient)
+      bustMediaCache(testDomain('test'), mockClient)
 
-      const avatarUrl = 'https://metadata.ens.domains/mainnet/avatar/test.eth'
-      const headerUrl = 'https://metadata.ens.domains/mainnet/header/test.eth'
+      const avatarUrl = 'https://metadata.ens.domains/mainnet/avatar/test.etc'
+      const headerUrl = 'https://metadata.ens.domains/mainnet/header/test.etc'
 
       expect(getCacheBustExpiry(avatarUrl)).toBeDefined()
       expect(getCacheBustExpiry(headerUrl)).toBeDefined()

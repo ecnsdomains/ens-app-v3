@@ -12,6 +12,7 @@ import { useRecords } from './nameservice/public/useRecords'
 import { useDecodedName } from './nameservice/subgraph/useDecodedName'
 import { useSubgraphRecords } from './nameservice/subgraph/useSubgraphRecords'
 import { useProfile } from './useProfile'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('./nameservice/subgraph/useSubgraphRecords')
 vi.mock('./nameservice/public/useRecords')
@@ -90,7 +91,7 @@ beforeEach(() => {
 })
 
 it('should return the correct data', () => {
-  const { result } = renderHook(() => useProfile({ name: 'test.eth' }))
+  const { result } = renderHook(() => useProfile({ name: testDomain('test') }))
   expect(result.current).toMatchInlineSnapshot(`
     {
       "data": {
@@ -118,7 +119,6 @@ it('should return the correct data', () => {
           "date": 2021-01-01T00:00:00.000Z,
           "value": 1609459200000,
         },
-        "isMigrated": true,
         "resolverAddress": "0xresolverAddress",
         "texts": [
           {
@@ -148,7 +148,7 @@ it('should return the correct data', () => {
 })
 
 it('should set address value to ETH record value', () => {
-  const { result } = renderHook(() => useProfile({ name: 'test.eth' }))
+  const { result } = renderHook(() => useProfile({ name: testDomain('test') }))
   expect(result.current.data!.address).toEqual('ETH-value')
 })
 
@@ -162,7 +162,7 @@ it('should set address value to undefined if no ETH record value', () => {
     isFetching: false,
     isCachedData: false,
   })
-  const { result } = renderHook(() => useProfile({ name: 'test.eth' }))
+  const { result } = renderHook(() => useProfile({ name: testDomain('test') }))
   expect(result.current.data!.address).toEqual(undefined)
 })
 
@@ -170,7 +170,7 @@ it('should add decodedName if available', () => {
   mockUseDecodedName.mockReturnValue({
     data: 'decoded-name',
   })
-  const { result } = renderHook(() => useProfile({ name: 'test.eth' }))
+  const { result } = renderHook(() => useProfile({ name: testDomain('test') }))
   expect(result.current.data!.decodedName).toEqual('decoded-name')
 })
 
@@ -191,7 +191,7 @@ it('should fetch default records when no subgraph records, then fetch with subgr
     isFetching: false,
     isCachedData: false,
   })
-  const { result, rerender } = renderHook(() => useProfile({ name: 'test.eth' }))
+  const { result, rerender } = renderHook(() => useProfile({ name: testDomain('test') }))
   expect(useRecords).toHaveBeenCalledWith(
     expect.objectContaining({
       texts: expect.not.arrayContaining(['avatar', 'com.example']),
@@ -232,7 +232,7 @@ it('should fetch union of supported coin records and subgraph coin records', () 
     isFetching: false,
     isCachedData: false,
   })
-  renderHook(() => useProfile({ name: 'test.eth' }))
+  renderHook(() => useProfile({ name: testDomain('test') }))
   expect(useRecords).toHaveBeenCalledWith(
     expect.objectContaining({
       coins: expect.arrayContaining([
@@ -257,7 +257,7 @@ it('should filter out unsupported coin records', () => {
     isFetching: false,
     isCachedData: false,
   })
-  renderHook(() => useProfile({ name: 'test.eth' }))
+  renderHook(() => useProfile({ name: testDomain('test') }))
   expect(useRecords).toHaveBeenCalledWith(
     expect.objectContaining({
       coins: expect.not.arrayContaining([3010]),
@@ -266,7 +266,7 @@ it('should filter out unsupported coin records', () => {
 })
 
 it('should propagate resolverAddress parameter to useSubgraphRecords and useRecords', () => {
-  renderHook(() => useProfile({ name: 'test.eth', resolverAddress: '0xresolverAddress' }))
+  renderHook(() => useProfile({ name: testDomain('test'), resolverAddress: '0xresolverAddress' }))
   expect(useSubgraphRecords).toHaveBeenCalledWith(
     expect.objectContaining({
       resolverAddress: '0xresolverAddress',
@@ -283,7 +283,7 @@ it('should propagate resolverAddress parameter to useSubgraphRecords and useReco
 })
 
 it('should propagate subgraphEnabled parameter to useSubgraphRecords', () => {
-  renderHook(() => useProfile({ name: 'test.eth', subgraphEnabled: false }))
+  renderHook(() => useProfile({ name: testDomain('test'), subgraphEnabled: false }))
   expect(useSubgraphRecords).toHaveBeenCalledWith(
     expect.objectContaining({
       enabled: false,
@@ -292,7 +292,7 @@ it('should propagate subgraphEnabled parameter to useSubgraphRecords', () => {
 })
 
 it('should propagate enabled parameter to useSubgraphRecords and useRecords', () => {
-  renderHook(() => useProfile({ name: 'test.eth', enabled: false }))
+  renderHook(() => useProfile({ name: testDomain('test'), enabled: false }))
   expect(useSubgraphRecords).toHaveBeenCalledWith(
     expect.objectContaining({
       enabled: false,

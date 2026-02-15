@@ -36,7 +36,7 @@ const wrapperData: GetWrapperDataReturnType = {
 }
 
 describe('getRegistrationStatus', () => {
-  describe('2LD .eth', () => {
+  describe('2LD .etc', () => {
     it('should return short if a name is short', async () => {
       const result = getRegistrationStatus({
         timestamp: Date.now(),
@@ -235,7 +235,7 @@ describe('getRegistrationStatus', () => {
     expect(result).toBe('unsupportedTLD')
   })
 
-  it('should not return short if name is short but is not .eth', () => {
+  it('should not return short if name is short but is not .etc', () => {
     const result = getRegistrationStatus({
       timestamp: Date.now(),
       validation: { is2LD: false, isNativeTld: false, isShort: true },

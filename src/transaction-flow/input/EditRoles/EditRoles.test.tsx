@@ -3,6 +3,7 @@ import { render, screen, userEvent, waitFor, within } from '@app/test-utils'
 import { beforeAll, describe, expect, it, vi } from 'vitest'
 
 import EditRoles from './EditRoles-flow'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/account/useAccountSafely', () => ({
   useAccountSafely: () => ({ address: '0xowner' }),
@@ -101,7 +102,7 @@ beforeAll(() => {
 
 describe('EditRoles', () => {
   it('should dispatch a transaction for each role changed', async () => {
-    render(<EditRoles data={{ name: 'test.eth' }} dispatch={mockDispatch} onDismiss={() => {}} />)
+    render(<EditRoles data={{ name: testDomain('test') }} dispatch={mockDispatch} onDismiss={() => {}} />)
     await userEvent.click(
       within(screen.getByTestId('role-card-owner')).getByTestId('role-card-change-button'),
     )
@@ -138,14 +139,14 @@ describe('EditRoles', () => {
         {
           data: {
             address: '0xnick',
-            name: 'test.eth',
+            name: testDomain('test'),
           },
           name: 'updateNativeCoinAddress',
         },
         {
           data: {
             contract: 'registrar',
-            name: 'test.eth',
+            name: testDomain('test'),
             newOwnerAddress: '0xnick',
             reclaim: true,
             sendType: 'sendManager',
@@ -155,7 +156,7 @@ describe('EditRoles', () => {
         {
           data: {
             contract: 'contract',
-            name: 'test.eth',
+            name: testDomain('test'),
             newOwnerAddress: '0xnick',
             sendType: 'sendOwner',
           },
@@ -166,7 +167,7 @@ describe('EditRoles', () => {
   })
 
   it('should not be able to set a role to the existing address', async () => {
-    render(<EditRoles data={{ name: 'test.eth' }} dispatch={mockDispatch} onDismiss={() => {}} />)
+    render(<EditRoles data={{ name: testDomain('test') }} dispatch={mockDispatch} onDismiss={() => {}} />)
     await userEvent.click(
       within(screen.getByTestId('role-card-owner')).getByTestId('role-card-change-button'),
     )
@@ -196,7 +197,7 @@ describe('EditRoles', () => {
   })
 
   it('should show shortcuts for setting to self or setting to 0x0', async () => {
-    render(<EditRoles data={{ name: 'test.eth' }} dispatch={mockDispatch} onDismiss={() => {}} />)
+    render(<EditRoles data={{ name: testDomain('test') }} dispatch={mockDispatch} onDismiss={() => {}} />)
     // Change owner first
     await userEvent.click(
       within(screen.getByTestId('role-card-owner')).getByTestId('role-card-change-button'),

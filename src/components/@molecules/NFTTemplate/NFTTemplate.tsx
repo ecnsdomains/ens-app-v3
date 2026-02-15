@@ -1,6 +1,8 @@
 import { ReactNode, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
+import { getCurrentTld } from '@app/constants/tld'
+
 import { useGetSegmentLength } from '../../../hooks/useGetSegmentLength'
 
 type Props = {
@@ -14,7 +16,8 @@ const bgProps = { width: '270', height: '270' }
 
 const getEllipsis = (str: string) => {
   const len = str.length
-  return `${str.substring(0, MAX_CHAR - 7)}...${str.substring(len - 7, len - 4)}.etc`
+  const tld = getCurrentTld()
+  return `${str.substring(0, MAX_CHAR - 7)}...${str.substring(len - 7, len - (tld.length + 1))}.${tld}`
 }
 
 const getFontSize = (str: string) => {

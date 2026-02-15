@@ -17,6 +17,7 @@ import { useResolverHasInterfaces } from '@app/hooks/useResolverHasInterfaces'
 import { convertFormSafeKey, formSafeKey } from '@app/utils/editor'
 
 import AdvancedEditor from './AdvancedEditor-flow'
+import { testDomain } from '@root/test/chainConstants'
 
 const mockProfileData = {
   data: {
@@ -151,7 +152,7 @@ describe('AdvancedEditor', () => {
 
   it('should render', async () => {
     render(
-      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: 'test.eth' }} />,
+      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: testDomain('test') }} />,
     )
     await waitFor(() => {
       expect(screen.getByTestId('advanced-editor')).toBeVisible()
@@ -160,7 +161,7 @@ describe('AdvancedEditor', () => {
 
   it('should submit key with empty string in an existing text record is deleted', async () => {
     render(
-      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: 'test.eth' }} />,
+      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: testDomain('test') }} />,
     )
 
     const avatarInput = await screen.findByTestId('record-input-avatar')
@@ -185,7 +186,7 @@ describe('AdvancedEditor', () => {
 
   it('should submit key/value when new text is added', async () => {
     render(
-      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: 'test.eth' }} />,
+      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: testDomain('test') }} />,
     )
     const addButton = await screen.findByTestId('add-record-button')
     const addInput = within(addButton).getByTestId('add-record-button-input')
@@ -214,7 +215,7 @@ describe('AdvancedEditor', () => {
 
   it('should submit key/value when new text with special characters is added', async () => {
     render(
-      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: 'test.eth' }} />,
+      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: testDomain('test') }} />,
     )
     const addButton = await screen.findByTestId('add-record-button')
     const addInput = within(addButton).getByTestId('add-record-button-input')
@@ -243,7 +244,7 @@ describe('AdvancedEditor', () => {
 
   it('should submit key with empty string in an existing address record is deleted', async () => {
     render(
-      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: 'test.eth' }} />,
+      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: testDomain('test') }} />,
     )
     const tab = await screen.findByTestId('address-tab')
     fireEvent.click(tab)
@@ -270,7 +271,7 @@ describe('AdvancedEditor', () => {
 
   it('should submit key/value when new address is added', async () => {
     render(
-      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: 'test.eth' }} />,
+      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: testDomain('test') }} />,
     )
 
     const tab = await screen.findByTestId('address-tab')
@@ -306,7 +307,7 @@ describe('AdvancedEditor', () => {
   it('should overwrite existing records and add new records for records passed in transactions', async () => {
     render(
       <AdvancedEditor
-        data={{ name: 'test.eth' }}
+        data={{ name: testDomain('test') }}
         transactions={[
           {
             name: 'updateProfile',
@@ -414,7 +415,7 @@ describe('AdvancedEditor', () => {
 
   it('should allow removing abi', async () => {
     render(
-      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: 'test.eth' }} />,
+      <AdvancedEditor dispatch={mockDispatch} onDismiss={() => {}} data={{ name: testDomain('test') }} />,
     )
     const tab = await screen.findByTestId('other-tab')
     fireEvent.click(tab)

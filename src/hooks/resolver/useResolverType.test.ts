@@ -9,6 +9,7 @@ import { useIsWrapped } from '../useIsWrapped'
 import { useProfile } from '../useProfile'
 import { useRegistryResolver } from './useRegistryResolver'
 import { isWildcardCalc, useResolverType } from './useResolverType'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/useIsWrapped')
 vi.mock('@app/hooks/useProfile')
@@ -50,7 +51,7 @@ beforeEach(() => {
 describe('useResolverType', () => {
   it('should return type is latest for base mock data', () => {
     mockUseIsWrapped.mockReturnValueOnce({ data: false, isLoading: false })
-    const { result } = renderHook(() => useResolverType({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverType({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       expect.objectContaining({
         data: { type: 'latest', isWildcard: false, tone: 'greenSecondary' },
@@ -62,7 +63,7 @@ describe('useResolverType', () => {
   })
 
   it('should return isLoading is false and data is undefined if enabled is false', () => {
-    const { result } = renderHook(() => useResolverType({ name: 'test.eth', enabled: false }))
+    const { result } = renderHook(() => useResolverType({ name: testDomain('test'), enabled: false }))
     expect(result.current).toMatchObject(
       expect.objectContaining({
         data: undefined,
@@ -113,7 +114,7 @@ describe('useResolverType', () => {
 
   it('should return isLoading is true and data is undefined if useBasicName is loading', () => {
     mockUseIsWrapped.mockReturnValueOnce({ data: true, isLoading: true })
-    const { result } = renderHook(() => useResolverType({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverType({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       expect.objectContaining({
         data: undefined,
@@ -139,7 +140,7 @@ describe('useResolverType', () => {
 
   it('should return isLoading is true and data is undefined if useRegistryResolve is loading', () => {
     mockUseRegistryResolver.mockReturnValueOnce(createRegistryResolverData({ isLoading: true }))
-    const { result } = renderHook(() => useResolverType({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverType({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       expect.objectContaining({
         data: undefined,
@@ -171,7 +172,7 @@ describe('useResolverType', () => {
         },
       }),
     )
-    const { result } = renderHook(() => useResolverType({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverType({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       expect.objectContaining({
         data: { type: 'outdated', isWildcard: false, tone: 'redSecondary' },
@@ -189,7 +190,7 @@ describe('useResolverType', () => {
       }),
     )
     mockUseIsWrapped.mockReturnValueOnce({ data: false, isLoading: false })
-    const { result } = renderHook(() => useResolverType({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverType({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       expect.objectContaining({
         data: undefined,
@@ -202,7 +203,7 @@ describe('useResolverType', () => {
     mockUseProfile.mockReturnValueOnce(
       createProfileData({ data: { resolverAddress: '0xresolver' } }),
     )
-    const { result } = renderHook(() => useResolverType({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverType({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       expect.objectContaining({
         data: { type: 'custom', isWildcard: false, tone: 'greySecondary' },
@@ -213,7 +214,7 @@ describe('useResolverType', () => {
 
   it('should return isWildcard is true if registry resolver is empty but profile resolver has value', () => {
     mockUseRegistryResolver.mockReturnValueOnce(createRegistryResolverData({ data: emptyAddress }))
-    const { result } = renderHook(() => useResolverType({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverType({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       expect.objectContaining({
         data: { type: 'latest', isWildcard: true, tone: 'greenSecondary' },
@@ -227,7 +228,7 @@ describe('useResolverType', () => {
     mockUseProfile.mockReturnValueOnce(
       createProfileData({ data: { resolverAddress: emptyAddress } }),
     )
-    const { result } = renderHook(() => useResolverType({ name: 'test.eth' }))
+    const { result } = renderHook(() => useResolverType({ name: testDomain('test') }))
     expect(result.current).toMatchObject(
       expect.objectContaining({
         data: { type: 'custom', isWildcard: false, tone: 'greySecondary' },

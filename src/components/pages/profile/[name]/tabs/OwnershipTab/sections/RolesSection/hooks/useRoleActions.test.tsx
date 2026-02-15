@@ -3,6 +3,7 @@ import { renderHook } from '@app/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import { useRoleActions } from './useRoleActions'
+import { testDomain } from '@root/test/chainConstants'
 
 const mockUseNameType = vi.fn()
 vi.mock('@app/hooks/nameType/useNameType', () => ({
@@ -41,7 +42,7 @@ describe('useRoleActions', () => {
     mockCheckCanSend.mockReturnValueOnce(true)
     const { result } = renderHook(() =>
       useRoleActions({
-        name: 'test.eth',
+        name: testDomain('test'),
         roles: [],
         details: {
           ownerData: {
@@ -106,7 +107,7 @@ describe('useRoleActions', () => {
     )
   })
 
-  it('should include the ability to refresh dns name if user is logged in and name is not .eth', async () => {
+  it('should include the ability to refresh dns name if user is logged in and name is not .etc', async () => {
     const { result } = renderHook(() =>
       useRoleActions({
         name: 'test.com',
@@ -125,10 +126,10 @@ describe('useRoleActions', () => {
     )
   })
 
-  it('should not include the ability to refresh dns name if user is logged in and name is .eth', async () => {
+  it('should not include the ability to refresh dns name if user is logged in and name is .etc', async () => {
     const { result } = renderHook(() =>
       useRoleActions({
-        name: 'test.eth',
+        name: testDomain('test'),
         roles: [],
         details: {
           isLoading: false,

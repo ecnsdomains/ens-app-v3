@@ -12,6 +12,7 @@ import { useOwner } from './nameservice/public/useOwner'
 import { useWrapperData } from './nameservice/public/useWrapperData'
 import { usePccExpired } from './fuses/usePccExpired'
 import { useValidateSubnameLabel } from './useValidateSubnameLabel'
+import { testDomain } from '@root/test/chainConstants'
 
 const BYTE256 =
   '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
@@ -103,7 +104,7 @@ const groups = [
     tests: [
       {
         description: 'should return valid if owner is empty address',
-        name: 'unwrapped.eth',
+        name: testDomain('unwrapped'),
         isWrapped: false,
         label: 'test1',
         ownerData: makeOwnerData('registry'),
@@ -116,7 +117,7 @@ const groups = [
       },
       {
         description: 'should return valid if owner is undefined',
-        name: 'unwrapped.eth',
+        name: testDomain('unwrapped'),
         isWrapped: false,
         label: 'test1b',
         ownerData: makeOwnerData('registry', { owner: undefined }),
@@ -129,7 +130,7 @@ const groups = [
       },
       {
         description: 'should return NOT valid if owner is defined',
-        name: 'unwrapped.eth',
+        name: testDomain('unwrapped'),
         isWrapped: false,
         label: 'test1b',
         ownerData: makeOwnerData('registry', { owner: '0xOwner' }),
@@ -142,7 +143,7 @@ const groups = [
       },
       {
         description: 'should return NOT valid if label is not all lowercase',
-        name: 'unwrapped.eth',
+        name: testDomain('unwrapped'),
         isWrapped: false,
         label: 'Test2',
         ownerData: makeOwnerData('registry'),
@@ -155,7 +156,7 @@ const groups = [
       },
       {
         description: 'should return valid for label with 256 bytes',
-        name: 'unwrapped.eth',
+        name: testDomain('unwrapped'),
         isWrapped: false,
         label: BYTE256,
         ownerData: makeOwnerData('registry'),
@@ -173,7 +174,7 @@ const groups = [
     tests: [
       {
         description: 'should return valid if owner is empty address',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: 'test1',
         ownerData: makeOwnerData('nameWrapper'),
@@ -187,7 +188,7 @@ const groups = [
       },
       {
         description: 'should return valid if owner is undefined',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: 'test1b',
         ownerData: makeOwnerData('nameWrapper', { owner: undefined }),
@@ -201,7 +202,7 @@ const groups = [
       },
       {
         description: 'should return NOT valid if owner is defined',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: 'owned',
         ownerData: makeOwnerData('nameWrapper', { owner: '0xOwner' }),
@@ -215,7 +216,7 @@ const groups = [
       },
       {
         description: 'should return NOT valid if label is not all lowercase',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: 'Test2',
         ownerData: makeOwnerData('nameWrapper'),
@@ -228,7 +229,7 @@ const groups = [
       },
       {
         description: 'should return NOT valid if label is 256 bytes',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: BYTE256,
         ownerData: makeOwnerData('nameWrapper'),
@@ -241,7 +242,7 @@ const groups = [
       },
       {
         description: 'should return valid if label is 255 bytes',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: BYTE256.slice(1),
         ownerData: makeOwnerData('nameWrapper'),
@@ -254,7 +255,7 @@ const groups = [
       },
       {
         description: 'should return NOT valid if label exists and PCC is burned',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: 'pccburned',
         ownerData: makeOwnerData('nameWrapper'),
@@ -276,7 +277,7 @@ const groups = [
       },
       {
         description: 'should return NOT valid if label includes invalid characters',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: 'hello world',
         ownerData: makeOwnerData('nameWrapper'),
@@ -289,7 +290,7 @@ const groups = [
       },
       {
         description: 'should return NOT valid if label has period between text',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: 'hello.world',
         ownerData: makeOwnerData('nameWrapper'),
@@ -302,7 +303,7 @@ const groups = [
       },
       {
         description: 'should return valid if label is expired subname',
-        name: 'wrapped.eth',
+        name: testDomain('wrapped'),
         isWrapped: true,
         label: 'hello.world',
         ownerData: makeOwnerData('nameWrapper'),

@@ -30,11 +30,11 @@ describe('useRouterWithHistory', () => {
     it('should preserve referrer when pushing to new route', () => {
       const { result } = renderHook(() => useRouterWithHistory())
 
-      result.current.push('/profile/test.eth')
+      result.current.push('/profile/test.etc')
 
       expect(mockPush).toHaveBeenCalledWith(
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: { referrer: 'test-partner' },
         },
         undefined,
@@ -45,11 +45,11 @@ describe('useRouterWithHistory', () => {
     it('should merge additional query params with referrer', () => {
       const { result } = renderHook(() => useRouterWithHistory())
 
-      result.current.push('/profile/test.eth', { tab: 'records' })
+      result.current.push('/profile/test.etc', { tab: 'records' })
 
       expect(mockPush).toHaveBeenCalledWith(
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: { tab: 'records', referrer: 'test-partner' },
         },
         undefined,
@@ -60,11 +60,11 @@ describe('useRouterWithHistory', () => {
     it('should handle shallow routing', () => {
       const { result } = renderHook(() => useRouterWithHistory())
 
-      result.current.push('/profile/test.eth', undefined, true)
+      result.current.push('/profile/test.etc', undefined, true)
 
       expect(mockPush).toHaveBeenCalledWith(
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: { referrer: 'test-partner' },
         },
         undefined,
@@ -77,18 +77,18 @@ describe('useRouterWithHistory', () => {
     it('should preserve referrer and add from parameter', () => {
       const { result} = renderHook(() => useRouterWithHistory())
 
-      result.current.pushWithHistory('/profile/test.eth')
+      result.current.pushWithHistory('/profile/test.etc')
 
       expect(mockPush).toHaveBeenCalledWith(
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: {
             from: '/current-path',
             referrer: 'test-partner',
           },
         },
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: {
             referrer: 'test-partner',
           },
@@ -99,11 +99,11 @@ describe('useRouterWithHistory', () => {
     it('should merge additional query params with referrer and from', () => {
       const { result } = renderHook(() => useRouterWithHistory())
 
-      result.current.pushWithHistory('/profile/test.eth', { tab: 'records' })
+      result.current.pushWithHistory('/profile/test.etc', { tab: 'records' })
 
       expect(mockPush).toHaveBeenCalledWith(
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: {
             tab: 'records',
             from: '/current-path',
@@ -111,7 +111,7 @@ describe('useRouterWithHistory', () => {
           },
         },
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: {
             tab: 'records',
             referrer: 'test-partner',
@@ -123,20 +123,20 @@ describe('useRouterWithHistory', () => {
     it('should not pass second parameter to router.push (regression test)', () => {
       const { result } = renderHook(() => useRouterWithHistory())
 
-      result.current.pushWithHistory('/profile/test.eth')
+      result.current.pushWithHistory('/profile/test.etc')
 
       // This test verifies decorative URL (second param) excludes 'from'
       expect(mockPush).toHaveBeenCalledTimes(1)
       expect(mockPush).toHaveBeenCalledWith(
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: {
             from: '/current-path',
             referrer: 'test-partner',
           },
         },
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: {
             referrer: 'test-partner',
           },
@@ -149,15 +149,15 @@ describe('useRouterWithHistory', () => {
     it('should preserve referrer when replacing route', () => {
       const { result } = renderHook(() => useRouterWithHistory())
 
-      result.current.replace('/profile/test.eth')
+      result.current.replace('/profile/test.etc')
 
       expect(mockReplace).toHaveBeenCalledWith(
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: { referrer: 'test-partner' },
         },
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: { referrer: 'test-partner' },
         },
         {},
@@ -167,15 +167,15 @@ describe('useRouterWithHistory', () => {
     it('should not add from parameter by default', () => {
       const { result } = renderHook(() => useRouterWithHistory())
 
-      result.current.replace('/profile/test.eth', { maintainHistory: false })
+      result.current.replace('/profile/test.etc', { maintainHistory: false })
 
       expect(mockReplace).toHaveBeenCalledWith(
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: { referrer: 'test-partner' },
         },
         {
-          pathname: '/profile/test.eth',
+          pathname: '/profile/test.etc',
           query: { referrer: 'test-partner' },
         },
         {},

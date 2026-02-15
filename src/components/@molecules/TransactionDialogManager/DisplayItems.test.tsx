@@ -6,6 +6,7 @@ import { usePrimaryName } from '@app/hooks/nameservice/public/usePrimaryName'
 import { TransactionDisplayItem } from '@app/types'
 
 import { DisplayItems } from './DisplayItems'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@app/hooks/nameservice/public/usePrimaryName')
 
@@ -24,7 +25,7 @@ const addressItem: TransactionDisplayItem = {
 
 const nameItem: TransactionDisplayItem = {
   label: 'NameItem',
-  value: 'test.eth',
+  value: testDomain('test'),
   type: 'name',
 }
 
@@ -42,8 +43,8 @@ describe('DisplayItems', () => {
   it('should show an address item and primary name', () => {
     mockUsePrimaryName.mockReturnValue({
       data: {
-        name: 'test.eth',
-        beautifiedName: 'test.eth',
+        name: testDomain('test'),
+        beautifiedName: testDomain('test'),
       },
       isLoading: false,
       status: 'success',
@@ -51,7 +52,7 @@ describe('DisplayItems', () => {
     render(<DisplayItems displayItems={[addressItem]} />)
     expect(screen.getByText('transaction.itemLabel.AddressItem')).toBeVisible()
     expect(screen.getByText('0x123...67890')).toBeVisible()
-    expect(screen.getByText('test.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('test'))).toBeVisible()
   })
   it('should show an address item and no primary name', () => {
     mockUsePrimaryName.mockReturnValue({
@@ -62,12 +63,12 @@ describe('DisplayItems', () => {
     render(<DisplayItems displayItems={[addressItem]} />)
     expect(screen.getByText('transaction.itemLabel.AddressItem')).toBeVisible()
     expect(screen.getByText('0x123...67890')).toBeVisible()
-    expect(screen.queryByText('test.eth')).not.toBeInTheDocument()
+    expect(screen.queryByText(testDomain('test'))).not.toBeInTheDocument()
   })
   it('should show a name item', () => {
     render(<DisplayItems displayItems={[nameItem]} />)
     expect(screen.getByText('transaction.itemLabel.NameItem')).toBeVisible()
-    expect(screen.getByText('test.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('test'))).toBeVisible()
   })
   it('should render multiple items', () => {
     mockUsePrimaryName.mockReturnValue({
@@ -79,7 +80,7 @@ describe('DisplayItems', () => {
     expect(screen.getByText('transaction.itemLabel.AddressItem')).toBeVisible()
     expect(screen.getByText('0x123...67890')).toBeVisible()
     expect(screen.getByText('transaction.itemLabel.NameItem')).toBeVisible()
-    expect(screen.getByText('test.eth')).toBeVisible()
+    expect(screen.getByText(testDomain('test'))).toBeVisible()
     expect(screen.getByText('transaction.itemLabel.GenericItem')).toBeVisible()
     expect(screen.getByText('GenericValue')).toBeVisible()
   })

@@ -7,6 +7,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { OwnerArray } from '@app/types'
 
 import { ownershipInfoCalc, ProfileDetails } from './ProfileDetails'
+import { testDomain, TLD, DOT_TLD } from '@root/test/chainConstants'
 
 vi.mock('next/router', () => ({
   useRouter: () => ({
@@ -77,7 +78,7 @@ describe('onwershipInfoCalc', () => {
       { transferType: 'manager', address: '0x123', label: 'name.manager' },
     ] as unknown as OwnerArray
 
-    const result = ownershipInfoCalc('eth', false, owners, gracePeriodEndDate, expiryDate)
+    const result = ownershipInfoCalc(TLD, false, owners, gracePeriodEndDate, expiryDate)
 
     expect(result).toEqual([
       { key: 'name.owner', type: 'text', value: '' },
@@ -104,7 +105,7 @@ describe('onwershipInfoCalc', () => {
     ] as unknown as OwnerArray
 
     // Date string is locale based. Ignore this test if it fails as March 4, 2073
-    const result = ownershipInfoCalc('test.eth', false, owners, gracePeriodEndDate, expiryDate)
+    const result = ownershipInfoCalc(testDomain('test'), false, owners, gracePeriodEndDate, expiryDate)
 
     const expectedExpiryLabel = expiryDate.toLocaleDateString(undefined, {
       year: 'numeric',
@@ -124,13 +125,13 @@ describe('onwershipInfoCalc', () => {
       {
         key: 'name.parent',
         type: 'text',
-        value: 'eth',
+        value: TLD,
       },
     ])
   })
 
   it('should return parent as [root] if TLD', () => {
-    const result = ownershipInfoCalc('eth', true, [], new Date(), new Date())
+    const result = ownershipInfoCalc(TLD, true, [], new Date(), new Date())
     expect(result).toEqual([
       {
         key: 'name.owner',
@@ -150,7 +151,7 @@ describe('ProfileDetails', () => {
   it('should show content hash if there is valid contenthash', () => {
     render(
       <ProfileDetails
-        name="test.eth"
+        name={testDomain('test')}
         expiryDate={undefined}
         accountRecords={[]}
         otherRecords={[
@@ -174,7 +175,7 @@ describe('ProfileDetails', () => {
   it('should not show content hash if contenthash is empty', () => {
     render(
       <ProfileDetails
-        name="test.eth"
+        name={testDomain('test')}
         expiryDate={undefined}
         accountRecords={[]}
         otherRecords={[]}

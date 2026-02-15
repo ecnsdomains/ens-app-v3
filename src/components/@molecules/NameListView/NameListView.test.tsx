@@ -7,6 +7,7 @@ import { useNamesForAddress } from '@app/hooks/nameservice/subgraph/useNamesForA
 import { createDateAndValue } from '@app/utils/utils'
 
 import { NameListView } from './NameListView'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('next/router', async () => await vi.importActual('next-router-mock'))
 vi.mock('@app/components/@atoms/NameDetailItem/TaggedNameItem')
@@ -32,7 +33,7 @@ describe('NameListView', () => {
     mockUseNamesForAddress.mockReturnValue({
       infiniteData: [
         {
-          name: 'name.eth',
+          name: testDomain('name'),
           id: '0x123',
           expiryDate: createDateAndValue(new Date('2020-01-01').getTime()),
           relation: {
@@ -45,7 +46,7 @@ describe('NameListView', () => {
     })
 
     const { getByText } = render(<NameListView address="0x123" selfAddress={undefined} />)
-    expect(getByText('name.eth')).toBeInTheDocument()
+    expect(getByText(testDomain('name'))).toBeInTheDocument()
   })
   it('should render no results if there are no results', () => {
     mockUseNamesForAddress.mockReturnValue({

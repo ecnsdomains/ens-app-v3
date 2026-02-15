@@ -25,6 +25,7 @@ import {
   validateExpiry,
   yearsToSeconds,
 } from './utils'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 describe('shortenAddress', () => {
   it('should NOT shorten address if it is below maxLength', () => {
@@ -85,7 +86,7 @@ describe('formatDateTime', () => {
   it('should format time correctly', () => {
     const date = new Date('2020-01-01T00:00:00.000Z')
     const result = formatDateTime(date)
-    expect(result).toEqual('24:00:00 UTC')
+    expect(result).toEqual('00:00:00 UTC')
   })
 })
 
@@ -93,7 +94,7 @@ describe('formatFullExpiry', () => {
   it('should format the date and time as expected', () => {
     const expiry = new Date('2020-01-01T00:00:00.000Z')
     const result = formatFullExpiry(expiry)
-    expect(result).toEqual('January 1, 2020, 24:00:00 UTC')
+    expect(result).toEqual('January 1, 2020, 00:00:00 UTC')
   })
   it('should return empty if undefined', () => {
     expect(formatFullExpiry()).toEqual('')
@@ -186,7 +187,7 @@ describe('checkDNSName', () => {
     expect(result).toEqual(false)
   })
   it('should return false when name uses the native TLD', () => {
-    const name = 'test.etc'
+    const name = testDomain('test')
     const result = checkDNSName(name)
     expect(result).toEqual(false)
   })
@@ -194,7 +195,7 @@ describe('checkDNSName', () => {
 
 describe('checkNativeTld2LD', () => {
   it('should return true when name is a native TLD 2LD', () => {
-    const name = 'test.etc'
+    const name = testDomain('test')
     const result = checkNativeTld2LD(name)
     expect(result).toEqual(true)
   })
@@ -207,12 +208,12 @@ describe('checkNativeTld2LD', () => {
 
 describe('checkSubname', () => {
   it('should return true when name has more than 2 labels', () => {
-    const name = 'sub.test.eth'
+    const name = testSub('sub', 'test')
     const result = checkSubname(name)
     expect(result).toEqual(true)
   })
   it('should return false when name has 2 labels', () => {
-    const name = 'test.eth'
+    const name = testDomain('test')
     const result = checkSubname(name)
     expect(result).toEqual(false)
   })
@@ -249,7 +250,7 @@ describe('deleteProperties', () => {
 
 describe('getLabelFromName', () => {
   it('should get first label from name', () => {
-    const name = 'sub.test.eth'
+    const name = testSub('sub', 'test')
     const result = getLabelFromName(name)
     expect(result).toEqual('sub')
   })
@@ -257,7 +258,7 @@ describe('getLabelFromName', () => {
 
 describe('validateExpiry', () => {
   it('should return expiry when name is native TLD 2LD', () => {
-    const name = 'test.etc'
+    const name = testDomain('test')
     const expiry = new Date()
     const result = validateExpiry({ name, expiry, fuses: {} as any })
     expect(result).toEqual(expiry)
@@ -327,12 +328,12 @@ describe('calculateValueWithBuffer', () => {
 
 describe('getEncodedLabelAmount', () => {
   it('should return 0 for name with no encoded labels', () => {
-    const name = 'test.eth'
+    const name = testDomain('test')
     const result = getEncodedLabelAmount(name)
     expect(result).toEqual(0)
   })
   it('should return 1 for name with 1 encoded label', () => {
-    const name = '[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b].test.eth'
+    const name = testSub('[fa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b]', 'test')
     const result = getEncodedLabelAmount(name)
     expect(result).toEqual(1)
   })

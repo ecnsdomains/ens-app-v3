@@ -6,47 +6,47 @@ describe('getDestination', () => {
   describe('query parameter handling', () => {
     it('should preserve referrer query parameter', () => {
       const result = getDestination({
-        pathname: '/profile/test.eth',
+        pathname: '/profile/test.etc',
         query: { referrer: 'partner123' },
       })
 
       expect(result).toEqual({
-        pathname: '/test.eth',
+        pathname: '/test.etc',
         query: { referrer: 'partner123' },
       })
     })
 
     it('should preserve multiple query parameters', () => {
       const result = getDestination({
-        pathname: '/profile/test.eth',
+        pathname: '/profile/test.etc',
         query: { referrer: 'partner123', from: '/home', tab: 'records' },
       })
 
       expect(result).toEqual({
-        pathname: '/test.eth',
+        pathname: '/test.etc',
         query: { referrer: 'partner123', from: '/home', tab: 'records' },
       })
     })
 
     it('should handle empty query object', () => {
       const result = getDestination({
-        pathname: '/profile/test.eth',
+        pathname: '/profile/test.etc',
         query: {},
       })
 
       expect(result).toEqual({
-        pathname: '/test.eth',
+        pathname: '/test.etc',
         query: {},
       })
     })
 
     it('should handle missing query property', () => {
       const result = getDestination({
-        pathname: '/profile/test.eth',
+        pathname: '/profile/test.etc',
       })
 
       expect(result).toEqual({
-        pathname: '/test.eth',
+        pathname: '/test.etc',
         query: {},
       })
     })
@@ -55,24 +55,24 @@ describe('getDestination', () => {
   describe('path rewriting', () => {
     it('should rewrite /profile/:name to flattened path', () => {
       const result = getDestination({
-        pathname: '/profile/vitalik.eth',
+        pathname: '/profile/vitalik.etc',
         query: { referrer: 'test' },
       })
 
       expect(result).toEqual({
-        pathname: '/vitalik.eth',
+        pathname: '/vitalik.etc',
         query: { referrer: 'test' },
       })
     })
 
     it('should rewrite /register/:name to flattened path with query', () => {
       const result = getDestination({
-        pathname: '/register/test.eth',
+        pathname: '/register/test.etc',
         query: { referrer: 'partner' },
       })
 
       expect(result).toEqual({
-        pathname: '/test.eth/register',
+        pathname: '/test.etc/register',
         query: { referrer: 'partner' },
       })
     })
@@ -105,24 +105,24 @@ describe('getDestination', () => {
   describe('special characters', () => {
     it('should handle names with # character', () => {
       const result = getDestination({
-        pathname: '/profile/test#name.eth',
+        pathname: '/profile/test#name.etc',
         query: { referrer: 'test' },
       })
 
       expect(result).toEqual({
-        pathname: '/test%23name.eth',
+        pathname: '/test%23name.etc',
         query: { referrer: 'test' },
       })
     })
 
     it('should preserve query parameters with special characters', () => {
       const result = getDestination({
-        pathname: '/profile/test.eth',
+        pathname: '/profile/test.etc',
         query: { referrer: 'partner&co', from: '/test?param=value' },
       })
 
       expect(result).toEqual({
-        pathname: '/test.eth',
+        pathname: '/test.etc',
         query: { referrer: 'partner&co', from: '/test?param=value' },
       })
     })
@@ -157,7 +157,7 @@ describe('getDestination', () => {
   describe('query object format (regression test)', () => {
     it('should return query as object, not string', () => {
       const result = getDestination({
-        pathname: '/profile/test.eth',
+        pathname: '/profile/test.etc',
         query: { referrer: 'test', from: '/home' },
       })
 
@@ -170,7 +170,7 @@ describe('getDestination', () => {
 
     it('should not return query as URLSearchParams string format', () => {
       const result = getDestination({
-        pathname: '/profile/test.eth',
+        pathname: '/profile/test.etc',
         query: { referrer: 'test' },
       })
 

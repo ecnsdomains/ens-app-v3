@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { GetOwnerReturnType, GetWrapperDataReturnType } from '@ensdomains/ensjs/public'
 
 import { checkAvailablePrimaryName } from './checkAvailablePrimaryName'
+import { testDomain } from '@root/test/chainConstants'
 
 describe('checkAvailablePrimaryName', () => {
   it('should return true for offchain names with resolved address of user', () => {
@@ -11,10 +12,10 @@ describe('checkAvailablePrimaryName', () => {
     const profile = { address, isMigrated: undefined }
     const wrappedData = undefined as GetWrapperDataReturnType | undefined
 
-    const result = checkAvailablePrimaryName('primary.eth', {
+    const result = checkAvailablePrimaryName(testDomain('primary'), {
       isAuthorized: true,
     } as any)({
-      name: 'name.eth',
+      name: testDomain('name'),
       relation: {
         owner: ownerData?.owner === address,
         registrant: ownerData?.registrant === address,
@@ -32,7 +33,7 @@ describe('checkAvailablePrimaryName', () => {
       // this value would be false but is irrelevant
       isAuthorized: true,
     } as any)({
-      name: 'name.eth',
+      name: testDomain('name'),
       relation: {
         owner: false,
         registrant: true,

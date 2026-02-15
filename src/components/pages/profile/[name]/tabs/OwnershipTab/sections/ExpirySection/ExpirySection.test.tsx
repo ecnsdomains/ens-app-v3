@@ -6,10 +6,11 @@ import { GRACE_PERIOD } from '@app/utils/constants'
 
 import { makeMockIntersectionObserver } from '../../../../../../../../../test/mock/makeMockIntersectionObserver'
 import { ExpirySection } from './ExpirySection'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('./hooks/useExpiryDetails', () => ({
   useExpiryDetails: ({ name }: any) => {
-    if (name === 'test.eth')
+    if (name === testDomain('test'))
       return {
         data: [
           { type: 'expiry', date: new Date(3255803954000) },
@@ -24,7 +25,7 @@ vi.mock('./hooks/useExpiryDetails', () => ({
 const mockShowInput = vi.fn()
 vi.mock('./hooks/useExpiryActions', () => ({
   useExpiryActions: ({ name }: any) => {
-    if (name === 'test.eth')
+    if (name === testDomain('test'))
       return [
         {
           label: 'action.setReminder',
@@ -50,7 +51,7 @@ makeMockIntersectionObserver()
 
 describe('ExpirySection', () => {
   it.skip('should be able to open earnify button modal', async () => {
-    render(<ExpirySection name="test.eth" details={{} as any} />)
+    render(<ExpirySection name={testDomain('test')} details={{} as any} />)
     expect(screen.getByText('action.setReminder')).toBeVisible()
     expect(screen.getByText('action.extend')).toBeVisible()
     await userEvent.click(screen.getByText('action.setReminder'))
@@ -64,7 +65,7 @@ describe('ExpirySection', () => {
   })
 
   it('should be able to call show extend modal', async () => {
-    render(<ExpirySection name="test.eth" details={{} as any} />)
+    render(<ExpirySection name={testDomain('test')} details={{} as any} />)
     expect(screen.getByText('action.extend')).toBeVisible()
     await userEvent.click(screen.getByText('action.extend'))
     await waitFor(() => {

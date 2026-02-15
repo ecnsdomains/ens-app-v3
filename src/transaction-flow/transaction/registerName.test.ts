@@ -6,6 +6,7 @@ import { getPrice } from '@ensdomains/ensjs/public'
 import { registerName } from '@ensdomains/ensjs/wallet'
 
 import registerNameFlowTransaction from './registerName'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@ensdomains/ensjs/public')
 vi.mock('@ensdomains/ensjs/wallet')
@@ -20,7 +21,7 @@ it('adds a 2% value buffer to the transaction from the real price', async () => 
   const result = (await registerNameFlowTransaction.transaction({
     client: {} as any,
     connectorClient: { walletClient: true } as any,
-    data: { name: 'test.eth' } as any,
+    data: { name: testDomain('test') } as any,
   })) as unknown as [{ walletClient: true }, { name: string; value: bigint }]
   const data = result[1]
   expect(data.value).toEqual(102n)

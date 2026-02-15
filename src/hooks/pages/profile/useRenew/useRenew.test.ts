@@ -13,6 +13,7 @@ import { useTransactionFlow } from '@app/transaction-flow/TransactionFlowProvide
 import type { RegistrationStatus } from '@app/utils/registrationStatus'
 
 import { calculateRenewState, removeRenewParam, useRenew } from './useRenew'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('next/router', async () => await vi.importActual('next-router-mock'))
 vi.mock('@app/hooks/useBasicName')
@@ -365,7 +366,7 @@ describe('removeRenewParam', () => {
     expect(
       removeRenewParam({
         query: {
-          name: 'test.eth',
+          name: testDomain('test'),
           renew: '123',
           other: 'value',
         } as ParsedUrlQuery,
@@ -378,7 +379,7 @@ describe('removeRenewParam', () => {
     expect(
       removeRenewParam({
         query: {
-          name: 'test.eth',
+          name: testDomain('test'),
           other: ['value1', 'value2'],
           renew: '123',
         } as ParsedUrlQuery,
@@ -392,7 +393,7 @@ describe('removeRenewParam', () => {
       removeRenewParam({
         query: {
           z: 'last',
-          name: 'test.eth',
+          name: testDomain('test'),
           a: 'first',
           renew: '123',
           m: 'middle',
@@ -406,7 +407,7 @@ describe('removeRenewParam', () => {
     expect(
       removeRenewParam({
         query: {
-          name: 'test name.eth',
+          name: 'test name.etc',
           param: 'special value',
           renew: '123',
         } as ParsedUrlQuery,
@@ -419,7 +420,7 @@ describe('removeRenewParam', () => {
     expect(
       removeRenewParam({
         query: {
-          name: 'test.eth',
+          name: testDomain('test'),
           renew: '123',
         } as ParsedUrlQuery,
       }),
@@ -436,11 +437,11 @@ describe('removeRenewParam', () => {
   })
 
   it('should handle query with only name param', () => {
-    // URL: ?name=test.eth -> ''
+    // URL: ?name=test.etc -> ''
     expect(
       removeRenewParam({
         query: {
-          name: 'test.eth',
+          name: testDomain('test'),
         } as ParsedUrlQuery,
       }),
     ).toBe('')
@@ -462,7 +463,7 @@ describe('removeRenewParam', () => {
     expect(
       removeRenewParam({
         query: {
-          name: 'test.eth',
+          name: testDomain('test'),
           empty: '',
           renew: '123',
         } as ParsedUrlQuery,
@@ -497,7 +498,7 @@ describe('useRenew', () => {
       get: (key: string) => (key === 'renew' ? '123' : null),
     })
 
-    mockRouter.setCurrentUrl('/test.eth')
+    mockRouter.setCurrentUrl('/test.etc')
   })
 
   afterEach(() => {
@@ -512,10 +513,10 @@ describe('useRenew', () => {
       get: (key: string) => (key === 'renew' ? '86400' : null),
     })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
-    expect(mockShowExtendNamesInput).toHaveBeenCalledWith('extend-names-test.eth', {
-      names: ['test.eth'],
+    expect(mockShowExtendNamesInput).toHaveBeenCalledWith(testDomain('extend-names-test'), {
+      names: [testDomain('test')],
       isSelf: true,
       seconds: 86400,
     })
@@ -531,10 +532,10 @@ describe('useRenew', () => {
       get: (key: string) => (key === 'renew' ? '94608000' : null),
     })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
-    expect(mockShowExtendNamesInput).toHaveBeenCalledWith('extend-names-test.eth', {
-      names: ['test.eth'],
+    expect(mockShowExtendNamesInput).toHaveBeenCalledWith(testDomain('extend-names-test'), {
+      names: [testDomain('test')],
       isSelf: true,
       seconds: 94608000,
     })
@@ -543,27 +544,27 @@ describe('useRenew', () => {
   it('should show extend names input for registered names', () => {
     mockRouter.push('/test.eth?renew=123')
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
-    expect(mockShowExtendNamesInput).toHaveBeenCalledWith('extend-names-test.eth', {
-      names: ['test.eth'],
+    expect(mockShowExtendNamesInput).toHaveBeenCalledWith(testDomain('extend-names-test'), {
+      names: [testDomain('test')],
       isSelf: true,
       seconds: 86400,
     })
-    expect(mockRouter.asPath).toBe('/test.eth')
+    expect(mockRouter.asPath).toBe('/test.etc')
   })
 
   it('should show extend names input for registered names with default duration', () => {
     mockRouter.push('/test.eth?renew')
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
-    expect(mockShowExtendNamesInput).toHaveBeenCalledWith('extend-names-test.eth', {
-      names: ['test.eth'],
+    expect(mockShowExtendNamesInput).toHaveBeenCalledWith(testDomain('extend-names-test'), {
+      names: [testDomain('test')],
       isSelf: true,
       seconds: 86400,
     })
-    expect(mockRouter.asPath).toBe('/test.eth')
+    expect(mockRouter.asPath).toBe('/test.etc')
   })
 
   it('should show extend names input for registered names with large duration', () => {
@@ -573,14 +574,14 @@ describe('useRenew', () => {
       get: (key: string) => (key === 'renew' ? largeDuration.toString() : null),
     })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
-    expect(mockShowExtendNamesInput).toHaveBeenCalledWith('extend-names-test.eth', {
-      names: ['test.eth'],
+    expect(mockShowExtendNamesInput).toHaveBeenCalledWith(testDomain('extend-names-test'), {
+      names: [testDomain('test')],
       isSelf: true,
       seconds: largeDuration,
     })
-    expect(mockRouter.asPath).toBe('/test.eth')
+    expect(mockRouter.asPath).toBe('/test.etc')
   })
 
   it('should show extend names input for names in grace period', () => {
@@ -590,10 +591,10 @@ describe('useRenew', () => {
       isLoading: false,
     })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
-    expect(mockShowExtendNamesInput).toHaveBeenCalledWith('extend-names-test.eth', {
-      names: ['test.eth'],
+    expect(mockShowExtendNamesInput).toHaveBeenCalledWith(testDomain('extend-names-test'), {
+      names: [testDomain('test')],
       isSelf: true,
       seconds: 86400,
     })
@@ -604,7 +605,7 @@ describe('useRenew', () => {
     const mockOpenConnectModal = vi.fn()
     mockUseAccount.mockReturnValue({ status: 'disconnected' })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
     expect(useConnectModal().openConnectModal).toHaveBeenCalled()
     expect(mockShowExtendNamesInput).not.toHaveBeenCalled()
@@ -617,7 +618,7 @@ describe('useRenew', () => {
       isLoading: false,
     })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
     expect(mockShowExtendNamesInput).not.toHaveBeenCalled()
   })
@@ -629,7 +630,7 @@ describe('useRenew', () => {
       isLoading: true,
     })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
     expect(mockShowExtendNamesInput).not.toHaveBeenCalled()
   })
@@ -641,10 +642,10 @@ describe('useRenew', () => {
       isLoading: false,
     })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
-    expect(mockShowExtendNamesInput).toHaveBeenCalledWith('extend-names-test.eth', {
-      names: ['test.eth'],
+    expect(mockShowExtendNamesInput).toHaveBeenCalledWith(testDomain('extend-names-test'), {
+      names: [testDomain('test')],
       isSelf: false,
       seconds: 86400,
     })
@@ -657,7 +658,7 @@ describe('useRenew', () => {
       isLoading: true,
     })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
     expect(mockShowExtendNamesInput).not.toHaveBeenCalled()
   })
@@ -666,7 +667,7 @@ describe('useRenew', () => {
     mockRouter.push('/test.eth?renew=123')
     mockRouter.isReady = false
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
     expect(mockShowExtendNamesInput).not.toHaveBeenCalled()
   })
@@ -674,7 +675,7 @@ describe('useRenew', () => {
   it('should do nothing when connect modal is open', () => {
     mockRouter.push('/test.eth?renew=123')
     useConnectModal().connectModalOpen = true
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
     expect(mockShowExtendNamesInput).not.toHaveBeenCalled()
   })
@@ -685,7 +686,7 @@ describe('useRenew', () => {
       get: (key: string) => (key === 'renew' ? 'invalid' : null),
     })
 
-    renderHook(() => useRenew('test.eth'))
+    renderHook(() => useRenew(testDomain('test')))
 
     expect(mockShowExtendNamesInput).not.toHaveBeenCalled()
   })

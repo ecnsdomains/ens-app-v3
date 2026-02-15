@@ -7,6 +7,7 @@ import { decodeFuses, encodeFuses } from '@ensdomains/ensjs/utils'
 
 import { NameDetailItem } from './NameDetailItem'
 import { TaggedNameItem } from './TaggedNameItem'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('./NameDetailItem')
 vi.mock('@app/components/@atoms/ExpiryComponents/ExpiryComponents')
@@ -31,8 +32,8 @@ const renderHelper = ({
 }) =>
   render(
     <TaggedNameItem
-      name={eth ? 'name.eth' : 'name'}
-      truncatedName={eth ? 'name.eth' : 'name'}
+      name={eth ? testDomain('name') : 'name'}
+      truncatedName={eth ? testDomain('name') : 'name'}
       relation={{
         owner: controller,
         registrant: registrant,
@@ -47,7 +48,7 @@ mockNameDetailItem.mockImplementation(mockComponent as any)
 
 describe('TaggedNameItem', () => {
   describe('unwrapped', () => {
-    describe('.eth', () => {
+    describe('.etc', () => {
       it('should show all tags as disabled by default', () => {
         const { getByTestId } = renderHelper({ eth: true })
         expect(getByTestId('tag-name.manager-false')).toBeInTheDocument()
@@ -83,7 +84,7 @@ describe('TaggedNameItem', () => {
     })
   })
   describe('wrapped', () => {
-    describe('.eth', () => {
+    describe('.etc', () => {
       it('should only show owner tag, disabled by default', () => {
         const { getByTestId, queryByText } = renderHelper({
           eth: true,

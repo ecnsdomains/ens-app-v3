@@ -135,10 +135,10 @@ export const clearCacheBustExpiries = (): void => {
 }
 
 /**
- * Busts the cache for ENS metadata images
+ * Busts the cache for ECNS metadata images
  * Sets cache-bust expiry for avatar and/or header images
  *
- * @param name - ENS name (e.g., 'vitalik.eth')
+ * @param name - ECNS name (e.g., 'alice.etc')
  * @param client - Viem client with chain information
  * @param mediaKey - Optional specific media to bust ('avatar' or 'header')
  *                   If omitted, busts both avatar and header

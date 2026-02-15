@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { match, P } from 'ts-pattern'
 
+import { testDomain, testSub, testDeepSub } from '../chainConstants'
 import { MockUseBasicNameType } from './makeMockUseBasicName'
 
 type MockUseAbilitiesConfig = {
@@ -14,52 +15,52 @@ export const mockUseAbilitiesConfig = {
   'eth-unwrapped-2ld': {
     basicNameType: 'eth-unwrapped-2ld',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-2ld:owner': {
     basicNameType: 'eth-unwrapped-2ld:owner',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-2ld:manager': {
     basicNameType: 'eth-unwrapped-2ld:manager',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-2ld:unowned': {
     basicNameType: 'eth-unwrapped-2ld:unowned',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-2ld:grace-period': {
     basicNameType: 'eth-unwrapped-2ld:grace-period',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'eth-emancipated-2ld': {
     basicNameType: 'eth-emancipated-2ld',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'eth-emancipated-2ld:unowned': {
     basicNameType: 'eth-emancipated-2ld:unowned',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'eth-emancipated-2ld:grace-period': {
     basicNameType: 'eth-emancipated-2ld:grace-period',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'eth-burnt-2ld': {
     basicNameType: 'eth-burnt-2ld',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'eth-burnt-2ld:unowned': {
     basicNameType: 'eth-burnt-2ld:unowned',
     parentNameType: 'eth',
-    name: 'name.eth',
+    name: testDomain('name'),
   } as MockUseAbilitiesConfig,
   'dns-unwrapped-2ld': {
     basicNameType: 'dns-unwrapped-2ld',
@@ -86,127 +87,127 @@ export const mockUseAbilitiesConfig = {
   'eth-unwrapped-subname': {
     basicNameType: 'eth-unwrapped-subname',
     parentNameType: 'eth-unwrapped-2ld:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname+unwrapped-2ld:unowned': {
     basicNameType: 'eth-unwrapped-subname',
     parentNameType: 'eth-unwrapped-2ld:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname+unwrapped-2ld:grace-period:unowned': {
     basicNameType: 'eth-unwrapped-subname',
     parentNameType: 'eth-unwrapped-2ld:grace-period:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname+emancipated-2ld:unowned': {
     basicNameType: 'eth-unwrapped-subname',
     parentNameType: 'eth-emancipated-2ld:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname+emancipated-2ld:grace-period:unowned': {
     basicNameType: 'eth-unwrapped-subname',
     parentNameType: 'eth-emancipated-2ld:grace-period:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-unwrapped-subname:unowned
   'eth-unwrapped-subname:unowned+unwrapped-2ld': {
     basicNameType: 'eth-unwrapped-subname:unowned',
     parentNameType: 'eth-unwrapped-2ld',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname:unowned+unwrapped-2ld:manager': {
     basicNameType: 'eth-unwrapped-subname:unowned',
     parentNameType: 'eth-unwrapped-2ld:manager',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname:unowned+unwrapped-2ld:owner': {
     basicNameType: 'eth-unwrapped-subname:unowned',
     parentNameType: 'eth-unwrapped-2ld:owner',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname:unowned+unwrapped-2ld:grace-period': {
     basicNameType: 'eth-unwrapped-subname:unowned',
     parentNameType: 'eth-unwrapped-2ld:grace-period',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname:unowned+emancipated-2ld': {
     basicNameType: 'eth-unwrapped-subname:unowned',
     parentNameType: 'eth-emancipated-2ld',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname:unowned+emancipated-2ld:grace-period': {
     basicNameType: 'eth-unwrapped-subname:unowned',
     parentNameType: 'eth-emancipated-2ld:grace-period',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-wrapped-subname
   'eth-wrapped-subname': {
     basicNameType: 'eth-wrapped-subname',
     parentNameType: 'eth-locked-2ld:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname+unwrapped-2ld:unowned': {
     basicNameType: 'eth-wrapped-subname',
     parentNameType: 'eth-unwrapped-2ld:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname+unwrapped-2ld:grace-period:unowned': {
     basicNameType: 'eth-wrapped-subname',
     parentNameType: 'eth-unwrapped-2ld:grace-period:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname+emancipated-2ld:unowned': {
     basicNameType: 'eth-wrapped-subname',
     parentNameType: 'eth-emancipated-2ld:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname+emancipated-2ld:grace-period:unowned': {
     basicNameType: 'eth-wrapped-subname',
     parentNameType: 'eth-emancipated-2ld:grace-period:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-wrapped-subname:unowned
   'eth-wrapped-subname:unowned+unwrapped-2ld': {
     basicNameType: 'eth-wrapped-subname:unowned',
     parentNameType: 'eth-unwrapped-2ld',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname:unowned+unwrapped-2ld:grace-period': {
     basicNameType: 'eth-wrapped-subname:unowned',
     parentNameType: 'eth-unwrapped-2ld:grace-period',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname:unowned+emancipated-2ld': {
     basicNameType: 'eth-wrapped-subname:unowned',
     parentNameType: 'eth-emancipated-2ld',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname:unowned+emancipated-2ld:grace-period': {
     basicNameType: 'eth-wrapped-subname:unowned',
     parentNameType: 'eth-emancipated-2ld:grace-period',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-emancipated-subname
   'eth-emancipated-subname': {
     basicNameType: 'eth-emancipated-subname',
     parentNameType: 'eth-locked-2ld:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   // 'eth-emancipated-subname+unwrapped-2ld:unowned': {}, unwrapped name cannot burn pcc
   // 'eth-emancipated-subname+unwrapped-2ld:grace-period:unowned': {}, unwrapped name cannot burn pcc
   'eth-emancipated-subname+emancipated-2ld:unowned': {
     basicNameType: 'eth-emancipated-subname',
     parentNameType: 'eth-emancipated-2ld:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-emancipated-subname+locked-2ld:grace-period:unowned': {
     basicNameType: 'eth-emancipated-subname',
     parentNameType: 'eth-locked-2ld:grace-period:unowned',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-emancipated-subname:unowned
@@ -214,12 +215,12 @@ export const mockUseAbilitiesConfig = {
   'eth-emancipated-subname:unowned+locked-2ld': {
     basicNameType: 'eth-emancipated-subname:unowned',
     parentNameType: 'eth-locked-2ld',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-emancipated-subname:unowned+locked-2ld:grace-period': {
     basicNameType: 'eth-emancipated-subname:unowned',
     parentNameType: 'eth-locked-2ld:grace-period',
-    name: 'subname.name.eth',
+    name: testSub('subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // 4LD - We will reuse the 3ld subname types since the abilities only depends on the name being a subname
@@ -227,68 +228,68 @@ export const mockUseAbilitiesConfig = {
   'eth-unwrapped-subname+unwrapped-subname:unowned': {
     basicNameType: 'eth-unwrapped-subname',
     parentNameType: 'eth-unwrapped-subname:unowned',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname+wrapped-subname:unowned': {
     basicNameType: 'eth-unwrapped-subname',
     parentNameType: 'eth-wrapped-subname:unowned',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname+emancipated-subname:unowned': {
     basicNameType: 'eth-unwrapped-subname',
     parentNameType: 'eth-emancipated-subname:unowned',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-unwrapped-subname:unowned
   'eth-unwrapped-subname:unowned+unwrapped-subname': {
     basicNameType: 'eth-unwrapped-subname:unowned',
     parentNameType: 'eth-unwrapped-subname',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname:unowned+wrapped-subname': {
     basicNameType: 'eth-unwrapped-subname:unowned',
     parentNameType: 'eth-wrapped-subname',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-unwrapped-subname:unowned+emancipated-subname': {
     basicNameType: 'eth-unwrapped-subname:unowned',
     parentNameType: 'eth-emancipated-subname',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-wrapped-subname
   'eth-wrapped-subname+unwrapped-subname:unowned': {
     basicNameType: 'eth-wrapped-subname',
     parentNameType: 'eth-unwrapped-subname:unowned',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname+wrapped-subname:unowned': {
     basicNameType: 'eth-wrapped-subname',
     parentNameType: 'eth-wrapped-subname:unowned',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname+emancipated-subname:unowned': {
     basicNameType: 'eth-wrapped-subname',
     parentNameType: 'eth-emancipated-subname:unowned',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-wrapped-subname:unowned
   'eth-wrapped-subname:unowned+unwrapped-subname': {
     basicNameType: 'eth-wrapped-subname:unowned',
     parentNameType: 'eth-unwrapped-subname',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname:unowned+wrapped-subname': {
     basicNameType: 'eth-wrapped-subname:unowned',
     parentNameType: 'eth-wrapped-subname',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
   'eth-wrapped-subname:unowned+emancipated-subname': {
     basicNameType: 'eth-wrapped-subname:unowned',
     parentNameType: 'eth-emancipated-subname',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-emancipated-subname
@@ -297,7 +298,7 @@ export const mockUseAbilitiesConfig = {
   'eth-emancipated-subname+locked-subname:unowned': {
     basicNameType: 'eth-emancipated-subname',
     parentNameType: 'eth-locked-subname:unowned',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
 
   // eth-emancipated-subname:unowned
@@ -306,7 +307,7 @@ export const mockUseAbilitiesConfig = {
   'eth-emancipated-subname:unowned+locked-subname': {
     basicNameType: 'eth-emancipated-subname:unowned',
     parentNameType: 'eth-locked-subname',
-    name: 'subname.subname.name.eth',
+    name: testDeepSub('subname', 'subname', 'name'),
   } as MockUseAbilitiesConfig,
 } as const
 

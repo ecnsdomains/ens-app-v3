@@ -210,7 +210,7 @@ describe('SelectImportType component', () => {
     )
     expect(
       screen.getByText(
-        "The team behind .club have customized their ENS experience, so we're unable to help you import the name at this time",
+        "The team behind .club have customized their ECNS experience, so we're unable to help you import the name at this time",
       ),
     ).toBeInTheDocument()
   })
@@ -236,7 +236,7 @@ describe('SelectImportType component', () => {
     )
     expect(
       screen.getByText(
-        "The team behind .xyz have customized their ENS experience, so we're unable to help you import the name at this time",
+        "The team behind .xyz have customized their ECNS experience, so we're unable to help you import the name at this time",
       ),
     ).toBeInTheDocument()
   })

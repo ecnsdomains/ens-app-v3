@@ -1,18 +1,19 @@
 import { describe, expect, it } from 'vitest'
 
 import { nameLevel, parentName } from './name'
+import { TLD, testDomain, testSub } from '@root/test/chainConstants'
 
 describe('nameLevel', () => {
   it('should return correct value for a subname ', () => {
-    expect(nameLevel('subname.test.eth')).toEqual('subname')
+    expect(nameLevel(testSub('subname', 'test'))).toEqual('subname')
   })
 
   it('should return correct value for a 2ld ', () => {
-    expect(nameLevel('test.eth')).toEqual('2ld')
+    expect(nameLevel(testDomain('test'))).toEqual('2ld')
   })
 
   it('should return correct value for a tld', () => {
-    expect(nameLevel('eth')).toEqual('tld')
+    expect(nameLevel('etc')).toEqual('tld')
   })
 
   it('should return the correct value for [root]', () => {
@@ -22,14 +23,14 @@ describe('nameLevel', () => {
 
 describe('parentName', () => {
   it('should return a 2ld name for a subname', () => {
-    expect(parentName('subname.test.eth')).toEqual('test.eth')
+    expect(parentName(testSub('subname', 'test'))).toEqual(testDomain('test'))
   })
 
   it('should return a tld for a 2ld name', () => {
-    expect(parentName('test.eth')).toEqual('eth')
+    expect(parentName(testDomain('test'))).toEqual(TLD)
   })
 
   it('should return a root for a tld', () => {
-    expect(parentName('eth')).toEqual('[root]')
+    expect(parentName('etc')).toEqual('[root]')
   })
 })

@@ -7,6 +7,7 @@ import { getName } from '@ensdomains/ensjs/public'
 import { ClientWithEns, ConfigWithEns } from '@app/types'
 
 import { getPrimaryNameQueryFn } from './usePrimaryName'
+import { testDomain } from '@root/test/chainConstants'
 
 vi.mock('@ensdomains/ensjs/public')
 
@@ -40,7 +41,7 @@ describe('getPrimaryNameQueryFn', () => {
   it('should return name when name is returned and matches', async () => {
     mockGetName.mockImplementationOnce(() =>
       Promise.resolve({
-        name: 'test.eth',
+        name: testDomain('test'),
         match: true,
         resolverAddress: '0xresolver',
         reverseResolverAddress: '0xreverseResolver',
@@ -51,16 +52,14 @@ describe('getPrimaryNameQueryFn', () => {
       meta: {} as any,
       signal: undefined as any,
     })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "beautifiedName": "test.eth",
-        "match": true,
-        "name": "test.eth",
-        "originalName": "test.eth",
-        "resolverAddress": "0xresolver",
-        "reverseResolverAddress": "0xreverseResolver",
-      }
-    `)
+    expect(result).toEqual({
+      beautifiedName: testDomain('test'),
+      match: true,
+      name: testDomain('test'),
+      originalName: testDomain('test'),
+      resolverAddress: '0xresolver',
+      reverseResolverAddress: '0xreverseResolver',
+    })
   })
   it('should return null when no name is returned', async () => {
     mockGetName.mockImplementationOnce(() => Promise.resolve(null))
@@ -74,7 +73,7 @@ describe('getPrimaryNameQueryFn', () => {
   it('should return null when name does not match', async () => {
     mockGetName.mockImplementationOnce(() =>
       Promise.resolve({
-        name: 'test.eth',
+        name: testDomain('test'),
         match: false,
         resolverAddress: '0xresolver',
         reverseResolverAddress: '0xreverseResolver',
@@ -90,7 +89,7 @@ describe('getPrimaryNameQueryFn', () => {
   it('should return name when name does not match but allowMismatch is true', async () => {
     mockGetName.mockImplementationOnce(() =>
       Promise.resolve({
-        name: 'test.eth',
+        name: testDomain('test'),
         match: false,
         resolverAddress: '0xresolver',
         reverseResolverAddress: '0xreverseResolver',
@@ -101,22 +100,20 @@ describe('getPrimaryNameQueryFn', () => {
       meta: {} as any,
       signal: undefined as any,
     })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "beautifiedName": "test.eth",
-        "match": false,
-        "name": "test.eth",
-        "originalName": "test.eth",
-        "resolverAddress": "0xresolver",
-        "reverseResolverAddress": "0xreverseResolver",
-      }
-    `)
+    expect(result).toEqual({
+      beautifiedName: testDomain('test'),
+      match: false,
+      name: testDomain('test'),
+      originalName: testDomain('test'),
+      resolverAddress: '0xresolver',
+      reverseResolverAddress: '0xreverseResolver',
+    })
   })
-  
+
   it('should preserve original name and not beautify when match is false', async () => {
     mockGetName.mockImplementationOnce(() =>
       Promise.resolve({
-        name: 'MetaMask.eth',
+        name: testDomain('MetaMask'),
         match: false,
         resolverAddress: '0xresolver',
         reverseResolverAddress: '0xreverseResolver',
@@ -127,22 +124,20 @@ describe('getPrimaryNameQueryFn', () => {
       meta: {} as any,
       signal: undefined as any,
     })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "beautifiedName": "MetaMask.eth",
-        "match": false,
-        "name": "MetaMask.eth",
-        "originalName": "MetaMask.eth",
-        "resolverAddress": "0xresolver",
-        "reverseResolverAddress": "0xreverseResolver",
-      }
-    `)
+    expect(result).toEqual({
+      beautifiedName: testDomain('MetaMask'),
+      match: false,
+      name: testDomain('MetaMask'),
+      originalName: testDomain('MetaMask'),
+      resolverAddress: '0xresolver',
+      reverseResolverAddress: '0xreverseResolver',
+    })
   })
-  
+
   it('should beautify name when match is true', async () => {
     mockGetName.mockImplementationOnce(() =>
       Promise.resolve({
-        name: 'test.eth',
+        name: testDomain('test'),
         match: true,
         resolverAddress: '0xresolver',
         reverseResolverAddress: '0xreverseResolver',
@@ -153,15 +148,13 @@ describe('getPrimaryNameQueryFn', () => {
       meta: {} as any,
       signal: undefined as any,
     })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "beautifiedName": "test.eth",
-        "match": true,
-        "name": "test.eth",
-        "originalName": "test.eth",
-        "resolverAddress": "0xresolver",
-        "reverseResolverAddress": "0xreverseResolver",
-      }
-    `)
+    expect(result).toEqual({
+      beautifiedName: testDomain('test'),
+      match: true,
+      name: testDomain('test'),
+      originalName: testDomain('test'),
+      resolverAddress: '0xresolver',
+      reverseResolverAddress: '0xreverseResolver',
+    })
   })
 })

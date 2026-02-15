@@ -14,6 +14,7 @@ import { createDateAndValue } from '@app/utils/utils'
 
 import { makeMockUseAbilitiesData } from '../../../../../../../test/mock/makeMockUseAbilitiesData'
 import { PermissionsTab } from './PermissionsTab'
+import { testDomain, testSub } from '@root/test/chainConstants'
 
 vi.mock('next/router', () => ({
   useRouter: () => ({
@@ -121,7 +122,7 @@ describe('<PermissionsTab>', () => {
       mockUseParentBasicName.mockReturnValue({})
       render(
         <PermissionsTab
-          name="test.eth"
+          name={testDomain('test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -152,7 +153,7 @@ describe('<PermissionsTab>', () => {
         }),
       })
       render(
-        <PermissionsTab name="sub.test.eth" wrapperData={makeWrapperData({})} isCached={false} />,
+        <PermissionsTab name={testSub('sub', 'test')} wrapperData={makeWrapperData({})} isCached={false} />,
       )
       expect(screen.getByTestId('parent-can-control')).toBeInTheDocument()
       expect(screen.getByTestId('parent-can-change-permissions')).toBeInTheDocument()
@@ -170,7 +171,7 @@ describe('<PermissionsTab>', () => {
         }),
       })
       render(
-        <PermissionsTab name="sub.test.eth" wrapperData={makeWrapperData({})} isCached={false} />,
+        <PermissionsTab name={testSub('sub', 'test')} wrapperData={makeWrapperData({})} isCached={false} />,
       )
       expect(screen.getByTestId('parent-can-control')).toBeInTheDocument()
       expect(screen.getByTestId('parent-can-change-permissions')).toBeInTheDocument()
@@ -191,7 +192,7 @@ describe('<PermissionsTab>', () => {
         }),
       })
       render(
-        <PermissionsTab name="sub.test.eth" wrapperData={makeWrapperData({})} isCached={false} />,
+        <PermissionsTab name={testSub('sub', 'test')} wrapperData={makeWrapperData({})} isCached={false} />,
       )
       expect(screen.getByTestId('parent-can-control')).toBeInTheDocument()
       expect(screen.getByTestId('parent-can-change-permissions')).toBeInTheDocument()
@@ -213,7 +214,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -244,7 +245,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -276,7 +277,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -311,7 +312,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -339,7 +340,7 @@ describe('<PermissionsTab>', () => {
         wrapperData: makeWrapperData({}),
       })
       render(
-        <PermissionsTab name="sub.test.eth" wrapperData={makeWrapperData()} isCached={false} />,
+        <PermissionsTab name={testSub('sub', 'test')} wrapperData={makeWrapperData()} isCached={false} />,
       )
       const fuses = [
         'CANNOT_UNWRAP',
@@ -360,7 +361,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               child: {
@@ -398,7 +399,7 @@ describe('<PermissionsTab>', () => {
         }),
       })
       render(
-        <PermissionsTab name="sub.test.eth" wrapperData={makeWrapperData()} isCached={false} />,
+        <PermissionsTab name={testSub('sub', 'test')} wrapperData={makeWrapperData()} isCached={false} />,
       )
       expectFunc(['banner-parent-not-locked'])
     })
@@ -415,7 +416,7 @@ describe('<PermissionsTab>', () => {
         }),
       })
       render(
-        <PermissionsTab name="sub.test.eth" wrapperData={makeWrapperData()} isCached={false} />,
+        <PermissionsTab name={testSub('sub', 'test')} wrapperData={makeWrapperData()} isCached={false} />,
       )
       expectFunc(['banner-parent-not-locked'])
     })
@@ -435,7 +436,7 @@ describe('<PermissionsTab>', () => {
         }),
       })
       render(
-        <PermissionsTab name="sub.test.eth" wrapperData={makeWrapperData()} isCached={false} />,
+        <PermissionsTab name={testSub('sub', 'test')} wrapperData={makeWrapperData()} isCached={false} />,
       )
       expectFunc(['button-revoke-pcc', 'button-extend-expiry'])
     })
@@ -456,7 +457,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -486,7 +487,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -508,7 +509,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({ owner: '0xOwner' })}
           isCached={false}
         />,
@@ -528,7 +529,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({ owner: '0xOwner' })}
           isCached={false}
         />,
@@ -551,7 +552,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({ owner: '0xOwner' })}
           isCached={false}
         />,
@@ -574,7 +575,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -604,7 +605,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -634,7 +635,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -667,7 +668,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -701,7 +702,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {
@@ -739,7 +740,7 @@ describe('<PermissionsTab>', () => {
       })
       render(
         <PermissionsTab
-          name="sub.test.eth"
+          name={testSub('sub', 'test')}
           wrapperData={makeWrapperData({
             fuses: {
               parent: {

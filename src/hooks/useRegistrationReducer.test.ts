@@ -4,6 +4,7 @@ import { isHex, pad } from 'viem'
 import { EMPTY_BYTES32 } from '@ensdomains/ensjs/utils'
 
 import { SelectedItemProperties } from '@app/components/pages/profile/[name]/registration/types'
+import { testDomain } from '@root/test/chainConstants'
 
 // Test the getReferrerHex function behavior
 describe('useRegistrationReducer - referrer storage', () => {
@@ -86,7 +87,7 @@ describe('useRegistrationReducer - referrer storage', () => {
 
     const selected: SelectedItemProperties = {
       address: '0x1234567890123456789012345678901234567890',
-      name: 'test.eth',
+      name: testDomain('test'),
       chainId: 1,
       referrer: paddedReferrer,
     }
@@ -124,7 +125,7 @@ describe('useRegistrationReducer - referrer storage', () => {
 
     const selected: SelectedItemProperties = {
       address: '0x1234567890123456789012345678901234567890',
-      name: 'test.eth',
+      name: testDomain('test'),
       chainId: 1,
       referrer: paddedReferrer,
     }
