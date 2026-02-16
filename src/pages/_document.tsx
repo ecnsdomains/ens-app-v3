@@ -126,6 +126,10 @@ export default class MyDocument extends Document {
             </>
           )}
 
+          {/* ===== FONTS ===== */}
+          {/* eslint-disable-next-line @next/next/no-css-tags */}
+          <link rel="stylesheet" href="/fonts/fonts.css" />
+
           {/* ===== ESSENTIAL META TAGS ===== */}
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

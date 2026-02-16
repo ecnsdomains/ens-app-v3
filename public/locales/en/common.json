@@ -425,15 +425,15 @@
     "default": "We could't verify your account. Please return to Dentity and try again."
   },
   "networkNotifications": {
-    "EthereumClassic": {
-      "title": "Switch to Ethereum Classic?",
-      "description": "You've selected Ethereum Classic (mainnet) in your wallet.",
-      "action": "Stay on app.ecns.domains"
+    "Ethereum Classic": {
+      "title": "ETC Mainnet Detected",
+      "description": "Your wallet is connected to Ethereum Classic mainnet.",
+      "action": "Go to Mainnet App"
     },
     "Mordor": {
-      "title": "Switch to Mordor?",
-      "description": "You've selected Mordor (testnet) in your wallet.",
-      "action": "Stay on app.ecns.domains"
+      "title": "Mordor Testnet Detected",
+      "description": "Your wallet is connected to Mordor testnet.",
+      "action": "Go to Testnet App"
     }
   },
   "para": {

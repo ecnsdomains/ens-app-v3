@@ -213,7 +213,7 @@ const nextConfig = {
         files: './src/**/*.tsx',
         extensions: ['tsx'],
         failOnError: process.env.NODE_ENV !== 'development',
-        cache: false,
+        cache: true,
       }),
     )
     config.plugins.push(

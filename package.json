@@ -3,6 +3,7 @@
   "version": "0.1.123",
   "scripts": {
     "dev": "NODE_NO_WARNINGS=1 next dev --webpack",
+    "dev:turbo": "NODE_NO_WARNINGS=1 next dev",
     "dev:sepolia": "NEXT_PUBLIC_CHAIN_NAME=sepolia pnpm dev",
     "dev:mainnet": "NEXT_PUBLIC_CHAIN_NAME=mainnet pnpm dev",
     "dev:mordor": "NEXT_PUBLIC_CHAIN_NAME=mordor pnpm dev",
