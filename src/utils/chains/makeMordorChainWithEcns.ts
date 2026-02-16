@@ -37,16 +37,16 @@ export const etcMainnet = {
 } as const satisfies Chain
 
 // ECNS contract addresses on Mordor testnet
-// Deployed: 2026-02-06
+// Deployed: 2026-02-08
 export const ecnsMordorAddresses = {
   ECNSRegistry: '0x298195a795a5fe91bb47db1c4e501f07767775c8' as Address,
   ReverseRegistrar: '0xab9ffcf5ccaaf0f276a7c9813d57a8418e7e9f6a' as Address,
   DefaultReverseRegistrar: '0xe5230571856f9e4a15f5e9c4655b220b32a081b1' as Address,
-  BaseRegistrar: '0x4d5e3a1e5dfbc98783ecbc91e6be2233fbf2978e' as Address,
+  BaseRegistrar: '0x828efe05d833bd3e10a3086cf2df1c49bad0082f' as Address,
   ETCswapFullOracle: '0x430198d8f9a854e90210d3df98294453f3a9b875' as Address,
   ExponentialPremiumPriceOracle: '0xf16140598170236cdbbc309b9357d5785c88c2e8' as Address,
-  ETCRegistrarController: '0x13ff083bfd8377ea8e5a013e58662132cdb78ecb' as Address,
-  PublicResolver: '0xf8ee21672f4077354091aa5b1a147fde25ae81bc' as Address,
+  ETCRegistrarController: '0x3daccff9a51a04ac01a09ba78919874536b34309' as Address,
+  PublicResolver: '0xa2d0c9a23729811607e09487cdd98dbb43e55f71' as Address,
 } as const
 
 // ETC Mainnet contract addresses - TO BE DEPLOYED
