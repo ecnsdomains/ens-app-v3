@@ -2,7 +2,7 @@ import { Router } from 'next/router'
 import posthog from 'posthog-js'
 import { PostHogProvider as PostHogProviderBase } from 'posthog-js/react'
 import { ReactNode, useEffect } from 'react'
-import { useAccountEffect } from 'wagmi'
+import { useConnectionEffect } from 'wagmi'
 
 import { CookieConsentBanner } from '@app/components/CookieConsentBanner'
 
@@ -42,7 +42,7 @@ export const PostHogProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [])
 
-  useAccountEffect({
+  useConnectionEffect({
     onConnect(data) {
       posthog.identify(
         data.address,

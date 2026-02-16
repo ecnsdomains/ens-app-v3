@@ -1,7 +1,6 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
 import type { ReactNode } from 'react'
-import { ThirdwebProvider } from 'thirdweb/react'
 import { WagmiProvider } from 'wagmi'
 
 import { createPersistConfig } from './persist'
@@ -15,15 +14,13 @@ type Props = {
 export function QueryProviders({ children }: Props) {
   return (
     <WagmiProvider config={wagmiConfig} reconnectOnMount={typeof window !== 'undefined'}>
-      <ThirdwebProvider>
-        <PersistQueryClientProvider
-          client={queryClient}
-          persistOptions={createPersistConfig({ queryClient })}
-        >
-          {children}
-          <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
-        </PersistQueryClientProvider>
-      </ThirdwebProvider>
+      <PersistQueryClientProvider
+        client={queryClient}
+        persistOptions={createPersistConfig({ queryClient })}
+      >
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+      </PersistQueryClientProvider>
     </WagmiProvider>
   )
 }

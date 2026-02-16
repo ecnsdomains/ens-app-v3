@@ -1,5 +1,5 @@
 import type { Address } from 'viem'
-import { useAccount, useChainId, useConfig } from 'wagmi'
+import { useConnection, useChainId, useConfig } from 'wagmi'
 
 import { SupportedChain } from '@app/constants/chains'
 import { ConfigWithEns, CreateQueryKey, QueryDependencyType } from '@app/types'
@@ -151,7 +151,7 @@ export function useQueryOptions<
   queryFn,
 }: QueryKeyConfig<TParams, TFunctionName, QueryDependencyType> & { queryFn?: TQueryFn }) {
   const chainId = useChainId()
-  const { address } = useAccount()
+  const { address } = useConnection()
   const config = useConfig()
 
   if (queryDependencyType === 'independent')

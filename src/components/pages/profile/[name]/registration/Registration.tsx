@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import { match, P } from 'ts-pattern'
-import { useAccount, useChainId } from 'wagmi'
+import { useConnection, useChainId } from 'wagmi'
 
 import { Dialog, Helper, Typography } from '@ensdomains/thorin'
 
@@ -111,7 +111,7 @@ const Registration = ({ nameDetails, isLoading }: Props) => {
 
   const router = useRouterWithHistory()
   const chainId = useChainId()
-  const { address } = useAccount()
+  const { address } = useConnection()
   const primary = usePrimaryName({ address })
   const referrer = useReferrer()
   const referrerHex = getReferrerHex(referrer)

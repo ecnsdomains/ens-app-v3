@@ -3,11 +3,10 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { getLargestMedianGasFee } from './query'
 
-vi.mock('@getpara/rainbowkit', () => ({
+vi.mock('@app/hooks/useConnectModal', () => ({
   useConnectModal: () => ({
     openConnectModal: vi.fn(),
   }),
-  connectorsForWallets: () => [() => {}],
 }))
 
 vi.mock('@wagmi/core', async () => {

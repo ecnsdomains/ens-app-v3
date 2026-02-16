@@ -2,7 +2,7 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { match } from 'ts-pattern'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import type { VerificationErrorDialogProps } from '@app/components/pages/VerificationErrorDialog'
 import { DENTITY_ISS } from '@app/constants/verification'
@@ -25,7 +25,7 @@ export const useVerificationOAuthHandler = (): UseVerificationOAuthHandlerReturn
   const { t } = useTranslation('common')
   const { createTransactionFlow } = useTransactionFlow()
 
-  const { address: userAddress } = useAccount()
+  const { address: userAddress } = useConnection()
 
   const isReady = !!createTransactionFlow && !!router && !!iss && !!code && iss === DENTITY_ISS
   const { data: dentityToken, isLoading: isDentityTokenLoading } = useDentityToken({

@@ -3,7 +3,7 @@ import { Dispatch, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import usePrevious from 'react-use/lib/usePrevious'
 import { match, P } from 'ts-pattern'
-import { useAccount, useChainId } from 'wagmi'
+import { useConnection, useChainId } from 'wagmi'
 
 import { Dialog } from '@ensdomains/thorin'
 
@@ -16,7 +16,7 @@ import { IntroStageModal } from './stage/Intro'
 import { TransactionStageModal } from './stage/TransactionStageModal'
 
 export const useResetSelectedKey = (dispatch: any) => {
-  const { address } = useAccount()
+  const { address } = useConnection()
   const chainId = useChainId()
 
   const prevAddress = usePrevious(address)

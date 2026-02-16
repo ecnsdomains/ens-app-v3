@@ -1,7 +1,7 @@
 import { mockFunction, render, screen } from '@app/test-utils'
 
 import { describe, expect, it, vi } from 'vitest'
-import { useAccount, useBalance } from 'wagmi'
+import { useConnection, useBalance } from 'wagmi'
 
 import { useEstimateGasWithStateOverride } from '@app/hooks/chain/useEstimateGasWithStateOverride'
 import { useExpiry } from '@app/hooks/nameservice/public/useExpiry'
@@ -22,7 +22,7 @@ vi.mock('@app/hooks/useReferrer')
 
 const mockUseEstimateGasWithStateOverride = mockFunction(useEstimateGasWithStateOverride)
 const mockUsePrice = mockFunction(usePrice)
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 const mockUseBalance = mockFunction(useBalance)
 const mockUseNativeCoinPrice = mockFunction(useNativeCoinPrice)
 const mockUseExpiry = mockFunction(useExpiry)

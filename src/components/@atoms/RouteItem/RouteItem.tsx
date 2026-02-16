@@ -151,7 +151,7 @@ export const RouteItem = ({
 }
 
 export const DisconnectButton = () => {
-  const { disconnect } = useDisconnect()
+  const { mutate: disconnect } = useDisconnect()
 
   return (
     <ButtonLinkWrapper $isActive={false} onClick={() => disconnect()} type="button">

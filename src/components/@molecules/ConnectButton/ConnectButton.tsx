@@ -1,8 +1,8 @@
-import { useConnectModal } from '@getpara/rainbowkit'
+import { useConnectModal } from '@app/hooks/useConnectModal'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import type { Address } from 'viem'
-import { useConnections, useDisconnect } from 'wagmi'
+import { useDisconnect } from 'wagmi'
 
 import { Button, PersonSVG, Profile } from '@ensdomains/thorin'
 
@@ -14,7 +14,6 @@ import { useEnsAvatar } from '@app/hooks/useEnsAvatar'
 import { useRouterWithHistory } from '@app/hooks/useRouterWithHistory'
 import { useZorb } from '@app/hooks/useZorb'
 import { useBreakpoint } from '@app/utils/BreakpointProvider'
-import { hasParaConnection } from '@app/utils/utils'
 
 import { getDropdownItems } from './utils'
 
@@ -118,7 +117,7 @@ const HeaderProfile = ({ address }: { address: Address }) => {
 
   const router = useRouterWithHistory()
 
-  const { disconnect } = useDisconnect({
+  const { mutate: disconnect } = useDisconnect({
     mutation: {
       onSuccess: () => {
         router.push('/')
@@ -127,9 +126,6 @@ const HeaderProfile = ({ address }: { address: Address }) => {
   })
   const { copy, copied } = useCopied(300)
   const hasPendingTransactions = useHasPendingTransactions()
-
-  const connections = useConnections()
-  const isParaConnected = hasParaConnection(connections)
 
   return (
     <Profile
@@ -141,7 +137,6 @@ const HeaderProfile = ({ address }: { address: Address }) => {
         copy,
         copied,
         hasPendingTransactions,
-        isParaConnected,
         t,
         address,
       })}

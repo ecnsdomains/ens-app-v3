@@ -18,7 +18,6 @@ const config: KnipConfig = {
   ignore: [
     // Duplicate exports. Removal is currently blocked due to potential E2E test failures.
     'src/transaction-flow/input/EditResolver/EditResolver-flow.tsx',
-    'src/utils/metamask/firefox.ts',
     // We still need the `test-d` files
     'src/hooks/ensjs/public/useRecords.test-d.ts',
     'src/utils/query/match/matchExactOrNullParamItem.test-d.ts',

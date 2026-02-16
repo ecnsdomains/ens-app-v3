@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { match } from 'ts-pattern'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { ButtonProps } from '@ensdomains/thorin'
 
@@ -30,7 +30,7 @@ export const DesyncedMessage = ({
   isGracePeriod: boolean
 }) => {
   const { t } = useTranslation('profile')
-  const { isConnected } = useAccount()
+  const { isConnected } = useConnection()
   const { createTransactionFlow, usePreparedDataInput } = useTransactionFlow()
   const showExtendNamesInput = usePreparedDataInput('ExtendNames')
   const referrer = useReferrer()

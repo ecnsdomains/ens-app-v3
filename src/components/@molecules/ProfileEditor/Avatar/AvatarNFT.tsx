@@ -4,7 +4,7 @@ import { ReactNode, useCallback, useState } from 'react'
 import type { TFunction } from 'i18next'
 import { useTranslation } from 'react-i18next'
 import styled, { css, DefaultTheme, keyframes } from 'styled-components'
-import { useAccount, useClient } from 'wagmi'
+import { useConnection, useClient } from 'wagmi'
 
 import {
   AlertSVG,
@@ -364,7 +364,7 @@ export const AvatarNFT = ({
   const { t } = useTranslation('transactionFlow')
 
   const chain = useChainName()
-  const { address: _address } = useAccount()
+  const { address: _address } = useConnection()
   const address = _address!
 
   const { ethAddress } = useProfileAddresses(name)

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import type { Address } from 'viem'
-import { useAccount, useChainId } from 'wagmi'
+import { useConnection, useChainId } from 'wagmi'
 
 import { GetDnsOffchainDataReturnType } from '@ensdomains/ensjs/dns'
 
@@ -31,7 +31,7 @@ const getOffchainDnsResolverStatus = ({
 
 export const useDnsOffchainStatus = ({ name, enabled = true }: UseDnsOffchainStatusParameters) => {
   const chainId = useChainId()
-  const { address } = useAccount()
+  const { address } = useConnection()
 
   const {
     data: dnsOffchainData,

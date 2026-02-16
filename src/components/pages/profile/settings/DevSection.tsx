@@ -40,11 +40,12 @@ type TestConfig = Config<[typeof localhostWithEns]>
 
 export const DevSection = () => {
   const client = useClient<TestConfig>()
-  const testClient = useMemo(() => ({ ...client, mode: 'anvil' }) as const, [client])
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const testClient = useMemo(() => ({ ...client!, mode: 'anvil' as const }) as any, [client])
 
   const addTransaction = useAddRecentTransaction()
   const { createTransactionFlow } = useTransactionFlow()
-  const { sendTransactionAsync } = useSendTransaction()
+  const { mutateAsync: sendTransactionAsync } = useSendTransaction()
 
   const addSuccess = async () => {
     const hash = await sendTransactionAsync({

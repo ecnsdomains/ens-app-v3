@@ -4,7 +4,7 @@ import { usePreviousDistinct } from 'react-use'
 import styled, { css } from 'styled-components'
 import { match, P } from 'ts-pattern'
 import { parseEther } from 'viem'
-import { useAccount, useBalance } from 'wagmi'
+import { useConnection, useBalance } from 'wagmi'
 
 import { Avatar, Button, CurrencyToggle, Dialog, Helper, Typography } from '@ensdomains/thorin'
 
@@ -191,7 +191,7 @@ const ExtendNames = ({
   const referrerHex = getReferrerHex(referrer)
 
   const { data: nativeCoinPrice, isLoading: isNativeCoinPriceLoading } = useNativeCoinPrice()
-  const { address, isConnected: isAccountConnected } = useAccount()
+  const { address, isConnected: isAccountConnected } = useConnection()
   const { data: balance, isLoading: isBalanceLoading } = useBalance({
     address,
   })

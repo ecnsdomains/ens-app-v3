@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import { match, P } from 'ts-pattern'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { makeCommitment } from '@ensdomains/ensjs/utils'
 import { Button, CountdownCircle, Dialog, Heading, Spinner } from '@ensdomains/thorin'
@@ -207,7 +207,7 @@ type Props = {
 const Transactions = ({ registrationData, name, callback, onStart }: Props) => {
   const { t } = useTranslation('register')
 
-  const { address } = useAccount()
+  const { address } = useConnection()
   const keySuffix = `${name}-${address}`
   const commitKey = `commit-${keySuffix}`
   const registerKey = `register-${keySuffix}`

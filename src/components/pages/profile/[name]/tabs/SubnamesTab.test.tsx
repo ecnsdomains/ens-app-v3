@@ -2,7 +2,7 @@ import { mockFunction, render, screen } from '@app/test-utils'
 
 import { labelhash, namehash } from 'viem'
 import { beforeAll, describe, expect, it, vi } from 'vitest'
-import { useAccount, useEnsAvatar } from 'wagmi'
+import { useConnection, useEnsAvatar } from 'wagmi'
 
 import { Name } from '@ensdomains/ensjs/subgraph'
 
@@ -19,7 +19,7 @@ vi.mock('wagmi')
 vi.mock('@app/hooks/nameservice/subgraph/useSubnames')
 vi.mock('@app/hooks/useZorb')
 
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 const mockUseEnsAvatar = mockFunction(useEnsAvatar)
 
 const mockUseSubnames = mockFunction(useSubnames)

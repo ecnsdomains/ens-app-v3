@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import type { Address } from 'viem'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { GetOwnerReturnType, GetWrapperDataReturnType } from '@ensdomains/ensjs/public'
 import { CalendarSVG, FastForwardSVG } from '@ensdomains/thorin'
@@ -53,7 +53,7 @@ export const useExpiryActions = ({
   wrapperData?: GetWrapperDataReturnType
 }): UseExpiryActionsReturnType | null => {
   const { t } = useTranslation('common')
-  const { address, isConnected } = useAccount()
+  const { address, isConnected } = useConnection()
   const { usePreparedDataInput } = useTransactionFlow()
   const showExtendNamesInput = usePreparedDataInput('ExtendNames')
 

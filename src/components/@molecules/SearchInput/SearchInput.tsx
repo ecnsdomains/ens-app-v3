@@ -16,7 +16,7 @@ import useTransition, { TransitionState } from 'react-transition-state'
 import styled, { css } from 'styled-components'
 import { match } from 'ts-pattern'
 import { Address, isAddress } from 'viem'
-import { useAccount, useChainId } from 'wagmi'
+import { useConnection, useChainId } from 'wagmi'
 
 import {
   GetExpiryReturnType,
@@ -650,7 +650,7 @@ export const SearchInput = ({ size = 'extraLarge' }: { size?: 'medium' | 'extraL
   const queryClient = useQueryClient()
   const breakpoints = useBreakpoint()
 
-  const { address } = useAccount()
+  const { address } = useConnection()
   const chainId = useChainId()
 
   const [inputVal, setInputVal] = useState('')

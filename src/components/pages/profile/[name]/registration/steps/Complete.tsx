@@ -3,7 +3,7 @@ import { Fragment, useEffect, useMemo, useState } from 'react'
 import type ConfettiT from 'react-confetti'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { tokenise } from '@ensdomains/ensjs/utils'
 import { Button, Typography } from '@ensdomains/thorin'
@@ -136,7 +136,7 @@ const useEthInvoice = (
   isMoonpayFlow: boolean,
 ): { InvoiceFilled?: React.ReactNode; avatarSrc?: string } => {
   const { t } = useTranslation('register')
-  const { address } = useAccount()
+  const { address } = useConnection()
   const keySuffix = `${name}-${address}`
   const commitKey = `commit-${keySuffix}`
   const registerKey = `register-${keySuffix}`

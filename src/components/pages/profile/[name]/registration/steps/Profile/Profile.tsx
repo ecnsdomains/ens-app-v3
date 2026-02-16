@@ -4,7 +4,7 @@ import { Control, useWatch } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import { match } from 'ts-pattern'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { Button, Dialog, PlusSVG, Typography } from '@ensdomains/thorin'
 
@@ -84,7 +84,7 @@ const SubmitButton = ({
   control: Control<ProfileEditorForm>
   disabled: boolean
 }) => {
-  const { address } = useAccount()
+  const { address } = useConnection()
   const { t } = useTranslation('register')
 
   const records = useWatch({

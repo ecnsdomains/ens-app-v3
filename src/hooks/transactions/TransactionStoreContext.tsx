@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { useAccount, useChainId, useConfig } from 'wagmi'
+import { useConnection, useChainId, useConfig } from 'wagmi'
 
 import { ConfigWithEns } from '@app/types'
 
@@ -15,7 +15,7 @@ const TransactionStoreContext = createContext<TransactionStore | null>(null)
 
 export function TransactionStoreProvider({ children }: { children: React.ReactNode }) {
   const config = useConfig<ConfigWithEns>()
-  const { address } = useAccount()
+  const { address } = useConnection()
   const chainId = useChainId()
 
   // Use existing store if it exists, or lazily create one

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { ReactElement } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { Banner, QuestionCircleSVG } from '@ensdomains/thorin'
 
@@ -27,7 +27,7 @@ const ContentContainer = styled.div(
 export default function Page() {
   const { t } = useTranslation('names')
   const router = useRouter()
-  const { address, isConnecting, isReconnecting } = useAccount()
+  const { address, isConnecting, isReconnecting } = useConnection()
 
   const isLoading = !router.isReady || isConnecting || isReconnecting
 

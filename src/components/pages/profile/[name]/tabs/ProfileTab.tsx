@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { Helper } from '@ensdomains/thorin'
 
@@ -45,7 +45,7 @@ type Props = {
 const ProfileTab = ({ nameDetails, name }: Props) => {
   const { t } = useTranslation('profile')
 
-  const { address } = useAccount()
+  const { address } = useConnection()
 
   const {
     profile,

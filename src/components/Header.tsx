@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { ReactNode, useCallback, useEffect, useRef } from 'react'
 import useTransition, { TransitionState } from 'react-transition-state'
 import styled, { css, useTheme } from 'styled-components'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useRecentTransactions } from '@app/hooks/transactions/useRecentTransactions'
 import { useInitial } from '@app/hooks/useInitial'
@@ -130,7 +130,7 @@ export const Header = () => {
   const { space } = useTheme()
   const router = useRouter()
   const isInitial = useInitial()
-  const { isConnected } = useAccount()
+  const { isConnected } = useConnection()
   const breakpoints = useBreakpoint()
   const transactions = useRecentTransactions()
   const pendingTransactions = transactions.filter((x) => x.status === 'pending')

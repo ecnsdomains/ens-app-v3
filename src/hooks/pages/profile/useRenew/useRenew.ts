@@ -1,8 +1,8 @@
-import { useConnectModal } from '@getpara/rainbowkit'
+import { useConnectModal } from '@app/hooks/useConnectModal'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { match } from 'ts-pattern'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useAbilities } from '@app/hooks/abilities/useAbilities'
 import { useBasicName } from '@app/hooks/useBasicName'
@@ -30,7 +30,7 @@ export const calculateRenewState = ({
   renewSeconds: number | null
   connectModalOpen: boolean
   openConnectModal: ReturnType<typeof useConnectModal>['openConnectModal']
-  accountStatus: ReturnType<typeof useAccount>['status']
+  accountStatus: ReturnType<typeof useConnection>['status']
   isAbilitiesLoading: boolean
   isRouterReady: boolean
   name?: string
@@ -71,7 +71,7 @@ export function useRenew(name: string) {
   const { registrationStatus, isLoading: isBasicNameLoading, isWrapped } = useBasicName({ name })
   const abilities = useAbilities({ name })
   const searchParams = useSearchParams()
-  const { status } = useAccount()
+  const { status } = useConnection()
 
   const { openConnectModal, connectModalOpen } = useConnectModal()
   const [openedConnectModal, setOpenedConnectModal] = useState(connectModalOpen)

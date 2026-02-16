@@ -13,7 +13,6 @@ describe('getDropdownItems', () => {
     copy: vi.fn(),
     copied: false,
     hasPendingTransactions: false,
-    isParaConnected: false,
     t: mockT,
     address: mockAddress,
   }
@@ -68,19 +67,6 @@ describe('getDropdownItems', () => {
 
     const addressItem = items[2]
     expect(addressItem.icon).toBeDefined()
-  })
-
-  it('should include Para wallet item when isParaConnected is true', () => {
-    const items = getDropdownItems({
-      ...baseProps,
-      isParaConnected: true,
-    })
-
-    expect(items).toHaveLength(5)
-    expect(items[3]).toMatchObject({
-      label: 'wallet.myWallet',
-      color: 'text',
-    })
   })
 
   it('should call copy function when address item is clicked', () => {

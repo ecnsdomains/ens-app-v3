@@ -26,11 +26,8 @@ import { setupAnalytics } from '@app/utils/analytics'
 import { PostHogProvider } from '@app/utils/analytics/posthog'
 import { BreakpointProvider } from '@app/utils/BreakpointProvider'
 import { QueryProviders } from '@app/utils/query/providers'
-import { RainbowKitWithParaProvider } from '@app/utils/query/RainbowKitWithParaProvider'
 import { SyncDroppedTransaction } from '@app/utils/SyncProvider/SyncDroppedTransaction'
 import { SyncProvider } from '@app/utils/SyncProvider/SyncProvider'
-
-import '@getpara/rainbowkit/styles.css'
 
 import i18n from '../i18n'
 
@@ -165,27 +162,25 @@ const AppWithThorin = ({ Component, pageProps }: Omit<AppPropsWithLayout, 'route
 
   return (
     <PostHogProvider>
-      <RainbowKitWithParaProvider>
-        <TransactionStoreProvider>
-          <ThemeProvider theme={themeWithCSSVars}>
-            <BreakpointProvider queries={breakpoints}>
-              <IntercomProvider appId={INTERCOM_ID}>
-                <GlobalStyle />
-                <SyncProvider>
-                  <TransactionFlowProvider>
-                    <SyncDroppedTransaction>
-                      <NetworkNotifications />
-                      <TransactionNotifications />
-                      <TestnetWarning />
-                      <Basic>{getLayout(<Component {...pageProps} />)}</Basic>
-                    </SyncDroppedTransaction>
-                  </TransactionFlowProvider>
-                </SyncProvider>
-              </IntercomProvider>
-            </BreakpointProvider>
-          </ThemeProvider>
-        </TransactionStoreProvider>
-      </RainbowKitWithParaProvider>
+      <TransactionStoreProvider>
+        <ThemeProvider theme={themeWithCSSVars}>
+          <BreakpointProvider queries={breakpoints}>
+            <IntercomProvider appId={INTERCOM_ID}>
+              <GlobalStyle />
+              <SyncProvider>
+                <TransactionFlowProvider>
+                  <SyncDroppedTransaction>
+                    <NetworkNotifications />
+                    <TransactionNotifications />
+                    <TestnetWarning />
+                    <Basic>{getLayout(<Component {...pageProps} />)}</Basic>
+                  </SyncDroppedTransaction>
+                </TransactionFlowProvider>
+              </SyncProvider>
+            </IntercomProvider>
+          </BreakpointProvider>
+        </ThemeProvider>
+      </TransactionStoreProvider>
     </PostHogProvider>
   )
 }

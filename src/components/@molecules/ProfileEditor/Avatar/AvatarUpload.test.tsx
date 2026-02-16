@@ -1,7 +1,7 @@
 import { fireEvent, mockFunction, render, screen, waitFor } from '@app/test-utils'
 
 import { beforeAll, describe, expect, it, vi } from 'vitest'
-import { useAccount, useSignTypedData } from 'wagmi'
+import { useConnection, useSignTypedData } from 'wagmi'
 
 import { useChainName } from '@app/hooks/chain/useChainName'
 
@@ -15,7 +15,7 @@ vi.mock('@app/hooks/chain/useChainName')
 
 const mockUseChainName = mockFunction(useChainName)
 const mockUseSignTypedData = mockFunction(useSignTypedData)
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 
 const mockHandleCancel = vi.fn()
 const mockHandleSubmit = vi.fn()

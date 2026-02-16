@@ -2,7 +2,7 @@ import { Key, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import { Address } from 'viem'
 
-import { CheckSVG, CogSVG, CopySVG, ExitSVG, PersonSVG, WalletSVG } from '@ensdomains/thorin'
+import { CheckSVG, CogSVG, CopySVG, ExitSVG, PersonSVG } from '@ensdomains/thorin'
 import type { DropdownItem } from '@ensdomains/thorin/dist/types/components/molecules/Dropdown/Dropdown'
 
 import { shortenAddress } from '@app/utils/utils'
@@ -23,7 +23,6 @@ export const getDropdownItems = ({
   copy,
   copied,
   hasPendingTransactions,
-  isParaConnected,
   t,
   address,
 }: {
@@ -32,7 +31,6 @@ export const getDropdownItems = ({
   copy: any
   copied: any
   hasPendingTransactions: any
-  isParaConnected: boolean
   t: any
   address: Address
 }): DropdownItem[] =>
@@ -71,26 +69,6 @@ export const getDropdownItems = ({
       onClick: () => copy(address),
       icon: copied ? CheckSVG : CopySVG,
     },
-    ...(isParaConnected
-      ? [
-          {
-            label: t('wallet.myWallet'),
-            color: 'text',
-            icon: WalletSVG,
-            wrapper: (children: ReactNode, key: Key) => (
-              <a
-                href="https://connect.getpara.com/"
-                key={key}
-                target="_blank"
-                rel="noreferrer"
-                style={{ width: '100%' }}
-              >
-                {children}
-              </a>
-            ),
-          },
-        ]
-      : []),
     {
       label: t('wallet.disconnect'),
       color: 'red',

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { match } from 'ts-pattern'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useBasicName } from '@app/hooks/useBasicName'
 import { useRouterWithHistory } from '@app/hooks/useRouterWithHistory'
@@ -22,7 +22,7 @@ import { useDnsImportReducer } from './useDnsImportReducer'
 export const DnsClaim = () => {
   const router = useRouterWithHistory()
   const unencodedname = router.query.name as string
-  const { address } = useAccount()
+  const { address } = useConnection()
   const { registrationStatus, isLoading, name = '' } = useBasicName({ name: unencodedname })
   const nameContainsNonAscii = !!unencodedname && unencodedname.toLowerCase() !== name.toLowerCase()
 

@@ -1,5 +1,5 @@
 import { queryOptions } from '@tanstack/react-query'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useQuery } from '@app/utils/query/useQuery'
 import { checkIsSafeApp } from '@app/utils/safe'
@@ -7,7 +7,7 @@ import { checkIsSafeApp } from '@app/utils/safe'
 import { useQueryOptions } from './useQueryOptions'
 
 export const useIsSafeApp = () => {
-  const { connector } = useAccount()
+  const { connector } = useConnection()
   const initialOptions = useQueryOptions({
     params: { id: connector?.id },
     functionName: 'isSafeApp',

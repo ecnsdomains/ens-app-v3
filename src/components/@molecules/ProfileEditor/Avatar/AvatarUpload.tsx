@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import { bytesToHex } from 'viem'
-import { useAccount, useSignTypedData } from 'wagmi'
+import { useConnection, useSignTypedData } from 'wagmi'
 
 import { Button, Dialog, Helper } from '@ensdomains/thorin'
 
@@ -53,7 +53,7 @@ const UploadComponent = ({
   const queryClient = useQueryClient()
   const chainName = useChainName()
 
-  const { address } = useAccount()
+  const { address } = useConnection()
   const { signTypedDataAsync } = useSignTypedData()
 
   const {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
-import { useAccount, useChainId } from 'wagmi'
+import { useConnection, useChainId } from 'wagmi'
 
 import { Button, Toast } from '@ensdomains/thorin'
 
@@ -65,7 +65,7 @@ const ECNSToastWrapper = styled.div`
 
 export const NetworkNotifications = () => {
   const { t } = useTranslation()
-  const account = useAccount()
+  const account = useConnection()
   const connectedChainId = useChainId()
   const [open, setOpen] = useState<boolean>(false)
 

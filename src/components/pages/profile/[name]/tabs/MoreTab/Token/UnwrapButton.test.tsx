@@ -1,7 +1,7 @@
 import { mockFunction, render, screen } from '@app/test-utils'
 
 import { describe, expect, it, vi } from 'vitest'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useTransactionFlow } from '@app/transaction-flow/TransactionFlowProvider'
 
@@ -12,7 +12,7 @@ vi.mock('wagmi')
 
 vi.mock('@app/transaction-flow/TransactionFlowProvider')
 
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 
 const mockUseTransaction = mockFunction(useTransactionFlow)
 

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { useAccount, useChainId } from 'wagmi'
+import { useConnection, useChainId } from 'wagmi'
 
 import Registration from '@app/components/pages/profile/[name]/registration/Registration'
 import { useInitial } from '@app/hooks/useInitial'
@@ -16,7 +16,7 @@ export default function Page() {
 
   const initial = useInitial()
 
-  const { address } = useAccount()
+  const { address } = useConnection()
   const chainId = useChainId()
 
   const nameDetails = useNameDetails({ name })

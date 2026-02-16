@@ -40,7 +40,7 @@ import { getReadableError } from '@app/utils/errors'
 import { getIsCachedData } from '@app/utils/getIsCachedData'
 import { useQuery } from '@app/utils/query/useQuery'
 import { computeCacheBustFlags } from '@app/utils/transactionCacheBust'
-import { hasParaConnection, makeEtherscanLink } from '@app/utils/utils'
+import { makeEtherscanLink } from '@app/utils/utils'
 
 import { DisplayItems } from '../DisplayItems'
 import {
@@ -334,7 +334,7 @@ const getPreTransactionError = ({
 export const handleSendTransaction = async (
   request: Awaited<ReturnType<typeof createTransactionRequestUnsafe>>,
   actionName: string,
-  sendTransaction: ReturnType<typeof useSendTransaction>['sendTransaction'],
+  sendTransaction: ReturnType<typeof useSendTransaction>['mutate'],
 ) => {
   if (!request) {
     throw Error('No request object')
@@ -410,14 +410,14 @@ export const TransactionStageModal = ({
     [transaction, connectorClient?.account, safeAppStatusLoading, stage, isUniquenessDefined],
   )
 
+  const connections = useConnections()
+
   const initialOptions = useQueryOptions({
     params: uniqueTxIdentifiers,
     functionName: 'createTransactionRequest',
     queryDependencyType: 'standard',
     queryFn: createTransactionRequestQueryFn,
   })
-
-  const connections = useConnections()
 
   const preparedOptions = queryOptions({
     queryKey: initialOptions.queryKey,
@@ -447,7 +447,7 @@ export const TransactionStageModal = ({
   const {
     isPending: transactionLoading,
     error: transactionError,
-    sendTransaction,
+    mutate: sendTransaction,
   } = useSendTransaction({
     mutation: {
       onSuccess: transactionSuccessHandler({
@@ -521,8 +521,6 @@ export const TransactionStageModal = ({
     if (!helper) return null
     return <Helper {...helper} />
   }, [helper])
-
-  const isParaConnected = hasParaConnection(connections)
 
   const ActionButton = useMemo(() => {
     const handleCompleteTransaction = () => {
@@ -601,9 +599,7 @@ export const TransactionStageModal = ({
         onClick={() => handleSendTransaction(request!, actionName, sendTransaction)}
         data-testid="transaction-modal-confirm-button"
       >
-        {isParaConnected
-          ? t('transaction.dialog.confirm.openPara')
-          : t('transaction.dialog.confirm.openWallet')}
+        {t('transaction.dialog.confirm.openWallet')}
       </Button>
     )
   }, [
@@ -622,7 +618,6 @@ export const TransactionStageModal = ({
     isTransactionRequestCachedData,
     actionName,
     preTransactionError,
-    isParaConnected,
   ])
 
   return (

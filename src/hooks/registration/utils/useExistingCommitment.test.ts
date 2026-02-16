@@ -3,7 +3,7 @@ import { mockFunction, renderHook, waitFor } from '@app/test-utils'
 
 import { getBlock, getTransactionReceipt, readContract } from 'viem/actions'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { useAccount, useBlockNumber, useChainId, useConfig, usePublicClient } from 'wagmi'
+import { useConnection, useBlockNumber, useChainId, useConfig, usePublicClient } from 'wagmi'
 
 import { useChainName } from '@app/hooks/chain/useChainName'
 import { useInvalidateOnBlock } from '@app/hooks/chain/useInvalidateOnBlock'
@@ -91,7 +91,7 @@ const mockUseChainName = mockFunction(useChainName)
 const mockUseAddRecentTransaction = mockFunction(useAddRecentTransaction)
 const mockUseTransactionFlow = mockFunction(useTransactionFlow)
 const mockUsePublicClient = mockFunction(usePublicClient)
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 const mockUseConfig = mockFunction(useConfig)
 const mockUseChainId = mockFunction(useChainId)
 const mockUseBlockNumber = mockFunction(useBlockNumber)

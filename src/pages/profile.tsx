@@ -1,5 +1,5 @@
 import type { Hex } from 'viem'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import ProfileContent from '@app/components/pages/profile/[name]/Profile'
 import { useDotBoxAvailabilityOffchain } from '@app/hooks/dotbox/useDotBoxAvailabilityOffchain'
@@ -17,7 +17,7 @@ export default function Page() {
 
   const initial = useInitial()
 
-  const { address } = useAccount()
+  const { address } = useConnection()
 
   const dotBoxResult = useDotBoxAvailabilityOffchain({
     name: _name,

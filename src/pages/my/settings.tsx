@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { DevSection } from '@app/components/pages/profile/settings/DevSection'
 import { PrimarySection } from '@app/components/pages/profile/settings/PrimarySection/PrimarySection'
@@ -28,7 +28,7 @@ const OtherWrapper = styled.div(
 export default function Page() {
   const { t } = useTranslation('settings')
   const router = useRouter()
-  const { address, isConnecting, isReconnecting } = useAccount()
+  const { address, isConnecting, isReconnecting } = useConnection()
 
   // We need at least one graph call on this page to ensure that SyncProvider can correctly determine if the
   // graph is erroring or not.

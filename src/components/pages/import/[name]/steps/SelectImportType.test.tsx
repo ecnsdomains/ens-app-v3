@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react'
 import { I18nextProvider } from 'react-i18next'
 import { ThemeProvider } from 'styled-components'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { lightTheme } from '@ensdomains/thorin'
 
@@ -25,7 +25,7 @@ const queryClient = new QueryClient({
 })
 
 vi.mock('wagmi', () => ({
-  useAccount: vi.fn(() => ({ address: '0x123' })),
+  useConnection: vi.fn(() => ({ address: '0x123' })),
   useChainId: vi.fn(() => 1),
   useResolver: vi.fn(() => ({ data: null })),
   useConfig: vi.fn(() => ({

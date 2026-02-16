@@ -1,13 +1,13 @@
 import { mockFunction, renderHook } from '@app/test-utils'
 
 import { describe, expect, it, vi } from 'vitest'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useResetSelectedKey } from './TransactionDialogManager'
 
 vi.mock('wagmi')
 
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 
 describe('useResetSelectedKey', () => {
   it('should stopFlow if account changes', async () => {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useErrorBoundary, withErrorBoundary } from 'react-use-error-boundary'
 import styled, { css } from 'styled-components'
-import { useAccount, useSwitchChain } from 'wagmi'
+import { useConnection, useSwitchChain } from 'wagmi'
 
 import ErrorScreen from '@app/components/@atoms/ErrorScreen'
 import { getSupportedChainById } from '@app/constants/chains'
@@ -76,9 +76,9 @@ const shouldSwitchChain = ({
   !getSupportedChainById(chainId)
 
 export const Basic = withErrorBoundary(({ children }: { children: React.ReactNode }) => {
-  const { chainId, connector, isConnected } = useAccount()
+  const { chainId, connector, isConnected } = useConnection()
   const hasProgrammaticChainSwitching = Boolean(connector?.switchChain)
-  const { switchChain, isPending, isError } = useSwitchChain()
+  const { mutate: switchChain, isPending, isError } = useSwitchChain()
   useSetupIntercom()
 
   const [error] = useErrorBoundary()

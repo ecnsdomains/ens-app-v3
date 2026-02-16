@@ -1,3 +1,3 @@
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
-export const useAccountSafely = () => useAccount()
+export const useAccountSafely = () => useConnection()

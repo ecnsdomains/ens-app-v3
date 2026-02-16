@@ -7,7 +7,7 @@ import {
 import { useMemo } from 'react'
 import { Address, BlockTag, GetBlockParameters, GetBlockReturnType } from 'viem'
 import { getBlock } from 'viem/actions'
-import { useAccount, useClient } from 'wagmi'
+import { useConnection, useClient } from 'wagmi'
 
 import { ChainWithEns } from '@ensdomains/ensjs/contracts'
 import { GetNameHistoryReturnType } from '@ensdomains/ensjs/subgraph'
@@ -156,7 +156,7 @@ export const useFusesSetDates = ({ name, enabled = true }: UseFusesSetDatesParam
   const queryClient = useQueryClient()
 
   const client = useClient()
-  const { address } = useAccount()
+  const { address } = useConnection()
 
   const {
     data: nameHistory,

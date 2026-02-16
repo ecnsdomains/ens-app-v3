@@ -1,11 +1,11 @@
 import type { ParsedUrlQuery } from 'querystring'
 import { mockFunction, renderHook, screen } from '@app/test-utils'
 
-import { useConnectModal } from '@getpara/rainbowkit'
+import { useConnectModal } from '@app/hooks/useConnectModal'
 import mockRouter from 'next-router-mock'
 import { useSearchParams } from 'next/navigation'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { useAccount, type UseAccountReturnType } from 'wagmi'
+import { useConnection, type UseConnectionReturnType } from 'wagmi'
 
 import { useAbilities } from '@app/hooks/abilities/useAbilities'
 import { useBasicName } from '@app/hooks/useBasicName'
@@ -24,7 +24,7 @@ vi.mock('next/navigation')
 
 const mockUseBasicName = mockFunction(useBasicName)
 const mockUseAbilities = mockFunction(useAbilities)
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 const mockUseTransactionFlow = mockFunction(useTransactionFlow)
 const mockUseSearchParams = mockFunction(useSearchParams)
 
@@ -36,7 +36,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'disconnected' as UseAccountReturnType['status'],
+        accountStatus: 'disconnected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -53,7 +53,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -70,7 +70,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -87,7 +87,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: true,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -104,7 +104,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: null,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -121,7 +121,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: true,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -138,7 +138,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: true,
         isRouterReady: true,
         name: 'name',
@@ -155,7 +155,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: false,
         name: 'name',
@@ -172,7 +172,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: '',
@@ -189,7 +189,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -206,7 +206,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'disconnected' as UseAccountReturnType['status'],
+        accountStatus: 'disconnected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -223,7 +223,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -240,7 +240,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -257,7 +257,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: null,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -275,7 +275,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'disconnected' as UseAccountReturnType['status'],
+        accountStatus: 'disconnected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -292,7 +292,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'connected' as UseAccountReturnType['status'],
+        accountStatus: 'connected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -310,7 +310,7 @@ describe('calculateRenewState', () => {
         isRegistrationStatusLoading: false,
         renewSeconds: 123,
         connectModalOpen: false,
-        accountStatus: 'disconnected' as UseAccountReturnType['status'],
+        accountStatus: 'disconnected' as UseConnectionReturnType['status'],
         isAbilitiesLoading: false,
         isRouterReady: true,
         name: 'name',
@@ -325,7 +325,7 @@ describe('calculateRenewState', () => {
       isRegistrationStatusLoading: false,
       renewSeconds: 123,
       connectModalOpen: false,
-      accountStatus: 'connected' as UseAccountReturnType['status'],
+      accountStatus: 'connected' as UseConnectionReturnType['status'],
       isAbilitiesLoading: false,
       isRouterReady: true,
       name: 'name',

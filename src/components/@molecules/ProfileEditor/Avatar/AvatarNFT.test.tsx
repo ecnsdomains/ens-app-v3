@@ -4,7 +4,7 @@ import { fireEvent, mockFunction, render, screen, userEvent, waitFor } from '@ap
 import * as ReactQuery from '@tanstack/react-query'
 import React from 'react'
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest'
-import { useAccount, useClient } from 'wagmi'
+import { useConnection, useClient } from 'wagmi'
 
 import * as UseInfiniteQuery from '@app/utils/query/useInfiniteQuery'
 
@@ -20,7 +20,7 @@ vi.mock('@app/hooks/chain/useChainName', () => ({
 }))
 
 const mockUseClient = mockFunction(useClient)
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 
 const mockHandleSubmit = vi.fn()
 const mockHandleCancel = vi.fn()

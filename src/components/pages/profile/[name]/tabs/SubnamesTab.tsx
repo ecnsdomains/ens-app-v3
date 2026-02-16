@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { GetSubnamesParameters } from '@ensdomains/ensjs/subgraph'
 import { Button, PlusSVG, Spinner, Typography } from '@ensdomains/thorin'
@@ -112,7 +112,7 @@ export const SubnamesTab = ({
   isWrapped: boolean
 }) => {
   const { t } = useTranslation('profile')
-  const { address } = useAccount()
+  const { address } = useConnection()
   const { usePreparedDataInput } = useTransactionFlow()
   const showCreateSubnameInput = usePreparedDataInput('CreateSubname')
 

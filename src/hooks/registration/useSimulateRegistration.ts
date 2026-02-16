@@ -47,6 +47,7 @@ export const useSimulateRegistration = ({
   const premium = price?.premium ?? 0n
   const value = base + premium
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return useSimulateContract({
     ...makeSimulateRegistrationParams({
       registrationParams,
@@ -54,5 +55,5 @@ export const useSimulateRegistration = ({
     }),
     value: calculateValueWithBuffer(value),
     query,
-  })
+  } as any)
 }

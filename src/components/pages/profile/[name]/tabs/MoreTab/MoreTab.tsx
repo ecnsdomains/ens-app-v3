@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { CacheableComponent } from '@app/components/@atoms/CacheableComponent'
 import { getNetworkFromUrl } from '@app/constants/chains'
@@ -33,7 +33,7 @@ type Props = {
 const MoreTab = ({ name, nameDetails, abilities }: Props) => {
   const { canBeWrapped, ownerData, wrapperData, isWrapped, isCachedData, profile } = nameDetails
 
-  const { isConnected, address } = useAccount()
+  const { isConnected, address } = useConnection()
 
   const isOffchainImport = useIsOffchainName({
     name,

@@ -1,7 +1,7 @@
 import { mockFunction, renderHook, waitFor } from '@app/test-utils'
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { checkIsSafeApp } from '@app/utils/safe'
 
@@ -14,7 +14,7 @@ vi.mock('wagmi')
 
 const mockUseQueryOptions = mockFunction(useQueryOptions)
 const mockCheckIsSafeApp = mockFunction(checkIsSafeApp)
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 
 describe('useIsSafeApp', () => {
   beforeEach(() => {

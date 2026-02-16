@@ -2,7 +2,7 @@ import { Query, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { GetDnsOwnerReturnType } from '@ensdomains/ensjs/dns'
 import { Button, Helper, Tag, Typography } from '@ensdomains/thorin'
@@ -204,7 +204,7 @@ const DNSOwnerSection = ({
   canSend: boolean
   isWrapped: boolean
 }) => {
-  const { address } = useAccount()
+  const { address } = useConnection()
   const { t } = useTranslation('profile')
   const { createTransactionFlow } = useTransactionFlow()
   const queryClient = useQueryClient()

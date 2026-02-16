@@ -1,7 +1,7 @@
 import posthog from 'posthog-js'
 import { useEffect } from 'react'
 import { useIntercom } from 'react-use-intercom'
-import { useAccountEffect } from 'wagmi'
+import { useConnectionEffect } from 'wagmi'
 
 import { IS_DEV_ENVIRONMENT } from '@app/utils/constants'
 
@@ -33,7 +33,7 @@ export const useSetupIntercom = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useAccountEffect({
+  useConnectionEffect({
     onConnect(data) {
       trackEvent('wallet:connect', {
         // eslint-disable-next-line @typescript-eslint/naming-convention

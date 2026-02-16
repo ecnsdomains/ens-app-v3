@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import { match } from 'ts-pattern'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { Banner, CheckCircleSVG, Typography } from '@ensdomains/thorin'
 
@@ -107,7 +107,7 @@ export const NameAvailableBanner = ({
 const ProfileContent = ({ isSelf, isLoading: parentIsLoading, name }: Props) => {
   const router = useRouterWithHistory()
   const { t } = useTranslation('profile')
-  const { address } = useAccount()
+  const { address } = useConnection()
 
   const nameDetails = useNameDetails({ name })
   const {

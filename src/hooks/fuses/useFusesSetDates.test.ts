@@ -2,7 +2,7 @@ import { mockFunction, renderHook, waitFor } from '@app/test-utils'
 
 import { getBlock } from 'viem/actions'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { useAccount, useClient } from 'wagmi'
+import { useConnection, useClient } from 'wagmi'
 
 import { GetNameHistoryReturnType } from '@ensdomains/ensjs/subgraph'
 import { encodeFuses } from '@ensdomains/ensjs/utils'
@@ -24,7 +24,7 @@ vi.mock('viem/actions')
 
 vi.mock('../nameservice/subgraph/useNameHistory')
 
-const mockUseAccount = mockFunction(useAccount).mockImplementation(() => ({ address: '0x123' }))
+const mockUseAccount = mockFunction(useConnection).mockImplementation(() => ({ address: '0x123' }))
 const mockUseClient = mockFunction(useClient)
 const mockGetBlock = mockFunction(getBlock)
 

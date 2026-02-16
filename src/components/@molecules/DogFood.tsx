@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import { isAddress } from 'viem'
-import { useAccount, useChainId } from 'wagmi'
+import { useConnection, useChainId } from 'wagmi'
 
 import { Input } from '@ensdomains/thorin'
 
@@ -50,7 +50,7 @@ export const DogFood = ({
   }, [inputWatch, throttledSetEthNameInput])
 
   const chainId = useChainId()
-  const { address } = useAccount()
+  const { address } = useConnection()
 
   const { data: addressRecordData } = useAddressRecord({
     enabled: !!ethNameInput?.includes('.'),

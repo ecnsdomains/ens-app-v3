@@ -1,7 +1,7 @@
 import { mockFunction, render, screen, userEvent, waitFor } from '@app/test-utils'
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useContractAddress } from '@app/hooks/chain/useContractAddress'
 import { useLocalStorage } from '@app/hooks/useLocalStorage'
@@ -15,7 +15,7 @@ vi.mock('wagmi')
 vi.mock('@app/hooks/chain/useContractAddress')
 vi.mock('@app/hooks/useLocalStorage')
 
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 
 const mockUseContractAddress = mockFunction(useContractAddress)
 const mockUseLocalStorage = mockFunction(useLocalStorage)

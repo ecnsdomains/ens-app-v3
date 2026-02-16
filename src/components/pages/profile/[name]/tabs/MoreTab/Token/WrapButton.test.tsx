@@ -1,7 +1,7 @@
 import { mockFunction, render, screen } from '@app/test-utils'
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useWrapperApprovedForAll } from '@app/hooks/useWrapperApprovedForAll'
 import { useTransactionFlow } from '@app/transaction-flow/TransactionFlowProvider'
@@ -30,7 +30,7 @@ vi.mock('@app/hooks/resolver/useResolverStatus', () => ({
   useResolverStatus: () => mockUseResolverStatus(),
 }))
 
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 
 const mockUseTransaction = mockFunction(useTransactionFlow)
 const mockUseWrapperApprovedForAll = mockFunction(useWrapperApprovedForAll)

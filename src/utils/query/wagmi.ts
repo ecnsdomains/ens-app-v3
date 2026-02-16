@@ -1,6 +1,7 @@
-import { inAppWalletConnector } from '@thirdweb-dev/wagmi-adapter'
-import { createThirdwebClient, defineChain as thirdwebDefineChain } from 'thirdweb'
+import { createAppKit } from '@reown/appkit/react'
+import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import {
+  type Chain,
   createClient,
   formatTransactionRequest,
   type ExactPartial,
@@ -10,7 +11,7 @@ import {
   type TransactionType,
   type Transport,
 } from 'viem'
-import { createConfig, createStorage, fallback, http } from 'wagmi'
+import { createStorage, fallback, http } from 'wagmi'
 import { localhost, mainnet, sepolia } from 'wagmi/chains'
 
 import { ccipRequest } from '@ensdomains/ensjs/utils'
@@ -19,31 +20,10 @@ import { getChainsFromUrl, SupportedChain } from '@app/constants/chains'
 import { etcMainnet, mordor } from '@app/utils/chains/makeMordorChainWithEcns'
 
 import { isInsideSafe } from '../safe'
-import { rainbowKitConnectors } from './wallets'
 
 const isLocalProvider = !!process.env.NEXT_PUBLIC_PROVIDER
 
-const thirdwebClientId =
-  process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID || '4e8c81182c3709ee441e30d776223354'
-const unicornFactoryAddress =
-  process.env.NEXT_PUBLIC_NEXT_PUBLIC_UNICORN_FACTORY_ADDRESS ||
-  '0xD771615c873ba5a2149D5312448cE01D677Ee48A'
-
-// Create Thirdweb Client
-const client = createThirdwebClient({
-  clientId: thirdwebClientId,
-})
-
-// Create the Unicorn Wallet Connector (using Thirdweb In-App Wallet)
-// Note: The chain specified here is for the smart account functionality as per Unicorn docs.
-const unicornConnector = inAppWalletConnector({
-  client,
-  smartAccount: {
-    sponsorGas: true, // or false based on your needs / Unicorn requirements
-    chain: thirdwebDefineChain(mainnet.id),
-    factoryAddress: unicornFactoryAddress,
-  },
-})
+const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '903fdda1ea5a7d7a342a5d4c7891fa84'
 
 const tenderlyKey = process.env.NEXT_PUBLIC_TENDERLY_KEY || '4imxc4hQfRjxrVB2kWKvTo'
 const drpcKey = process.env.NEXT_PUBLIC_DRPC_KEY || 'AnmpasF2C0JBqeAEzxVO8aRuvzLTrWcR75hmDonbV6cR'
@@ -123,19 +103,6 @@ export const transports = {
 // This is a workaround to fix MetaMask defaulting to the wrong transaction type
 // when no type is specified, but an access list is provided.
 // See: https://github.com/MetaMask/core/issues/5720
-// Viem by default doesn't include the type in a TransactionRequest, because it's generally not required.
-// To fix the MetaMask issue, we need to include it. However, we don't want to break other wallets, so we only add it
-// for MetaMask.
-// Viem will use a chain specific transactionRequest formatter if provided, so we can utilise this to
-// add `type`.
-// References to the formatter are:
-// 1. Call to `extract` with all extra parameters (i.e. unused by call by default), and the chain specific formatter
-//   a. If a formatter is not provided, the function returns `{}` (existing behaviour)
-//   b. If a formatter is provided, returns the formatted extra parameters
-// 2. Call to chain specific formatter if provided, otherwise `formatTransactionRequest`, with the request and the formatted extra parameters
-//
-// We want to capture only the first call, so `type` is added to the final request object without
-// modifying existing behaviour.
 const formatExtraTransactionRequestParameters = (
   request:
     | { type: TransactionType }
@@ -166,17 +133,17 @@ const chains = getChainsFromUrl().map((c) => ({
   },
 })) as unknown as readonly [SupportedChain, ...SupportedChain[]]
 
-const combinedConnectors = [unicornConnector, ...rainbowKitConnectors]
-
-const wagmiConfig_ = createConfig({
-  syncConnectedChain: false,
-  connectors: combinedConnectors,
+// Reown AppKit WagmiAdapter — replaces manual createConfig + RainbowKit connectors
+const wagmiAdapter = new WagmiAdapter({
   ssr: true,
-  multiInjectedProviderDiscovery: !isInsideSafe(),
+  projectId,
+  networks: chains,
+  transports,
   storage: createStorage({ storage: localStorageWithInvertMiddleware(), key: prefix }),
-  chains,
-  client: ({ chain }) => {
-    const chainId = chain.id
+  syncConnectedChain: false,
+  multiInjectedProviderDiscovery: !isInsideSafe(),
+  client: ({ chain }: { chain: Chain }) => {
+    const chainId = chain.id as keyof typeof transports
 
     return createClient<Transport, typeof chain>({
       chain,
@@ -192,9 +159,37 @@ const wagmiConfig_ = createConfig({
       },
     })
   },
+} as any) // WagmiAdapter types may not expose all createConfig options, but they're passed through
+
+// Initialize Reown AppKit — wallet modal with social login, email, and standard wallets
+createAppKit({
+  adapters: [wagmiAdapter],
+  networks: chains as unknown as [SupportedChain, ...SupportedChain[]],
+  projectId,
+  metadata: {
+    name: 'ECNS',
+    description: 'Ethereum Classic Name Service',
+    url: 'https://ecns.domains',
+    icons: ['https://ecns.domains/icon.png'],
+  },
+  features: {
+    email: true,
+    socials: ['google', 'discord', 'apple', 'github', 'farcaster'],
+    emailShowWallets: true,
+  },
+  themeMode: 'dark',
+  themeVariables: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    '--w3m-accent': '#3FB68B',
+  },
 })
 
-export const wagmiConfig = wagmiConfig_ as typeof wagmiConfig_ & {
+// Type-assert the config to preserve chain literal types that WagmiAdapter loses
+// Runtime: correct chains are passed via `networks: chains` above
+// Types: Config<AppChains> ensures useChainId() returns SupportedChain['id'] literal union
+type AppChains = readonly [SupportedChain, ...SupportedChain[]]
+
+export const wagmiConfig = wagmiAdapter.wagmiConfig as unknown as import('wagmi').Config<AppChains> & {
   _isEns: true
 }
 

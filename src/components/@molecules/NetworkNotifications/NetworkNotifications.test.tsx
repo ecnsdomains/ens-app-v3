@@ -1,13 +1,13 @@
 import { mockFunction, render, screen } from '@app/test-utils'
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { useAccount, useChainId } from 'wagmi'
+import { useConnection, useChainId } from 'wagmi'
 
 import { NetworkNotifications } from './NetworkNotifications'
 import { shouldOpenModal } from './utils'
 
 vi.mock('wagmi')
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 const mockUseChainId = mockFunction(useChainId)
 
 vi.mock('./utils', async (importOriginal) => {

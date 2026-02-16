@@ -238,10 +238,6 @@ export const hslToHex = (hsl: string) => {
   return `#${f(0)}${f(8)}${f(4)}`
 }
 
-export const hasParaConnection = (connections: Connection[]) => {
-  return connections?.some((connection) => connection?.connector?.id === 'para-integrated')
-}
-
 export const connectorIsMetaMask = (
   connections: Connection[],
   connectorClient: ConnectorClientWithEns,

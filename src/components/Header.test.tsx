@@ -2,7 +2,7 @@ import { fireEvent, mockFunction, render, screen } from '@app/test-utils'
 
 import mockRouter from 'next-router-mock'
 import { describe, expect, it, Mock, vi } from 'vitest'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useRecentTransactions } from '@app/hooks/transactions/useRecentTransactions'
 import { useInitial } from '@app/hooks/useInitial'
@@ -22,7 +22,7 @@ vi.mock('./@molecules/SearchInput/SearchInput', () => ({
 vi.mock('./ConnectButton')
 vi.mock('wagmi')
 
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 const mockUseRecentTransactions = mockFunction(useRecentTransactions)
 const mockUseInitial = mockFunction(useInitial)
 const mockUseBreakpoint = mockFunction(useBreakpoint)

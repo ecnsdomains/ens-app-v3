@@ -1,13 +1,13 @@
 import { mockFunction, renderHook } from '@app/test-utils'
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { useExpiryActions } from './useExpiryActions'
 import { testDomain, testSub } from '@root/test/chainConstants'
 
 vi.mock('wagmi')
-const mockUseAccount = mockFunction(useAccount)
+const mockUseAccount = mockFunction(useConnection)
 
 vi.mock('@app/hooks/abilities/useAbilities', () => ({
   useAbilities: () => ({

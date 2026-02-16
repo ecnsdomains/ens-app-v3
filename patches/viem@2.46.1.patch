@@ -1,0 +1,63 @@
+diff --git a/actions/ens/getEnsAvatar.ts b/actions/ens/getEnsAvatar.ts
+--- a/actions/ens/getEnsAvatar.ts
++++ b/actions/ens/getEnsAvatar.ts
+@@ -20,6 +20,8 @@
+   Omit<GetEnsTextParameters, 'key'> & {
+     /** Gateway urls to resolve IPFS and/or Arweave assets. */
+     assetGatewayUrls?: AssetGatewayUrls | undefined
++    /** The key to get the ENS record for. */
++    key?: string | undefined
+   }
+ >
+
+@@ -68,6 +70,7 @@
+     gatewayUrls,
+     strict,
+     universalResolverAddress,
++    key,
+   }: GetEnsAvatarParameters,
+ ): Promise<GetEnsAvatarReturnType> {
+   const record = await getAction(
+@@ -77,7 +80,7 @@
+   )({
+     blockNumber,
+     blockTag,
+-    key: 'avatar',
++    key: key || 'avatar',
+     name,
+     universalResolverAddress,
+     gatewayUrls,
+diff --git a/_esm/actions/ens/getEnsAvatar.js b/_esm/actions/ens/getEnsAvatar.js
+--- a/_esm/actions/ens/getEnsAvatar.js
++++ b/_esm/actions/ens/getEnsAvatar.js
+@@ -29,11 +29,11 @@
+  * })
+  * // 'https://ipfs.io/ipfs/Qma8mnp6xV3J2cRNf3mTth5C8nV11CAnceVinc3y8jSbio'
+  */
+-export async function getEnsAvatar(client, { blockNumber, blockTag, assetGatewayUrls, name, gatewayUrls, strict, universalResolverAddress, }) {
++export async function getEnsAvatar(client, { blockNumber, blockTag, assetGatewayUrls, name, gatewayUrls, strict, universalResolverAddress, key, }) {
+     const record = await getAction(client, getEnsText, 'getEnsText')({
+         blockNumber,
+         blockTag,
+-        key: 'avatar',
++        key: key || 'avatar',
+         name,
+         universalResolverAddress,
+         gatewayUrls,
+diff --git a/_cjs/actions/ens/getEnsAvatar.js b/_cjs/actions/ens/getEnsAvatar.js
+--- a/_cjs/actions/ens/getEnsAvatar.js
++++ b/_cjs/actions/ens/getEnsAvatar.js
+@@ -4,11 +4,11 @@
+ const parseAvatarRecord_js_1 = require("../../utils/ens/avatar/parseAvatarRecord.js");
+ const getAction_js_1 = require("../../utils/getAction.js");
+ const getEnsText_js_1 = require("./getEnsText.js");
+-async function getEnsAvatar(client, { blockNumber, blockTag, assetGatewayUrls, name, gatewayUrls, strict, universalResolverAddress, }) {
++async function getEnsAvatar(client, { blockNumber, blockTag, assetGatewayUrls, name, gatewayUrls, strict, universalResolverAddress, key, }) {
+     const record = await (0, getAction_js_1.getAction)(client, getEnsText_js_1.getEnsText, 'getEnsText')({
+         blockNumber,
+         blockTag,
+-        key: 'avatar',
++        key: key || 'avatar',
+         name,
+         universalResolverAddress,
+         gatewayUrls,

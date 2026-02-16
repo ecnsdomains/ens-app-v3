@@ -1,7 +1,7 @@
 import { Dispatch, forwardRef, ReactNode, useMemo } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
-import { useAccount, useChainId } from 'wagmi'
+import { useConnection, useChainId } from 'wagmi'
 
 import { GetDnsOwnerReturnType } from '@ensdomains/ensjs/dns'
 import { RadioButton, RadioButtonGroup, Tag, Typography } from '@ensdomains/thorin'
@@ -158,7 +158,7 @@ export const SelectImportType = ({
   const { t } = useTranslation('dnssec', { keyPrefix: 'steps.selectType' })
   const { t: tc } = useTranslation('common')
 
-  const { address } = useAccount()
+  const { address } = useConnection()
   const chainId = useChainId()
   const isUnmanaged = useUnmanagedTLD(selected.name)
   const { data: tldResolver } = useResolver({ name: selected.name.split('.')[1] })

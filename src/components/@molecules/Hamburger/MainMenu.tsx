@@ -309,7 +309,6 @@ const MainMenu = ({ setCurrentView }: { setCurrentView: (view: HamburgerView) =>
           <div>
             <CurrencyToggle
               size="extraSmall"
-              crypto="ETC"
               fiat={userConfig.fiat}
               checked={userConfig.currency === 'fiat'}
               onChange={(e) => setCurrency(e.target.checked ? 'fiat' : 'eth')}

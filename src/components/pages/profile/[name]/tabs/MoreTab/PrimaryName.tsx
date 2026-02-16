@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 import { Button, Card, NametagSVG, RecordItem, Tag, Typography } from '@ensdomains/thorin'
 
@@ -73,7 +73,7 @@ interface PrimaryNameProps {
 
 export const PrimaryName = ({ name }: PrimaryNameProps) => {
   const { t } = useTranslation('profile')
-  const { address } = useAccount()
+  const { address } = useConnection()
   const { data: walletPrimaryname } = usePrimaryName({ address })
   const { data: profile } = useProfile({ name })
 

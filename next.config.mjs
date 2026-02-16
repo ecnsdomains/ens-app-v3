@@ -225,38 +225,6 @@ const nextConfig = {
       config.resolve.alias['../styles.css'] = path.resolve(__dirname, 'src/stub.css')
     }
 
-    if (!options.isServer && !options.dev) {
-      const originalEntry = config.entry
-      /**
-       * @param  {...any} args
-       */
-      config.entry = async (...args) => {
-        const entryConfig = await originalEntry(...args)
-        return {
-          ...entryConfig,
-          firefoxMetamask: {
-            import: [
-              './src/utils/metamask/firefox.ts',
-              '@metamask/providers',
-              '@metamask/post-message-stream',
-            ],
-            filename: 'static/chunks/initialise-metamask.js',
-            chunkLoading: false,
-          },
-        }
-      }
-
-      const originalSplitChunks = config.optimization.splitChunks
-      config.optimization.splitChunks = {
-        ...originalSplitChunks,
-        /**
-         * @param {{ name: string }} chunk
-         * @returns {boolean}
-         */
-        chunks: (chunk) => !/^(firefoxMetamask|polyfills|main|pages\/_app)$/.test(chunk.name),
-      }
-    }
-
     return config
   },
   ...(process.env.NEXT_PUBLIC_IPFS
