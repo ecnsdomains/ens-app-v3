@@ -6,7 +6,7 @@ description: GitHub Copilot coding agent for ECNS App - React/Next.js transactio
 
 **Role:** React/Next.js developer specializing in transaction flows, blockchain integration, and component architecture for ECNS (Ethereum Classic Name Service).
 
-**Tech Stack:** Next.js 16, React 19, TypeScript 5.7, viem 2.19.4, wagmi 2.12.4, styled-components 6.1.13
+**Tech Stack:** Next.js 16, React 19, TypeScript 5.9.3, viem 2.46.1, wagmi 3.4.4, Reown AppKit 1.8.18, styled-components 6.1.13
 
 ---
 
@@ -186,28 +186,29 @@ export const RegisterPage = () => {
 
 ## Blockchain Integration
 
-### viem + wagmi Pattern
+### viem + wagmi v3 Pattern
 
 ```typescript
-import { useAccount, useContractRead, useContractWrite } from 'wagmi'
+import { useConnection, useReadContract, useWriteContract } from 'wagmi'
 import { getContract } from 'viem'
 
 // Read contract data
-const { data: owner } = useContractRead({
+const { data: owner } = useReadContract({
   address: ECNS_REGISTRY,
   abi: ECNSRegistryABI,
   functionName: 'owner',
   args: [namehash('example.etc')],
 })
 
-// Write to contract
-const { writeAsync } = useContractWrite({
+// Write to contract (wagmi v3: mutateAsync, not writeAsync)
+const { mutateAsync } = useWriteContract()
+
+await mutateAsync({
   address: ECNS_REGISTRY,
   abi: ECNSRegistryABI,
   functionName: 'setOwner',
+  args: [namehash('example.etc'), newOwner],
 })
-
-await writeAsync({ args: [namehash('example.etc'), newOwner] })
 ```
 
 ### ENS.js (ECNS.js) Integration
@@ -353,7 +354,8 @@ export const MORDOR_CONTRACTS = {
   BaseRegistrar: '0x828efe05d833bd3e10a3086cf2df1c49bad0082f',
   ETCRegistrarController: '0x3daccff9a51a04ac01a09ba78919874536b34309',
   PublicResolver: '0xa2d0c9a23729811607e09487cdd98dbb43e55f71',
-  ReverseRegistrar: '0xab9ffcf5ccaaf0f276a7c9813d57a8418e7e9f6a',
+  ECNSMetadataRenderer: '0x3b0d6f757cc53197ac8515b1e75088bcabdfea73',
+  ECNSWordDictionary: '0xbbaf428472bbb7800c5bd255832a9858cead15fd',
 }
 ```
 
@@ -498,12 +500,13 @@ export const ProfilePage = ({ name }: { name: string }) => {
 | Runtime | Node.js | 24.x |
 | Framework | Next.js | 16.x |
 | UI | React | 19.x |
-| Language | TypeScript | 5.7 |
-| Blockchain | viem | 2.19.4 |
-| Blockchain | wagmi | 2.12.4 |
-| State | @tanstack/react-query | 5.22.2 |
+| Language | TypeScript | 5.9.3 |
+| Blockchain | viem | 2.46.1 |
+| Blockchain | wagmi | 3.4.4 |
+| Wallet | @reown/appkit | 1.8.18 |
+| State | @tanstack/react-query | 5.90.21 |
 | Styling | styled-components | 6.1.13 |
 | Design | @ensdomains/thorin | 1.0.0-beta.28 |
-| Testing | Vitest | 3.x |
-| E2E | Playwright | 1.50.1 |
-| Package Manager | pnpm | 10.23.0 |
+| Testing | Vitest | 4.x |
+| E2E | Playwright | 1.58.0 |
+| Package Manager | pnpm | 10.28.2 |

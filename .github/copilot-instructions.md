@@ -6,7 +6,7 @@
 
 ## Project Overview
 
-ECNS App - Frontend for Ethereum Classic Name Service (`.etc` domains). Built with Next.js 16, React 19, TypeScript 5.7, viem 2.19.4, wagmi 2.12.4.
+ECNS App - Frontend for Ethereum Classic Name Service (`.etc` domains). Built with Next.js 16, React 19, TypeScript 5.9.3, viem 2.46.1, wagmi 3.4.4, Reown AppKit 1.8.18.
 
 **Repository:** https://github.com/ecnsdomains/ens-app-v3
 **Networks:** ETC mainnet (chain 61), Mordor testnet (chain 63)
@@ -15,7 +15,7 @@ ECNS App - Frontend for Ethereum Classic Name Service (`.etc` domains). Built wi
 
 ## LTS Versions (CRITICAL)
 
-**Last Updated:** 2026-02-12
+**Last Updated:** 2026-02-16
 
 ### Current Stable Versions
 
@@ -28,7 +28,7 @@ ECNS App - Frontend for Ethereum Classic Name Service (`.etc` domains). Built wi
 | React | 19.x | Server Components |
 | TypeScript | 5.x | Strict mode |
 | Tailwind CSS | 4.x | CSS-first |
-| Vitest | 3.x | Vite-native |
+| Vitest | 4.x | Vite-native |
 | Playwright | 1.x | E2E testing |
 
 ### DEPRECATED - DO NOT USE
@@ -51,13 +51,14 @@ ECNS App - Frontend for Ethereum Classic Name Service (`.etc` domains). Built wi
 - **Runtime:** Node.js 24.x
 - **Framework:** Next.js 16.x (App Router)
 - **UI:** React 19.x (Server Components)
-- **Language:** TypeScript 5.7 (strict mode)
-- **Package Manager:** pnpm 10.23.0
+- **Language:** TypeScript 5.9.3 (strict mode)
+- **Package Manager:** pnpm 10.28.2
 
 ### Blockchain
-- **viem:** 2.19.4 (Ethereum interaction)
-- **wagmi:** 2.12.4 (React hooks)
-- **@tanstack/react-query:** 5.22.2 (data fetching/caching)
+- **viem:** 2.46.1 (Ethereum interaction, patched for ECNS avatar key)
+- **wagmi:** 3.4.4 (React hooks — v3, `useConnection` not `useAccount`)
+- **@reown/appkit:** 1.8.18 (Wallet connection — replaces RainbowKit)
+- **@tanstack/react-query:** 5.90.21 (data fetching/caching)
 - **@ensdomains/ensjs:** deab43b (ENS SDK, custom build)
 
 ### Styling & UI
@@ -66,8 +67,8 @@ ECNS App - Frontend for Ethereum Classic Name Service (`.etc` domains). Built wi
 - **react-hook-form:** 7.51.0 (form management)
 
 ### Testing
-- **Vitest:** 3.x (unit/integration tests)
-- **Playwright:** 1.50.1 (E2E tests)
+- **Vitest:** 4.x (unit/integration tests)
+- **Playwright:** 1.58.0 (E2E tests)
 - **@testing-library/react:** 16.2.0 (component testing)
 
 ---
@@ -270,27 +271,45 @@ export const RegisterPage = () => {
 
 ## Blockchain Integration
 
-### viem + wagmi
+### viem + wagmi v3
 
 ```typescript
-import { useContractRead, useContractWrite } from 'wagmi'
+import { useReadContract, useWriteContract } from 'wagmi'
 
 // Read contract
-const { data: owner } = useContractRead({
+const { data: owner } = useReadContract({
   address: ECNS_REGISTRY,
   abi: ECNSRegistryABI,
   functionName: 'owner',
   args: [namehash('example.etc')],
 })
 
-// Write to contract
-const { writeAsync } = useContractWrite({
+// Write to contract (wagmi v3: mutateAsync, not writeAsync)
+const { mutateAsync } = useWriteContract()
+
+await mutateAsync({
   address: ECNS_REGISTRY,
   abi: ECNSRegistryABI,
   functionName: 'setOwner',
+  args: [namehash('example.etc'), newOwner],
 })
+```
 
-await writeAsync({ args: [namehash('example.etc'), newOwner] })
+### Wallet Connection (Reown AppKit)
+
+```typescript
+import { useAppKit } from '@reown/appkit/react'
+import { useConnection } from 'wagmi' // wagmi v3: useConnection, not useAccount
+
+const { open } = useAppKit()
+const { data: connection } = useConnection()
+
+// Open wallet modal
+open()
+
+// Access connected account
+connection?.accounts[0]
+connection?.chainId
 ```
 
 ### ENS.js (ECNS.js)
@@ -374,7 +393,8 @@ export const MORDOR_CONTRACTS = {
   BaseRegistrar: '0x828efe05d833bd3e10a3086cf2df1c49bad0082f',
   ETCRegistrarController: '0x3daccff9a51a04ac01a09ba78919874536b34309',
   PublicResolver: '0xa2d0c9a23729811607e09487cdd98dbb43e55f71',
-  ReverseRegistrar: '0xab9ffcf5ccaaf0f276a7c9813d57a8418e7e9f6a',
+  ECNSMetadataRenderer: '0x3b0d6f757cc53197ac8515b1e75088bcabdfea73',
+  ECNSWordDictionary: '0xbbaf428472bbb7800c5bd255832a9858cead15fd',
 }
 ```
 
