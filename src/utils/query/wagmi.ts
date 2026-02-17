@@ -159,7 +159,8 @@ const wagmiAdapter = new WagmiAdapter({
       },
     })
   },
-} as any) // WagmiAdapter types may not expose all createConfig options, but they're passed through
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- WagmiAdapter types don't expose all createConfig options (client, syncConnectedChain), but they're passed through at runtime
+} as any)
 
 // Initialize Reown AppKit — wallet modal with social login, email, and standard wallets
 createAppKit({

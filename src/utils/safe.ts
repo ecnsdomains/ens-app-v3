@@ -1,20 +1,10 @@
 import { Hash } from 'viem'
-import { Connector, CreateConnectorFn } from 'wagmi'
-import { safe, walletConnect } from 'wagmi/connectors'
+import { Connector } from 'wagmi'
 
 export const SAFE_ENDPOINT = 'https://safe-client.safe.global'
 
-type ConnectorType<TConnector extends (...args: any) => CreateConnectorFn> = ReturnType<
-  ReturnType<TConnector>
-> & {
-  emitter: any
-  uid: any
-}
-
-const checkIsWcConnector = (c: Connector | undefined): c is ConnectorType<typeof walletConnect> =>
-  c?.type === walletConnect.type
-const checkIsSafeConnector = (c: Connector | undefined): c is ConnectorType<typeof safe> =>
-  c?.type === safe.type
+const checkIsWcConnector = (c: Connector | undefined): boolean => c?.type === 'walletConnect'
+const checkIsSafeConnector = (c: Connector | undefined): boolean => c?.type === 'safe'
 
 export type SafeAppType = 'iframe' | 'walletconnect'
 
@@ -30,7 +20,7 @@ export const checkIsSafeApp = async (
 
   if (isSafeConnector) return 'iframe'
 
-  const connectorProvider = await connector.getProvider()
+  const connectorProvider = (await connector!.getProvider()) as { session?: { peer: { metadata: { name: string; url: string } } } }
   const { session } = connectorProvider
   if (!session) return false
 

@@ -24,19 +24,7 @@ const babelIncludeRegexes = [
 const nextConfig = {
   // Enable Turbopack with default config (silence webpack-only config warning)
   turbopack: {},
-  transpilePackages: [
-    '@getpara/rainbowkit',
-    '@getpara/rainbowkit-wallet',
-    '@getpara/core-components',
-    '@getpara/react-components',
-    '@getpara/react-common',
-    '@getpara/react-sdk',
-    '@getpara/react-sdk-lite',
-    '@getpara/core-sdk',
-    '@getpara/web-sdk',
-    '@getpara/wagmi-v2-integration',
-    '@getpara/viem-v2-integration',
-  ],
+  transpilePackages: [],
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
@@ -206,6 +194,13 @@ const nextConfig = {
         /^styled-components$/,
         styledComponentsPath,
       ),
+    )
+
+    // Suppress @metamask/sdk trying to import React Native async-storage (web build doesn't need it)
+    config.plugins.push(
+      new options.webpack.IgnorePlugin({
+        resourceRegExp: /^@react-native-async-storage\/async-storage$/,
+      }),
     )
 
     config.plugins.push(
