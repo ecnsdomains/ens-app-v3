@@ -112,7 +112,7 @@ export const SyncProvider = ({ children }: { children: React.ReactNode }) => {
 
   const hasSubgraphSyncErrors = useHasSubgraphSyncErrors()
   const { data: currentGraphBlock } = useQuery<number>({
-    queryKey: ['graphBlock', chainId, transactions],
+    queryKey: ['graphBlock', chainId],
     queryFn: () =>
       subgraphClient!.request<GraphResponse>(query).then((res) => {
         return res!._meta.block.number
@@ -120,7 +120,7 @@ export const SyncProvider = ({ children }: { children: React.ReactNode }) => {
     initialData: 0,
     refetchInterval: (q) => {
       if (hasSubgraphSyncErrors.error) return false
-      if (!q.state.data) return 1000
+      if (q.state.data == null) return 1000
       const waitingForBlock = findTransactionHigherThanBlock(q.state.data)
       if (waitingForBlock) {
         return 1000

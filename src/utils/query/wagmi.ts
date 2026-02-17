@@ -1,4 +1,3 @@
-import { createAppKit } from '@reown/appkit/react'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import {
   type Chain,
@@ -162,28 +161,10 @@ const wagmiAdapter = new WagmiAdapter({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- WagmiAdapter types don't expose all createConfig options (client, syncConnectedChain), but they're passed through at runtime
 } as any)
 
-// Initialize Reown AppKit — wallet modal with social login, email, and standard wallets
-createAppKit({
-  adapters: [wagmiAdapter],
-  networks: chains as unknown as [SupportedChain, ...SupportedChain[]],
-  projectId,
-  metadata: {
-    name: 'ECNS',
-    description: 'Ethereum Classic Name Service',
-    url: 'https://ecns.domains',
-    icons: ['https://ecns.domains/icon.png'],
-  },
-  features: {
-    email: true,
-    socials: ['google', 'discord', 'apple', 'github', 'farcaster'],
-    emailShowWallets: true,
-  },
-  themeMode: 'dark',
-  themeVariables: {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    '--w3m-accent': '#3FB68B',
-  },
-})
+// Exported for lazy-loaded AppKit initialization (see appkit-init.ts)
+export { wagmiAdapter }
+export const appKitNetworks = chains as unknown as [SupportedChain, ...SupportedChain[]]
+export { projectId }
 
 // Type-assert the config to preserve chain literal types that WagmiAdapter loses
 // Runtime: correct chains are passed via `networks: chains` above

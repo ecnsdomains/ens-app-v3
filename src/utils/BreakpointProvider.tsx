@@ -36,7 +36,11 @@ const BreakpointProvider = ({
         },
         {} as Record<QueryType, boolean>,
       )
-      setQueryMatch(updatedMatches)
+      setQueryMatch((prev) => {
+        const prevRecord = prev as Record<QueryType, boolean>
+        if (keys.every((k) => prevRecord[k] === updatedMatches[k])) return prev
+        return updatedMatches
+      })
     }
 
     if (window && window.matchMedia) {
