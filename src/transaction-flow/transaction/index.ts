@@ -85,7 +85,7 @@ export const createTransactionRequest = <TName extends TransactionName>({
   name,
   ...rest
 }: { name: TName } & TransactionParameters<TName>): TransactionReturnType<TName> => {
-  // i think this has to be any :(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- transaction parameter types are too complex for union narrowing
   return transactions[name].transaction({ ...rest } as any) as TransactionReturnType<TName>
 }
 

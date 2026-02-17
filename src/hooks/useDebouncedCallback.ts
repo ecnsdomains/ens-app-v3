@@ -1,5 +1,6 @@
 import { DependencyList, useCallback, useRef } from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic callback requires flexible args
 export default function useDebouncedCallback<T extends (...args: any[]) => ReturnType<T>>(
   func: T,
   wait?: number,

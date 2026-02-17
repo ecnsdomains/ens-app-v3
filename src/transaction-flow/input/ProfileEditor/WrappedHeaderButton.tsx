@@ -11,7 +11,6 @@ type Props = {
 } & Omit<ComponentProps<typeof HeaderButton>, 'validated'>
 
 export const WrappedHeaderButton = ({ control, name, src, ...props }: Props) => {
-  // @ts-ignore
   const { data: header } = useEnsAvatar({ name, key: 'header' })
   const formState = useFormState<ProfileEditorForm>({
     control,

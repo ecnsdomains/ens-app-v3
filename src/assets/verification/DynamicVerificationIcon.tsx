@@ -1,9 +1,10 @@
+import type { ComponentType } from 'react'
 import dynamic from 'next/dynamic'
 
 import { VerificationProtocol } from '../../transaction-flow/input/VerifyProfile/VerifyProfile-flow'
 
 export const verificationIconTypes: {
-  [key in VerificationProtocol]: any
+  [key in VerificationProtocol]: ComponentType<{ width?: number; height?: number }>
 } = {
   dentity: dynamic(() => import('./Dentity.svg')),
 }

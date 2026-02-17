@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css, DefaultTheme, keyframes } from 'styled-components'
 
 const anim = keyframes`
   0% {
@@ -10,7 +10,7 @@ const anim = keyframes`
   }
 `
 
-export const cacheableComponentStyles = ({ $isCached }: { theme: any; $isCached?: boolean }) => css`
+export const cacheableComponentStyles = ({ $isCached }: { theme: DefaultTheme; $isCached?: boolean }) => css`
   transition: opacity 0.15s ease-in-out;
   opacity: 1;
   ${$isCached &&

@@ -379,7 +379,7 @@ export const OwnerProfileButton = ({
       ? {
           icon: CopyIcon,
           label: 'Copy name',
-          onClick: () => copy(primary.data?.name!),
+          onClick: () => copy(primary.data!.name),
         }
       : undefined,
     ...(dataType === 'address'

@@ -83,7 +83,7 @@ export const getPrimaryNameQueryFn =
             try {
               const normalizedVersion = normalise(originalName)
               isNormalized = originalName === normalizedVersion
-            } catch (error) {
+            } catch {
               // If normalisation fails, treat as non-normalized
               isNormalized = false
             }

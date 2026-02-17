@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useRouterWithHistory } from './useRouterWithHistory'
 
-export const useProtectedRoute = (baseRoute: string, condition: any) => {
+export const useProtectedRoute = (baseRoute: string, condition: unknown) => {
   const router = useRouterWithHistory()
 
   useEffect(() => {

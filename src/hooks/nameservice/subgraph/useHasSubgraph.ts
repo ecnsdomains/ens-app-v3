@@ -6,6 +6,7 @@ import { useClient } from 'wagmi'
  */
 export const useHasSubgraph = () => {
   const client = useClient()
-  const url = (client?.chain as Record<string, any>)?.subgraphs?.ens?.url
+  const chain = client?.chain as { subgraphs?: { ens?: { url?: string } } } | undefined
+  const url = chain?.subgraphs?.ens?.url
   return typeof url === 'string' && url.length > 0
 }

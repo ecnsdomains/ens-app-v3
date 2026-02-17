@@ -74,7 +74,7 @@ type Props = {
 
 export const Calendar = forwardRef(
   (
-    { value, name, onBlur, highlighted, min, onChange, ...props }: Props,
+    { value, name: _name, onBlur: _onBlur, highlighted, min, onChange, ...props }: Props,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const inputRef = useDefaultRef<HTMLInputElement>(ref)

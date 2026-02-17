@@ -37,8 +37,8 @@ vi.mock('@app/hooks/useConnectModal', () => ({
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (value: string, opts: any) => {
-      const optsTxt = opts?.value || opts?.count || ''
+    t: (value: string, opts: Record<string, unknown>) => {
+      const optsTxt = (opts?.value || opts?.count || '') as string
       return [value, ...(optsTxt ? [optsTxt] : [])].join('.')
     },
     i18n: {
@@ -106,19 +106,24 @@ const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>
 const customRenderHook = <TProps, TResult>(
   callback: (props: TProps) => TResult,
   options?: Omit<RenderHookOptions<TProps>, 'wrapper'>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- test wrapper type mismatch is intentional
 ) => renderHook(callback, { wrapper: AllTheProviders as any, ...options })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- test utility requires flexible function signatures
 export type PartialMockedFunction<T extends (...args: any) => any> = (
   ...args: Parameters<T>
 ) => DeepPartial<ReturnType<T>>
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- test utility needs flexible hook signatures
 export type MockHookData<THookFn extends (...args: any[]) => { data: any }> = DeepPartial<
   ReturnType<THookFn>['data']
 >
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- test utility requires flexible function types
 export const expectEnabledHook = <TFn extends (...args: any[]) => any>(fn: TFn, enabled: boolean) =>
   expect(fn).toHaveBeenCalledWith(expect.objectContaining({ enabled }))
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- test utility for casting functions to mocks
 export const mockFunction = <T extends (...args: any) => any>(func: T) =>
   func as unknown as MockedFunction<PartialMockedFunction<T>>
 

@@ -153,7 +153,7 @@ export const NameDetailItem = ({
         as={mode !== 'select' ? 'a' : 'div'}
         data-testid={`name-item-${name}`}
         className="name-detail-item"
-        onClick={(e: any) => {
+        onClick={(e: React.MouseEvent) => {
           if (mode === 'select' && name !== INVALID_NAME && !disabled) {
             e.preventDefault()
             e.stopPropagation()
@@ -164,7 +164,7 @@ export const NameDetailItem = ({
         <NameItemContainer>
           <AvatarWrapper
             data-testid={`name-item-avatar-wrapper-${name}`}
-            onClick={(e: any) => {
+            onClick={(e: React.MouseEvent) => {
               e.preventDefault()
               e.stopPropagation()
               if (name !== INVALID_NAME && !disabled) {

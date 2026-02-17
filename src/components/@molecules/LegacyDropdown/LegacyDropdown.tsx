@@ -40,7 +40,7 @@ type DropdownItemObject = {
   disabled?: boolean
 }
 
-export type DropdownItem = DropdownItemObject | React.ReactElement<React.PropsWithRef<any>>
+export type DropdownItem = DropdownItemObject | React.ReactElement<React.PropsWithRef<Record<string, unknown>>>
 
 interface DropdownMenuContainerProps {
   $opened?: boolean
@@ -245,7 +245,7 @@ const DropdownChild = ({
   item,
 }: {
   setIsOpen: (isOpen: boolean) => void
-  item: ReactElement<React.PropsWithRef<any>>
+  item: ReactElement<React.PropsWithRef<Record<string, unknown>>>
 }) => {
   const ref = useRef<HTMLDivElement>(null)
   const Item = cloneElement(item, { ...item.props, ref })
@@ -299,7 +299,7 @@ const DropdownMenu = ({
         const { color, value, icon, label, onClick, disabled, as, wrapper } =
           item as DropdownItemObject
 
-        const props: React.ComponentProps<any> = {
+        const props: React.ComponentProps<typeof MenuButton> & { as?: string } = {
           $inner: inner,
           $hasColor: !!color,
           $color: color,
@@ -486,14 +486,14 @@ export const LegacyDropdown = ({
   inheritContentWidth = false,
   ...props
 }: Props & (PropsWithIsOpen | PropsWithoutIsOpen)) => {
-  const dropdownRef = useRef<any>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const [internalIsOpen, internalSetIsOpen] = useState(false)
   const [isOpen, setIsOpen] = _setIsOpen
     ? [_isOpen, _setIsOpen]
     : [internalIsOpen, internalSetIsOpen]
 
-  const handleClickOutside = (e: any) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+  const handleClickOutside = (e: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
       setIsOpen(false)
     }
   }
@@ -541,7 +541,8 @@ export const LegacyDropdown = ({
 
       {Children.map(children, (child) => {
         if (!isValidElement(child)) return null
-        return cloneElement(child as any, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- cloneElement requires any to merge arbitrary props
+        return cloneElement(child as React.ReactElement<any>, {
           ...buttonProps,
           zindex: '10',
           pressed: isOpen ? 'true' : undefined,
@@ -560,9 +561,9 @@ export const LegacyDropdown = ({
         setIsOpen={setIsOpen}
         shortThrow={shortThrow}
         width={
-          (inner || inheritContentWidth) &&
-          dropdownRef.current &&
-          dropdownRef.current.getBoundingClientRect().width.toFixed(2)
+          (inner || inheritContentWidth) && dropdownRef.current
+            ? dropdownRef.current.getBoundingClientRect().width.toFixed(2)
+            : undefined
         }
       />
     </Container>

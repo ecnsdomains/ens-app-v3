@@ -62,7 +62,8 @@ const Badge = styled.div<{ $color: Color }>(
 )
 
 export const VerificationBadge = forwardRef<HTMLElement, Props>(
-  ({ showBadge, isVerified, type, verifier, tooltipContent, children, ...props }: Props, ref) => {
+  ({ showBadge, isVerified, type, verifier: _verifier, tooltipContent, children, ...props }: Props, ref) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- cloneElement requires any to merge arbitrary ref and spread props
     const clonedChild = cloneElement(children, { ref, ...props } as any)
 
     if (!showBadge) return clonedChild

@@ -1,4 +1,3 @@
-import { UseInfiniteQueryOptions, UseQueryOptions } from '@tanstack/react-query'
 import { ComponentProps } from 'react'
 import type { TFunction } from 'i18next'
 import type { Account, Address, Client, Hex, TransactionReceipt, Transport } from 'viem'
@@ -168,7 +167,7 @@ export type ConnectorClientWithEns = Client<Transport, SupportedChain, Account>
 export type ConfigWithEns = typeof wagmiConfig
 export type ClientWithEns = ReturnType<ConfigWithEns['getClient']>
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- TError and TSelectData are part of the public API for positional generic args
 export type QueryConfig<TData = unknown, TError = Error, TSelectData = TData> = {
   gcTime?: number
   enabled?: boolean
@@ -176,7 +175,7 @@ export type QueryConfig<TData = unknown, TError = Error, TSelectData = TData> = 
   /** Scope the cache to a given context. */
   scopeKey?: string
 }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- TError and TSelectData are part of the public API for positional generic args
 export type InfiniteQueryConfig<TData = unknown, TError = Error, TSelectData = TData> = {
   gcTime?: number
   enabled?: boolean
@@ -187,6 +186,7 @@ export type InfiniteQueryConfig<TData = unknown, TError = Error, TSelectData = T
 export type BaseQueryKeyParameters = { chainId: number; address: Address | undefined }
 export type QueryDependencyType = 'standard' | 'graph' | 'independent'
 export type CreateQueryKey<
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- {} means "any non-null" for generic constraint
   TParams extends {},
   TFunctionName extends string,
   TQueryDependencyType extends QueryDependencyType,

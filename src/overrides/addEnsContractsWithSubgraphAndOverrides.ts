@@ -11,6 +11,7 @@ import { addEnsContractsWithSubgraph } from '@app/utils/chains/addEnsContractsWi
  */
 export type ChainWithEnsAndContracts<
   TChain extends Chain,
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- {} default means "no additional contracts", Record<string, never> would poison the intersection
   TAdditionalContracts extends Record<string, { address: Address }> = {},
 > = Omit<TChain, 'contracts'> & {
   contracts: CheckedChainWithEns<TChain>['contracts'] & TAdditionalContracts
@@ -22,6 +23,7 @@ export type ChainWithEnsAndContracts<
  */
 export type LocalhostChainWithEnsAndContracts<
   TChain extends Chain,
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- {} default means "no additional contracts", Record<string, never> would poison the intersection
   TAdditionalContracts extends Record<string, { address: Address }> = {},
 > = Omit<ChainWithEns<TChain>, 'contracts'> & {
   contracts: ChainWithEns<TChain>['contracts'] & TAdditionalContracts
@@ -32,8 +34,8 @@ type SupportedChain = (typeof supportedChains)[number]
 const isSupportedChain = (chainId?: number): chainId is SupportedChain =>
   !!chainId && supportedChains.includes(chainId as SupportedChain)
 
-const overrideContracts = ['wrappedRenewalWithReferrer'] as const
-type OverrideContracts = (typeof overrideContracts)[number]
+const _overrideContracts = ['wrappedRenewalWithReferrer'] as const
+type OverrideContracts = (typeof _overrideContracts)[number]
 
 const addresses = {
   [mainnet.id]: {

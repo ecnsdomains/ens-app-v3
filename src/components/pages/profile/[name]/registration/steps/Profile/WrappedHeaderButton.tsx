@@ -9,7 +9,7 @@ type Props = {
   control: Control<ProfileEditorForm>
 } & Omit<ComponentProps<typeof HeaderButton>, 'validated'>
 
-export const WrappedHeaderButton = ({ control, name, src, ...props }: Props) => {
+export const WrappedHeaderButton = ({ control, name: _name, src, ...props }: Props) => {
   const headerValue = useWatch({
     control,
     name: 'header',

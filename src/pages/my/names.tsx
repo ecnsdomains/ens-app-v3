@@ -31,7 +31,7 @@ export default function Page() {
 
   const isLoading = !router.isReady || isConnecting || isReconnecting
 
-  useProtectedRoute('/', isLoading ? true : address && (address as any) !== '')
+  useProtectedRoute('/', isLoading ? true : !!address)
 
   return (
     <Content title={t('title')} singleColumnContent loading={isLoading}>

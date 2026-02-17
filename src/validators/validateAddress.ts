@@ -14,11 +14,10 @@ export const validateCryptoAddress = ({
     const coinTypeInstance = getCoderByCoinNameWithTestnetSupport(coin)
     coinTypeInstance.decode(_address)
     return true
-  } catch (e: any) {
+  } catch (e: unknown) {
     if (typeof e === 'string') return e
-    if (e.reason) return e.reason
-    if (e.message) return e.message
-    if (e.toString) return e.toString()
+    if (e instanceof Error) return e.message
+    if (typeof e === 'object' && e !== null && 'reason' in e) return String((e as { reason: unknown }).reason)
     return 'Invalid address'
   }
 }

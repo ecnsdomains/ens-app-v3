@@ -22,9 +22,10 @@ const InnerContainer = styled.div(() => [
 ])
 
 type DogFoodProps = Pick<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- useForm generic must be `any` for cross-form compatibility
   ReturnType<typeof useForm<any>>,
   'register' | 'watch' | 'formState' | 'setValue' | 'trigger'
-> & { label?: string; validations?: any; disabled?: boolean; hideLabel?: boolean }
+> & { label?: string; validations?: Record<string, (value: string) => string | undefined | Promise<string | undefined>>; disabled?: boolean; hideLabel?: boolean }
 
 export const DogFood = ({
   register,

@@ -34,7 +34,7 @@ const SyncManager = ({ data: { name }, dispatch, onDismiss }: Props) => {
   const nameType = useNameType(name)
   const abilities = useAbilities({ name })
   const primaryNameOrAddress = usePrimaryNameOrAddress({
-    address: details?.ownerData?.owner!,
+    address: details!.ownerData!.owner,
     shortenedAddressLength: 5,
     enabled: !!details?.ownerData?.owner,
   })

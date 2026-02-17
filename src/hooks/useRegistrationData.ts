@@ -74,7 +74,7 @@ const useRegistrationData = <TParams extends UseRegistrationDataParameters>({
   enabled = true,
   gcTime,
   staleTime,
-  scopeKey,
+  scopeKey: _scopeKey,
   // params
   ...params
 }: TParams & UseRegistrationDataConfig) => {

@@ -1,6 +1,6 @@
 import { forwardRef, PropsWithChildren } from 'react'
 
-type Props = PropsWithChildren<{}>
+type Props = PropsWithChildren<object>
 export const OptionGroup = forwardRef<HTMLDivElement, Props>(
   ({ children, ...props }: Props, ref) => {
     return (

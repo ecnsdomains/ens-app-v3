@@ -14,6 +14,7 @@ type UseQueryResultExcludingPendingResult<TData = unknown, TError = DefaultError
   QueryObserverPendingResult<TData, TError>
 >
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- intentional: creates a distinct type for the result union
 interface QueryObserverCustomResult<TData = unknown, TError = DefaultError>
   extends QueryObserverBaseResult<TData, TError> {}
 

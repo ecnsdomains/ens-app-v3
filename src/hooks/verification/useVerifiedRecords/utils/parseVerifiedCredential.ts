@@ -29,7 +29,7 @@ export const parseVerifiableCredential =
         (vc) => ({
           issuer: 'dentity',
           key: 'com.twitter',
-          value: normaliseTwitterRecordValue(vc?.credentialSubject?.username),
+          value: normaliseTwitterRecordValue(vc?.credentialSubject?.username ?? ''),
         }),
       )
       .with({ type: P.when((type) => type?.includes('VerifiedDiscordAccount')) }, (vc) => ({

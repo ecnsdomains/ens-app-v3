@@ -194,8 +194,9 @@ const RevokePermissions = ({ data, transactions, onDismiss, dispatch }: Props) =
 
   const { data: expiry } = useExpiry({ name })
 
-  const transactionData: any = transactions?.find((tx: any) => tx.name === 'changePermissions')
-    ?.data as TransactionData | undefined
+  const transactionData = transactions?.find(
+    (tx: { name: string }) => tx.name === 'changePermissions',
+  )?.data as TransactionData | undefined
 
   const { register, control, handleSubmit, getValues, trigger, formState } = useForm<FormData>({
     mode: 'onChange',
@@ -364,7 +365,7 @@ const RevokePermissions = ({ data, transactions, onDismiss, dispatch }: Props) =
         ))
         .with('lastWarning', () => (
           <NameConfirmationWarningView
-            expiry={expiry?.expiry.date!}
+            expiry={expiry!.expiry.date!}
             name={name}
             setDisabled={setDisabled}
             {...dialogContentProps}

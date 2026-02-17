@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 import { CrossSVG, LeftChevronSVG, PersonSVG } from '@ensdomains/thorin'
 
@@ -145,7 +145,7 @@ const BackButton = styled.button(
   `,
 )
 
-const arrowOverlayStyles = ({ theme, $isOpen }: { theme: any; $isOpen: boolean }) => css`
+const arrowOverlayStyles = ({ theme, $isOpen }: { theme: DefaultTheme; $isOpen: boolean }) => css`
   position: absolute;
   display: flex;
   align-items: center;

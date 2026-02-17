@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query'
 import { Dispatch, useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 import { match, P } from 'ts-pattern'
 import { BaseError } from 'viem'
 import { useClient, useConnections, useConnectorClient, useSendTransaction } from 'wagmi'
@@ -115,7 +115,7 @@ const AeroplaneIcon = styled(AeroplaneSVG)(
   `,
 )
 
-const circleIconStyles = ({ theme }: { theme: any }) => css`
+const circleIconStyles = ({ theme }: { theme: DefaultTheme }) => css`
   width: ${theme.space['6']};
   height: ${theme.space['6']};
   color: ${theme.colors.background};

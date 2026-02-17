@@ -99,7 +99,7 @@ export const ExpirySection = ({ name, details }: Props) => {
 
   if (!expiry.data || expiry.data?.length === 0) return null
 
-  const isOutOfGracePeriod = expiry.data.find((d) => d.type === 'grace-period')?.date! < new Date()
+  const isOutOfGracePeriod = (expiry.data.find((d) => d.type === 'grace-period')?.date ?? new Date(0)) < new Date()
 
   return (
     <>
@@ -113,7 +113,7 @@ export const ExpirySection = ({ name, details }: Props) => {
           <Header>
             <PanelsContainer>
               {expiry.data.map((item) => (
-                <ExpiryPanel key={item.type} {...(item as any)} />
+                <ExpiryPanel key={item.type} {...(item as React.ComponentProps<typeof ExpiryPanel>)} />
               ))}
             </PanelsContainer>
           </Header>

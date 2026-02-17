@@ -19,7 +19,7 @@ import { useTransactionFlow } from '@app/transaction-flow/TransactionFlowProvide
 
 import { SectionContainer } from './Section'
 
-const rpcSendBatch = (items: { method: string; params: any[] }[]) =>
+const rpcSendBatch = (items: { method: string; params: unknown[] }[]) =>
   fetch('http://localhost:8545', {
     method: 'POST',
     headers: {
@@ -40,7 +40,7 @@ type TestConfig = Config<[typeof localhostWithEns]>
 
 export const DevSection = () => {
   const client = useClient<TestConfig>()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- viem test actions require anvil mode client which doesn't match standard client types
   const testClient = useMemo(() => ({ ...client!, mode: 'anvil' as const }) as any, [client])
 
   const addTransaction = useAddRecentTransaction()

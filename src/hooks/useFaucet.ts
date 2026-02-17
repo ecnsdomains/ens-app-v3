@@ -19,7 +19,7 @@ type BaseJsonRPC<Result> = {
   jsonrpc: string
   id: string | number | null
   result?: Result
-  error?: any
+  error?: { code: number; message: string }
 }
 
 type ErrorJsonRPC = {
@@ -37,14 +37,14 @@ type SuccessJsonRPC<Result> = {
 
 type FaucetStatus = 'ok' | 'paused' | 'out of funds'
 
-type JsonRpc<Result = any> = BaseJsonRPC<Result> & (ErrorJsonRPC | SuccessJsonRPC<Result>)
+type JsonRpc<Result = unknown> = BaseJsonRPC<Result> & (ErrorJsonRPC | SuccessJsonRPC<Result>)
 
 const createEndpoint = (chainName: string) =>
   process.env.NODE_ENV === 'development'
     ? `http://localhost:8787/${chainName}`
     : `${FAUCET_WORKER_URL}/${chainName}`
 
-type QueryKey = CreateQueryKey<{}, 'getFaucetAddress', 'standard'>
+type QueryKey = CreateQueryKey<Record<string, never>, 'getFaucetAddress', 'standard'>
 
 const getFaucetQueryFn =
   (config: ConfigWithEns) =>

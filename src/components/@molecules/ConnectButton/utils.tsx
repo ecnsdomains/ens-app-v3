@@ -26,12 +26,12 @@ export const getDropdownItems = ({
   t,
   address,
 }: {
-  primary: any
-  disconnect: any
-  copy: any
-  copied: any
-  hasPendingTransactions: any
-  t: any
+  primary: { name?: string } | null | undefined
+  disconnect: () => void
+  copy: (value: string) => void
+  copied: boolean
+  hasPendingTransactions: boolean
+  t: (key: string) => string
   address: Address
 }): DropdownItem[] =>
   [

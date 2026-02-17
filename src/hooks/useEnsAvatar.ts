@@ -22,7 +22,7 @@ const checkImageExists = async (
   try {
     const response = await fetch(imageUrlWithExpiry, { method: 'GET' })
     return response.ok ? imageUrlWithExpiry : null
-  } catch (error) {
+  } catch {
     return null
   }
 }

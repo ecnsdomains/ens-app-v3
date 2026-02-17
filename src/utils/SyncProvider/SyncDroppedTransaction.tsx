@@ -35,7 +35,7 @@ export const getAccountHistoryEndpoint = (address: string, chainId: number) => {
   }
 }
 
-function useInterval(callback: () => void, delay: number | null, dependencies: any[]) {
+function useInterval(callback: () => void, delay: number | null, dependencies: unknown[]) {
   const savedCallback = useRef<() => void>(() => {})
 
   useEffect(() => {
@@ -182,7 +182,7 @@ export const findDroppedTransactions = async (
 
       // Find tranasaction in user's history based on nonce
       // Get matching nonce from history
-      const matchingNonceTransaction = accountTransactionHistory.find((tx: any) => {
+      const matchingNonceTransaction = accountTransactionHistory.find((tx) => {
         return parseInt(tx.nonce, 10) === pendingTransaction.nonce
       })
 

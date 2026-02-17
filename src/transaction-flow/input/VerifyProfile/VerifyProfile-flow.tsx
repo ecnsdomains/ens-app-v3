@@ -11,9 +11,9 @@ import { SearchViewLoadingView } from '../SendName/views/SearchView/views/Search
 import { DentityView } from './views/DentityView'
 import { VerificationOptionsList } from './views/VerificationOptionsList'
 
-const VERIFICATION_PROTOCOLS = ['dentity'] as const
+const _VERIFICATION_PROTOCOLS = ['dentity'] as const
 
-export type VerificationProtocol = (typeof VERIFICATION_PROTOCOLS)[number]
+export type VerificationProtocol = (typeof _VERIFICATION_PROTOCOLS)[number]
 
 type Data = {
   name: string

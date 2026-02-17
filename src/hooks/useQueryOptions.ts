@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type -- {} is used as "any non-null" generic constraint, not as empty object */
 import type { Address } from 'viem'
 import { useConnection, useChainId, useConfig } from 'wagmi'
 

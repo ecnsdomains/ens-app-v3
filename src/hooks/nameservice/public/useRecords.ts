@@ -71,7 +71,7 @@ type UseRecordQueryKey<
   'standard'
 >
 
-type NonFunctionGuard<T> = T extends Function ? never : T
+type NonFunctionGuard<T> = T extends (...args: unknown[]) => unknown ? never : T
 
 export const getRecordsQueryFn =
   (config: ConfigWithEns) =>

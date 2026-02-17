@@ -26,7 +26,8 @@ export const makeAppendVerificationProps =
     normalisedKey,
     ...rest
   }: T): GenericReturnType<T> => {
-    if (!verificationData) return { isVerified: false, value, normalisedKey, ...rest } as any
+    if (!verificationData)
+      return { isVerified: false, value, normalisedKey, ...rest } as GenericReturnType<T>
     const verifiers = verificationData
       .filter(({ verified, key, value: _value }) => {
         return verified && key === normalisedKey && _value?.toLowerCase() === value?.toLowerCase()
@@ -34,11 +35,12 @@ export const makeAppendVerificationProps =
       .map(({ issuer }) => issuer)
 
     const isVerified = verifiers.length > 0
-    if (isVerified) return { isVerified, verifiers, value, normalisedKey, ...rest } as any
+    if (isVerified)
+      return { isVerified, verifiers, value, normalisedKey, ...rest } as GenericReturnType<T>
     return {
       value,
       normalisedKey,
       ...rest,
       isVerified,
-    } as any
+    } as GenericReturnType<T>
   }

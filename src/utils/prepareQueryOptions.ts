@@ -25,7 +25,9 @@ export function prepareQueryOptions<
 ): DefinedInitialDataOptions<TQueryFnData, TError, TData, TQueryKey> & {
   queryKey: DataTag<TQueryKey, TQueryFnData, TError>
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- implementation signature must be compatible with all overloads
 export function prepareQueryOptions(options: Record<string, any>) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- mirrors implementation param type
   const newOptions = {} as Record<string, any>
   for (const key in options) {
     if (options[key] !== undefined) {

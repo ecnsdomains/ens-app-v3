@@ -166,12 +166,13 @@ export const PrimarySection = () => {
   const resetPrimary = () => {
     if (!address) return
     showResetPrimaryNameInput(`resetPrimary-${address}`, {
-      name: primary.data?.name!,
+      name: primary.data!.name,
       address,
     })
   }
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Skeleton `as` prop typing incompatible with styled-components
     <Skeleton loading={isLoading} as={SkeletonFiller as any}>
       <Card>
         {primary.data?.name ? (

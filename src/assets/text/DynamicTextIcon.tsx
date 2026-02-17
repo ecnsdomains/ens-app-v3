@@ -21,7 +21,7 @@ export const DynamicTextIcon = ({
 }) => {
   if (name in textIcons) {
     const key = name as keyof typeof textIcons
-    const Icon = textIcons[key] as any
+    const Icon = textIcons[key] as React.ComponentType<{ fill?: string }>
     return <Icon {...props} />
   }
   if (showDefault) {

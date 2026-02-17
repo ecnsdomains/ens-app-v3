@@ -10,6 +10,7 @@ import { deserialize } from 'wagmi'
 import { serialize } from './serialize'
 
 export const stringify = <TData = unknown>(data: TData) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- JSON.stringify replacer binds `this` to parent object (untyped by spec)
   serialize(data, function innerReplacer(this: any, key) {
     const directValueReference = this[key]
     if (directValueReference instanceof Date)
@@ -45,7 +46,7 @@ export const createPersistConfig = ({
 }): OmitKeyof<PersistQueryClientOptions, 'queryClient'> => ({
   persister: persister(),
   dehydrateOptions: {
-    shouldDehydrateQuery: (query: any) =>
+    shouldDehydrateQuery: (query: { gcTime: number; queryHash: string }) =>
       query.gcTime !== 0 && query.queryHash !== JSON.stringify([{ entity: 'signer' }]),
   },
   buster: process.env.CONFIG_BUILD_ID,

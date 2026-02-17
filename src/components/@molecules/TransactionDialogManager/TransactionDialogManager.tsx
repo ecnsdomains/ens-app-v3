@@ -15,7 +15,7 @@ import { InternalTransactionFlow, TransactionFlowAction } from '../../../transac
 import { IntroStageModal } from './stage/Intro'
 import { TransactionStageModal } from './stage/TransactionStageModal'
 
-export const useResetSelectedKey = (dispatch: any) => {
+export const useResetSelectedKey = (dispatch: Dispatch<TransactionFlowAction>) => {
   const { address } = useConnection()
   const chainId = useChainId()
 
@@ -131,9 +131,11 @@ export const TransactionDialogManager = ({
           return (
             <TransactionStageModal
               actionName={transactionItem.name}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any -- transaction data types are dynamically resolved
               displayItems={transaction.displayItems(transactionItem.data as any, t)}
               helper={
                 'helper' in transaction && typeof transaction.helper === 'function'
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- transaction data types are dynamically resolved
                   ? transaction.helper(transactionItem.data as any, t)
                   : undefined
               }

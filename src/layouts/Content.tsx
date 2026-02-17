@@ -299,6 +299,7 @@ export const Content = ({
 
       {!hideHeading && (
         <HeadingItems>
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any -- Skeleton `as` prop typing incompatible with styled-components */}
           <Skeleton loading={loading} as={FullWidthSkeleton as any}>
             <CustomLeadingHeading>
               <CompactTitle
@@ -326,6 +327,7 @@ export const Content = ({
 
       {!inlineHeading && children.header && (
         <ContentContainer>
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any -- Skeleton `as` prop typing incompatible with styled-components */}
           <Skeleton loading={loading} as={FullWidthSkeleton as any}>
             {children.header}
           </Skeleton>
@@ -337,6 +339,7 @@ export const Content = ({
         </ContentContainer>
       )}
       <ContentContainer>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any -- Skeleton `as` prop typing incompatible with styled-components */}
         <Skeleton loading={loading} as={FullWidthSkeleton as any}>
           {children.trailing}
         </Skeleton>

@@ -366,6 +366,7 @@ const ProfileEditor = ({ data = {}, transactions = [], dispatch, onDismiss }: Pr
                 control={control}
                 src={headerSrc}
                 onSelectOption={(option) =>
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- dynamic view name construction
                   editorDispatch({ type: 'pushView', payload: `header-${option}` as any })
                 }
                 onHeaderChange={(header) => setHeader(header)}

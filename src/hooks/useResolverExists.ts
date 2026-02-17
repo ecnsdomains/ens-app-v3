@@ -55,7 +55,7 @@ export const getResolverExistsQueryFn =
         id: `${address}-${namehash(name)}`,
       })
       return !!resolver
-    } catch (e) {
+    } catch {
       // If the graph is down or has an error, we assume the resolver exists for safety
       return true
     }

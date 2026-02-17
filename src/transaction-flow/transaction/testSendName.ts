@@ -2,6 +2,7 @@ import type { TFunction } from 'i18next'
 
 import type { Transaction, TransactionDisplayItem, TransactionFunctionParameters } from '@app/types'
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- empty data type for test transaction
 type Data = {}
 
 const displayItems = (

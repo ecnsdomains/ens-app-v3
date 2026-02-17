@@ -93,6 +93,7 @@ export const useNameDetails = ({ name, subgraphEnabled = true }: UseNameDetailsP
     }
     return null
   }, [
+    expiryDate,
     gracePeriodEndDate,
     normalisedName,
     profile,

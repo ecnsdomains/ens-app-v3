@@ -9,7 +9,7 @@ export const useCopied = (timeoutMs: number = 1500) => {
   }
 
   useEffect(() => {
-    let timeout: any
+    let timeout: ReturnType<typeof setTimeout> | undefined
     if (copied) {
       timeout = setTimeout(() => setCopied(false), timeoutMs)
     }

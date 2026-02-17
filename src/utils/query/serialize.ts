@@ -18,7 +18,7 @@ function getReferenceKey(keys: string[], cutoff: number) {
  * @param value the value to match
  * @returns the matching index, or -1
  */
-function getCutoff(array: any[], value: any) {
+function getCutoff(array: unknown[], value: unknown) {
   const { length } = array
 
    
@@ -31,8 +31,8 @@ function getCutoff(array: any[], value: any) {
   return 0
 }
 
-type StandardReplacer = (key: string, value: any) => any
-type CircularReplacer = (key: string, value: any, referenceKey: string) => any
+type StandardReplacer = (key: string, value: unknown) => unknown
+type CircularReplacer = (key: string, value: unknown, referenceKey: string) => unknown
 
 /**
  * Create a replacer method that handles circular values
@@ -48,10 +48,11 @@ function createReplacer(
   const hasReplacer = typeof replacer === 'function'
   const hasCircularReplacer = typeof circularReplacer === 'function'
 
-  const cache: any[] = []
+  const cache: unknown[] = []
   const keys: string[] = []
 
-  return function replace(this: any, key: string, value: any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- JSON.stringify replacer binds `this` to parent object (untyped by spec)
+  return function replace(this: any, key: string, value: unknown) {
     if (typeof value === 'object') {
       if (cache.length) {
         const thisCutoff = getCutoff(cache, this)
@@ -94,18 +95,19 @@ function createReplacer(
  * @returns the stringified output
  */
 export function serialize(
-  value: any,
+  value: unknown,
   replacer?: StandardReplacer | null | undefined,
   indent?: number | null | undefined,
   circularReplacer?: CircularReplacer | null | undefined,
 ) {
   return JSON.stringify(
     value,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- JSON.stringify replacer binds `this` to parent object (untyped by spec)
     createReplacer(function initialReplacer(this: any, key, replacerValue_) {
-      let replacerValue = replacerValue_
-      if (typeof replacerValue === 'bigint')
+      let replacerValue: unknown = replacerValue_
+      if (typeof replacerValue_ === 'bigint')
         replacerValue = { __type: 'bigint', value: replacerValue_.toString() }
-      if (value instanceof Map)
+      if (replacerValue_ instanceof Map)
         replacerValue = { __type: 'Map', value: Array.from(replacerValue_.entries()) }
       return replacer?.call(this, key, replacerValue) ?? replacerValue
     }, circularReplacer),

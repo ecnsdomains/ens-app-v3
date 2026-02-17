@@ -210,7 +210,7 @@ const Profile = ({ name, callback, registrationData, resolverExists }: Props) =>
     process.nextTick(() => trigger())
   }
 
-  const onSubmit = (data: ProfileEditorForm, e?: BaseSyntheticEvent<object, any, any>) => {
+  const onSubmit = (data: ProfileEditorForm, e?: BaseSyntheticEvent) => {
     e?.preventDefault()
     setAvatarSrcStorage()
     setHeaderSrcStorage()

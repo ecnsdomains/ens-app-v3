@@ -42,11 +42,11 @@ const getAvatarSrc = async (record: string) => {
     if (protocol === 'eip155') {
       const apiUrl = makeApiURL(record)
       if (!apiUrl) return
-      const resp = await fetch(apiUrl, {
+      const resp: { media?: Array<{ gateway?: string }> } = await fetch(apiUrl, {
         method: 'GET',
         redirect: 'follow',
       }).then((res) => res.json())
-      return (resp as any)?.media?.[0]?.gateway
+      return resp?.media?.[0]?.gateway
     }
 
     return record

@@ -77,7 +77,7 @@ const UnknownLabels = ({
       payload: {
         ...transactionFlowItem,
         transactions: newTransactions,
-        intro: newIntro as any,
+        intro: newIntro as TransactionFlowItem['intro'],
       },
     })
   }

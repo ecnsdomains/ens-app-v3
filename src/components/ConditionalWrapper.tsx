@@ -5,7 +5,7 @@ export const ConditionalWrapper = ({
   wrapper,
   children,
 }: {
-  condition: any
+  condition: boolean
   wrapper: (children: ReactNode) => JSX.Element
   children: JSX.Element
 }) => (condition ? wrapper(children) : children)

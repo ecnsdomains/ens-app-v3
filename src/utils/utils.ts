@@ -135,16 +135,16 @@ export const isLabelTooLong = (label: string) => {
   return bytes.byteLength > 255
 }
 
-export const getTestId = (props: any, fallback: string): string => {
+export const getTestId = (props: Record<string, unknown>, fallback: string): string => {
   return props['data-testid'] ? String(props['data-testid']) : fallback
 }
 
-export const deleteProperty = <T extends Record<string, any>, K extends keyof T>(
+export const deleteProperty = <T extends Record<string, unknown>, K extends keyof T>(
   key: K,
   { [key]: _, ...newObj }: T,
 ): Omit<T, K> => newObj
 
-export const deleteProperties = <T extends Record<string, any>, K extends keyof T>(
+export const deleteProperties = <T extends Record<string, unknown>, K extends keyof T>(
   obj: T,
   ...keys: K[]
 ): Omit<T, K> => {
@@ -205,19 +205,27 @@ export function getTldFromName(name: string): string | undefined {
   Following types are based on this solution: https://stackoverflow.com/questions/53173203/typescript-recursive-function-composition/53175538#53175538
   Best to just move on and not try to understand it. (This is copilot's opintion!)
 */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- recursive type-level metaprogramming requires `any` for keyof constraints
 type Lookup<T, K extends keyof any, Else = never> = K extends keyof T ? T[K] : Else
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- tuple inference requires `any[]` constraint
 type Tail<T extends any[]> = T extends [any, ...infer R] ? R : never
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic function composition type requires `any`
 type Func1 = (arg: any) => any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- conditional type inference for function arguments
 type ArgType<F, Else = never> = F extends (arg: infer A) => any ? A : Else
 type AsChain<F extends [Func1, ...Func1[]], G extends Func1[] = Tail<F>> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- recursive chain type requires `any` for base constraints
   [K in keyof F]: (arg: ArgType<F[K]>) => ArgType<Lookup<G, K, any>, any>
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- tuple last-element extraction needs `any[]`
 type Last<T extends any[]> = T extends [...any, infer L] ? L : never
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- lax return type extraction from arbitrary functions
 type LaxReturnType<F> = F extends (...args: any) => infer R ? R : never
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- function composition pipe requires `any` for generic function array
 export const thread = <F extends [(arg: any) => any, ...Array<(arg: any) => any>]>(
   arg: ArgType<F[0]>,
   ...f: F & AsChain<F>

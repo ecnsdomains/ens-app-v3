@@ -315,8 +315,8 @@ const useAdvancedEditor = ({ name, profile, isLoading, overwrites, callback }: P
   const { data: [hasAbiInterface] = [undefined], isLoading: isLoadingAbiInterface } =
     useResolverHasInterfaces({
       interfaceNames: ['AbiResolver'],
-      resolverAddress: profile?.resolverAddress!,
-      enabled: !isLoading,
+      resolverAddress: profile!.resolverAddress!,
+      enabled: !isLoading && !!profile?.resolverAddress,
     })
 
   const hasChanges = Object.keys(formState.dirtyFields || {}).length > 0

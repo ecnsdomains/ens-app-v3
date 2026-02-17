@@ -46,7 +46,7 @@ export const getPrimaryNameQuery =
         coinType,
         coinName: getCoderByCoinTypeWithTestnetSupport(coinType).name,
       }
-    } catch (error) {
+    } catch {
       return null
     }
   }

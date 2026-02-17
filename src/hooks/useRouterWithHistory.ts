@@ -6,7 +6,7 @@ import { createUrlObject } from '@app/utils/urlObject'
 export const createDecorativeUrlObject = (urlObject?: ReturnType<typeof getDestination>) => {
   if (!urlObject || typeof urlObject === 'string') return undefined
   const { query = {}, ...rest } = urlObject
-  const { from, ...cleanQuery } = query
+  const { from: _from, ...cleanQuery } = query
   return { ...rest, query: cleanQuery }
 }
 
@@ -36,13 +36,13 @@ export const useRouterWithHistory = () => {
     router.replace(destination, createDecorativeUrlObject(destination), opts)
   }
 
-  const push = (pathname: string, query?: Record<string, any>, shallow?: boolean) => {
+  const push = (pathname: string, query?: Record<string, string | undefined>, shallow?: boolean) => {
     const urlObject = createUrlObject(pathname, { ...query, referrer })
     const destination = getDestination(urlObject)
     router.push(destination, undefined, { shallow })
   }
 
-  const pushWithHistory = (pathname: string, query?: Record<string, any>) => {
+  const pushWithHistory = (pathname: string, query?: Record<string, string | undefined>) => {
     const urlObject = createUrlObject(pathname, {
       ...query,
       from: router.asPath,

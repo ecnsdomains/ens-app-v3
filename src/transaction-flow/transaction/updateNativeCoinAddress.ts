@@ -48,7 +48,7 @@ const transaction = async ({
   let address
   try {
     address = getAddress(data.address)
-  } catch (e) {
+  } catch {
     throw new Error('Invalid address')
   }
   return setAddressRecord.makeFunctionData(connectorClient, {

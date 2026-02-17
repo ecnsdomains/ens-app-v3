@@ -15,9 +15,14 @@ const Container = styled.div(
   `,
 )
 
+type SearchResult = {
+  name?: string
+  address: Address
+}
+
 type Props = {
   name: string
-  results: any[]
+  results: SearchResult[]
   senderRole?: 'owner' | 'manager' | null
   onSelect: (address: Address) => void
 }

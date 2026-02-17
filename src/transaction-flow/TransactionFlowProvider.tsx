@@ -172,6 +172,7 @@ export const TransactionFlowProvider = ({ children }: { children: ReactNode }) =
     return {
       usePreparedDataInput: <C extends keyof DataInputComponent>(name: C) => {
         const { address } = useAccountSafely()
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- dynamic component preload not typed
         if (address) (DataInputComponents[name] as any).render.preload()
         const func: ShowDataInput<C> = (key, data, options = {}) =>
           dispatch({

@@ -4,6 +4,7 @@ import { ProfileRecord } from '@app/constants/profileRecordOptions'
 
 export type RegistrationStep = 'pricing' | 'profile' | 'info' | 'transactions' | 'complete'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- `extends any` is required for distributive conditional type
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void
   ? I
   : never
@@ -31,11 +32,13 @@ export type RegistrationStepData = {
     clearRecords?: boolean
     resolverAddress?: Address
   }
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   info: {}
   transactions: {
     secret: Hex
     started: boolean
   }
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   complete: {}
 }
 

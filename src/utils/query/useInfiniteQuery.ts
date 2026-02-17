@@ -15,6 +15,7 @@ type UseInfiniteQueryExcludingPendingResult<TData = unknown, TError = DefaultErr
   InfiniteQueryObserverPendingResult<TData, TError>
 >
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- intentional: creates a distinct type for the result union
 interface InfiniteQueryObserverCustomResult<TData = unknown, TError = DefaultError>
   extends InfiniteQueryObserverBaseResult<TData, TError> {}
 

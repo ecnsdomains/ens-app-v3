@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 import { DisabledSVG, InfoCircleSVG, Typography } from '@ensdomains/thorin'
 
@@ -56,7 +56,7 @@ const SectionItemContainer = styled.div<{ $screen?: 'desktop' | 'mobile' }>(
   `,
 )
 
-const sectionItemIconStyles = ({ theme, $color }: { theme: any; $color: Color }) => css`
+const sectionItemIconStyles = ({ theme, $color }: { theme: DefaultTheme; $color: Color }) => css`
   display: block;
   flex: 0 0 ${theme.space['6']};
   width: ${theme.space['6']};

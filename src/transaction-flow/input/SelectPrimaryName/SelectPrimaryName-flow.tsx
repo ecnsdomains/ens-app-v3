@@ -162,17 +162,17 @@ const SelectPrimaryName = ({ data: { address }, dispatch, onDismiss }: Props) =>
   })
 
   const { data: isWrapped, isLoading: isWrappedLoading } = useIsWrapped({
-    name: selectedName?.name!,
+    name: selectedName!.name!,
     enabled: !!selectedName?.name,
   })
   const { data: selectedNameProfile } = useProfile({
-    name: selectedName?.name!,
+    name: selectedName!.name!,
     enabled: !!selectedName?.name,
     subgraphEnabled: false,
   })
 
   const resolverStatus = useResolverStatus({
-    name: selectedName?.name!,
+    name: selectedName!.name!,
     enabled: !!selectedName && !isWrappedLoading,
   })
 
@@ -189,9 +189,9 @@ const SelectPrimaryName = ({ data: { address }, dispatch, onDismiss }: Props) =>
     if (!transactionFlowItem) return
     const transactionCount = transactionFlowItem.transactions.length
     if (transactionCount === 1) {
-      // TODO: Fix typescript transactions error
       dispatch({
         name: 'setTransactions',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- transaction union type mismatch
         payload: transactionFlowItem.transactions as any[],
       })
       dispatch({

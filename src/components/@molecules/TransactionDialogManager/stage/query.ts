@@ -73,7 +73,7 @@ export const transactionSuccessHandler =
         Parameters: [hash: Hash]
         ReturnType: Transaction | null
       }>({ method: 'eth_getTransactionByHash', params: [tx] })
-    } catch (e) {
+    } catch {
       // this is expected to fail in most cases
     }
 
@@ -83,7 +83,7 @@ export const transactionSuccessHandler =
           method: 'eth_getTransactionByHash',
           params: [tx],
         })
-      } catch (e) {
+      } catch {
         console.error('Failed to get transaction info')
       }
     }
@@ -152,7 +152,7 @@ export const getLargestMedianGasFee = async () => {
       blockCount: 5,
       rewardPercentiles: [50],
     })
-  } catch (e) {
+  } catch {
     console.error('Failed to get fee history')
     return defaultMaxPriorityFeePerGas
   }
@@ -177,7 +177,7 @@ type CreateTransactionRequestUnsafeParameters = {
   connectorClient: ConnectorClientWithEns
   params: UniqueTransaction
   chainId: SupportedChain['id']
-  connections: any
+  connections: ReturnType<typeof useConnections>
 }
 
 export const createTransactionRequestUnsafe = async ({
@@ -218,8 +218,10 @@ export const createTransactionRequestUnsafe = async ({
   })
 
   if (connectorIsMetaMask(connections, connectorClient)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- MetaMask connector requires non-standard flag
     ;(request as any).__is_metamask = true
   } else if (connectorIsPhantom(connections, connectorClient)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Phantom wallet requires tuple-style accessList format
     request.accessList = request.accessList?.map((v) => [v.address, v.storageKeys]) as any
   }
 

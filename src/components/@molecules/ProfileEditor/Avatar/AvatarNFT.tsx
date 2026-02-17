@@ -390,7 +390,7 @@ export const AvatarNFT = ({
   }
 
   if (selectedNFT !== null) {
-    const nftReference = NFTs?.[selectedNFT]!
+    const nftReference = NFTs![selectedNFT]
 
     const handleConfirm = () => {
       const string = `eip155:1/${nftReference.id.tokenMetadata.tokenType.toLowerCase()}:${

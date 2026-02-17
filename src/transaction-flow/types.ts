@@ -17,6 +17,7 @@ export type TransactionStage = 'confirm' | 'sent' | 'complete' | 'failed'
 
 type GenericDataInput = {
   name: keyof DataInputComponent
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- data varies per input component, typed at usage site
   data: any
 }
 
@@ -35,6 +36,7 @@ export type GenericTransaction<
 
 type GenericIntro = {
   name: IntroComponentName
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- data varies per intro component, typed at usage site
   data: any
 }
 

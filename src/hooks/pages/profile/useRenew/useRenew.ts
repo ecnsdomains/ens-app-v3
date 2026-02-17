@@ -58,7 +58,7 @@ export const removeRenewParam = ({
 }: {
   query: ReturnType<typeof useRouterWithHistory>['query']
 }): string => {
-  const searchParams = new URLSearchParams(query as any)
+  const searchParams = new URLSearchParams(query as Record<string, string>)
   // remove the name param in case the page is a redirect from /profile page
   searchParams.delete('name')
   searchParams.delete('renew')

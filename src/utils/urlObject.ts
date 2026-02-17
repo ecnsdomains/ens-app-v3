@@ -27,6 +27,6 @@ export const createUrlObject = (
 
   return {
     ...urlObject,
-    query: { ...((urlObject.query as Record<string, any>) || {}), ...filteredQuery },
+    query: { ...((urlObject.query as Record<string, string | undefined>) || {}), ...filteredQuery },
   }
 }

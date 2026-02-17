@@ -17,13 +17,8 @@ import {
 } from '@ensdomains/thorin'
 
 import SocialDiscord from '@app/assets/social/SocialDiscord.svg'
-import SocialDiscourse from '@app/assets/social/SocialDiscourse.svg'
-import SocialDiscourseColour from '@app/assets/social/SocialDiscourseColour.svg'
 import SocialGithub from '@app/assets/social/SocialGithub.svg'
-import SocialMirror from '@app/assets/social/SocialMirror.svg'
-import SocialMirrorColour from '@app/assets/social/SocialMirrorColour.svg'
 import SocialX from '@app/assets/social/SocialX.svg'
-import SocialYoutube from '@app/assets/social/SocialYoutube.svg'
 import BaseLink from '@app/components/@atoms/BaseLink'
 import { SocialIcon } from '@app/components/SocialIcon'
 import { useChainName } from '@app/hooks/chain/useChainName'

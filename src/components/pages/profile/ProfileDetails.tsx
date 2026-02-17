@@ -61,10 +61,11 @@ const ProfileSection = ({
   type,
   name = '',
 }: {
-  condition: any
+  condition: boolean
   label: string
   array: Array<Record<'key' | 'value', string> & { iconKey?: string }>
-  button: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- accepts various profile record renderer components with differing prop shapes
+  button: React.ComponentType<any>
   supported?: Array<string>
   type?: 'address' | 'text'
   name?: string

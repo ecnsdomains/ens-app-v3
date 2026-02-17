@@ -21,8 +21,8 @@ export const parseDentityVerifiablePresentation =
       (credential) =>
         !!credential &&
         credential.type.includes('VerifiedENS') &&
-        !!credential.credentialSubject.ethAddress &&
-        !!credential.credentialSubject.ensName &&
+        !!credential.credentialSubject?.ethAddress &&
+        !!credential.credentialSubject?.ensName &&
         credential.credentialSubject?.ethAddress?.toLowerCase() === ownerAddress?.toLowerCase() &&
         credential.credentialSubject?.ensName?.toLowerCase() === name?.toLowerCase(),
     )

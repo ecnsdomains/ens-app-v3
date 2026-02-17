@@ -121,20 +121,20 @@ export const RecordInput = forwardRef(
   (
     {
       value,
-      readOnly,
+      readOnly: _readOnly,
       error: errorProp,
       validated,
       showDefaultPrefix = false,
       showDot,
       deletable = true,
-      showDot: showDotProp,
+      showDot: _showDotProp,
       prefix: prefixProp,
       label: labelProp,
       labelDisabled = 'Input is disabled',
       option,
       placeholder = 'Enter value here',
       onDelete,
-      onClear,
+      onClear: _onClear,
       disabled,
       ...props
     }: Props,

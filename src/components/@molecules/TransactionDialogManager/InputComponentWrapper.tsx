@@ -74,7 +74,7 @@ const InputComponentWrapper = ({ children }: { children: ReactNode }) => {
           // stale
           // and have been updated more than staleTime ago (isStale() doesn't always work for some reason)
           const staleQueries = cache.getAll().filter((q) => {
-            const { enabled } = q.options as any
+            const { enabled } = q.options as { enabled?: boolean }
             return (
               q.meta?.isRefetchQuery &&
               (typeof enabled === 'undefined' || enabled) &&

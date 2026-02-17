@@ -183,6 +183,7 @@ const ButtonsContainer = styled.div(
 )
 
 const isGetDnsOwnerQuery = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Query cache entries have `any` types; narrowing requires matching
   query: Query<any, any, any, any>,
 ): query is Query<
   GetDnsOwnerReturnType,

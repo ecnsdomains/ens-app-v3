@@ -1,6 +1,6 @@
 import { ElementType } from 'react'
 import { useTranslation } from 'react-i18next'
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 import { useDisconnect } from 'wagmi'
 
 import { ExitSVG } from '@ensdomains/thorin'
@@ -16,7 +16,7 @@ type LinkWrapperProps = {
   $isActive: boolean
 }
 
-const linkWrapperStyles = ({ theme, $asText, $disabled, $isActive }: LinkWrapperProps & { theme: any }) => css`
+const linkWrapperStyles = ({ theme, $asText, $disabled, $isActive }: LinkWrapperProps & { theme: DefaultTheme }) => css`
   --indicator-color: ${theme.colors.accent};
   position: relative;
   display: flex;
@@ -75,7 +75,7 @@ const StyledAnchor = styled.div(
   `,
 )
 
-const iconContainerStyles = ({ theme }: { theme: any }) => css`
+const iconContainerStyles = ({ theme }: { theme: DefaultTheme }) => css`
   width: ${theme.space['6']};
   height: ${theme.space['6']};
 `
@@ -86,7 +86,8 @@ const StyledExitIcon = styled(ExitSVG)(iconContainerStyles)
 // dynamically creating styled components inside render functions
 const StyledIconBase = styled.svg(iconContainerStyles)
 
-const DynamicIcon = ({ icon: Icon }: { icon: ElementType }) => {
+const DynamicIcon = ({ icon: Icon }: { icon?: ElementType }) => {
+  if (!Icon) return null
   return <StyledIconBase as={Icon} data-testid="route-item-icon" />
 }
 
@@ -104,7 +105,7 @@ export const RouteItem = ({
   const { t } = useTranslation('common')
   const activeRoute = useActiveRoute()
   const isActive = active || activeRoute === route.name
-  const icon = isActive ? route.icon?.active! : route.icon?.inactive!
+  const icon = isActive ? route.icon?.active : route.icon?.inactive
 
   const content = (
     <>

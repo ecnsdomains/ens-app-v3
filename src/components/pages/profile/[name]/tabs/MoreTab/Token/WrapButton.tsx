@@ -24,7 +24,7 @@ type Props = {
   isRegistrant: boolean
 }
 
-const WrapButton = ({ name, ownerData, profile, canBeWrapped, isManager, isRegistrant }: Props) => {
+const WrapButton = ({ name, ownerData, profile: _profile, canBeWrapped, isManager, isRegistrant: _isRegistrant }: Props) => {
   const { t } = useTranslation('profile')
 
   const { data: hasGraphError, isLoading: hasGraphErrorLoading } = useHasGraphError()

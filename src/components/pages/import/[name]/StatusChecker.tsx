@@ -46,7 +46,7 @@ export const StatusChecker = ({
   statusHelperElement,
   message,
 }: {
-  refetch: () => any
+  refetch: () => void
   isLoading: boolean
   isRefetching: boolean
   dataUpdatedAt: number | undefined

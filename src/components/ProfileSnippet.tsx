@@ -238,8 +238,7 @@ export const ProfileSnippet = ({
   const hookBeautifiedName = useBeautifiedName(name)
   const beautifiedName = hasMismatch ? name : hookBeautifiedName
 
-  // We are overriding the key parameter here to get the header url. This will break the type checker
-  // @ts-ignore
+  // We are overriding the key parameter here to get the header url
   const { data: headerUrl } = useEnsAvatar({ name, key: 'header' })
 
   const description = getTextRecord?.('description')?.value

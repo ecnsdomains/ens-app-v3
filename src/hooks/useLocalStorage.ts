@@ -80,11 +80,11 @@ export function useReadLocalStorage<T>(key: string): LocalStorageValue<T> {
   return storedValue
 }
 
-export const useLocalStorageReducer = <S = any, A = any>(
+export const useLocalStorageReducer = <S, A>(
   key: string,
   reducer: Reducer<S, A>,
   initialState: S,
-  initialAction?: ((initial: any) => any) | undefined,
+  initialAction?: ((initial: S) => S) | undefined,
 ): [S, Dispatch<A>] => {
   const [state, dispatch] = useImmerReducer(
     reducer,

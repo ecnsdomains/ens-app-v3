@@ -10,7 +10,7 @@ import { getIsCachedData } from '@app/utils/getIsCachedData'
 import { prepareQueryOptions } from '@app/utils/prepareQueryOptions'
 import { useQuery } from '@app/utils/query/useQuery'
 
-type UseSubgraphMetaParameters = {}
+type UseSubgraphMetaParameters = Record<string, never>
 
 type UseSubgraphMetaReturnType = {
   hasIndexingErrors: boolean

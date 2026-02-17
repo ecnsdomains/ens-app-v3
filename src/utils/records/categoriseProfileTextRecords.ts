@@ -1,4 +1,5 @@
 import type { DecodedText } from '@ensdomains/ensjs/dist/types'
+import type { DecodedContentHash } from '@ensdomains/ensjs/utils'
 
 import {
   supportedGeneralRecordKeys,
@@ -32,7 +33,7 @@ export const categoriseAndTransformTextRecords = ({
   appendVerificationProps,
 }: {
   texts?: DecodedText[]
-  contentHash?: any
+  contentHash?: DecodedContentHash | string | null
   appendVerificationProps?: (
     record: NormalisedAccountsRecord,
   ) => NormalisedAccountsRecord & { isVerified?: boolean; verifiers?: VerificationProtocol[] }

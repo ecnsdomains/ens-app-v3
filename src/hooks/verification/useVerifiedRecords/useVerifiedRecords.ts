@@ -60,7 +60,7 @@ export const getVerifiedRecords = async <TParams extends UseVerifiedRecordsParam
   return Promise.all(
     responses
       .filter(
-        (response): response is PromiseFulfilledResult<any> => response.status === 'fulfilled',
+        (response): response is PromiseFulfilledResult<unknown> => response.status === 'fulfilled',
       )
       .map(({ value }) => value)
       .map(parseVerificationData({ ownerAddress, name })),

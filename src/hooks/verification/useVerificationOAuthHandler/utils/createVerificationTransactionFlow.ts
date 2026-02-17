@@ -10,7 +10,7 @@ type Props = Pick<
   'name' | 'verifier' | 'resolverAddress' | 'verifiedPresentationUri'
 > & {
   userAddress?: Hash
-  router?: any
+  router?: unknown
   createTransactionFlow?: CreateTransactionFlow
 }
 

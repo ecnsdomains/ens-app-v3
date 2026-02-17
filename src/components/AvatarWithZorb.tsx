@@ -89,7 +89,7 @@ export const NameAvatar = ({
 }
 
 export const AvatarWithZorb = ({
-  src,
+  src: _src,
   name,
   address,
   size,
@@ -109,7 +109,7 @@ export const AvatarWithZorb = ({
 }
 
 export const AddressAvatar = ({
-  src,
+  src: _src,
   address,
   size,
   ...props

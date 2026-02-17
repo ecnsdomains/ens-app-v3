@@ -1,5 +1,5 @@
 import { ElementType } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 const SocialIconWrapper = styled.a(
   ({ theme }) => css`
@@ -13,7 +13,7 @@ const SocialIconWrapper = styled.a(
   `,
 )
 
-const iconStyles = ({ theme, $iconColor }: { theme: any; $iconColor?: string }) => css`
+const iconStyles = ({ theme, $iconColor }: { theme: DefaultTheme; $iconColor?: string }) => css`
   height: 100%;
   position: absolute;
   transition: 0.15s all ease-in-out;
@@ -24,7 +24,7 @@ const iconStyles = ({ theme, $iconColor }: { theme: any; $iconColor?: string }) 
   }
 `
 
-const coloredIconStyles = ({ theme }: { theme: any }) => css`
+const coloredIconStyles = ({ theme: _theme }: { theme: DefaultTheme }) => css`
   height: 100%;
   position: absolute;
   transition: 0.15s all ease-in-out;

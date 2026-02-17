@@ -4,7 +4,7 @@ import { VerifiableCredential } from '@app/types/verification'
 export const tryVerifyVerifiableCredentials = async (data?: VerifiableCredential) => {
   try {
     return !!data
-  } catch (e) {
+  } catch {
     return false
   }
 }

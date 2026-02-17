@@ -91,7 +91,7 @@ export const useExpiryDetails = ({ name, details }: Input, options: Options = {}
                   {
                     type: 'registration',
                     date: registrationData?.data?.registrationDate,
-                    link: buildTransactionUrl(registrationData?.data?.transactionHash!),
+                    link: buildTransactionUrl(registrationData.data!.transactionHash),
                   },
                 ]
               : []),

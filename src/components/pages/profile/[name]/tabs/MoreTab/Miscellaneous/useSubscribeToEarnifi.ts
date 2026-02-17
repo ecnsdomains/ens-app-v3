@@ -5,7 +5,7 @@ export const EARNIFI_ENDPOINT = 'https://notifications-api.vercel.app/api/v1/ens
 export const getErrorMessage = async (response: Response) => {
   try {
     const json = await response.json()
-    return (json as any)?.message
+    return (json as Record<string, unknown>)?.message as string | undefined
   } catch (e) {
     console.error(e)
     return undefined

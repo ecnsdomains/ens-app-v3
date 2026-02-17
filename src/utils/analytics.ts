@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    plausible: any
+    plausible: (eventName: string, options?: { props: Record<string, unknown> }) => void
   }
 }
 
@@ -31,7 +31,7 @@ export function getUtm() {
 export const setupAnalytics = () => {
   setUtm()
 }
-export const trackEvent = async (type: string, chain: string, customProperties?: any) => {
+export const trackEvent = async (type: string, chain: string, customProperties?: Record<string, unknown>) => {
   const referrer = getUtm()
 
   const props = { ...customProperties, referrer }

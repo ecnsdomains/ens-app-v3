@@ -1,5 +1,7 @@
 import { UrlObject } from 'url'
 
+import type { ComponentType, SVGProps } from 'react'
+
 import {
   CogActiveSVG,
   CogSVG,
@@ -28,8 +30,8 @@ export type RouteItemObj = {
   disabled: boolean
   connected: boolean
   icon?: {
-    inactive: any
-    active: any
+    inactive: ComponentType<SVGProps<SVGSVGElement>>
+    active: ComponentType<SVGProps<SVGSVGElement>>
   }
   onlyDropdown?: boolean
 }
@@ -176,7 +178,7 @@ export const rewrites = [
 export const getDestination = (url: UrlObject) => {
   const isIPFS = !!process.env.NEXT_PUBLIC_IPFS
   let href = url.pathname!
-  const query = new URLSearchParams((url.query || '') as any)
+  const query = new URLSearchParams((url.query || '') as string)
   for (const rewrite of rewrites) {
     const regex = new RegExp(rewrite.source.replace(/:[^/]+/g, '([^/]+)'))
     const match = regex.exec(href)

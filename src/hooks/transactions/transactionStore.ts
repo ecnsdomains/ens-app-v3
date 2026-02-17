@@ -107,7 +107,7 @@ function safeParseJsonData(string: string | null): Data {
   try {
     const value = string ? parse<Data>(string) : {}
     return typeof value === 'object' ? value : {}
-  } catch (err) {
+  } catch {
     return {}
   }
 }

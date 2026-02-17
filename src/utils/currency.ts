@@ -15,6 +15,7 @@ export const makeDisplay = ({
   const options: Intl.NumberFormatOptions & { [x: string]: string } = {
     style: 'currency',
     currency: symbol.toLowerCase(),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Intl.NumberFormatOptions types don't include 'auto' for useGrouping despite browser support
     useGrouping: 'auto' as any,
     trailingZeroDisplay: 'auto',
   }

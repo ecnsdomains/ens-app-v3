@@ -16,6 +16,7 @@ export function QueryProviders({ children }: Props) {
     <WagmiProvider config={wagmiConfig} reconnectOnMount={typeof window !== 'undefined'}>
       <PersistQueryClientProvider
         client={queryClient}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- PersistQueryClientProvider persistOptions type mismatch with OmitKeyof return type
         persistOptions={createPersistConfig({ queryClient }) as any}
       >
         {children}

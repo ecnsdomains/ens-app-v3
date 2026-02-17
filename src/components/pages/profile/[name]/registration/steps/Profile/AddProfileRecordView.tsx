@@ -110,6 +110,7 @@ const DismissButtonWrapper = styled.div(
 )
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Control's second generic defaults to any in react-hook-form
   control: Control<ProfileEditorForm, any>
   onAdd?: (records: ProfileRecord[]) => void
   onClose?: () => void

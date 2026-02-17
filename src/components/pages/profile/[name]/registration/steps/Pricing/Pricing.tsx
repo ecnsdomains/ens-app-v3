@@ -155,14 +155,14 @@ const InfoItem = styled.div(
 )
 
 const CheckboxWrapper = styled.div<{ $name: string }>(
-  ({ theme, $name }) => css`
+  ({ theme: _theme, $name }) => css`
     width: 100%;
     grid-area: ${$name};
   `,
 )
 
 const OutlinedContainerDescription = styled(Typography)<{ $name: string }>(
-  ({ theme, $name }) => css`
+  ({ theme: _theme, $name }) => css`
     grid-area: ${$name};
   `,
 )

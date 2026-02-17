@@ -267,7 +267,7 @@ const dateToInput = (date: Date) =>
     .toISOString()
     .replace(/:[0-9][0-9]\..*/g, '')
 
-type PropertyFunc = (name: string) => (property: string, value: any, toString?: boolean) => void
+type PropertyFunc = (name: string) => (property: string, value: string | number | undefined, toString?: boolean) => void
 
 const usePointVars = (
   chartPos: number | undefined,
@@ -324,7 +324,7 @@ const TemporaryPremium = ({ startDate, name }: Props) => {
         if (value === undefined) {
           bg.style.removeProperty(propertyName)
         } else {
-          bg.style.setProperty(propertyName, str)
+          bg.style.setProperty(propertyName, String(str))
         }
       }
     },

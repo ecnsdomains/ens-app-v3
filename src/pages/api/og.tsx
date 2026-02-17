@@ -22,7 +22,7 @@ export default async function handler(req: NextRequest) {
   const title = searchParams.get('title') || 'ECNS'
   const subtitle =
     searchParams.get('subtitle') || 'Your web3 username on Ethereum Classic'
-  const theme = searchParams.get('theme') || 'default' // default, minimal, profile
+  const _theme = searchParams.get('theme') || 'default' // default, minimal, profile
 
   try {
     // Load IBM Plex Mono font (would need to be hosted or use system fonts)

@@ -47,7 +47,7 @@ export const recordOptionsToToupleList = (
 
 const mergeRecords =
   <
-    TMatchObject extends Record<string, any>,
+    TMatchObject extends Record<string, unknown>,
     TMatchKey extends keyof TMatchObject = keyof TMatchObject,
   >(
     matchKey: TMatchKey,
@@ -69,7 +69,7 @@ export const mergeTextRecords = mergeRecords<TextRecord>('key')
 export const mergeAddressRecords = mergeRecords<AddressRecord>('id')
 
 const checkRecordsEqual =
-  <TMatchObject extends Record<string, any>>(keyFn: (item: TMatchObject) => string) =>
+  <TMatchObject extends Record<string, unknown>>(keyFn: (item: TMatchObject) => string) =>
   (a: TMatchObject[] = [], b: TMatchObject[] = []): boolean => {
     return Object.values(
       [...a, ...b].reduce(
@@ -150,6 +150,7 @@ export const profileRecordsToKeyValue = async (records: Profile): Promise<Record
     ...(records.abi
       ? {
           abi: await encodeAbi({
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- ensjs encodeAbi expects flexible ABI data type
             data: records.abi.abi as any,
             encodeAs: contentTypeToEncodeAs(records.abi.contentType as 1 | 2 | 4 | 8),
           }),
@@ -188,6 +189,7 @@ export const checkProfileRecordsContains = ({
 
 const hasCoins = (
   records: unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- GetRecordsReturnType generics require `any` for flexible type narrowing
 ): records is GetRecordsReturnType<any, (string | number)[], any, any> => {
   return typeof records === 'object' && !!records && 'coins' in records
 }

@@ -1,3 +1,10 @@
 export type VerifiableCredential = {
   type: Array<'VerifiedCredential' | string>
-} & Record<string, any>
+  credentialSubject?: {
+    ethAddress?: string
+    ensName?: string
+    username?: string
+    name?: string
+    verifiedEmail?: string
+  }
+} & Record<string, unknown>
