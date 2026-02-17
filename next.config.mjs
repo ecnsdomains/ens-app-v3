@@ -2,32 +2,36 @@
 
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-param-reassign */
 import { execSync } from 'child_process'
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
-
-import StylelintPlugin from 'stylelint-webpack-plugin'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
-
-const babelIncludeRegexes = [
-  /next[\\/]dist[\\/]shared[\\/]lib/,
-  /next[\\/]dist[\\/]client/,
-  /next[\\/]dist[\\/]pages/,
-  /[\\/](strip-ansi|ansi-regex)[\\/]/,
-]
 
 /**
  * @type {import('next').NextConfig}
  * */
 const nextConfig = {
-  // Enable Turbopack with default config (silence webpack-only config warning)
-  turbopack: {},
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+    resolveAlias: {
+      // Stub React Native async-storage (transitive from @reown/appkit-adapter-wagmi)
+      '@react-native-async-storage/async-storage': '',
+      // IPFS build: stub out styles.css import
+      ...(process.env.NEXT_PUBLIC_IPFS
+        ? { '../styles.css': './src/stub.css' }
+        : {}),
+    },
+  },
   transpilePackages: [],
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
+  },
+  // Expose git hash as build-time env var (replaces webpack DefinePlugin)
+  env: {
+    CONFIG_BUILD_ID: execSync('git rev-parse HEAD').toString().trim(),
   },
   images: {
     remotePatterns: [
@@ -130,97 +134,6 @@ const nextConfig = {
   generateBuildId: () => {
     const hash = execSync('git rev-parse HEAD').toString().trim()
     return hash
-  },
-  webpack: (config, options) => {
-    for (const rule of config.module.rules) {
-      if (rule.oneOf && rule.oneOf.length > 5) {
-        for (const item of rule.oneOf) {
-          if (typeof item.exclude === 'function' && item.test.toString().includes('js')) {
-            /**
-             * @param {string} excludePath
-             * @returns {boolean}
-             */
-            item.exclude = (excludePath) => {
-              if (babelIncludeRegexes.some((r) => r.test(excludePath))) {
-                return false
-              }
-              return /node_modules/.test(excludePath)
-            }
-          }
-        }
-      }
-    }
-
-    // Grab the existing rule that handles SVG imports
-    // @ts-ignore - rules is a private property that is not typed
-    const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'))
-
-    config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
-      {
-        ...fileLoaderRule,
-        test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
-      },
-      // Convert all other *.svg imports to React components
-      {
-        test: /\.svg$/i,
-        issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-        use: ['@svgr/webpack'],
-      },
-    )
-
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    fileLoaderRule.exclude = /\.svg$/i
-
-    config.resolve.mainFields = ['browser', 'module', 'main']
-
-    // Fix styled-components ESM/CJS resolution in SSR
-    // Forces all imports to use the same styled-components instance
-    const styledComponentsPath = path.resolve(
-      __dirname,
-      'node_modules/styled-components/dist/styled-components.esm.js',
-    )
-
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      'styled-components': styledComponentsPath,
-    }
-
-    // Use NormalModuleReplacementPlugin to force resolution across vendor chunks
-    config.plugins.push(
-      new options.webpack.NormalModuleReplacementPlugin(
-        /^styled-components$/,
-        styledComponentsPath,
-      ),
-    )
-
-    // Suppress @metamask/sdk trying to import React Native async-storage (web build doesn't need it)
-    config.plugins.push(
-      new options.webpack.IgnorePlugin({
-        resourceRegExp: /^@react-native-async-storage\/async-storage$/,
-      }),
-    )
-
-    config.plugins.push(
-      new StylelintPlugin({
-        files: './src/**/*.tsx',
-        extensions: ['tsx'],
-        failOnError: process.env.NODE_ENV !== 'development',
-        cache: true,
-      }),
-    )
-    config.plugins.push(
-      new options.webpack.DefinePlugin({
-        'process.env.CONFIG_BUILD_ID': JSON.stringify(options.buildId),
-      }),
-    )
-    if (process.env.NEXT_PUBLIC_IPFS) {
-      config.resolve.alias['../styles.css'] = path.resolve(__dirname, 'src/stub.css')
-    }
-
-    return config
   },
   ...(process.env.NEXT_PUBLIC_IPFS
     ? {

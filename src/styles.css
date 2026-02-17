@@ -87,13 +87,6 @@ a[data-variant="accent"] {
   color: var(--ecns-primary) !important;
 }
 
-/* Intercom z-index fix */
-.intercom-lightweight-app,
-#intercom-container {
-  position: relative;
-  z-index: 998 !important;
-}
-
 /* Identicon background */
 cpsl-identicon {
   background: var(--ecns-primary) !important;

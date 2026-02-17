@@ -4,9 +4,6 @@ let csp = ''
 csp += 'worker-src'
 // allow our own worker scripts
 csp += " 'self' blob:"
-// allow Para (Capsule) worker scripts
-csp += ' https://app.beta.usecapsule.com'
-csp += ' https://app.usecapsule.com'
 // end worker-src
 csp += ';'
 
@@ -14,22 +11,12 @@ csp += ';'
 csp += ' script-src'
 // allow self
 csp += " 'self'"
-// allow plausible script
-csp += ' plausible.io'
 // allow PostHog
 csp += ' jakob.ecns.domains'
 // allow cloudflare analytics script
 csp += ' https://static.cloudflareinsights.com'
 // allow loading from the pages domain for this app
 csp += ' *.ecns-app.pages.dev'
-// allow intercom scripts
-csp += ' https://app.intercom.io'
-csp += ' https://widget.intercom.io'
-csp += ' https://js.intercomcdn.com'
-// allow Para (Capsule) scripts
-csp += ' https://app.beta.usecapsule.com'
-csp += ' https://app.usecapsule.com'
-
 // allow inline wasm evaluation
 csp += " 'wasm-unsafe-eval'"
 // INLINE SCRIPT HASHES

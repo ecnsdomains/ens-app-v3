@@ -255,12 +255,6 @@ export default class MyDocument extends Document {
           <link rel="dns-prefetch" href="https://rpc.mordor.etccooperative.org" />
           <link rel="dns-prefetch" href="https://etc.rivet.link" />
 
-          {/* ===== ANALYTICS ===== */}
-          <script
-            defer
-            data-domain="ecns.domains"
-            src="https://plausible.io/js/script.outbound-links.js"
-          />
         </Head>
         <body>
           <Main />

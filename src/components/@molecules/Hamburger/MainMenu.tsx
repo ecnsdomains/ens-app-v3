@@ -155,7 +155,7 @@ const RoutesSection = styled.div(
   miscSectionStyle,
 )
 
-const RouteItem = styled.a(
+const RouteItem = styled.div(
   ({ theme }) => css`
     transition: all 0.1s ease-in-out;
     text-align: left;
