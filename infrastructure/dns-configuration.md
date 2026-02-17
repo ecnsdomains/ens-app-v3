@@ -302,7 +302,7 @@ Set these in Vercel for both app and docs projects:
 # Production
 NEXT_PUBLIC_DOMAIN=ecns.domains
 NEXT_PUBLIC_CHAIN_NAME=etc
-NEXT_PUBLIC_PROVIDER=https://etc.rivet.cloud
+NEXT_PUBLIC_PROVIDER=https://etc.rivet.link
 NEXT_PUBLIC_GRAPH_URI=https://subgraph.ecns.domains/graphql
 
 # Preview/Development

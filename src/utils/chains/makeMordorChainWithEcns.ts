@@ -25,7 +25,7 @@ export const etcMainnet = {
   name: 'Ethereum Classic',
   nativeCurrency: { name: 'Ether', symbol: 'ETC', decimals: 18 },
   rpcUrls: {
-    default: { http: ['https://etc.rivet.cloud'] },
+    default: { http: ['https://etc.rivet.link'] },
   },
   blockExplorers: {
     default: {

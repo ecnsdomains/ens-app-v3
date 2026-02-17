@@ -253,7 +253,7 @@ export default class MyDocument extends Document {
           {/* ===== CANONICAL & DNS PREFETCH ===== */}
           <link rel="canonical" href="https://ecns.domains" />
           <link rel="dns-prefetch" href="https://rpc.mordor.etccooperative.org" />
-          <link rel="dns-prefetch" href="https://etc.rivet.cloud" />
+          <link rel="dns-prefetch" href="https://etc.rivet.link" />
 
           {/* ===== ANALYTICS ===== */}
           <script

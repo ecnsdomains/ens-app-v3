@@ -186,6 +186,11 @@
       "esbuild",
       "fsevents"
     ],
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@react-native-async-storage/async-storage"
+      ]
+    },
     "overrides": {
       "clones-with-immutable-args": "npm:empty-npm-package@*",
       "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@0.3.0-beta.13",

@@ -70,7 +70,7 @@ Add these environment variables for **Production**:
 ```bash
 # Chain Configuration
 NEXT_PUBLIC_CHAIN_NAME=etc
-NEXT_PUBLIC_PROVIDER=https://etc.rivet.cloud
+NEXT_PUBLIC_PROVIDER=https://etc.rivet.link
 NEXT_PUBLIC_DOMAIN=ecns.domains
 
 # Optional: Analytics

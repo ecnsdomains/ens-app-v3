@@ -83,7 +83,7 @@ const localStorageWithInvertMiddleware = (): Storage | undefined => {
 
 // ETC RPC URLs
 const mordorRpcUrl = 'https://rpc.mordor.etccooperative.org'
-const etcMainnetRpcUrl = 'https://etc.rivet.cloud'
+const etcMainnetRpcUrl = 'https://etc.rivet.link'
 
 export const transports = {
   ...(isLocalProvider
