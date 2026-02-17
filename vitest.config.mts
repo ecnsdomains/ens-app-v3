@@ -36,7 +36,6 @@ export default defineConfig({
     typecheck: {
       ignoreSourceErrors: true,
     },
-    environmentMatchGlobs: [['**/*.node.test.ts', 'node']],
     deps: {
       optimizer: {
         web: {
