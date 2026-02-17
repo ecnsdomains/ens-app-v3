@@ -29,18 +29,11 @@ export const useInfiniteQuery = <
   TQueryKey extends QueryKey = QueryKey,
   TPageParam = unknown,
 >(
-  options: UseInfiniteQueryOptions<
-    TQueryFnData,
-    TError,
-    TData,
-    TQueryFnData,
-    TQueryKey,
-    TPageParam
-  >,
+  options: UseInfiniteQueryOptions<TQueryFnData, TError, TData, TQueryKey, TPageParam>,
   client?: QueryClient,
 ): CustomInifiniteQueryResult<TData, TError> => {
   const enabled = options.enabled ?? true
-  const results = useTanstackInfiniteQuery(options, client)
+  const results = useTanstackInfiniteQuery(options, client) as UseInfiniteQueryResult<TData, TError>
   return {
     ...results,
     isLoading: Boolean(enabled && results.isPending),

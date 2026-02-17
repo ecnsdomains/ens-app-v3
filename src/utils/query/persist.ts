@@ -3,7 +3,7 @@ import type {
   Persister,
   PersistQueryClientOptions,
 } from '@tanstack/query-persist-client-core'
-import type { QueryClient } from '@tanstack/react-query'
+import type { OmitKeyof, QueryClient } from '@tanstack/react-query'
 import { del, get, set } from 'idb-keyval'
 import { deserialize } from 'wagmi'
 
@@ -38,11 +38,10 @@ function createIDBPersister(idbValidKey: IDBValidKey = 'reactQuery') {
 const persister = () => createIDBPersister('wagmi.cache')
 
 export const createPersistConfig = ({
-  queryClient,
+  queryClient: _queryClient,
 }: {
   queryClient: QueryClient
-}): PersistQueryClientOptions => ({
-  queryClient,
+}): OmitKeyof<PersistQueryClientOptions, 'queryClient'> => ({
   persister: persister(),
   dehydrateOptions: {
     shouldDehydrateQuery: (query: any) =>

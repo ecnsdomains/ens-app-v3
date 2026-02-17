@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { emptyAddress } from '@app/utils/constants'
 import { isLabelTooLong } from '@app/utils/utils'
 
-import { useOwner } from './nameservice/public/useOwner'
+import { useOwner, type UseOwnerReturnType } from './nameservice/public/useOwner'
 import { useWrapperData } from './nameservice/public/useWrapperData'
 import { usePccExpired } from './fuses/usePccExpired'
 import { useValidate } from './useValidate'
@@ -25,10 +25,11 @@ export const useValidateSubnameLabel = ({
   const validation = useValidate({ input: label, enabled: validationEnabled })
 
   const ownerEnabled = validationEnabled && validation.isValid && validation.labelCount === 1
-  const { data: ownership, isLoading: isOwnerLoading } = useOwner({
+  const { data: ownership_, isLoading: isOwnerLoading } = useOwner({
     name: `${validation.name}.${name}`,
     enabled: ownerEnabled,
   })
+  const ownership = ownership_ as UseOwnerReturnType | undefined
 
   const wrapperDataEnabled = ownerEnabled && isWrapped
   const { data: wrapperData, isLoading: isWrapperDataLoading } = useWrapperData({

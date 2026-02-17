@@ -87,7 +87,7 @@ export const useResolverHasInterfaces = <
 
   const errors = getResolverInterfaceErrors<ArrayToUnion<TInterfaceNames>, TInterfaceNames>({
     interfaceNames,
-    hasInterfaces: data,
+    hasInterfaces: data as boolean[] | undefined,
   })
 
   return {

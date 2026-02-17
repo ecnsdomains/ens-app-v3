@@ -247,7 +247,8 @@ export const useRecords = <
 
   const query = useQuery({
     ...preparedOptions,
-    placeholderData,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    placeholderData: placeholderData as any,
   })
 
   return {

@@ -46,11 +46,12 @@ export const useBasicName = ({
   const isRoot = name === '[root]'
 
   const {
-    data: ownerData,
+    data: ownerData_,
     isLoading: isOwnerLoading,
     isCachedData: isOwnerCachedData,
     refetchIfEnabled: refetchOwner,
   } = useOwner({ name: normalisedName, enabled: commonEnabled })
+  const ownerData = ownerData_ as UseOwnerReturnType | undefined
   const {
     data: wrapperData,
     isLoading: isWrapperDataLoading,

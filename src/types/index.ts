@@ -168,17 +168,19 @@ export type ConnectorClientWithEns = Client<Transport, SupportedChain, Account>
 export type ConfigWithEns = typeof wagmiConfig
 export type ClientWithEns = ReturnType<ConfigWithEns['getClient']>
 
-export type QueryConfig<TData, TError, TSelectData = TData> = Pick<
-  UseQueryOptions<TData, TError, TSelectData>,
-  'gcTime' | 'enabled' | 'staleTime'
-> & {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type QueryConfig<TData = unknown, TError = Error, TSelectData = TData> = {
+  gcTime?: number
+  enabled?: boolean
+  staleTime?: number
   /** Scope the cache to a given context. */
   scopeKey?: string
 }
-export type InfiniteQueryConfig<TData, TError, TSelectData = TData> = Pick<
-  UseInfiniteQueryOptions<TData, TError, TSelectData>,
-  'gcTime' | 'enabled' | 'staleTime'
-> & {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type InfiniteQueryConfig<TData = unknown, TError = Error, TSelectData = TData> = {
+  gcTime?: number
+  enabled?: boolean
+  staleTime?: number
   /** Scope the cache to a given context. */
   scopeKey?: string
 }

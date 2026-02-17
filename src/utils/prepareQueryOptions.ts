@@ -13,7 +13,7 @@ export function prepareQueryOptions<
 >(
   options: UndefinedInitialDataOptions<TQueryFnData, TError, TData, TQueryKey>,
 ): UndefinedInitialDataOptions<TQueryFnData, TError, TData, TQueryKey> & {
-  queryKey: DataTag<TQueryKey, TQueryFnData>
+  queryKey: DataTag<TQueryKey, TQueryFnData, TError>
 }
 export function prepareQueryOptions<
   TQueryFnData = unknown,
@@ -23,7 +23,7 @@ export function prepareQueryOptions<
 >(
   options: DefinedInitialDataOptions<TQueryFnData, TError, TData, TQueryKey>,
 ): DefinedInitialDataOptions<TQueryFnData, TError, TData, TQueryKey> & {
-  queryKey: DataTag<TQueryKey, TQueryFnData>
+  queryKey: DataTag<TQueryKey, TQueryFnData, TError>
 }
 export function prepareQueryOptions(options: Record<string, any>) {
   const newOptions = {} as Record<string, any>

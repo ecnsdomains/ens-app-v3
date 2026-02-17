@@ -1,4 +1,4 @@
-import { QueryFunctionContext, useQuery, UseQueryOptions } from '@tanstack/react-query'
+import { QueryFunctionContext, useQuery } from '@tanstack/react-query'
 
 import { getCacheBustExpiry, TTL_MS } from '@app/utils/metadataCache'
 import { createMetaDataUrl } from '@app/utils/metadataUrl'
@@ -27,19 +27,28 @@ const checkImageExists = async (
   }
 }
 
-type UseEnsAvatarParameters = Omit<UseQueryOptions, 'queryFn' | 'queryKey'> & {
+type UseEnsAvatarParameters = {
   name?: string
   key?: 'avatar' | 'header'
+  staleTime?: number
+  enabled?: boolean
+  gcTime?: number
 }
 
-export const useEnsAvatar = ({ name, key, staleTime, enabled = true }: UseEnsAvatarParameters) => {
+export const useEnsAvatar = ({ name, key, staleTime, enabled = true, gcTime }: UseEnsAvatarParameters) => {
   const chainName = useChainName()
   const url = createMetaDataUrl({ name, chainName, mediaKey: key })
 
-  return useQuery({
-    queryKey: [META_DATA_QUERY_KEY, url],
+  const result = useQuery({
+    queryKey: [META_DATA_QUERY_KEY, url] as const,
     queryFn: checkImageExists,
     staleTime: staleTime ?? STALE_TIME,
     enabled: enabled && !!url,
+    gcTime,
   })
+
+  return {
+    ...result,
+    data: result.data as string | null | undefined,
+  }
 }

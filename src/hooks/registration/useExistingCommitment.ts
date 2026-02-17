@@ -305,7 +305,7 @@ export const useExistingCommitment = <TParams extends UseExistingCommitmentParam
   })
 
   useInvalidateOnBlock({
-    enabled: preparedOptions.enabled,
+    enabled: preparedOptions.enabled as boolean | undefined,
     queryKey: preparedOptions.queryKey,
   })
 
