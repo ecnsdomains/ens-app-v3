@@ -25,6 +25,6 @@ export const createMetaDataUrl = ({
   chainName: string
   mediaKey?: 'avatar' | 'header'
 }): string | null => {
-  if (!name || !chainName || !mediaKey) return null
+  if (!META_DATA_BASE_URL || !name || !chainName || !mediaKey) return null
   return `${META_DATA_BASE_URL}/${chainName}/${mediaKey}/${name}`
 }

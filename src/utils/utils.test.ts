@@ -165,13 +165,13 @@ describe('makeBlockExplorerLink', () => {
   it('should default to ETC mainnet blockscout', () => {
     const data = 'test'
     const result = makeEtherscanLink(data)
-    expect(result).toEqual(`https://blockscout.com/etc/mainnet/tx/${data}`)
+    expect(result).toEqual(`https://etc.blockscout.com/tx/${data}`)
   })
   it('should allow custom route', () => {
     const data = 'test'
     const route = 'address'
     const result = makeEtherscanLink(data, undefined, route)
-    expect(result).toEqual(`https://blockscout.com/etc/mainnet/address/${data}`)
+    expect(result).toEqual(`https://etc.blockscout.com/address/${data}`)
   })
 })
 

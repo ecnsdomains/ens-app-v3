@@ -35,10 +35,9 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'metadata.ens.domains',
-      },
+      ...(process.env.NEXT_PUBLIC_METADATA_URL
+        ? [{ protocol: /** @type {const} */ ('https'), hostname: new URL(process.env.NEXT_PUBLIC_METADATA_URL).hostname }]
+        : []),
     ],
   },
   async headers() {

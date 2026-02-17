@@ -21,7 +21,7 @@ export const localhostWithEns = makeLocalhostChainWithEnsAndOverrides<typeof loc
   deploymentAddresses,
 )
 
-const ENS_SUBGRAPH_API_KEY = '9ad5cff64d93ed2c33d1a57b3ec03ea9'
+const ENS_SUBGRAPH_API_KEY = process.env.NEXT_PUBLIC_ENS_SUBGRAPH_API_KEY || ''
 
 export const mainnetWithEns = addEnsContractsWithSubgraphAndOverrides({
   chain: mainnet,

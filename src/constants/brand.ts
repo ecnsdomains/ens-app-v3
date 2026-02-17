@@ -18,27 +18,19 @@ export const BRAND = {
 
 /**
  * External service URLs for backend workers and third-party services.
- * These need deployment per-brand. When a service is not yet deployed,
- * the corresponding feature flag should be false to hide the UI.
+ * Set via NEXT_PUBLIC_* env vars in .env.local when services are deployed.
+ * Empty string = service not connected (UI should check before calling).
  */
 export const SERVICES = {
-  // TODO: Deploy ECNS metadata service — currently points to ENS
-  metadataUrl: 'https://metadata.ens.domains',
-  // TODO: Deploy ECNS avatar upload worker
-  avatarUploadUrl: 'https://avatar-upload.ens-cf.workers.dev',
-  // TODO: Deploy ECNS NFT worker
-  nftWorkerUrl: 'https://ens-nft-worker.ens-cf.workers.dev',
-  // TODO: Deploy ECNS analytics proxy
-  analyticsApiUrl: 'https://jakob.ens.domains',
-  // TODO: Deploy ECNS auth worker for Dentity verification
-  authWorkerStagingUrl: 'https://auth-worker-staging.ens-cf.workers.dev/v1',
-  authWorkerUrl: 'https://auth-worker.ens-cf.workers.dev/v1',
-  // TODO: Deploy ECNS MoonPay worker
-  moonpayWorkerUrl: 'https://moonpay-worker.ens-cf.workers.dev',
-  // TODO: Deploy ECNS faucet worker
-  faucetWorkerUrl: 'https://ens-faucet.ens-cf.workers.dev',
-  // TODO: Deploy ECNS DotBox premium marketplace worker
-  dotboxWorkerUrl: 'https://dotbox-worker.ens-cf.workers.dev',
+  metadataUrl: process.env.NEXT_PUBLIC_METADATA_URL || '',
+  avatarUploadUrl: process.env.NEXT_PUBLIC_AVATAR_UPLOAD_URL || '',
+  nftWorkerUrl: process.env.NEXT_PUBLIC_NFT_WORKER_URL || '',
+  analyticsApiUrl: process.env.NEXT_PUBLIC_ANALYTICS_API_URL || '',
+  authWorkerStagingUrl: process.env.NEXT_PUBLIC_AUTH_WORKER_STAGING_URL || '',
+  authWorkerUrl: process.env.NEXT_PUBLIC_AUTH_WORKER_URL || '',
+  moonpayWorkerUrl: process.env.NEXT_PUBLIC_MOONPAY_WORKER_URL || '',
+  faucetWorkerUrl: process.env.NEXT_PUBLIC_FAUCET_WORKER_URL || '',
+  dotboxWorkerUrl: process.env.NEXT_PUBLIC_DOTBOX_WORKER_URL || '',
 } as const
 
 /**
@@ -46,12 +38,12 @@ export const SERVICES = {
  * Set to true when the corresponding backend service is ready.
  */
 export const FEATURES = {
-  /** MoonPay fiat on-ramp integration */
+  /** MoonPay fiat on-ramp integration (requires moonpayWorkerUrl) */
   hasFiatOnramp: false,
-  /** DotBox premium name marketplace */
-  hasPremiumMarketplace: true,
-  /** Dentity identity verification */
-  hasVerification: true,
-  /** ENS/ECNS faucet for testnet */
+  /** DotBox premium name marketplace (requires dotboxWorkerUrl) */
+  hasPremiumMarketplace: false,
+  /** Dentity identity verification (requires authWorkerUrl) */
+  hasVerification: false,
+  /** ECNS faucet for testnet (requires faucetWorkerUrl) */
   hasFaucet: false,
 } as const

@@ -11,8 +11,6 @@ csp += ';'
 csp += ' script-src'
 // allow self
 csp += " 'self'"
-// allow PostHog
-csp += ' jakob.ecns.domains'
 // allow cloudflare analytics script
 csp += ' https://static.cloudflareinsights.com'
 // allow loading from the pages domain for this app

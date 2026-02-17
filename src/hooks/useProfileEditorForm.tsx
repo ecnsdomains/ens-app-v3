@@ -22,9 +22,7 @@ import { validateAbi } from '../validators/validateAbi'
 const SINGLE_VALUE_RECORD_TYPES = ['contenthash']
 
 const SUPPORTED_AVUP_ENDPOINTS = [
-  'https://euc.li',
-  'https://ens.xyz',
-  SERVICES.avatarUploadUrl,
+  ...(SERVICES.avatarUploadUrl ? [SERVICES.avatarUploadUrl] : []),
   ...(process.env.NEXT_PUBLIC_AVUP_ENDPOINT ? [process.env.NEXT_PUBLIC_AVUP_ENDPOINT] : []),
 ]
 

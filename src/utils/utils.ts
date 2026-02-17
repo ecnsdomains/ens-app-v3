@@ -91,8 +91,8 @@ export const formatDurationOfDates = ({
 }
 
 export const makeBlockExplorerLink = (data: string, chainId?: number, route: string = 'tx') => {
-  if (chainId === 63) return `https://blockscout.com/etc/mordor/${route}/${data}`
-  return `https://blockscout.com/etc/mainnet/${route}/${data}`
+  if (chainId === 63) return `https://etc-mordor.blockscout.com/${route}/${data}`
+  return `https://etc.blockscout.com/${route}/${data}`
 }
 
 /** @deprecated Use makeBlockExplorerLink instead */

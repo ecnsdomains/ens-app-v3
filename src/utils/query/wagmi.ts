@@ -80,9 +80,9 @@ const localStorageWithInvertMiddleware = (): Storage | undefined => {
   }
 }
 
-// ETC RPC URLs
-const mordorRpcUrl = 'https://rpc.mordor.etccooperative.org'
-const etcMainnetRpcUrl = 'https://etc.rivet.link'
+// ETC RPC URLs (override via .env.local)
+const mordorRpcUrl = process.env.NEXT_PUBLIC_MORDOR_RPC_URL || 'https://rpc.mordor.etccooperative.org'
+const etcMainnetRpcUrl = process.env.NEXT_PUBLIC_ETC_RPC_URL || 'https://etc.rivet.link'
 
 export const transports = {
   ...(isLocalProvider
