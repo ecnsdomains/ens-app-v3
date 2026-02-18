@@ -148,8 +148,8 @@ importers:
         specifier: https://pkg.pr.new/ensdomains/ensjs/@ensdomains/ensjs@deab43b
         version: https://pkg.pr.new/ensdomains/ensjs/@ensdomains/ensjs@deab43b(typescript@5.9.3)(viem@2.46.1(patch_hash=da6a54aab3d5b216601e6031b00a686dbc0bbd995312675700beec0c1806c2c7)(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.75))(zod@3.25.75)
       '@ensdomains/thorin':
-        specifier: 1.0.0-beta.28
-        version: 1.0.0-beta.28(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: file:../thorin/components
+        version: file:../thorin/components(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@noble/hashes':
         specifier: ^1.3.2
         version: 1.8.0
@@ -1250,12 +1250,12 @@ packages:
   '@ensdomains/solsha1@0.0.3':
     resolution: {integrity: sha512-uhuG5LzRt/UJC0Ux83cE2rCKwSleRePoYdQVcqPN1wyf3/ekMzT/KZUF9+v7/AG5w9jlMLCQkUM50vfjr0Yu9Q==}
 
-  '@ensdomains/thorin@1.0.0-beta.28':
-    resolution: {integrity: sha512-t+/n5c9e923lUR/YH0TIO9cON+xIhGA+qKOqaY5bF3mv7kC3Ob2+c96PYlyz3aa44zbNVv3J7lqxCvEWtRpRRw==}
+  '@ensdomains/thorin@file:../thorin/components':
+    resolution: {directory: ../thorin/components, type: directory}
     engines: {node: '>=20'}
     peerDependencies:
-      react: ^18
-      react-dom: ^18
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
 
   '@esbuild-plugins/node-globals-polyfill@0.2.3':
     resolution: {integrity: sha512-r3MIryXDeXDOZh7ih1l/yE9ZLORCd5e8vWg02azWRGj5SPTuoh69A2AIyn0Z31V/kHBfZ4HgWJ+OK3GTTwLmnw==}
@@ -8942,7 +8942,7 @@ snapshots:
     dependencies:
       hash-test-vectors: 1.3.2
 
-  '@ensdomains/thorin@1.0.0-beta.28(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@ensdomains/thorin@file:../thorin/components(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@vanilla-extract/sprinkles': 1.6.5
       clsx: 2.1.1
