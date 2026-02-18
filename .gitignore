@@ -80,3 +80,7 @@ certificates
 .playwright-mcp
 .claude
 /thoughts
+
+# GitHub Actions (disabled for local development)
+.github/workflows/
+.github/actions/
