@@ -28,7 +28,7 @@ export const PostHogProvider = ({ children }: { children: ReactNode }) => {
       // Enable debug mode in development
       loaded: (posthogInstance) => {
         if (!isProduction()) {
-          posthogInstance.debug()
+          posthogInstance.opt_out_capturing()
         }
       },
     })

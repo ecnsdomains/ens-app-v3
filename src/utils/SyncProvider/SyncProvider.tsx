@@ -117,10 +117,9 @@ export const SyncProvider = ({ children }: { children: React.ReactNode }) => {
       subgraphClient!.request<GraphResponse>(query).then((res) => {
         return res!._meta.block.number
       }),
-    initialData: 0,
     refetchInterval: (q) => {
       if (hasSubgraphSyncErrors.error) return false
-      if (q.state.data == null) return 1000
+      if (q.state.data == null) return false
       const waitingForBlock = findTransactionHigherThanBlock(q.state.data)
       if (waitingForBlock) {
         return 1000

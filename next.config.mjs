@@ -24,7 +24,9 @@ const nextConfig = {
         : {}),
     },
   },
-  transpilePackages: [],
+  // Turbopack can't chunk @reown/appkit-scaffold-ui's dynamic imports through pnpm's
+  // deep .pnpm store paths (3 duplicate installations). Transpiling resolves this.
+  transpilePackages: ['@reown/appkit-scaffold-ui'],
   reactStrictMode: true,
   compiler: {
     styledComponents: true,

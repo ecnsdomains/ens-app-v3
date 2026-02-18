@@ -38,7 +38,7 @@ export function useInvalidateOnBlock({
   const previousBlockNumberRef = useRef<bigint | null>(null)
 
   const { data: blockNumber } = useBlockNumber({
-    watch: true,
+    watch: process.env.NODE_ENV === 'production',
     query: {
       enabled,
     },

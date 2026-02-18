@@ -220,9 +220,13 @@ export const SyncDroppedTransaction = ({ children }: { children: React.ReactNode
   const transactions = useRecentTransactions()
   const store = useTransactionStore()
 
+  const hasPendingOrSearching = transactions.some(
+    (t) => t.status === 'pending' || t.searchStatus === 'searching',
+  )
+
   useInterval(
     () => findDroppedTransactions(client, { address, store, transactions }),
-    TRANSACTION_SEARCH_INTERVAL,
+    hasPendingOrSearching ? TRANSACTION_SEARCH_INTERVAL : null,
     [address, client.chain.id, store, transactions.length],
   )
 
