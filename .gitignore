@@ -79,10 +79,14 @@ tsconfig.vitest-temp.json
 
 certificates
 
-# Claude
+# Claude Code working directory (local only)
+.claude/
+CLAUDE.md
 .playwright-mcp
-.claude
 /thoughts
+
+# Internal development directory
+.local/
 
 # Planning & internal docs
 SESSION_NOTES.md
